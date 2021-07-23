@@ -1,5 +1,5 @@
 nav {
-  background-color: red;
+  background-color: $dark-blue;
   height: 4rem;
   padding: 0 5em;
   @include flex(row, space-between);
@@ -15,6 +15,7 @@ nav {
       margin-left: 0.5em;
       font-family: $s-ff;
       font-weight: 800;
+      color: $gray;
     }
   }
   ul {
@@ -24,7 +25,7 @@ nav {
       font-size: 1.1rem;
       font-family: $s-ff;
       a {
-        color: black;
+        color: $gray;
       }
     }
   }
