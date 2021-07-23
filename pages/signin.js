@@ -1,10 +1,11 @@
 import React from "react";
-
+import Gear from "../components/gear";
 const Signin = () => {
   return (
-    <div>
-      <h1>This is sign in</h1>
-    </div>
+    <section className='signin-section'>
+      <h1>The Sign In page is under development.</h1>
+      <Gear />
+    </section>
   );
 };
 

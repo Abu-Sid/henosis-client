@@ -1,10 +1,12 @@
 import React from "react";
+import Gear from "../components/gear";
 
 const Features = () => {
   return (
-    <div>
-      <h1>This is features</h1>
-    </div>
+    <section className='features-section'>
+      <h1>The features page is under development.</h1>
+      <Gear />
+    </section>
   );
 };
 
