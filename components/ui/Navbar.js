@@ -2,22 +2,19 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import logo from "../public/images/logo.png";
+import logo from "../../public/images/Logo.png";
 
 const Navbar = () => {
   return (
     <nav>
-      <div className='logo'>
-        <div className='logo__image'>
-          <Image
-            src='/../public/images/logo.png'
-            alt='logo'
-            layout='fill'
-            objectFit='contain'
-          />
+      <Link href='/' passHref>
+        <div className='logo'>
+          <div className='logo__image'>
+            <Image src={logo} alt='logo' layout='fill' objectFit='contain' />
+          </div>
+          <h1 className='logo__text'>Henosis</h1>
         </div>
-        <h1 className='logo__text'>Henosis</h1>
-      </div>
+      </Link>
       <ul>
         <li>
           <Link href='/features'>Features</Link>
