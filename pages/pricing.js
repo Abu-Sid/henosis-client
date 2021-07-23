@@ -1,10 +1,11 @@
 import React from "react";
-
+import Gear from "../components/gear";
 const Pricing = () => {
   return (
-    <div>
-      <h1>This is pricing</h1>
-    </div>
+    <section className='pricing-section'>
+      <h1>The pricing page is under development.</h1>
+      <Gear />
+    </section>
   );
 };
 
