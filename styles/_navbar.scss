@@ -1,0 +1,33 @@
+nav {
+  background-color: $dark-blue;
+  height: 4rem;
+  padding: 0 5em;
+  @include flex(row, space-between);
+  .logo {
+    height: 100%;
+    @include flex;
+    cursor: pointer;
+    &__image {
+      height: 100%;
+      width: 60px;
+      position: relative;
+    }
+    &__text {
+      margin-left: 0.5em;
+      font-family: $s-ff;
+      font-weight: 800;
+      color: $gray;
+    }
+  }
+  ul {
+    @include flex;
+    li {
+      margin-left: 1em;
+      font-size: 1.1rem;
+      font-family: $s-ff;
+      a {
+        color: $gray;
+      }
+    }
+  }
+}

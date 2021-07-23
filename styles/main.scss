@@ -1,0 +1,21 @@
+//* Global Styling
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+}
+
+//* Helpers
+
+@import "./helpers/colors";
+@import "./helpers/fonts";
+@import "./helpers/tools";
+
+//* Pages
+
+//* Components
+
+@import "./navbar";
