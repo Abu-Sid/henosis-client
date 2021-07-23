@@ -1,5 +1,5 @@
 import React from "react";
-import Gear from "../components/gear";
+import Gear from "../components/Gear";
 const Signin = () => {
   return (
     <section className='signin-section'>
