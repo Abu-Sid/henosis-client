@@ -1,7 +1,10 @@
 nav {
-  background-color: $dark-blue;
   height: 4rem;
   padding: 0 5em;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
   @include flex(row, space-between);
   .logo {
     height: 100%;
@@ -16,7 +19,7 @@ nav {
       margin-left: 0.5em;
       font-family: $s-ff;
       font-weight: 800;
-      color: $gray;
+      color: $dark-blue;
     }
   }
   ul {
@@ -26,8 +29,16 @@ nav {
       font-size: 1.1rem;
       font-family: $s-ff;
       a {
-        color: $gray;
+        color: $dark-blue;
       }
     }
   }
+}
+
+.color {
+  background-color: $dark-blue;
+}
+
+.transparent {
+  background: transparent;
 }
