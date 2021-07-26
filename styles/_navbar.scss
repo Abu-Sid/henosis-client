@@ -5,6 +5,7 @@ nav {
   top: 0;
   right: 0;
   left: 0;
+  z-index: 900;
   @include flex(row, space-between);
   .logo {
     height: 100%;
@@ -13,13 +14,12 @@ nav {
     &__image {
       height: 100%;
       width: 60px;
-      position: relative;
+      @include flex;
     }
     &__text {
       margin-left: 0.5em;
       font-family: $s-ff;
       font-weight: 800;
-      color: $dark-blue;
     }
   }
   ul {
@@ -28,9 +28,6 @@ nav {
       margin-left: 1em;
       font-size: 1.1rem;
       font-family: $s-ff;
-      a {
-        color: $dark-blue;
-      }
     }
   }
 }
@@ -41,4 +38,12 @@ nav {
 
 .transparent {
   background: transparent;
+}
+
+.blue {
+  color: $dark-blue;
+}
+
+.white {
+  color: $gray;
 }
