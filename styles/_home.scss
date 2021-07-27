@@ -2,17 +2,18 @@
   overflow: hidden;
   width: 100%;
   margin-top: 5rem;
-  position: relative;
+  // position: relative;
 }
+//Banner-Section
 .banner {
   padding: 4rem;
   margin: 2rem;
-  @include flex(row, space-between);
+  @include flex(row, space-around, stretch);
   span {
     color: $purple;
   }
   &__text {
-    margin-left: 0.5em;
+    @include flex(column, space-evenly, auto);
     h1 {
       font-size: $fs-l;
       font-family: $s-ff;
@@ -24,12 +25,46 @@
       color: $gray-purple;
     }
   }
+
   &__image {
-    width: 60%;
+    width: 50%;
   }
 }
+//Features-Section
+.features {
+  @include flex(column);
+  &__text {
+    height: 8rem;
+    @include flex(column, space-between);
+    text-align: center;
+    h1 {
+      font-size: $fs-l;
+    }
+    h4 {
+      font-size: $fs-m;
+    }
+    span {
+      color: $purple;
+    }
+  }
+  &__image {
+    margin: 5rem;
+  }
+}
+//Board or Chat Section
 .chat {
-  @extend .banner;
+  margin: 2rem;
+  @include flex(row, space-around, stretch);
+  span {
+    color: $purple;
+  }
+  &__text {
+    padding: 2rem;
+    @include flex(column, center, center);
+    p {
+      text-align: center;
+    }
+  }
 }
 .act {
   @include flex();
