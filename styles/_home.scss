@@ -1,28 +1,42 @@
 .home-section {
   overflow: hidden;
-  height: 100vh;
   width: 100%;
+  margin-top: 5rem;
   position: relative;
-  .intro-text {
-    position: absolute;
-    top: 130px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: $s-ff;
-    text-align: center;
+}
+.banner {
+  padding: 4rem;
+  margin: 2rem;
+  @include flex(row, space-between);
+  span {
+    color: $purple;
+  }
+  &__text {
+    margin-left: 0.5em;
     h1 {
-      color: $dark-blue;
+      font-size: $fs-l;
+      font-family: $s-ff;
+      text-transform: uppercase;
+      margin: 1rem 0 2rem 0;
+    }
+    h4 {
+      font-size: $fs-m;
+      color: $gray-purple;
     }
   }
-  .dashboard {
-    height: 400px;
-    width: 900px;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    background-image: url(../public/images/dashboard.svg);
-    background-position: top;
+  &__image {
+    width: 60%;
+  }
+}
+.chat {
+  @extend .banner;
+}
+.act {
+  @include flex();
+  &__body {
+    background-image: url(../public/images/cta.png);
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
   }
 }
