@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../Footer';
 import ActionToCall from './ActionToCall';
 import Banner from './Banner';
 import BoardSection from './BoardSection';
@@ -13,6 +14,7 @@ const HomePage = () => {
             <BoardSection/>
             <DashboardSection/>
             <ActionToCall/>
+            <Footer/>
         </>
     );
 };
