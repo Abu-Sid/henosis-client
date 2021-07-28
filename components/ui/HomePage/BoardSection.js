@@ -8,8 +8,8 @@ const BoardSection = () => {
                 <Image src={chat} alt='chat' />
             </div>
             <div className='chat__text'>
-                <h5>Group Chat</h5>
-                <h2>The board is just the <span>beginning</span> .</h2>
+                <h4>Group Chat</h4>
+                <h2>The board is just the <span>beginning</span> .</h2> <br />
                 <p>You can <span>chat with other developers</span>  in your group, 
 while working on a feature or solving a problem.</p>
             </div>

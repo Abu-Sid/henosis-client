@@ -6,7 +6,7 @@ const ActionToCall = () => {
             <div className='act__body'>
                 <h1>Sign up and get started with Henosis today. <br /> 
                     A world of productive teamwork awaits!</h1>
-                <div>
+                <div className='act__body__input'>
                     <input type="text" placeholder='Email'/>
                     <button className='button-primary'>Signup</button>
                 </div>

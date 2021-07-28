@@ -5,6 +5,7 @@
   // position: relative;
 }
 //Banner-Section
+
 .banner {
   padding: 4rem;
   margin: 2rem;
@@ -31,6 +32,7 @@
   }
 }
 //Features-Section
+
 .features {
   @include flex(column);
   &__text {
@@ -52,6 +54,7 @@
   }
 }
 //Board or Chat Section
+
 .chat {
   margin: 2rem;
   @include flex(row, space-around, stretch);
@@ -59,19 +62,54 @@
     color: $purple;
   }
   &__text {
+    width: 80%;
     padding: 2rem;
-    @include flex(column, center, center);
-    p {
-      text-align: center;
+    @include flex(column, center, flex-start);
+    h4 {
+      color: $purple;
     }
   }
 }
+//Dashboard section
+
+.dashboard {
+  margin: 2rem;
+  @include flex(row, space-around, stretch);
+  span {
+    color: $purple;
+  }
+  &__text {
+    width: 80%;
+    padding: 2rem;
+    @include flex(column, center, flex-start);
+    h5 {
+      color: $purple;
+    }
+  }
+}
+//Action-To-Call Section
+
 .act {
   @include flex();
   &__body {
+    width: 50%;
+    padding: 2rem;
     background-image: url(../public/images/cta.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    text-align: center;
+    &__input {
+      input {
+        background-color: $light-gray-purple;
+        padding: 0.25rem;
+        margin-top: 0.5rem;
+        border-radius: 5px;
+        border: 0;
+      }
+      button {
+        padding: 0.25rem 0.5rem;
+      }
+    }
   }
 }
