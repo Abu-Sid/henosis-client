@@ -1,3 +1,103 @@
+@mixin button {
+  color: #fff;
+  border: 1px solid lightgray;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  outline: none;
+  font-size: 1.2rem;
+  margin: 0.2rem;
+  &:focus {
+    box-shadow: 0 0 3px #001bb3;
+  }
+}
+
 .pricing-section {
-  @extend .features-section;
+  font-family: $s-ff;
+  margin: 6rem auto 0 auto;
+  max-width: 85%;
+  margin-bottom: 1.5rem;
+  &__top {
+    @include flex(row, space-between);
+    h1 {
+      font-size: 2.1rem;
+    }
+    h3 {
+      margin-top: 1rem;
+      color: $gray-purple;
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+    button {
+      background-color: $purple;
+      @include button;
+      &.price-active {
+        background-color: $gray;
+        color: $gray-purple;
+      }
+    }
+  }
+  &__main {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5rem;
+    &__card {
+      border-radius: 10px;
+      padding: 2rem;
+      background-color: $light-gray-purple;
+      &:hover {
+        box-shadow: 0px 0px 10px #5a5a5a;
+        transform: scale(1.005);
+        transition: 0.3s;
+      }
+      h3 {
+        margin: 1rem 0;
+        font-size: 1.5rem;
+      }
+      &__price {
+        color: $green;
+      }
+      button {
+        width: 100%;
+        background-color: $gray-purple;
+        @include button;
+        &:hover {
+          background-color: $purple;
+          transition: background-color 0.5s;
+        }
+      }
+      p {
+        margin: 8px 0;
+        color: #140044;
+        font-weight: 500;
+        font-size: large;
+      }
+    }
+  }
+}
+
+@media (max-width: 1080px) {
+  .pricing-section {
+    margin: 4.5rem auto 1.5rem auto;
+    &__top {
+      @include flex(column, space-between);
+      button {
+        margin-top: 1.5rem;
+      }
+    }
+    &__main {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-section {
+    max-width: 96%;
+    &__main {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
 }
