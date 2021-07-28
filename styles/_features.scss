@@ -1,10 +1,85 @@
 .features-section {
-  height: 85vh;
+  margin-top: 4rem;
+  height: 100vh;
   width: 100%;
-  @include flex(column);
-  h1 {
-    margin-top: 1em;
-    font-family: $s-ff;
-    color: $dark-blue;
+  &__intro {
+    height: 15em;
+    @include flex(column);
+    h1 {
+      @include writing-style($dark-blue, extra-large, medium);
+    }
+    h2 {
+      @include writing-style($gray-purple, medium, regular);
+      margin-top: 0.5em;
+    }
+    a {
+      margin-top: 1em;
+      padding: 0.5em 1em;
+      border: none;
+      background-color: $purple;
+      border-radius: radius(small);
+      cursor: pointer;
+      @include writing-style($white, medium, regular);
+    }
+  }
+}
+
+//* Features sub section styling starts from here
+
+.features-sub-section-reverse {
+  padding: 5em 0;
+  @include flex(row-reverse);
+  &__image {
+    margin-left: 15px;
+    width: 50%;
+    overflow: hidden;
+    div {
+      width: 110%;
+    }
+  }
+  &__info {
+    padding-left: 100px;
+    width: 50%;
+    margin-right: 15px;
+    h1 {
+      @include writing-style($dark-blue, large, regular);
+      margin-bottom: 1em;
+    }
+    p {
+      @include writing-style($gray-purple, medium, thin);
+      margin-bottom: 1em;
+    }
+    a {
+      color: $purple;
+      .read-more-icon {
+        padding-top: 2px;
+        margin-left: 0.5em;
+      }
+    }
+  }
+}
+
+.features-sub-section {
+  @extend .features-sub-section-reverse;
+  @include flex(row);
+  &__image {
+    margin-right: 15px;
+    height: 200px;
+    width: 50%;
+    position: relative;
+    div {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 200px;
+      width: 110%;
+    }
+  }
+  &__info {
+    @extend .features-sub-section-reverse__info;
+    padding-right: 100px;
+    padding-left: 0;
+    margin-left: 15px;
+    margin-right: 0;
   }
 }
