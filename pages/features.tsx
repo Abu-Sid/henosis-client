@@ -1,5 +1,5 @@
 import React from "react";
-import Gear from "../components/Gear";
+import Link from "next/link";
 import FeatureSubSection from "../components/ui/Feature/FeatureSubSection";
 import FeaturesData from "../data/FeaturesData.json";
 
@@ -12,7 +12,9 @@ const Features = () => {
         <h2>
           Henosis Software is the project management tool for agile teams.
         </h2>
-        <button>Get Started</button>
+        <Link href='/signup'>
+          <a>Get Started</a>
+        </Link>
       </div>
       {FeaturesData.features.map((feature) => (
         <FeatureSubSection key={feature.id} feature={feature} />

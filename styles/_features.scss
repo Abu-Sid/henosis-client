@@ -12,12 +12,13 @@
       @include writing-style($gray-purple, medium, regular);
       margin-top: 0.5em;
     }
-    button {
+    a {
       margin-top: 1em;
       padding: 0.5em 1em;
       border: none;
       background-color: $purple;
       border-radius: radius(small);
+      cursor: pointer;
       @include writing-style($white, medium, regular);
     }
   }
