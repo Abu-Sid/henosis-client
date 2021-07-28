@@ -86,9 +86,7 @@ const useForm = () => {
     const handleInvalid = e => {
         e.preventDefault();
         const node = e.target.parentNode;
-        const note = node.className==="password-container";
-        
-        handleFocus(note?node.parentNode:node);
+        handleFocus(node.tagName==="FORM"?node:node.parentNode);
         const { name } = e.target;
         if (!inputData[name]) {
             setError(preError => ({...preError, [name]: true}));

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +12,7 @@ import {
 } from "../redux/actions/userActions";
 import { RootState } from "../redux/reducers";
 
-const Signup = () => {
+const SignUp = () => {
   const dispatch = useDispatch();
 
   const router = useRouter();
@@ -57,10 +58,12 @@ const Signup = () => {
         <h1>Create New Account</h1>
         <LoginForm submit={submit} newUser />
         <GoogleGithubLogin />
-        {/* <button onClick={handleLogout}>Logout</button> */}
+        <p className="login-bottom">
+          Already Have An Account? <Link href="/signin">Sign In</Link>
+        </p>
       </div>
     </section>
   );
 };
 
-export default Signup;
+export default SignUp;

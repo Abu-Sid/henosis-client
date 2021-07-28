@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +12,7 @@ import {
 } from "../redux/actions/userActions";
 import { RootState } from "../redux/reducers";
 
-const Signin = () => {
+const SignIn = () => {
   const dispatch = useDispatch();
 
   const router = useRouter();
@@ -48,9 +49,12 @@ const Signin = () => {
         <h1>Sign In</h1>
         <LoginForm submit={submit} />
         <GoogleGithubLogin />
+        <p className="login-bottom">
+          Don&apos;t Have An Account? <Link href="/signup">Sign Up</Link>
+        </p>
       </div>
     </section>
   );
 };
 
-export default Signin;
+export default SignIn;
