@@ -66,13 +66,26 @@
         @include btn;
         margin: 20px auto;
         @include flex;
-        background-color: #4c00ff;
+        background-color: $purple;
         &:hover {
           transition: 0.5s;
           background-color: $dark-blue;
         }
         &:focus {
           box-shadow: 0 0 5px #0004ff;
+        }
+      }
+    }
+    .login-bottom {
+      margin-top: 1.5rem;
+      text-align: center;
+      font-size: 19px;
+      a {
+        color: $purple;
+        margin-left: 5px;
+        &:hover {
+          transition: 0.5s;
+          color: #0004ff;
         }
       }
     }
