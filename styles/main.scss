@@ -3,9 +3,13 @@
 * {
   box-sizing: border-box;
   margin: 0;
-  padding: 0;
+  // padding: 0;
   text-decoration: none;
   list-style: none;
+}
+
+body {
+  font-family: "Rubik", sans-serif;
 }
 
 //* Helpers
@@ -20,7 +24,6 @@
 @import "./features";
 @import "./pricing";
 @import "./signin";
-@import "./signup";
 
 //* Components
 

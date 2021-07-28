@@ -1,3 +1,130 @@
-.signin-section {
-  @extend .features-section;
+@mixin input {
+  display: block;
+  padding: 0.7rem;
+  border-radius: 5px;
+  border: none;
+  font-size: 18px;
+  outline: none;
+  width: 100%;
+  margin: 12px auto;
+}
+
+@mixin btn {
+  background-color: $purple;
+  color: $light-gray;
+}
+
+.login-section {
+  font-family: $s-ff;
+  min-height: 90vh;
+  margin-top: 4.5rem;
+  @include flex(column);
+  h1 {
+    color: $dark-blue;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+  }
+  .inner-login {
+    background-color: #e6e8ea;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 500px;
+    form {
+      input {
+        @include input;
+        background-color: #d0d1d8;
+        &:focus {
+          box-shadow: 0 0 3px #00008f;
+        }
+        &[type="submit"] {
+          margin-top: 30px;
+          @include btn;
+        }
+        &[type="submit"]:hover {
+          transition: 0.5s;
+          background-color: $dark-blue;
+        }
+      }
+      label {
+        font-size: 18px;
+        margin: 0 8px;
+        display: inline-block;
+      }
+      .password-container {
+        position: relative;
+      }
+    }
+    .google-github-login {
+      h2 {
+        text-align: center;
+        font-weight: 600;
+        margin: 5px 0;
+      }
+      button {
+        @include input;
+        @include btn;
+        margin: 20px auto;
+        @include flex;
+        background-color: $purple;
+        &:hover {
+          transition: 0.5s;
+          background-color: $dark-blue;
+        }
+        &:focus {
+          box-shadow: 0 0 5px #0004ff;
+        }
+      }
+    }
+    .login-bottom {
+      margin-top: 1.5rem;
+      text-align: center;
+      font-size: 19px;
+      a {
+        color: $purple;
+        margin-left: 5px;
+        &:hover {
+          transition: 0.5s;
+          color: #0004ff;
+        }
+      }
+    }
+  }
+}
+
+.alert-error {
+  padding: 8px;
+  color: #ff0000;
+  background-color: #ffd4d4;
+  font-size: 17px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.eye-icon {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  cursor: pointer;
+  color: $gray-purple;
+  &.eye-active {
+    color: $purple;
+  }
+}
+
+.google-icon,
+.github-icon {
+  margin-right: 10px;
+}
+
+@media (max-width: 530px) {
+  .login-section {
+    .inner-login {
+      padding: 2rem 1.3rem;
+      width: 95%;
+    }
+  }
 }

@@ -20,6 +20,16 @@ const useForm = () => {
                 handleError(true);
             }
         }
+        else if (required&&name==='name') {
+            const length = value.length>=6;
+            const isValid = /^([^0-9]*)$/.test(value);
+            if (isValid&&length) {
+                handleError(false);
+            }
+            else {
+                handleError(true);
+            }
+        }
         else if (required&&name==='password') {
             const isValid = value.length>=6;
             if (inputData.confirmPassword) {
@@ -75,7 +85,8 @@ const useForm = () => {
 
     const handleInvalid = e => {
         e.preventDefault();
-        handleFocus(e.target.parentNode);
+        const node = e.target.parentNode;
+        handleFocus(node.tagName==="FORM"?node:node.parentNode);
         const { name } = e.target;
         if (!inputData[name]) {
             setError(preError => ({...preError, [name]: true}));

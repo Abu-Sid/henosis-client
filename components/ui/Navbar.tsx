@@ -1,16 +1,13 @@
-import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/router";
-
-import logo from "../../public/images/logo.svg";
+import React from "react";
 import Logo from "./Logo";
 
 const Navbar = () => {
   const router = useRouter();
   const path = router.pathname;
   return (
-    <nav className={path === "/" ? "white" : "color"}>
+    <nav className={path === "/" ? "white-bg" : "colored-bg"}>
       <Link href='/' passHref>
         <div className='logo'>
           <div className='logo__image'>
