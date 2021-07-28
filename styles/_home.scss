@@ -51,6 +51,7 @@
   }
   &__image {
     margin: 5rem;
+    width: 60%;
   }
 }
 //Board or Chat Section
@@ -73,7 +74,7 @@
 //Dashboard section
 
 .dashboard {
-  margin: 2rem;
+  margin: 7rem;
   @include flex(row, space-around, stretch);
   span {
     color: $purple;
@@ -90,6 +91,7 @@
 //Action-To-Call Section
 
 .act {
+  margin: 7rem;
   @include flex();
   &__body {
     width: 50%;
@@ -109,6 +111,7 @@
       }
       button {
         padding: 0.25rem 0.5rem;
+        border: 0;
       }
     }
   }
