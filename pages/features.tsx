@@ -1,8 +1,10 @@
 import React from "react";
 import Gear from "../components/Gear";
 import FeatureSubSection from "../components/ui/Feature/FeatureSubSection";
+import FeaturesData from "../data/FeaturesData.json";
 
 const Features = () => {
+  console.log(FeaturesData);
   return (
     <section className='features-section'>
       <div className='features-section__intro'>
@@ -12,7 +14,9 @@ const Features = () => {
         </h2>
         <button>Get Started</button>
       </div>
-      <FeatureSubSection />
+      {FeaturesData.features.map((feature) => (
+        <FeatureSubSection key={feature.id} feature={feature} />
+      ))}
     </section>
   );
 };
