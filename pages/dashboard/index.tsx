@@ -1,4 +1,5 @@
 import React from "react";
+import withAuthCheck from "../../HOC/withAuthCheck";
 
 const Dashboard = () => {
   return (
@@ -8,4 +9,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default withAuthCheck(Dashboard);
