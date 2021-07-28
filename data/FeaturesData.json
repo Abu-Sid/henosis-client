@@ -1,0 +1,25 @@
+{
+  "features": [
+    {
+      "id": "kanban",
+      "image": "kanban.png",
+      "featureHeader": "Kanban boards",
+      "details": "Flexible kanban boards give your team full visibility into what’s next so you can continuously deliver maximum output in minimal cycle time.",
+      "textPosition": "left"
+    },
+    {
+      "id": "activity",
+      "image": "activity.png",
+      "featureHeader": "Activity meter",
+      "details": "The activity section in your dashboard gives you a detailed view of what you have done so far and what you need to do next. ",
+      "textPosition": "right"
+    },
+    {
+      "id": "chat",
+      "image": "chat-channel.png",
+      "featureHeader": "Chat portal",
+      "details": "Our channel-based chat portal helps you to organize your communications with your team members. This results in better efficiency in problem-solving and developing new features.",
+      "textPosition": "left"
+    }
+  ]
+}
