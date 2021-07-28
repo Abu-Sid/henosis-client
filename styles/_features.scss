@@ -10,12 +10,15 @@
     }
     h2 {
       @include writing-style($gray-purple, medium, regular);
+      margin-top: 0.5em;
     }
     button {
       margin-top: 1em;
-      padding: 5em, 3em;
+      padding: 0.5em 1em;
       border: none;
       background-color: $purple;
+      border-radius: radius(small);
+      @include writing-style($white, medium, regular);
     }
   }
 }
