@@ -1,5 +1,23 @@
 .features-section {
+  margin-top: 4rem;
   height: 100vh;
   width: 100%;
-  background-color: red;
+  &__intro {
+    height: 15em;
+    @include flex(column);
+    h1 {
+      @include writing-style($dark-blue, extra-large, medium);
+    }
+    h2 {
+      @include writing-style($gray-purple, medium, regular);
+    }
+    button {
+      margin-top: 1em;
+      padding: 5em, 3em;
+      border: none;
+      background-color: $purple;
+    }
+  }
 }
+
+//* Features sub section styling starts from here

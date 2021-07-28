@@ -1,3 +1,40 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
 
 $s-ff: "Rubik", sans-serif;
+
+@function font-weight($size) {
+  $font-weights: (
+    "black": 800,
+    "bold": 700,
+    "medium": 600,
+    "regular": 500,
+    "thin": 400,
+    "extra-thin": 300,
+  );
+
+  @return map-get($font-weights, $size);
+}
+
+@function font-size($size) {
+  $font-sizes: (
+    "extra-small": 0.5rem,
+    "small": 0.8rem,
+    "medium": 1rem,
+    "large": 1.5rem,
+    "extra-large": 2rem,
+    "extra-extra-large": 3rem,
+  );
+  @return map-get($font-sizes, $size);
+}
+
+//* To use writing-style :
+//TODO @include writing-style(text-color, text-size, text-weight)
+//* text-size : extra-small, small, medium, large, extra-large, extra-extra-large
+//* text-weight: black, bold, medium, regular, thin, extra-thin
+//! PLEASE DO NOT PASS ANY UNIT VALUE SUCH AS hex, hsl, rgb, rem, px, 400, 500.
+
+@mixin writing-style($color: $dark-blue, $font-size: 1rem, $font-weight: 500) {
+  color: $color;
+  font-size: font-size($font-size);
+  font-weight: font-weight($font-weight);
+} ;
