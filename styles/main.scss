@@ -29,6 +29,20 @@ body {
 
 @import "./navbar";
 @import "./gear";
+@import "./footer";
+
+// button
+.button-primary {
+  color: $light-gray;
+  background-color: $purple;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: all ease-in-out 200ms;
+  &:hover {
+    background-color: $gray-purple;
+  }
+}
+//Homepage design
 
 .toast {
   font-family: $s-ff;

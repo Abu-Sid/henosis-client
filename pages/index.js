@@ -1,9 +1,10 @@
 import React from "react";
+import HomePage from "../components/ui/HomePage/HomePage";
 
 const Home = () => {
   return (
     <section className='home-section'>
-      <h1>This is home</h1>
+      <HomePage/>
     </section>
   );
 };
