@@ -1,28 +1,118 @@
 .home-section {
   overflow: hidden;
-  height: 100vh;
   width: 100%;
-  position: relative;
-  .intro-text {
-    position: absolute;
-    top: 130px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: $s-ff;
-    text-align: center;
+  margin-top: 5rem;
+  // position: relative;
+}
+//Banner-Section
+
+.banner {
+  padding: 4rem;
+  margin: 2rem;
+  @include flex(row, space-around, stretch);
+  span {
+    color: $purple;
+  }
+  &__text {
+    @include flex(column, space-evenly, auto);
     h1 {
-      color: $dark-blue;
+      font-size: $fs-l;
+      font-family: $s-ff;
+      text-transform: uppercase;
+      margin: 1rem 0 2rem 0;
+    }
+    h4 {
+      font-size: $fs-m;
+      color: $gray-purple;
     }
   }
-  .dashboard {
-    height: 400px;
-    width: 900px;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    background-image: url(../public/images/dashboard.svg);
-    background-position: top;
+
+  &__image {
+    width: 50%;
+  }
+}
+//Features-Section
+
+.features {
+  @include flex(column);
+  &__text {
+    height: 8rem;
+    @include flex(column, space-between);
+    text-align: center;
+    h1 {
+      font-size: $fs-l;
+    }
+    h4 {
+      font-size: $fs-m;
+    }
+    span {
+      color: $purple;
+    }
+  }
+  &__image {
+    margin: 5rem;
+    width: 60%;
+  }
+}
+//Board or Chat Section
+
+.chat {
+  margin: 2rem;
+  @include flex(row, space-around, stretch);
+  span {
+    color: $purple;
+  }
+  &__text {
+    width: 80%;
+    padding: 2rem;
+    @include flex(column, center, flex-start);
+    h4 {
+      color: $purple;
+    }
+  }
+}
+//Dashboard section
+
+.dashboard {
+  margin: 7rem;
+  @include flex(row, space-around, stretch);
+  span {
+    color: $purple;
+  }
+  &__text {
+    width: 60%;
+    padding: 2rem;
+    @include flex(column, center, flex-start);
+    h5 {
+      color: $purple;
+    }
+  }
+}
+//Action-To-Call Section
+
+.act {
+  margin: 7rem;
+  @include flex();
+  &__body {
+    width: 50%;
+    padding: 2rem;
+    background-image: url(../public/images/cta.png);
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
+    text-align: center;
+    &__input {
+      input {
+        background-color: $light-gray-purple;
+        padding: 0.25rem;
+        margin-top: 0.5rem;
+        border-radius: 5px;
+        border: 0;
+      }
+      button {
+        padding: 0.25rem 0.5rem;
+        border: 0;
+      }
+    }
   }
 }

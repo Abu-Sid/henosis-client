@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { githubLogin, googleLogin, IUser } from "../../auth/authManager";
 import {
   authUserFailure,
-  authUserRequest,
   authUserSuccess,
 } from "../../redux/actions/userActions";
 import { RootState } from "../../redux/reducers";
@@ -14,18 +14,17 @@ import GoogleIcon from "./GoogleIcon";
 const GoogleGithubLogin = () => {
   const dispatch = useDispatch();
 
-  const router = useRouter();
-
-  const { path } = useSelector((state: RootState) => state.routerState);
-
   const handleLogin = async (provider: () => Promise<IUser>) => {
-    dispatch(authUserRequest());
+    const loadingId = toast.loading("Loading...");
 
     try {
       const user = await provider();
+      toast.dismiss(loadingId);
+      toast.success("Login Successfully!");
       dispatch(authUserSuccess(user));
-      router.replace(path);
     } catch (error) {
+      toast.dismiss(loadingId);
+      toast.error(error.message);
       dispatch(authUserFailure(error.message));
     }
   };
@@ -46,4 +45,3 @@ const GoogleGithubLogin = () => {
 };
 
 export default GoogleGithubLogin;
-8;
