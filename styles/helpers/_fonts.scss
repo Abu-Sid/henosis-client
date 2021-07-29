@@ -1,14 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
 
 $s-ff: "Rubik", sans-serif;
-<<<<<<< HEAD
 $fs-xs: 0.8rem; /* font size extra small */
 $fs-s: 1rem; /* font size small */
 $fs-m: 1.2rem; /* font size medium */
 $fs-l: 2rem; /* font size large */
 $fs-xl: 3rem; /* font size extra-large */
 $fs-xxl: 3.5rem; /* font size extra-large */
-=======
 
 @function font-weight($size) {
   $font-weights: (
@@ -46,4 +44,3 @@ $fs-xxl: 3.5rem; /* font size extra-large */
   font-size: font-size($font-size);
   font-weight: font-weight($font-weight);
 } ;
->>>>>>> f33ba3da6bd2acfd99e4a0c42390daf4c5a8df60
