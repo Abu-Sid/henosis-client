@@ -3,9 +3,13 @@
 * {
   box-sizing: border-box;
   margin: 0;
-  padding: 0;
+  // padding: 0;
   text-decoration: none;
   list-style: none;
+}
+
+body {
+  font-family: "Rubik", sans-serif;
 }
 
 //* Helpers
@@ -25,6 +29,7 @@
 
 @import "./navbar";
 @import "./gear";
+<<<<<<< HEAD
 @import "./footer";
 
 // button
@@ -39,3 +44,9 @@
   }
 }
 //Homepage design
+=======
+
+.toast {
+  font-family: $s-ff;
+}
+>>>>>>> f33ba3da6bd2acfd99e4a0c42390daf4c5a8df60

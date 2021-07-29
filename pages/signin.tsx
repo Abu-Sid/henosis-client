@@ -1,59 +1,47 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { ILoginData, signInUser } from "../auth/authManager";
 import GoogleGithubLogin from "../components/Login/GoogleGithubLogin";
 import LoginForm from "../components/Login/LoginForm";
-import {
-  authUserFailure,
-  authUserRequest,
-  authUserSuccess,
-} from "../redux/actions/userActions";
+import RedirectUser from "../components/Login/RedirectUser";
+import { authUserFailure, authUserSuccess } from "../redux/actions/userActions";
 import { RootState } from "../redux/reducers";
 
 const SignIn = () => {
   const dispatch = useDispatch();
 
-  const router = useRouter();
-
-  const { path } = useSelector((state: RootState) => state.routerState);
-
   const submit = async (data: ILoginData) => {
-    dispatch(authUserRequest());
-
+    const loadingId = toast.loading("Loading...");
     const { email, password } = data;
 
     try {
       const user = await signInUser(email, password);
+      toast.dismiss(loadingId);
+      toast.success("Login Successfully!");
       dispatch(authUserSuccess(user));
-      router.replace(path);
     } catch (error) {
+      toast.dismiss(loadingId);
+      toast.error(error.message);
       dispatch(authUserFailure(error.message));
     }
   };
 
-  const { user, privateLoading } = useSelector(
-    (state: RootState) => state.userReducer
-  );
-
-  if (privateLoading) return <h1>Loading...</h1>;
-
-  if (user.email) {
-    router.replace("/");
-  }
-
   return (
-    <section className="login-section">
-      <div className="inner-login">
-        <h1>Sign In</h1>
-        <LoginForm submit={submit} />
-        <GoogleGithubLogin />
-        <p className="login-bottom">
-          Don&apos;t Have An Account? <Link href="/signup">Sign Up</Link>
-        </p>
-      </div>
-    </section>
+    <RedirectUser>
+      <section className="login-section">
+        <div className="inner-login">
+          <h1>Sign In</h1>
+          <LoginForm submit={submit} />
+          <GoogleGithubLogin />
+          <p className="login-bottom">
+            Don&apos;t Have An Account? <Link href="/signup">Sign Up</Link>
+          </p>
+        </div>
+      </section>
+    </RedirectUser>
   );
 };
 

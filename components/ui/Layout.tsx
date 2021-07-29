@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { auth, setUser } from "../../auth/authManager";
-import { authPrivateLoading, authUserSuccess } from "../../redux/actions/userActions";
+import {
+  authPrivateLoading,
+  authUserSuccess,
+} from "../../redux/actions/userActions";
 import Navbar from "./Navbar";
 
 const Layout = ({ children }) => {
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -16,10 +19,11 @@ const Layout = ({ children }) => {
       dispatch(authPrivateLoading());
     });
     return unsubscribe;
-  }, [dispatch])
+  }, [dispatch]);
 
   return (
     <>
+      <Toaster toastOptions={{ className: "toast" }} />
       <Navbar />
       <main>{children}</main>
     </>

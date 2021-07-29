@@ -1,10 +1,6 @@
 import { IUser } from "./../../../auth/authManager";
 import ActionType from "./actionTypes";
 
-interface RequestAction {
-  type: ActionType.AUTH_USER_REQUEST;
-}
-
 interface SuccessAction {
   type: ActionType.AUTH_USER_SUCCESS;
   payload: IUser;
@@ -23,11 +19,6 @@ interface LogoutAction {
   type: ActionType.AUTH_USER_LOGOUT;
 }
 
-type Action =
-  | RequestAction
-  | SuccessAction
-  | FailureAction
-  | LoadingAction
-  | LogoutAction;
+type Action = SuccessAction | FailureAction | LoadingAction | LogoutAction;
 
 export default Action;

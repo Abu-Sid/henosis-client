@@ -80,7 +80,7 @@
     color: $purple;
   }
   &__text {
-    width: 80%;
+    width: 60%;
     padding: 2rem;
     @include flex(column, center, flex-start);
     h5 {

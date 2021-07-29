@@ -1,12 +1,6 @@
 import { IUser } from "../../../auth/authManager";
 import ActionType from "./actionTypes";
 
-export const authUserRequest = () => {
-  return {
-    type: ActionType.AUTH_USER_REQUEST,
-  };
-};
-
 export const authUserSuccess = (user: IUser) => {
   return {
     type: ActionType.AUTH_USER_SUCCESS,
