@@ -1,22 +1,21 @@
-import React, { Children, ReactComponentElement, useState } from "react";
+import React, { Children, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
 import Logo from "./Logo";
-import ProfilePicture from "../../public/images/icons/account-icon.svg";
 
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 interface INav {
   children?: object | string;
-  name?: string | React.Component;
+  name?: string;
+  text?: string;
   href?: string;
-  leftIcon?: React.Component | SVGAElement;
-  rightIcon?: React.Component | SVGAElement;
+  icon?: any;
 }
 
 const Navbar = () => {
@@ -82,7 +81,7 @@ const Navbar = () => {
       <NavItem name='Features' href='/features' />
       <NavItem name='Pricing' href='/pricing' />
       <li className={path === "/" ? "divider-blue" : "divider-white"}></li>
-      <NavItem name='Dropdown'>
+      <NavItem text='My Account' icon={faChevronDown}>
         <DropdownMenu>
           <DropdownItem href='/signup'>Sign Up</DropdownItem>
           <DropdownItem href='/signin'>Sign In</DropdownItem>
@@ -122,50 +121,38 @@ const Nav = ({ children }) => {
   );
 };
 
-const NavItem: React.FC<INav> = ({
-  children,
-  href,
-  name,
-  leftIcon,
-  rightIcon,
-  text,
-}) => {
+const NavItem: React.FC<INav> = ({ children, href, name, text, icon }) => {
   const [open, setOpen] = useState(false);
-
+  const router = useRouter();
+  const path = router.pathname;
   return (
-    <li>
-      <span>{rightIcon}</span>
+    <li className={path === "/" ? "blue" : "white"}>
+      <p className='username'>{text}</p>
       {href && (
         <Link href={href}>
-          <a> {name} </a>
+          <a className={path === "/" ? "blue" : "white"}> {name} </a>
         </Link>
       )}
-
-      {!href && <button onClick={() => setOpen(!open)}>{name}</button>}
-      <span>{leftIcon}</span>
-
+      {!href && (
+        <button className='toggle-button' onClick={() => setOpen(!open)}>
+          <FontAwesomeIcon icon={icon} />
+        </button>
+      )}
       {open && children}
     </li>
   );
 };
 
 const DropdownMenu = ({ children }) => {
-  return <div className='dropdown-menu'>{children}</div>;
+  return <div className='dropdown'>{children}</div>;
 };
 
-const DropdownItem: React.FC<INav> = ({
-  children,
-  href,
-  leftIcon,
-  rightIcon,
-}) => {
+const DropdownItem: React.FC<INav> = ({ children, href }) => {
   return (
-    <div>
-      <span>{leftIcon}</span>
+    <div className='dropdown__item'>
       <Link href={href}>
         <a>{children}</a>
       </Link>
-      <span>{rightIcon}</span>
     </div>
   );
 };
