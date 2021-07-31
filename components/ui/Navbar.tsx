@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Children, ReactComponentElement, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -11,22 +11,19 @@ import { RootState } from "../../redux/reducers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
+interface INav {
+  children?: object | string;
+  name?: string | React.Component;
+  href?: string;
+  leftIcon?: React.Component | SVGAElement;
+  rightIcon?: React.Component | SVGAElement;
+}
+
 const Navbar = () => {
   const router = useRouter();
   const path = router.pathname;
-  let visibility;
-  if (path === "/dashboard") {
-    visibility = { display: "none" };
-  } else {
-    visibility = { display: "flex" };
-  }
 
   const { user } = useSelector((state: RootState) => state.userReducer);
-
-  const options = [
-    { value: "signin", label: "Sign In" },
-    { value: "signup", label: "Sign up" },
-  ];
 
   return (
     // <nav
@@ -82,21 +79,95 @@ const Navbar = () => {
     //   </ul>
     // </nav>
     <Nav>
-      <NavItem>Mir hussain</NavItem>
+      <NavItem name='Features' href='/features' />
+      <NavItem name='Pricing' href='/pricing' />
+      <li className={path === "/" ? "divider-blue" : "divider-white"}></li>
+      <NavItem name='Dropdown'>
+        <DropdownMenu>
+          <DropdownItem href='/signup'>Sign Up</DropdownItem>
+          <DropdownItem href='/signin'>Sign In</DropdownItem>
+        </DropdownMenu>
+      </NavItem>
     </Nav>
   );
 };
 
 const Nav = ({ children }) => {
+  const router = useRouter();
+  const path = router.pathname;
+
+  let visibility;
+  if (path === "/dashboard") {
+    visibility = { display: "none" };
+  } else {
+    visibility = { display: "flex" };
+  }
   return (
-    <nav>
+    <nav
+      style={visibility}
+      className={path === "/" ? "white-bg" : "colored-bg"}
+    >
+      <Link href='/' passHref>
+        <div className='logo'>
+          <div className='logo__image'>
+            <Logo color={path === "/" ? "white" : "color"} />
+          </div>
+          <h1 className={path === "/" ? "blue logo__text" : "white logo__text"}>
+            Henosis
+          </h1>
+        </div>
+      </Link>
       <ul>{children}</ul>
     </nav>
   );
 };
 
-const NavItem = ({ children }) => {
-  return <li>{children}</li>;
+const NavItem: React.FC<INav> = ({
+  children,
+  href,
+  name,
+  leftIcon,
+  rightIcon,
+  text,
+}) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <li>
+      <span>{rightIcon}</span>
+      {href && (
+        <Link href={href}>
+          <a> {name} </a>
+        </Link>
+      )}
+
+      {!href && <button onClick={() => setOpen(!open)}>{name}</button>}
+      <span>{leftIcon}</span>
+
+      {open && children}
+    </li>
+  );
+};
+
+const DropdownMenu = ({ children }) => {
+  return <div className='dropdown-menu'>{children}</div>;
+};
+
+const DropdownItem: React.FC<INav> = ({
+  children,
+  href,
+  leftIcon,
+  rightIcon,
+}) => {
+  return (
+    <div>
+      <span>{leftIcon}</span>
+      <Link href={href}>
+        <a>{children}</a>
+      </Link>
+      <span>{rightIcon}</span>
+    </div>
+  );
 };
 
 export default Navbar;
