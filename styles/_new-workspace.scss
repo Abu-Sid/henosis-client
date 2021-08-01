@@ -1,0 +1,26 @@
+.new-workspace {
+  height: 100vh;
+  width: 100%;
+  @include flex;
+}
+
+.workspace-form {
+  background-color: $gray;
+  padding: 2em;
+  &__header {
+    color: $dark-blue;
+    margin-bottom: 1em;
+  }
+  &__input {
+    margin-bottom: 1em;
+    @include flex(column, flex-start, flex-start);
+    label {
+      color: $gray-purple;
+      margin-bottom: 0.5em;
+    }
+    input {
+      font-size: font-size(large);
+      width: 100%;
+    }
+  }
+}
