@@ -8,7 +8,8 @@ import Logo from "./Logo";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faTh } from "@fortawesome/free-solid-svg-icons";
+import { CSSTransition } from "react-transition-group";
 
 interface INav {
   children?: object | string;
@@ -24,7 +25,6 @@ const Navbar = () => {
 
   const { user } = useSelector((state: RootState) => state.userReducer);
   const username = user?.name;
-  console.log(username);
 
   return (
     <Nav>

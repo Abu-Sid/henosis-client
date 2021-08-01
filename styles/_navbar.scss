@@ -51,6 +51,7 @@ nav {
         &__item {
           padding: 0.5em;
           border-radius: radius(small);
+          transition: background 300ms ease-in-out;
           a {
             color: $dark-blue;
           }
