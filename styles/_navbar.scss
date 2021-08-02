@@ -28,6 +28,47 @@ nav {
       margin-left: 1em;
       font-size: 1.1rem;
       font-family: $s-ff;
+      position: relative;
+      @include flex;
+      .username {
+        cursor: default;
+      }
+      .toggle-button {
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+      }
+
+      .dropdown {
+        position: absolute;
+        width: 100%;
+        top: 30px;
+        right: 50%;
+        padding: 0.5em;
+        transform: translateX(50%);
+        border-radius: radius(small);
+        background-color: $gray;
+        &__item {
+          padding: 0.5em;
+          border-radius: radius(small);
+          transition: background 300ms ease-in-out;
+          a {
+            color: $dark-blue;
+          }
+          &:hover {
+            background-color: $light-gray-purple;
+          }
+        }
+      }
+    }
+    .divider-blue {
+      height: 25px;
+      width: 0;
+      border-left: $dark-blue solid 2px;
+    }
+    .divider-white {
+      @extend .divider-blue;
+      border-left: $gray solid 2px;
     }
   }
 }
