@@ -8,7 +8,7 @@ import Logo from "./Logo";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faTh } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { logout } from "../../auth/authManager";
 import { useDispatch } from "react-redux";
 import { authUserLogout } from "../../redux/actions/userActions";
@@ -22,10 +22,14 @@ interface INav {
   functionality?: () => void;
 }
 
-const Navbar = () => {
+const useRoute = () => {
   const router = useRouter();
-  const path = router.pathname;
+  return router.pathname;
+};
+
+const Navbar = () => {
   const dispatch = useDispatch();
+  const path = useRoute();
 
   const { user } = useSelector((state: RootState) => state.userReducer);
   const username = user?.name;
@@ -49,6 +53,16 @@ const Navbar = () => {
           {!username && <DropdownItem href='/signup'>Sign Up</DropdownItem>}
           {!username && <DropdownItem href='/signin'>Sign In</DropdownItem>}
           {username && (
+            <DropdownItem href='/new-workspace'>
+              Create new workspace
+            </DropdownItem>
+          )}
+          {username && (
+            <DropdownItem href='/existing-workspace'>
+              Existing workspaces
+            </DropdownItem>
+          )}
+          {username && (
             <DropdownItem functionality={handleLogout}>Log out</DropdownItem>
           )}
         </DropdownMenu>
@@ -58,8 +72,7 @@ const Navbar = () => {
 };
 
 const Nav = ({ children }) => {
-  const router = useRouter();
-  const path = router.pathname;
+  const path = useRoute();
 
   let visibility;
   if (path === "/dashboard") {
@@ -88,9 +101,12 @@ const Nav = ({ children }) => {
 };
 
 const NavItem: React.FC<INav> = ({ children, href, name, text, icon }) => {
+  const path = useRoute();
   const [open, setOpen] = useState(false);
-  const router = useRouter();
-  const path = router.pathname;
+
+  const handleDropdown = () => {
+    setOpen(!open);
+  };
   return (
     <li className={path === "/" ? "blue" : "white"}>
       {href && (
@@ -103,10 +119,10 @@ const NavItem: React.FC<INav> = ({ children, href, name, text, icon }) => {
           className={
             path === "/" ? "blue toggle-button" : "white toggle-button"
           }
-          onClick={() => setOpen(!open)}
+          onClick={handleDropdown}
         >
           <p>{text}</p>
-          <FontAwesomeIcon icon={icon} />
+          <FontAwesomeIcon className='toggle-icon' icon={icon} />
         </button>
       )}
       {open && children}

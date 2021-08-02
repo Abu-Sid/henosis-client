@@ -48,11 +48,11 @@ nav {
 
       .dropdown {
         position: absolute;
-        width: 100%;
+        width: 200%;
         top: 30px;
         right: 50%;
         padding: 0.5em;
-        transform: translateX(50%);
+        transform: translateX(30%);
         border-radius: radius(small);
         background-color: $gray;
         &__item {
