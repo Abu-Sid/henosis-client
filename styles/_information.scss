@@ -1,14 +1,9 @@
 .information {
-  font-family: $s-ff;
   min-height: 90vh;
-  margin-top: 4.5rem;
-  @include flex(column);
-  h1 {
-    color: $dark-blue;
-    text-align: center;
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-  }
+  font-family: $s-ff;
+  margin: 4.5rem auto 1rem auto;
+  max-width: 85%;
+  @include flex(row, flex-start);
 }
 
 .information__form {
@@ -58,5 +53,11 @@
     &:focus {
       box-shadow: 0 0 5px #0004ff;
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .information {
+    max-width: 96%;
   }
 }

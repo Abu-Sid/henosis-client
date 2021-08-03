@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import profileIcon from "../../public/images/user-profile-icon-png.png";
 import { IWorkspace } from "../../redux/actions/workspaceActions/actionInterface";
 
 interface IProps {
@@ -10,7 +11,7 @@ interface IProps {
 const WorkspaceRow = ({ workspace, index }: IProps) => {
   const { workspaceName, members, type } = workspace;
 
-  const owner = members.find((member) => member.isCreator);
+  const { photo, name } = members.find((member) => member.isCreator);
 
   return (
     <Link passHref href={`/workspaces/${workspace._id}`}>
@@ -19,8 +20,8 @@ const WorkspaceRow = ({ workspace, index }: IProps) => {
         <td>{workspaceName}</td>
         <td>{type}</td>
         <td className="owner">
-          <img className="owner-image" src={owner.photo} alt="" />
-          {owner.name}
+          <img className="owner-image" src={photo || profileIcon.src} alt="" />
+          {name}
         </td>
       </tr>
     </Link>

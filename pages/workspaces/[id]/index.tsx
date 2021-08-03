@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
 import withAuthCheck from "../../../HOC/withAuthCheck";
@@ -17,7 +17,7 @@ const Workspace = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const socketIo = io("http://localhost:5000/workspace");
+    const socketIo = io("https://henosis-server.herokuapp.com/workspace");
 
     socketIo.emit("workspace", query.id);
 
@@ -40,13 +40,7 @@ const Workspace = () => {
 
   return (
     <div className="workspace">
-      {loading ? (
-        <h1>Loading..</h1>
-      ) : (
-        <h1>
-          {workspaceName}
-        </h1>
-      )}
+      {loading ? <h1>Loading..</h1> : <h1>{workspaceName}</h1>}
     </div>
   );
 };
