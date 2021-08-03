@@ -11,7 +11,7 @@ const useForm = () => {
 
         const handleError = (isError, provider) => setError(preError => ({...preError, [provider||name]: isError}));
 
-        if (required&&name==='email') {
+        if (required&&name==='email'||required&&name==='companyEmail') {
             const isValid = /\S+@\S+\.\S+/.test(value);
             if (isValid) {
                 handleError(false);
@@ -21,7 +21,7 @@ const useForm = () => {
             }
         }
         else if (required&&name==='name') {
-            const length = value.length>=6;
+            const length = value.trim().length>=6;
             const isValid = /^([^0-9]*)$/.test(value);
             if (isValid&&length) {
                 handleError(false);
@@ -31,7 +31,7 @@ const useForm = () => {
             }
         }
         else if (required&&name==='password') {
-            const isValid = value.length>=6;
+            const isValid = value.trim().length>=6;
             if (inputData.confirmPassword) {
                 const match = value === inputData.confirmPassword;
                 if (match) {
@@ -49,7 +49,7 @@ const useForm = () => {
             }
         }
         else if (required&&name==='confirmPassword') {
-            const isValid = value.length>=6;
+            const isValid = value.trim().length>=6;
             const match = inputData.password === value;
             if (isValid&&match) {
                 handleError(false);
@@ -58,8 +58,8 @@ const useForm = () => {
                 handleError(true);
             }
         }
-        else if(name==="workspaceName"){
-            if (value.length>=6) {
+        else if(name==="workspaceName"||name==="companyName"){
+            if (value.trim().length>=6) {
                 handleError(false);
             }
             else {

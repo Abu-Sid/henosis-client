@@ -26,7 +26,7 @@ const Workspaces = () => {
   // );
 
   useEffect(() => {
-    const socket = io("http://localhost:5000/user-workspaces");
+    const socket = io("https://henosis-server.herokuapp.com/user-workspaces");
 
     socket.emit("request-user-workspaces", user.email);
 

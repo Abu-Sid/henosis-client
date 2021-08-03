@@ -24,7 +24,9 @@ const Workspace = () => {
     useState<Socket<DefaultEventsMap, DefaultEventsMap>>(null);
 
   useEffect(() => {
-    const socketIo = io("http://localhost:5000/create-workspace");
+    const socketIo = io(
+      "https://henosis-server.herokuapp.com/create-workspace"
+    );
     setSocket(socketIo);
 
     socketIo.on("workspace-created", (id) => {
