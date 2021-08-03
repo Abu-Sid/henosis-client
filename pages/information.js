@@ -20,9 +20,9 @@ const Information = () => {
                  <>
                     <h1 className='information__form__header'>Company Information</h1>
                     <div className='information__form__input'>
-                        <label htmlFor='information'>Company name: </label>
+                        <label htmlFor='company_name'>Company name: </label>
                         <input type='text' name='company_name' id='company_name' placeholder="Name" />
-                        <label htmlFor='information'>Company email: </label>
+                        <label htmlFor='company_email'>Company email: </label>
                         <input type='email' name='company_email' id='company_email' placeholder="Email"/>
                     </div>
                  </>
@@ -31,9 +31,9 @@ const Information = () => {
                  <>
                     <h1 className='information__form__header'>Workspace Information</h1>
                     <div className='information__form__input'>
-                        <label htmlFor='information'>Workspace name: </label>
+                        <label htmlFor='workspace_name'>Workspace name: </label>
                         <input type='text' name='workspace_name' id='workspace_name' placeholder="Name" />
-                        <label htmlFor='information'>Add member(optional): </label>
+                        <label htmlFor='member_email'>Add member(optional): </label>
                         <input type='email' name='member_email' id='member_email' placeholder="Email" />
                     </div>
                     {
