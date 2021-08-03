@@ -10,8 +10,7 @@ const BoardSection = () => {
             <div className='chat__text'>
                 <h4>Group Chat</h4>
                 <h2>The board is just the <span>beginning</span> .</h2> <br />
-                <p>You can <span>chat with other developers</span>  in your group, 
-while working on a feature or solving a problem.</p>
+                <p>You can <span>chat with other developers</span>  in your group, while working on a feature or solving a problem.</p>
             </div>
         </div>
     );

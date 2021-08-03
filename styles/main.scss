@@ -27,6 +27,7 @@ body {
 @import "./new-workspace";
 @import "./workspaces";
 @import "./workspace";
+@import "./information";
 
 //* Components
 
@@ -40,6 +41,7 @@ body {
   color: $light-gray;
   background-color: $purple;
   padding: 0.75rem 1.5rem;
+  margin: 0.5rem 0;
   border-radius: 0.5rem;
   transition: all ease-in-out 200ms;
   border: none;
