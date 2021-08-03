@@ -46,7 +46,7 @@
     }
     h4 {
       margin-top: 2rem;
-      font-size: $fs-m;
+      // font-size: $fs-m;
       color: $dark-blue;
     }
     span {
@@ -183,7 +183,7 @@
       margin: 2rem, 0;
       @include flex(column);
       h1 {
-        font-size: $fs-m;
+        font-size: 1.5rem;
       }
       h4 {
         margin-top: 0.75rem;

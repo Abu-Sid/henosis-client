@@ -36,7 +36,7 @@ const PricingCard = ({ data, isAnnual }: IProps) => {
           ? "Price: " + (isAnnual ? annualPrice + "$" : monthlyPrice + "$")
           : "Free"}
       </h3>
-      <Link href={title === "Basic" ? "/workspaces" : "/checkout"} passHref>
+      <Link href={title === "Basic" ? "/workspaces" : "/information"} passHref>
         <button>
           {title === "Basic" ? "Get Started" : "Start 7 day trial"}
         </button>
