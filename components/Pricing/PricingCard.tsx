@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { features } from "./PriceData";
 import SelectIcon from "./SelectIcon";
@@ -35,7 +36,11 @@ const PricingCard = ({ data, isAnnual }: IProps) => {
           ? "Price: " + (isAnnual ? annualPrice + "$" : monthlyPrice + "$")
           : "Free"}
       </h3>
-      <button>{title === "Basic" ? "Get Started" : "Start 7 day trial"}</button>
+      <Link href={title === "Basic" ? "/workspaces" : "/checkout"} passHref>
+        <button>
+          {title === "Basic" ? "Get Started" : "Start 7 day trial"}
+        </button>
+      </Link>
     </div>
   );
 };
