@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { useDispatch } from "react-redux";
@@ -20,6 +21,13 @@ const Layout = ({ children }) => {
     });
     return unsubscribe;
   }, [dispatch]);
+
+  const { pathname } = useRouter();
+
+  useEffect(() => {
+    const path = pathname.split("/")[1];
+    document.title = `Henosis ${path ? " - " + path : ""}`;
+  }, [pathname]);
 
   return (
     <>

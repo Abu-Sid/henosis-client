@@ -58,6 +58,14 @@ const useForm = () => {
                 handleError(true);
             }
         }
+        else if(name==="workspaceName"){
+            if (value.length>=6) {
+                handleError(false);
+            }
+            else {
+                handleError(true);
+            }
+        }
         else if (required&&value.length<1) {
             handleError(true);
         }
