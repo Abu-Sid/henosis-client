@@ -1,4 +1,10 @@
-import React, { Children, useState } from "react";
+import React, {
+  Children,
+  useEffect,
+  useState,
+  createContext,
+  useContext,
+} from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -8,8 +14,12 @@ import Logo from "./Logo";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faTh } from "@fortawesome/free-solid-svg-icons";
-import { CSSTransition } from "react-transition-group";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { logout } from "../../auth/authManager";
+import { useDispatch } from "react-redux";
+import { authUserLogout } from "../../redux/actions/userActions";
+
+export const DropdownContext = createContext([]);
 
 interface INav {
   children?: object | string;
@@ -17,33 +27,64 @@ interface INav {
   text?: string;
   href?: string;
   icon?: any;
+  functionality?: () => void;
 }
 
-const Navbar = () => {
+const useRoute = () => {
   const router = useRouter();
-  const path = router.pathname;
+  return router.pathname;
+};
+
+const Navbar = () => {
+  const dispatch = useDispatch();
+  const path = useRoute();
 
   const { user } = useSelector((state: RootState) => state.userReducer);
   const username = user?.name;
 
+  const [open, setOpen] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      dispatch(authUserLogout());
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <Nav>
-      <NavItem name='Features' href='/features' />
-      <NavItem name='Pricing' href='/pricing' />
-      <li className={path === "/" ? "divider-blue" : "divider-white"}></li>
-      <NavItem text={username ? username : "My account"} icon={faChevronDown}>
-        <DropdownMenu>
-          <DropdownItem href='/signup'>Sign Up</DropdownItem>
-          <DropdownItem href='/signin'>Sign In</DropdownItem>
-        </DropdownMenu>
-      </NavItem>
-    </Nav>
+    <DropdownContext.Provider value={[open, setOpen]}>
+      <Nav>
+        <NavItem name='Features' href='/features' />
+        <NavItem name='Pricing' href='/pricing' />
+        <li className={path === "/" ? "divider-blue" : "divider-white"}></li>
+        <NavItem text={username ? username : "My account"} icon={faChevronDown}>
+          <DropdownMenu>
+            {!username && <DropdownItem href='/signup'>Sign Up</DropdownItem>}
+            {!username && <DropdownItem href='/signin'>Sign In</DropdownItem>}
+            {username && (
+              <DropdownItem href='/new-workspace'>
+                Create new workspace
+              </DropdownItem>
+            )}
+            {username && (
+              <DropdownItem href='/workspaces'>
+                Existing workspaces
+              </DropdownItem>
+            )}
+            {username && (
+              <DropdownItem functionality={handleLogout}>Log out</DropdownItem>
+            )}
+          </DropdownMenu>
+        </NavItem>
+      </Nav>
+    </DropdownContext.Provider>
   );
 };
 
 const Nav = ({ children }) => {
-  const router = useRouter();
-  const path = router.pathname;
+  const path = useRoute();
 
   let visibility;
   if (path === "/dashboard") {
@@ -72,23 +113,25 @@ const Nav = ({ children }) => {
 };
 
 const NavItem: React.FC<INav> = ({ children, href, name, text, icon }) => {
-  const [open, setOpen] = useState(false);
-  const router = useRouter();
-  const path = router.pathname;
+  const path = useRoute();
+  const [open, setOpen] = useContext(DropdownContext);
+
   return (
     <li className={path === "/" ? "blue" : "white"}>
-      <p className='username'>{text}</p>
       {href && (
         <Link href={href}>
           <a className={path === "/" ? "blue" : "white"}> {name} </a>
         </Link>
       )}
       {!href && (
-        <button className='toggle-button' onClick={() => setOpen(!open)}>
-          <FontAwesomeIcon
-            className={path === "/" ? "blue" : "white"}
-            icon={icon}
-          />
+        <button
+          className={
+            path === "/" ? "blue toggle-button" : "white toggle-button"
+          }
+          onClick={() => setOpen(!open)}
+        >
+          <p>{text}</p>
+          <FontAwesomeIcon className='toggle-icon' icon={icon} />
         </button>
       )}
       {open && children}
@@ -100,12 +143,21 @@ const DropdownMenu = ({ children }) => {
   return <div className='dropdown'>{children}</div>;
 };
 
-const DropdownItem: React.FC<INav> = ({ children, href }) => {
+const DropdownItem: React.FC<INav> = ({ children, href, functionality }) => {
+  const [open, setOpen] = useContext(DropdownContext);
+
+  const handleClick = () => {
+    functionality();
+    setOpen(!open);
+  };
   return (
     <div className='dropdown__item'>
-      <Link href={href}>
-        <a>{children}</a>
-      </Link>
+      {!href && <a onClick={handleClick}>{children}</a>}
+      {href && (
+        <Link href={href}>
+          <a onClick={() => setOpen(!open)}>{children}</a>
+        </Link>
+      )}
     </div>
   );
 };
