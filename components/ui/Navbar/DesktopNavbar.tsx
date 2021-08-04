@@ -11,7 +11,6 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import Nav from "./Nav";
 import NavItem from "./NavItem";
 import { DropdownMenu, DropdownItem } from "./DropDown";
-
 export const DropdownContext = createContext([]);
 
 export interface INav {
