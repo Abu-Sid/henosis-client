@@ -1,26 +1,82 @@
 .new-workspace {
-  height: 100vh;
-  width: 100%;
-  @include flex;
+  min-height: 90vh;
+  font-family: $s-ff;
+  margin: 4.5rem auto 1rem auto;
+  max-width: 85%;
+  @include flex(row, flex-start);
 }
 
 .workspace-form {
   background-color: $gray;
   padding: 2em;
+  width: 500px;
+  border-radius: 8px;
+  margin: 0 auto;
   &__header {
     color: $dark-blue;
     margin-bottom: 1em;
+    text-align: center;
   }
   &__input {
     margin-bottom: 1em;
     @include flex(column, flex-start, flex-start);
     label {
       color: $gray-purple;
-      margin-bottom: 0.5em;
+      span {
+        font-size: $fs-xs;
+      }
     }
-    input {
-      font-size: font-size(large);
-      width: 100%;
+  }
+  input,
+  button {
+    font-size: font-size(large);
+    @include input;
+    &:focus {
+      box-shadow: 0 0 1px 2px #6161ff;
     }
+    background-color: #d0d1d8;
+    margin: 0.5em 0;
+  }
+  button {
+    background-color: $light-gray-purple;
+    color: $dark-blue;
+    transition: background-color 0.5s ease-in-out;
+    &:hover {
+      background-color: $dark-blue;
+      color: $light-gray-purple;
+    }
+  }
+}
+.workspace-select-category {
+  width: 100%;
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: repeat(2, 1fr);
+  &-option {
+    max-width: fit-content;
+    margin: 0 auto;
+    background-color: $gray;
+    border-radius: 8px;
+    text-align: center;
+    padding: 1rem;
+    .workspace-select-icon {
+      display: block;
+    }
+    button {
+      @include button;
+      background-color: $purple;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .new-workspace {
+    max-width: 96%;
+  }
+}
+
+@media (max-width: 970px) {
+  .workspace-select-category {
+    grid-template-columns: 1fr;
   }
 }

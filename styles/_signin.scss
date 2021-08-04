@@ -1,14 +1,3 @@
-@mixin input {
-  display: block;
-  padding: 0.7rem;
-  border-radius: 5px;
-  border: none;
-  font-size: 18px;
-  outline: none;
-  width: 100%;
-  margin: 12px auto;
-}
-
 @mixin btn {
   background-color: $purple;
   color: $light-gray;
@@ -35,7 +24,7 @@
         @include input;
         background-color: #d0d1d8;
         &:focus {
-          box-shadow: 0 0 3px #00008f;
+          box-shadow: 0 0 1px 2px #5050ff;
         }
         &[type="submit"] {
           margin-top: 30px;
@@ -90,15 +79,6 @@
       }
     }
   }
-}
-
-.alert-error {
-  padding: 8px;
-  color: #ff0000;
-  background-color: #ffd4d4;
-  font-size: 17px;
-  margin-bottom: 10px;
-  border-radius: 5px;
 }
 
 .eye-icon {

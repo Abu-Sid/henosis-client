@@ -7,7 +7,7 @@
   font-size: 1.2rem;
   margin: 0.2rem;
   &:focus {
-    box-shadow: 0 0 3px #001bb3;
+    box-shadow: 0 0 1px 3px #425eff;
   }
 }
 
@@ -56,6 +56,7 @@
       }
       &__price {
         color: $green;
+        text-align: center;
       }
       button {
         width: 100%;
