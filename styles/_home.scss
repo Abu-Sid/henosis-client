@@ -142,44 +142,113 @@
     color: gray-purple;
   }
 }
-@media screen and (max-width: 600px) {
-  // .home-section {
-  //   margin: 0;
-  // }
+
+// Responsive Layout
+
+@media (max-width: 1080px) {
   .banner {
     padding: 0rem;
     margin: 1rem;
     @include flex(column, center);
-    span {
-      color: $purple;
+    &__text {
+      @include flex(column, center, flex-start);
+      h1 {
+        font-size: $fs-l;
+      }
+      h4 {
+        // text-align: center;
+      }
     }
+
+    &__image {
+      width: 100%;
+    }
+  }
+  //Features-Section
+
+  .features {
+    margin: 3rem;
+
+    @include flex(column);
+    &__text {
+      width: 100%;
+      margin: 1rem, 0;
+      @include flex(column);
+      h1 {
+        font-size: 1.5rem;
+      }
+      h4 {
+        margin-top: 1.55rem;
+        font-size: $fs-s;
+      }
+    }
+    &__image {
+      width: 100%;
+      margin: 3rem 0 0 0;
+    }
+  }
+  //Board or Chat Section
+
+  .chat {
+    margin: 1rem;
+    @include flex(column-reverse);
+    &__text {
+      width: 100%;
+      @include flex(column, flex-start, flex-start);
+    }
+  }
+  //Dashboard section
+
+  .dashboard {
+    margin: 1rem;
+    @include flex(column);
+    &__text {
+      width: 100%;
+      @include flex(column, flex-start, flex-start);
+    }
+  }
+  //Action-To-Call Section
+
+  .act {
+    margin: 3rem 1rem;
+    &__body {
+      width: 100%;
+      padding: 1rem;
+      background-size: cover;
+      border-radius: 1.5rem;
+      box-shadow: 8px 16px 11px 0px rgba(0, 0, 0, 0.24);
+      h1 {
+        font-size: $fs-m;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .banner {
+    padding: 0rem;
+    margin: 1rem;
+    @include flex(column, center);
     &__text {
       @include flex(column, center, center);
       h1 {
-        font-size: $fs-m;
-        font-family: $s-ff;
-        text-transform: uppercase;
-        margin: 1rem 0 2rem 0;
+        font-size: 1.75rem;
       }
       h4 {
-        font-size: $fs-m;
-        color: $gray-purple;
         text-align: center;
       }
     }
 
     &__image {
       width: 100%;
-      box-shadow: 12px 13px 12px -5px rgba(0, 0, 0, 0.39);
     }
   }
   //Features-Section
 
   .features {
-    margin: 1rem;
+    margin: 3rem;
     @include flex(column);
     &__text {
-      // height: 2rem 0;
       margin: 2rem, 0;
       @include flex(column);
       h1 {
@@ -189,14 +258,10 @@
         margin-top: 0.75rem;
         font-size: $fs-s;
       }
-      span {
-        color: $purple;
-      }
     }
     &__image {
       width: 100%;
       margin: 3rem 0 0 0;
-      box-shadow: 12px 13px 12px -5px rgba(0, 0, 0, 0.39);
     }
   }
   //Board or Chat Section
@@ -204,22 +269,10 @@
   .chat {
     margin: 1rem;
     @include flex(column-reverse);
-    span {
-      color: $purple;
-    }
     &__text {
       width: 100%;
       text-align: center;
-
-      // padding: 2rem;
       @include flex(column);
-      h4 {
-        color: $purple;
-      }
-    }
-    &__image {
-      width: 100%;
-      box-shadow: 12px 13px 12px -5px rgba(0, 0, 0, 0.39);
     }
   }
   //Dashboard section
@@ -227,55 +280,24 @@
   .dashboard {
     margin: 1rem;
     @include flex(column);
-    span {
-      color: $purple;
-    }
     &__text {
       width: 100%;
       text-align: center;
-
-      // padding: 2rem;
       @include flex(column, center);
-      h5 {
-        color: $purple;
-      }
-    }
-    &__image {
-      width: 100%;
-      box-shadow: 12px 13px 12px -5px rgba(0, 0, 0, 0.39);
     }
   }
   //Action-To-Call Section
 
   .act {
     margin: 3rem 1rem;
-    @include flex();
     &__body {
       width: 100%;
       padding: 1rem;
-      background-image: url(../public/images/cta.png);
-      background-position: center;
-      // object-fit: fill;
-      // background-repeat: no-repeat;
       background-size: cover;
-      text-align: center;
       border-radius: 1.5rem;
       box-shadow: 8px 16px 11px 0px rgba(0, 0, 0, 0.24);
       h1 {
         font-size: $fs-m;
-      }
-      &__input {
-        input {
-          background-color: $light-gray-purple;
-          padding: 0.25rem;
-          margin-top: 0.5rem;
-          border-radius: 5px;
-          border: 0;
-        }
-        button {
-          padding: 0.25rem 0.5rem;
-          border: 0;
-        }
       }
     }
   }
