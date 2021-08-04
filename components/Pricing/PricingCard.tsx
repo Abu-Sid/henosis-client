@@ -33,7 +33,7 @@ const PricingCard = ({ data, isAnnual }: IProps) => {
       ))}
       <h3 className="pricing-section__main__card__price">
         {monthlyPrice
-          ? "Price: " + (isAnnual ? annualPrice + "$" : monthlyPrice + "$")
+          ? "Price: " + (isAnnual ? "$" + annualPrice : "$" + monthlyPrice)
           : "Free"}
       </h3>
       <Link href={title === "Basic" ? "/workspaces" : "/information"} passHref>

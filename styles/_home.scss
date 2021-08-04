@@ -20,16 +20,27 @@
       font-family: $s-ff;
       text-transform: uppercase;
       margin: 1rem 0 2rem 0;
+      @include writing-style($dark-blue, extra-large, medium);
     }
     h4 {
       font-size: $fs-m;
       color: $gray-purple;
     }
+    button {
+      width: 50%;
+    }
   }
 
   &__image {
+    overflow: hidden;
     width: 50%;
-    box-shadow: 12px 13px 12px -5px rgba(0, 0, 0, 0.39);
+
+    &:hover {
+      box-shadow: 0px 0px 10px #5a5a5a;
+      transform: scale(1.005);
+      transition: 0.3s;
+      border-radius: radius(medium);
+    }
   }
 }
 //Features-Section
@@ -54,9 +65,15 @@
     }
   }
   &__image {
+    overflow: hidden;
     margin: 5rem;
     width: 60%;
-    box-shadow: 12px 13px 12px -5px rgba(0, 0, 0, 0.39);
+    &:hover {
+      box-shadow: 0px 0px 10px #5a5a5a;
+      transform: scale(1.005);
+      transition: 0.3s;
+      border-radius: radius(medium);
+    }
   }
 }
 //Board or Chat Section
@@ -79,8 +96,14 @@
     }
   }
   &__image {
+    overflow: hidden;
     width: 100%;
-    box-shadow: 12px 13px 12px -5px rgba(0, 0, 0, 0.39);
+    &:hover {
+      box-shadow: 0px 0px 10px #5a5a5a;
+      transform: scale(1.005);
+      transition: 0.3s;
+      border-radius: radius(medium);
+    }
   }
 }
 //Dashboard section
@@ -104,7 +127,12 @@
   }
   &__image {
     width: 100%;
-    box-shadow: 12px 13px 12px -5px rgba(0, 0, 0, 0.39);
+    &:hover {
+      box-shadow: 0px 0px 10px #5a5a5a;
+      transform: scale(1.005);
+      transition: 0.3s;
+      border-radius: radius(medium);
+    }
   }
 }
 //Action-To-Call Section
@@ -120,7 +148,13 @@
     background-repeat: no-repeat;
     background-size: cover;
     text-align: center;
-    box-shadow: 12px 13px 12px -5px rgba(0, 0, 0, 0.39);
+
+    &:hover {
+      box-shadow: 0px 0px 10px #5a5a5a;
+      transform: scale(1.005);
+      transition: 0.3s;
+      border-radius: radius(medium);
+    }
     &__input {
       input {
         background-color: $light-gray-purple;
@@ -143,7 +177,7 @@
   }
 }
 
-// Responsive Layout
+// Responsive Layout for Ipad
 
 @media (max-width: 1080px) {
   .banner {
@@ -154,9 +188,6 @@
       @include flex(column, center, flex-start);
       h1 {
         font-size: $fs-l;
-      }
-      h4 {
-        // text-align: center;
       }
     }
 
@@ -223,7 +254,7 @@
     }
   }
 }
-
+// Responsive Layout for mobile
 @media screen and (max-width: 600px) {
   .banner {
     padding: 0rem;
