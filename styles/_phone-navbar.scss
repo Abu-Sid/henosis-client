@@ -1,4 +1,5 @@
-.desktop-navbar {
+.phone-navbar {
+  display: none;
   height: 4rem;
   padding: 0 5em;
   position: fixed;
@@ -22,6 +23,7 @@
       font-weight: 800;
     }
   }
+
   ul {
     @include flex;
     li {
@@ -39,10 +41,37 @@
         @include flex;
         .toggle-icon {
           transform: translateY(3px);
+          font-size: 1.5rem;
         }
         p {
           margin-right: 0.5em;
           font-size: 1.1rem;
+        }
+      }
+
+      .dropdown {
+        background-color: red;
+        position: absolute;
+        width: 200%;
+        top: 30px;
+        right: 50%;
+        padding: 0.5em;
+        transform: translateX(30%);
+        border-radius: radius(small);
+        background-color: $gray;
+        &__item {
+          transition: background 300ms ease-in-out;
+          a {
+            border-radius: radius(small);
+            color: $dark-blue;
+            padding: 0.5em;
+            width: 100%;
+            display: block;
+            cursor: pointer;
+            &:hover {
+              background-color: $light-gray-purple;
+            }
+          }
         }
       }
     }
@@ -57,41 +86,6 @@
     }
   }
 }
-
-.dropdown {
-  position: absolute;
-  width: 200%;
-  top: 30px;
-  right: 50%;
-  padding: 0.5em;
-  transform: translateX(30%);
-  border-radius: radius(small);
-  background-color: $gray;
-  &__item {
-    transition: background 300ms ease-in-out;
-    a {
-      border-radius: radius(small);
-      color: $dark-blue;
-      padding: 0.5em;
-      width: 100%;
-      display: block;
-      cursor: pointer;
-      &:hover {
-        background-color: $light-gray-purple;
-      }
-    }
-  }
-}
-
-.phone-navbar {
-  @extend .desktop-navbar;
-  padding: 0 2em;
-  display: none;
-  .toggle-icon {
-    font-size: 1.5rem;
-  }
-}
-
 .colored-bg {
   background-color: $dark-blue;
 }
@@ -113,20 +107,7 @@
 }
 
 @media only screen and (max-width: 800px) {
-  .desktop-navbar {
-    display: none;
-  }
-
   .phone-navbar {
-    @include flex(row, space-between);
-  }
-  .dropdown {
-    width: 400%;
-    top: 35px;
-    right: 50%;
-    padding: 0.5em;
-    transform: translateX(20%);
-    border-radius: radius(small);
-    background-color: $gray;
+    display: flex;
   }
 }

@@ -8,7 +8,7 @@ const Banner = () => {
             
                 <div className='banner__text'>
                     <h1>Get your work done. <br /> <span>Together.</span> </h1>
-                    <h4>Project Management and Collaboration made <br /> easy by <span> Henosis</span>.</h4>
+                    <h4>Project Management and Collaboration made easy by <span> Henosis</span>.</h4>
                     <button className='button-primary'>GET STARTED</button>
                 </div>
             

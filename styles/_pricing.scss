@@ -20,10 +20,11 @@
     @include flex(row, space-between);
     h1 {
       font-size: 2.1rem;
+      color: $dark-blue;
     }
     h3 {
       margin-top: 1rem;
-      color: $gray-purple;
+      color: $purple;
       font-size: 1.5rem;
       font-weight: 500;
     }
@@ -53,17 +54,18 @@
       h3 {
         margin: 1rem 0;
         font-size: 1.5rem;
+        color: $purple;
       }
       &__price {
-        color: $green;
+        color: $dark-blue;
         text-align: center;
       }
       button {
         width: 100%;
-        background-color: $gray-purple;
+        background-color: $purple;
         @include button;
         &:hover {
-          background-color: $purple;
+          background-color: $gray-purple;
           transition: background-color 0.5s;
         }
       }
