@@ -37,6 +37,7 @@ const Workspace = () => {
   }, [query, replace, dispatch]);
 
   const { workspaceName } = workspace;
+  console.log(workspace);
 
   return (
     <div className="workspace">
