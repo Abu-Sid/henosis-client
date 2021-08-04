@@ -7,7 +7,7 @@ import {
   authPrivateLoading,
   authUserSuccess,
 } from "../../redux/actions/userActions";
-import Navbar from "./Navbar";
+import Navbar from "./Navbar/Navbar";
 
 const Layout = ({ children }) => {
   const dispatch = useDispatch();
