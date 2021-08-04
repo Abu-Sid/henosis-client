@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import WorkspaceForm from "../components/NewWorkspace/WorkspaceForm";
+import Payment from "../components/Payment/Payment";
 import withAuthCheck from "../HOC/withAuthCheck";
 import { IWorkspace } from "../redux/actions/workspaceActions/actionInterface";
 import { RootState } from "../redux/reducers";
@@ -17,6 +18,8 @@ const Information = () => {
 
   const { user } = useSelector((state: RootState) => state.userReducer);
 
+  const btnRef = useRef(null);
+
   const submit = (data: IData) => {
     const workspace = {
       ...data,
@@ -24,15 +27,13 @@ const Information = () => {
       members: [{ ...user, isCreator: true }],
     };
     setWorkspaceData(workspace);
+    btnRef.current.click();
   };
 
   return (
     <section className="information">
-      {workspaceData.companyName ? (
-        <h1>Order Processing</h1>
-      ) : (
-        <WorkspaceForm submit={submit} isCompany />
-      )}
+      <Payment ref={btnRef} workspaceData={workspaceData} />
+      <WorkspaceForm submit={submit} isCompany />
     </section>
   );
 };
