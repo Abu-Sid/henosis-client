@@ -1,5 +1,7 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import useForm from "../../hooks/useForm";
+import { RootState } from "../../redux/reducers";
 
 interface IForm {
   handleInput: (e: any) => void;
@@ -14,7 +16,15 @@ interface IProps {
 }
 
 const WorkspaceForm = ({ submit, isCompany }: IProps) => {
-  const { handleInput, handleInvalid, handleSubmit, error }: IForm = useForm();
+  const { email } = useSelector((state: RootState) => state.userReducer.user);
+
+  const { handleInput, handleInvalid, handleSubmit, error }: IForm = useForm(
+    isCompany
+      ? {
+          companyEmail: email,
+        }
+      : {}
+  );
 
   return (
     <form onSubmit={handleSubmit(submit)} className="workspace-form">
@@ -48,6 +58,7 @@ const WorkspaceForm = ({ submit, isCompany }: IProps) => {
               onInvalid={handleInvalid}
               required
               placeholder="Email"
+              defaultValue={email}
             />
             {error.companyEmail && (
               <p className="alert-error">Valid Company Email Is Required</p>

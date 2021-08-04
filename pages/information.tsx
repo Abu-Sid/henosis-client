@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import WorkspaceForm from "../components/NewWorkspace/WorkspaceForm";
+import Payment from "../components/Payment/Payment";
+import { priceData } from "../components/Pricing/PriceData";
 import withAuthCheck from "../HOC/withAuthCheck";
 import { IWorkspace } from "../redux/actions/workspaceActions/actionInterface";
 import { RootState } from "../redux/reducers";
@@ -17,6 +20,16 @@ const Information = () => {
 
   const { user } = useSelector((state: RootState) => state.userReducer);
 
+  const { query } = useRouter();
+
+  const btnRef = useRef(null);
+
+  useEffect(() => {
+    if (workspaceData.type) {
+      btnRef.current.click();
+    }
+  }, [workspaceData]);
+
   const submit = (data: IData) => {
     const workspace = {
       ...data,
@@ -26,13 +39,18 @@ const Information = () => {
     setWorkspaceData(workspace);
   };
 
+  const isAnnual = query.isAnnual === "true" ? true : false;
+
+  const pricing =
+    priceData.find((data) => data.title.toLowerCase() === query.name) ||
+    priceData[2];
+
+  const price = pricing[isAnnual ? "annualPrice" : "monthlyPrice"];
+
   return (
     <section className="information">
-      {workspaceData.companyName ? (
-        <h1>Order Processing</h1>
-      ) : (
-        <WorkspaceForm submit={submit} isCompany />
-      )}
+      <Payment ref={btnRef} workspaceData={workspaceData} price={price} />
+      <WorkspaceForm submit={submit} isCompany />
     </section>
   );
 };
