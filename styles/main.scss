@@ -24,6 +24,10 @@ body {
 @import "./features";
 @import "./pricing";
 @import "./signin";
+@import "./new-workspace";
+@import "./workspaces";
+@import "./workspace";
+@import "./information";
 
 //* Components
 
@@ -33,15 +37,32 @@ body {
 
 // button
 .button-primary {
+  font-family: $s-ff;
   color: $light-gray;
   background-color: $purple;
   padding: 0.75rem 1.5rem;
+  margin: 0.5rem 0;
   border-radius: 0.5rem;
   transition: all ease-in-out 200ms;
+  border: none;
+  &:focus {
+    box-shadow: 0 0 0 2px #2b2bff;
+  }
   &:hover {
     background-color: $gray-purple;
   }
 }
+
+// error alert
+.alert-error {
+  padding: 5px;
+  color: #ff0000;
+  background-color: #ffd4d4;
+  font-size: 16.5px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
 //Homepage design
 
 .toast {

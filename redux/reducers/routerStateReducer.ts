@@ -5,7 +5,7 @@ export interface RouterState {
 }
 
 const initialState: RouterState = {
-  path: "/dashboard",
+  path: "/workspaces",
 };
 
 interface Action {
