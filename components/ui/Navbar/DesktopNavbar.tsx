@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { createContext } from "react";
 import { useRouter } from "next/router";
 
 import { useSelector } from "react-redux";
@@ -35,8 +35,6 @@ const DesktopNavbar = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
   const username = user?.name;
 
-  const [open, setOpen] = useState(false);
-
   const handleLogout = async () => {
     try {
       await logout();
@@ -47,32 +45,28 @@ const DesktopNavbar = () => {
   };
 
   return (
-    <DropdownContext.Provider value={[open, setOpen]}>
-      <Nav>
-        <NavItem name='Features' href='/features' />
-        <NavItem name='Pricing' href='/pricing' />
-        <li className={path === "/" ? "divider-blue" : "divider-white"}></li>
-        <NavItem text={username ? username : "My account"} icon={faChevronDown}>
-          <DropdownMenu>
-            {!username && <DropdownItem href='/signup'>Sign Up</DropdownItem>}
-            {!username && <DropdownItem href='/signin'>Sign In</DropdownItem>}
-            {username && (
-              <DropdownItem href='/new-workspace'>
-                Create new workspace
-              </DropdownItem>
-            )}
-            {username && (
-              <DropdownItem href='/workspaces'>
-                Existing workspaces
-              </DropdownItem>
-            )}
-            {username && (
-              <DropdownItem functionality={handleLogout}>Log out</DropdownItem>
-            )}
-          </DropdownMenu>
-        </NavItem>
-      </Nav>
-    </DropdownContext.Provider>
+    <Nav className='desktop-navbar'>
+      <NavItem name='Features' href='/features' />
+      <NavItem name='Pricing' href='/pricing' />
+      <li className={path === "/" ? "divider-blue" : "divider-white"}></li>
+      <NavItem text={username ? username : "My account"} icon={faChevronDown}>
+        <DropdownMenu>
+          {!username && <DropdownItem href='/signup'>Sign Up</DropdownItem>}
+          {!username && <DropdownItem href='/signin'>Sign In</DropdownItem>}
+          {username && (
+            <DropdownItem href='/new-workspace'>
+              Create new workspace
+            </DropdownItem>
+          )}
+          {username && (
+            <DropdownItem href='/workspaces'>Existing workspaces</DropdownItem>
+          )}
+          {username && (
+            <DropdownItem functionality={handleLogout}>Log out</DropdownItem>
+          )}
+        </DropdownMenu>
+      </NavItem>
+    </Nav>
   );
 };
 

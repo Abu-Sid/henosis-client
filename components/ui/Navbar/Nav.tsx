@@ -2,21 +2,26 @@ import React from "react";
 import Link from "next/link";
 import { useRoute } from "./Navbar";
 import Logo from "../Logo";
+import { INav } from "./Navbar";
 
-const Nav = ({ children }) => {
+const Nav: React.FC<INav> = ({ children, className }) => {
   const path = useRoute();
 
   let visibility;
   if (path === "/dashboard") {
-    visibility = { display: "none" };
+    visibility = "hidden";
   } else {
-    visibility = { display: "flex" };
+    visibility = null;
+  }
+
+  let color;
+  if (path === "/") {
+    color = "white-bg";
+  } else {
+    color = "colored-bg";
   }
   return (
-    <nav
-      style={visibility}
-      className={path === "/" ? "white-bg" : "colored-bg"}
-    >
+    <nav className={`${color} ${visibility} ${className}`}>
       <Link href='/' passHref>
         <div className='logo'>
           <div className='logo__image'>

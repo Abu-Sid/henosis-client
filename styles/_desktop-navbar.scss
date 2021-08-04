@@ -1,4 +1,4 @@
-nav {
+.desktop-navbar {
   height: 4rem;
   padding: 0 5em;
   position: fixed;
@@ -97,4 +97,14 @@ nav {
 
 .white {
   color: $gray;
+}
+
+.hidden {
+  display: none;
+}
+
+@media only screen and (max-width: 800px) {
+  .desktop-navbar {
+    display: none;
+  }
 }

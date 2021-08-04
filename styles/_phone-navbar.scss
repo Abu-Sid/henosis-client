@@ -1,5 +1,9 @@
+.phone-navbar {
+  display: none;
+}
+
 @media only screen and (max-width: 800px) {
-  .white-bg {
-    background-color: red;
+  .phone-navbar {
+    display: flex;
   }
 }

@@ -31,9 +31,9 @@ body {
 
 //* Components
 
-@import "./navbar";
-@import "./footer";
+@import "./desktop-navbar";
 @import "./phone-navbar";
+@import "./footer";
 
 // button
 .button-primary {

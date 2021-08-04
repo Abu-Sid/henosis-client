@@ -1,10 +1,12 @@
 import React from "react";
+import Nav from "./Nav";
+import NavItem from "./NavItem";
 
 const PhoneNavbar = () => {
   return (
-    <div>
-      <h1>This is phone navbar</h1>
-    </div>
+    <Nav className='phone-navbar'>
+      <NavItem>Mir Hussain</NavItem>
+    </Nav>
   );
 };
 
