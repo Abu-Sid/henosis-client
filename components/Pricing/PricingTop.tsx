@@ -10,7 +10,7 @@ const PricingTop = ({ handleIsAnnual, isAnnual }: IProps) => {
     <div className="pricing-section__top">
       <div>
         <h1>Simple, transparent pricing.</h1>
-        <h3>No contracts, no surprise fees.</h3>
+        <h3>No contracts, No surprise fees.</h3>
       </div>
       <div>
         <button

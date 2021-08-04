@@ -37,6 +37,7 @@ body {
 // button
 .button-primary {
   font-family: $s-ff;
+  font-size: medium;
   color: $light-gray;
   background-color: $purple;
   padding: 0.75rem 1.5rem;
@@ -49,6 +50,8 @@ body {
   }
   &:hover {
     background-color: $gray-purple;
+    transform: scale(1.005);
+    transition: 0.3s;
   }
 }
 
