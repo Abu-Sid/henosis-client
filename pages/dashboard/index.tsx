@@ -1,10 +1,11 @@
 import React from "react";
 import withAuthCheck from "../../HOC/withAuthCheck";
+import Sidebar from "../../components/ui/Sidebar";
 
 const Dashboard = () => {
   return (
     <div>
-      <h1>This is dashboard</h1>
+      <Sidebar />
     </div>
   );
 };
