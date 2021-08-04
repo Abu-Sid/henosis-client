@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import WorkspaceForm from "../components/NewWorkspace/WorkspaceForm";
 import Payment from "../components/Payment/Payment";
@@ -24,6 +24,12 @@ const Information = () => {
 
   const btnRef = useRef(null);
 
+  useEffect(() => {
+    if (workspaceData.type) {
+      btnRef.current.click();
+    }
+  }, [workspaceData]);
+
   const submit = (data: IData) => {
     const workspace = {
       ...data,
@@ -31,7 +37,6 @@ const Information = () => {
       members: [{ ...user, isCreator: true }],
     };
     setWorkspaceData(workspace);
-    btnRef.current.click();
   };
 
   const isAnnual = query.isAnnual === "true" ? true : false;

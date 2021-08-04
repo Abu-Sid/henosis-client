@@ -25,7 +25,7 @@ const Workspace = () => {
 
   useEffect(() => {
     const socketIo = io(
-      "https://henosis-server.herokuapp.com/create-workspace"
+      "https://intense-peak-24388.herokuapp.com/create-workspace"
     );
     setSocket(socketIo);
 

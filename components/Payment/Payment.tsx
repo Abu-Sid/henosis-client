@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React, { forwardRef, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import StripeCheckout, { Token } from "react-stripe-checkout";
 import io, { Socket } from "socket.io-client";
@@ -25,7 +26,7 @@ const Payment = (
 
   useEffect(() => {
     const socketIo = io(
-      "https://henosis-server.herokuapp.com/create-workspace"
+      "https://intense-peak-24388.herokuapp.com/create-workspace"
     );
     setSocket(socketIo);
 
@@ -38,12 +39,16 @@ const Payment = (
     };
   }, [router]);
 
-  const handelCreateWorkspace = () => {
-    socket.emit("create-workspace", workspaceData);
+  const handelCreateWorkspace = (loadingId: string) => {
+    toast.dismiss(loadingId);
+    if (socket !== null) {
+      socket.emit("create-workspace", workspaceData);
+    }
   };
 
   const makePayment = (token: Token) => {
     const data = { price, type: "Business", user };
+    const loadingId = toast.loading("Loading...");
 
     fetch("https://intense-peak-24388.herokuapp.com/payment", {
       method: "POST",
@@ -52,8 +57,8 @@ const Payment = (
       },
       body: JSON.stringify({ token, data }),
     })
-      .then(() => handelCreateWorkspace())
-      .catch((err) => console.log("error", err));
+      .then(() => handelCreateWorkspace(loadingId))
+      .catch((err) => toast.dismiss(loadingId));
   };
 
   return (
