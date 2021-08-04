@@ -69,7 +69,7 @@ const Navbar = () => {
               </DropdownItem>
             )}
             {username && (
-              <DropdownItem href='/existing-workspace'>
+              <DropdownItem href='/workspaces'>
                 Existing workspaces
               </DropdownItem>
             )}
