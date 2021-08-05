@@ -1,8 +1,8 @@
 import { useCallback, useMemo, useState } from "react";
 
-const useForm = () => {
+const useForm = (defaultValue={}) => {
 
-    const [inputData, setInputData] = useState({});
+    const [inputData, setInputData] = useState(defaultValue);
 
     const [error, setError] = useState({});
 
@@ -109,9 +109,9 @@ const useForm = () => {
         if(!filtered.length){
             submit(inputData, e);
             e.target.reset();
-            setInputData({});
+            setInputData(defaultValue);
         }
-    }, [inputData, handleFocus])
+    }, [inputData, handleFocus, defaultValue])
 
     return {
         handleInput,

@@ -17,7 +17,7 @@ const Workspace = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const socketIo = io("https://henosis-server.herokuapp.com/workspace");
+    const socketIo = io("https://intense-peak-24388.herokuapp.com/workspace");
 
     socketIo.emit("workspace", query.id);
 
@@ -36,11 +36,24 @@ const Workspace = () => {
     };
   }, [query, replace, dispatch]);
 
-  const { workspaceName } = workspace;
+  const { workspaceName, companyName } = workspace;
 
   return (
     <div className="workspace">
-      {loading ? <h1>Loading..</h1> : <h1>{workspaceName}</h1>}
+      {loading ? (
+        <h1>Loading..</h1>
+      ) : (
+        <>
+          <h1>
+            Welcome to your workspace --{workspaceName}{" "}
+            {companyName && "--" + companyName}
+          </h1>
+          <img
+            src="https://cdn.dribbble.com/users/5246919/screenshots/11915912/media/f7b14b34de780768f18b37cce2431b0b.gif"
+            alt=""
+          />
+        </>
+      )}
     </div>
   );
 };

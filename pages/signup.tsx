@@ -27,15 +27,6 @@ const SignUp = () => {
     }
   };
 
-  // const handleLogout = async () => {
-  //   try {
-  //     await logout();
-  //     dispatch(authUserLogout());
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   return (
     <RedirectUser>
       <section className="login-section">

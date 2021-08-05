@@ -2,10 +2,14 @@
   font-family: $s-ff;
   margin: 4.5rem auto 1rem auto;
   max-width: 85%;
+  text-align: center;
+  img {
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 768px) {
-  .workspaces {
+  .workspace {
     max-width: 96%;
   }
 }
