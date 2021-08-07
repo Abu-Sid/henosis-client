@@ -16,7 +16,14 @@ export interface IWorkspace {
   }[];
 }
 
-export interface IAction {
+interface SuccessAction {
   type: ActionType.WORKSPACE_SUCCESS;
   payload: IWorkspace;
 }
+
+interface FailureAction {
+  type: ActionType.WORKSPACE_FAILURE;
+  payload: string;
+}
+
+export type IAction = SuccessAction | FailureAction;

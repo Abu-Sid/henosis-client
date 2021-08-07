@@ -7,3 +7,10 @@ export const workspaceSuccess = (workspace: IWorkspace): IAction => {
     payload: workspace,
   };
 };
+
+export const workspaceFailure = (error: string): IAction => {
+  return {
+    type: ActionType.WORKSPACE_FAILURE,
+    payload: error,
+  };
+};
