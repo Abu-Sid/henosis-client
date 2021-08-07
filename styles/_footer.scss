@@ -1,4 +1,53 @@
-.footer {
-  margin-top: 4rem;
-  @include flex();
+.container {
+  margin-top: 10rem;
+  width: 100%;
+  background-image: url(../public/images/cta.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  .row {
+    padding: 1.8rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    h4 {
+      color: #4a4fff;
+      margin-bottom: 0.5rem;
+    }
+    .icons {
+      font-size: 1.5rem;
+      margin-right: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    p {
+      color: black;
+      font-size: 1rem;
+      padding: 0.4rem 0;
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    }
+  }
+  .footer-sign-up {
+    text-align: center;
+    input {
+      background-color: $light-gray-purple;
+      padding: 0.4rem;
+      margin-top: 0.5rem;
+      border-radius: 5px;
+      border: 0;
+    }
+    button {
+      padding: 0.25rem 0.5rem;
+      border: 0;
+      margin-left: 0.2rem;
+    }
+  }
+  .footer-bottom {
+    text-align: center;
+    padding: 1.5rem;
+    p {
+      color: #75798c;
+    }
+  }
 }
