@@ -6,6 +6,23 @@
   img {
     max-width: 100%;
   }
+  .workspace-error {
+    text-align: center;
+    min-height: 90vh;
+    @include flex(column);
+    h1 {
+      color: $red;
+    }
+    h2 {
+      margin-bottom: 1.2rem;
+      margin-top: 1.8rem;
+    }
+    button {
+      @include button;
+      color: $light-gray;
+      background-color: $purple;
+    }
+  }
 }
 
 @media (max-width: 768px) {
