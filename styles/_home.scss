@@ -135,45 +135,36 @@
     }
   }
 }
-//Action-To-Call Section
-
-.act {
-  margin-top: 10rem;
-  @include flex();
-  &__body {
-    width: 50%;
-    padding: 2rem;
-    background-image: url(../public/images/cta.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+// Contact form
+.contact-container {
+  border-radius: 0.5rem;
+  background-color: #e6e8ea;
+  padding: 2.5rem;
+  width: 28rem;
+  margin: 10rem auto;
+  h2 {
     text-align: center;
-
-    &:hover {
-      box-shadow: 0px 0px 10px #5a5a5a;
-      transform: scale(1.005);
-      transition: 0.3s;
-      border-radius: radius(medium);
-    }
-    &__input {
-      input {
-        background-color: $light-gray-purple;
-        padding: 0.25rem;
-        margin-top: 0.5rem;
-        border-radius: 5px;
-        border: 0;
-      }
-      button {
-        padding: 0.25rem 0.5rem;
-        border: 0;
-      }
-    }
+    margin-bottom: 2rem;
   }
-}
-.footer {
-  margin: 3rem;
-  p {
-    color: gray-purple;
+  input,
+  textarea {
+    background-color: #d0d1d8;
+    width: 100%;
+    padding: 0.6rem 1.5rem;
+    border: 0.02rem solid #d0d1d8;
+    border-radius: 0.4rem;
+    box-sizing: border-box;
+    margin: 0.5rem 0;
+    resize: vertical;
+  }
+
+  .button {
+    background-color: #4a4fff;
+    color: white;
+    padding: 0.8rem 1.8rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
   }
 }
 
@@ -238,22 +229,8 @@
       @include flex(column, flex-start, flex-start);
     }
   }
-  //Action-To-Call Section
-
-  .act {
-    margin: 3rem 1rem;
-    &__body {
-      width: 100%;
-      padding: 1rem;
-      background-size: cover;
-      border-radius: 1.5rem;
-      box-shadow: 8px 16px 11px 0px rgba(0, 0, 0, 0.24);
-      h1 {
-        font-size: $fs-m;
-      }
-    }
-  }
 }
+
 // Responsive Layout for mobile
 @media screen and (max-width: 600px) {
   .banner {

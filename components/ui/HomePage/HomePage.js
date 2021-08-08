@@ -1,6 +1,6 @@
 import React from 'react';
 import Footer from '../Footer';
-import ActionToCall from './ActionToCall';
+import Contact from './Contact';
 import Banner from './Banner';
 import BoardSection from './BoardSection';
 import DashboardSection from './DashboardSection';
@@ -13,7 +13,7 @@ const HomePage = () => {
             <FeaturesSection/>
             <BoardSection/>
             <DashboardSection/>
-            <ActionToCall/>
+            <Contact/>
             <Footer/>
         </>
     );
