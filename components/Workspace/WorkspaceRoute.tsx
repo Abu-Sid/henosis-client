@@ -3,6 +3,10 @@ import React from "react";
 import NotFound from "../../pages/404";
 import Backlog from "./WorkspacePages/Backlog";
 import Board from "./WorkspacePages/Board";
+import Chat from "./WorkspacePages/Chat";
+import Notification from "./WorkspacePages/Notification";
+import Settings from "./WorkspacePages/Settings";
+import PersonalDashboard from "./WorkspacePages/PersonalDashboard";
 
 const WorkspaceRoute = () => {
   const [, path] = useRouter().query.paths;
@@ -14,6 +18,14 @@ const WorkspaceRoute = () => {
       return <Board />;
     case "backlog":
       return <Backlog />;
+    case "chat":
+      return <Chat />;
+    case "notifications":
+      return <Notification />;
+    case "settings":
+      return <Settings />;
+    case "personal-dashboard":
+      return <PersonalDashboard />;
     default:
       return <NotFound />;
   }

@@ -1,7 +1,8 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
-import Logo from "../../public/images/logo.svg";
+import Logo from "../../public/images/logo.png";
 import Menu from "../../public/images/icons/menu.svg";
 import User from "../../public/images/icons/user.svg";
 import ClipBoard from "../../public/images/icons/clipboard-check.svg";
@@ -13,13 +14,11 @@ import Logout from "../../public/images/icons/logout.svg";
 
 const Sidebar = () => {
   const router = useRouter();
-  const path = router.pathname;
-  const { id } = router.query;
-
-  console.log(path);
+  const route = router.pathname;
+  const path = router.query.paths?.[0];
 
   let visibility;
-  if (!path.includes("workspaces/[...paths]")) {
+  if (!route.includes("workspaces/[...paths]")) {
     visibility = "hidden";
   } else {
     visibility = null;
@@ -28,42 +27,58 @@ const Sidebar = () => {
     <div className='sidebar-container'>
       <div className={`sidebar ${visibility}`}>
         <ul>
-          <li>
+          <li className='sidebar__logo'>
             <Link href='/'>
-              <a>Logo</a>
+              <a>
+                <Image src={Logo} alt='logo' />
+              </a>
             </Link>
           </li>
           <li>
-            <Link href={`${id}/dashboard`}>
-              <a>Dashboard</a>
+            <Link href={`${path}/personal-dashboard`}>
+              <a>
+                <Image src={User} alt='user-icon' />
+              </a>
             </Link>
           </li>
           <li>
-            <Link href={`${id}/backlog`}>
-              <a>Backlog</a>
+            <Link href={`${path}/backlog`}>
+              <a>
+                <Image src={ClipBoard} alt='backlog-icon' />
+              </a>
             </Link>
           </li>
           <li>
-            <Link href={`${id}/boards`}>
-              <a>Boards</a>
+            <Link href={`${path}/board`}>
+              <a>
+                <Image src={Boards} alt='board-icon' />
+              </a>
             </Link>
           </li>
           <li>
-            <Link href={`${id}/chat`}>
-              <a>Chat</a>
+            <Link href={`${path}/chat`}>
+              <a>
+                <Image src={Chat} alt='chat-icon' />
+              </a>
             </Link>
           </li>
           <li>
-            <Link href={`${id}/notifications`}>
-              <a>Notification</a>
+            <Link href={`${path}/notifications`}>
+              <a>
+                <Image src={Mail} alt='notifications-icon' />
+              </a>
             </Link>
           </li>
           <li>
-            <Link href={`${id}/settings`}>
-              <a>Settings</a>
+            <Link href={`${path}/settings`}>
+              <a>
+                <Image src={Settings} alt='settings-icon' />
+              </a>
             </Link>
           </li>
-          <li className='sidebar__logout'>Logout</li>
+          <li className='sidebar__logout'>
+            <Image src={Logout} alt='logo' />
+          </li>
         </ul>
       </div>
     </div>
