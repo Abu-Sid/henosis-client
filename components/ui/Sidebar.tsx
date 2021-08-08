@@ -16,8 +16,10 @@ const Sidebar = () => {
   const path = router.pathname;
   const { id } = router.query;
 
+  console.log(path);
+
   let visibility;
-  if (!path.includes("workspaces/[id]")) {
+  if (!path.includes("workspaces/[...paths]")) {
     visibility = "hidden";
   } else {
     visibility = null;
