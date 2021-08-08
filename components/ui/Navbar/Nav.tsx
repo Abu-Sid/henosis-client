@@ -8,7 +8,7 @@ const Nav: React.FC<INav> = ({ children, className }) => {
   const path = useRoute();
 
   let visibility;
-  if (path === "/dashboard") {
+  if (path.includes("workspaces/[id]")) {
     visibility = "hidden";
   } else {
     visibility = null;

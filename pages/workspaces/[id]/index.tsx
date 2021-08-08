@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import io, { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
+import { useRoute } from "../../../components/ui/Navbar/Navbar";
 import WorkspaceError from "../../../components/Workspace/WorkspaceError";
 import withAuthCheck from "../../../HOC/withAuthCheck";
 import {
@@ -69,7 +70,7 @@ const Workspace = () => {
   const { workspaceName, companyName } = workspace;
 
   return (
-    <div className="workspace">
+    <div className='workspace'>
       {loading ? (
         <h1>Loading..</h1>
       ) : error ? (
@@ -85,8 +86,8 @@ const Workspace = () => {
             {companyName && "--" + companyName}
           </h1>
           <img
-            src="https://cdn.dribbble.com/users/5246919/screenshots/11915912/media/f7b14b34de780768f18b37cce2431b0b.gif"
-            alt=""
+            src='https://cdn.dribbble.com/users/5246919/screenshots/11915912/media/f7b14b34de780768f18b37cce2431b0b.gif'
+            alt=''
           />
         </>
       )}

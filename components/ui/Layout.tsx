@@ -8,6 +8,7 @@ import {
   authUserSuccess,
 } from "../../redux/actions/userActions";
 import Navbar from "./Navbar/Navbar";
+import Sidebar from "./Sidebar";
 
 const Layout = ({ children }) => {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const Layout = ({ children }) => {
     <>
       <Toaster toastOptions={{ className: "toast" }} />
       <Navbar />
+      <Sidebar />
       <main>{children}</main>
     </>
   );
