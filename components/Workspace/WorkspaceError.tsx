@@ -2,21 +2,23 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
+import { RequestData } from "../../pages/workspaces/[...paths]";
 import { RootState } from "../../redux/reducers";
 
 interface IProps {
-  creatorEmail: string;
-  requestName: string;
+  requestData: RequestData;
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 }
 
-const WorkspaceError = ({ creatorEmail, requestName, socket }: IProps) => {
+const WorkspaceError = ({ requestData, socket }: IProps) => {
   const { error } = useSelector((state: RootState) => state.workspaceReducer);
 
   const { user } = useSelector((state: RootState) => state.userReducer);
 
-  const handleSendEmail = (email: string, requestName: string) => {
-    socket.emit("send-access-email", user, email, requestName);
+  const { creatorEmail, workspaceName } = requestData;
+
+  const handleSendEmail = (email: string, workspaceName: string) => {
+    socket.emit("send-access-email", user, email, workspaceName);
   };
 
   return (
@@ -25,7 +27,7 @@ const WorkspaceError = ({ creatorEmail, requestName, socket }: IProps) => {
       {creatorEmail && (
         <>
           <h2>If you are a member of this team, Please request for access</h2>
-          <button onClick={() => handleSendEmail(creatorEmail, requestName)}>
+          <button onClick={() => handleSendEmail(creatorEmail, workspaceName)}>
             Request For Access
           </button>
         </>
