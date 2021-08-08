@@ -49,7 +49,7 @@ const Workspaces = () => {
   }, [user, router]);
 
   return (
-    <section className="workspaces">
+    <section className='workspaces'>
       {loading ? (
         <h1>Loading...</h1>
       ) : (
