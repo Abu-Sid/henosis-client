@@ -23,9 +23,7 @@ const Workspace = () => {
 
   const [id] = query.paths;
 
-  const { workspace, error } = useSelector(
-    (state: RootState) => state.workspaceReducer
-  );
+  const { error } = useSelector((state: RootState) => state.workspaceReducer);
 
   const { email } = useSelector((state: RootState) => state.userReducer.user);
 
@@ -77,8 +75,6 @@ const Workspace = () => {
       });
     }
   }, [replace, dispatch, email, id, loaded, socket]);
-
-  const { workspaceName, companyName, _id } = workspace;
 
   return (
     <>

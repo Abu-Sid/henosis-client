@@ -2,8 +2,9 @@
   font-family: $s-ff;
   margin: 4.5rem auto 1rem auto;
   max-width: 85%;
-  text-align: center;
 }
+
+@import "./workspace/board";
 
 .workspace-error {
   text-align: center;
