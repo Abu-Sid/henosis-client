@@ -1,16 +1,17 @@
 import { useRouter } from "next/router";
 import React from "react";
+import Board from "./WorkspacePages/Board";
 
 const WorkspaceRoute = () => {
   const [, pathName] = useRouter().query.paths;
 
   switch (pathName) {
     case undefined:
-      return <h1>RootPath</h1>;
+      return <h1>Home</h1>;
     case "board":
-      return <h1>Board</h1>;
-    case "backLock":
-      return <h1>BackLock</h1>;
+      return <Board />;
+    case "backlog":
+      return <h1>Backlog</h1>;
     default:
       return <h1>Not Found</h1>;
   }

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -89,17 +88,7 @@ const Workspace = () => {
         <WorkspaceError requestData={requestData} socket={socket} />
       ) : (
         <div className="workspace">
-          <ul>
-            <li>
-              <Link href={`/workspaces/${id}`}>Root</Link>
-            </li>
-            <li>
-              <Link href={`/workspaces/${id}/board`}>board</Link>
-            </li>
-            <li>
-              <Link href={`/workspaces/${id}/backLock`}>backLock</Link>
-            </li>
-          </ul>
+          {/* <Sidebar /> */}
           <WorkspaceRoute />
         </div>
       )}
