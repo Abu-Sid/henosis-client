@@ -1,7 +1,7 @@
 .workspace {
   font-family: $s-ff;
-  margin: 10px auto 1rem auto;
-  max-width: 85%;
+  padding-left: 100px;
+  width: 100%;
 }
 
 @import "./workspace/board";

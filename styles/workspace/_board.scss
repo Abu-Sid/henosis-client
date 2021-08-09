@@ -1,0 +1,32 @@
+.board-section {
+  margin: 0;
+  padding: 10px 10px 10px 0;
+  height: 100vh;
+  &__indicator {
+    margin: 10px 0 20px 0;
+    color: $gray-purple;
+    span {
+      color: $purple;
+    }
+  }
+
+  &__header {
+    @include flex(row, space-between, flex-start);
+  }
+  &__objective {
+    h1 {
+      @include writing-style($gray-purple, large, thin);
+      span {
+        @include writing-style($dark-blue, large, regular);
+      }
+    }
+    ol {
+      list-style-type: decimal;
+      background-color: red;
+    }
+  }
+  &__actions {
+    transform: translateY(-10px);
+    @include flex;
+  }
+}
