@@ -66,7 +66,7 @@ const useForm = (defaultValue={}) => {
                 handleError(true);
             }
         }
-        else if (required&&value.length<1) {
+        else if (required&&value.trim().length<1) {
             handleError(true);
         }
         else{

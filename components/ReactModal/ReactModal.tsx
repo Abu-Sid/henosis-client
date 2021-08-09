@@ -1,3 +1,5 @@
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { ReactElement } from "react";
 import Modal from "react-modal";
 const customStyles = {
@@ -8,6 +10,12 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
+    border: "none",
+    boxShadow: "3px 3px 20px #adadad",
+    width: "97%",
+    maxWidth: "500px",
+    backgroundColor: "#f0f1f5",
+    borderRadius: "8px",
   },
 };
 
@@ -31,7 +39,9 @@ const ReactModal = ({ children, modalIsOpen, setIsOpen }: IProps) => {
       style={customStyles}
       contentLabel="Example Modal"
     >
-      <button onClick={closeModal}>close</button>
+      <button className="close-btn" onClick={closeModal}>
+        <FontAwesomeIcon style={{ fontSize: "25px" }} icon={faTimes} />
+      </button>
       {children}
     </Modal>
   );
