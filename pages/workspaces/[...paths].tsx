@@ -84,7 +84,7 @@ const Workspace = () => {
       ) : error ? (
         <WorkspaceError requestData={requestData} socket={socket} />
       ) : (
-        <div className="workspace">
+        <div className='workspace'>
           <Sidebar />
           <WorkspaceRoute />
         </div>
