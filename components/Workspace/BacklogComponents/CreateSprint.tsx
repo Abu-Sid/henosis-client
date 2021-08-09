@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { io, Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
-import { IUser } from "../../../auth/authManager";
 import useForm from "../../../hooks/useForm";
 import { RootState } from "../../../redux/reducers";
 import ReactModal from "../../ReactModal/ReactModal";
@@ -20,7 +19,7 @@ interface ITask {
   taskName: string;
   currentStatus: string;
   taskTime: string;
-  assignedMember: IUser;
+  assignedMember: string;
 }
 
 interface ISprint {
@@ -72,10 +71,12 @@ const CreateSprint = () => {
   const { handleInput, handleInvalid, handleSubmit, error }: IForm = useForm();
 
   useEffect(() => {
-    const socketIo = io(
-      "https://intense-peak-24388.herokuapp.com/create-sprint"
-    );
+    const socketIo = io("http://localhost:5000/sprint");
     setSocket(socketIo);
+
+    socketIo.on("created-sprint", (sprint) => {
+      console.log(sprint);
+    });
 
     return () => {
       socketIo.disconnect();

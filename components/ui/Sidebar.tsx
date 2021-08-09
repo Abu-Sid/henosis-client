@@ -14,19 +14,11 @@ import Logout from "../../public/images/icons/logout.svg";
 
 const Sidebar = () => {
   const router = useRouter();
-  const route = router.pathname;
   const path = router.query.paths?.[0];
-  console.log(path);
 
-  let visibility;
-  if (!route.includes("workspaces/[...paths]")) {
-    visibility = "hidden";
-  } else {
-    visibility = null;
-  }
   return (
     <div className='sidebar-container'>
-      <div className={`sidebar ${visibility}`}>
+      <div className='sidebar'>
         <ul>
           <li className='sidebar__logo'>
             <Link href='/'>
