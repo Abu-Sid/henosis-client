@@ -1,41 +1,15 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { io, Socket } from "socket.io-client";
-import { DefaultEventsMap } from "socket.io-client/build/typed-events";
+import React from "react";
 import useForm from "../../../hooks/useForm";
-import { RootState } from "../../../redux/reducers";
 import ReactModal from "../../ReactModal/ReactModal";
+import { IData } from "../WorkspacePages/Backlog";
 
 interface IForm {
   handleInput: (e: any) => void;
   handleInvalid: (e: any) => void;
-  handleSubmit: (submit: (data: any) => void) => (e: any) => void;
+  handleSubmit: (submit: (data: IData) => void) => (e: any) => void;
   error: any;
-}
-
-interface ITask {
-  taskName: string;
-  currentStatus: string;
-  taskTime: string;
-  assignedMember: string;
-}
-
-interface ISprint {
-  status: string[];
-  tasks: ITask[];
-  sprintName: string;
-  startDate: string;
-  endDate: string;
-  workspaceId: string;
-  goals: string[];
-}
-
-interface IData {
-  sprintName: string;
-  startDate: string;
-  endDate: string;
 }
 
 const inputData = [
@@ -56,50 +30,22 @@ const inputData = [
   },
 ];
 
-const CreateSprint = () => {
-  const [modalIsOpen, setIsOpen] = useState(false);
+interface IProps {
+  modalIsOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  submit: (data: IData) => void;
+  goals: number[];
+  setGoals: React.Dispatch<React.SetStateAction<number[]>>;
+}
 
-  const [goals, setGoals] = useState([1]);
-
-  const { _id } = useSelector(
-    (state: RootState) => state.workspaceReducer.workspace
-  );
-
-  const [socket, setSocket] =
-    useState<Socket<DefaultEventsMap, DefaultEventsMap>>(null);
-
+const CreateSprint = ({
+  modalIsOpen,
+  setIsOpen,
+  submit,
+  goals,
+  setGoals,
+}: IProps) => {
   const { handleInput, handleInvalid, handleSubmit, error }: IForm = useForm();
-
-  useEffect(() => {
-    const socketIo = io("http://localhost:5000/sprint");
-    setSocket(socketIo);
-
-    socketIo.on("created-sprint", (sprint) => {
-      console.log(sprint);
-    });
-
-    return () => {
-      socketIo.disconnect();
-    };
-  }, []);
-
-  const submit = (data: IData) => {
-    const goalData: string[] = [];
-    const sprintData: ISprint = {
-      workspaceId: _id,
-      ...data,
-      status: ["TO DO", "IN PROGRESS", "DONE"],
-      tasks: [] as ITask[],
-      goals: goalData,
-    };
-    goals.forEach((goal) => {
-      goalData.push(data["goal" + goal]);
-      delete sprintData["goal" + goal];
-    });
-    if (socket !== null) {
-      socket.emit("create-sprint", { ...sprintData, goals: goalData });
-    }
-  };
 
   const lastGoal = goals[goals.length - 1];
 
