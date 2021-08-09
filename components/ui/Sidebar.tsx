@@ -16,6 +16,7 @@ const Sidebar = () => {
   const router = useRouter();
   const route = router.pathname;
   const path = router.query.paths?.[0];
+  console.log(path);
 
   let visibility;
   if (!route.includes("workspaces/[...paths]")) {
