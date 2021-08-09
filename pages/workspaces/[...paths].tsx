@@ -18,6 +18,10 @@ export interface RequestData {
   workspaceName: string;
 }
 
+//components
+
+import Sidebar from "../../components/ui/Sidebar";
+
 const Workspace = () => {
   const { query, replace } = useRouter();
 
@@ -83,8 +87,8 @@ const Workspace = () => {
       ) : error ? (
         <WorkspaceError requestData={requestData} socket={socket} />
       ) : (
-        <div className="workspace">
-          {/* <Sidebar /> */}
+        <div className='workspace'>
+          <Sidebar />
           <WorkspaceRoute />
         </div>
       )}
