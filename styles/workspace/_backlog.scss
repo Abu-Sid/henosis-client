@@ -1,0 +1,14 @@
+.backlog-section {
+  h2 {
+    color: $purple;
+    font-weight: 600;
+    span {
+      color: $gray-purple;
+    }
+  }
+  button {
+    @include button;
+    color: $gray;
+    background-color: $purple;
+  }
+}

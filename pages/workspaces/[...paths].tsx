@@ -84,10 +84,10 @@ const Workspace = () => {
       ) : error ? (
         <WorkspaceError requestData={requestData} socket={socket} />
       ) : (
-        <div className="workspace">
+        <section className="workspace">
           <Sidebar />
           <WorkspaceRoute />
-        </div>
+        </section>
       )}
     </>
   );
