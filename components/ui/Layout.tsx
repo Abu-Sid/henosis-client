@@ -37,7 +37,6 @@ const Layout = ({ children }) => {
     <>
       <Toaster toastOptions={{ className: "toast" }} />
       {!path.includes("workspaces/[...paths]") && <Navbar />}
-      <Sidebar />
       <main>{children}</main>
     </>
   );

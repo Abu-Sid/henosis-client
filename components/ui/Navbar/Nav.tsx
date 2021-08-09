@@ -7,13 +7,6 @@ import { INav } from "./Navbar";
 const Nav: React.FC<INav> = ({ children, className }) => {
   const path = useRoute();
 
-  let visibility;
-  if (path.includes("workspaces/[...paths]")) {
-    visibility = "hidden";
-  } else {
-    visibility = null;
-  }
-
   let color;
   if (path === "/") {
     color = "white-bg";
@@ -21,7 +14,7 @@ const Nav: React.FC<INav> = ({ children, className }) => {
     color = "colored-bg";
   }
   return (
-    <nav className={`${color} ${visibility} ${className}`}>
+    <nav className={`${color} ${className}`}>
       <Link href='/' passHref>
         <div className='logo'>
           <div className='logo__image'>
