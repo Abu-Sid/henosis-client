@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import io, { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
+import Sidebar from "../../components/ui/Sidebar";
 import WorkspaceError from "../../components/Workspace/WorkspaceError";
 import WorkspaceRoute from "../../components/Workspace/WorkspaceRoute";
 import withAuthCheck from "../../HOC/withAuthCheck";
@@ -17,10 +18,6 @@ export interface RequestData {
   creatorEmail: string;
   workspaceName: string;
 }
-
-//components
-
-import Sidebar from "../../components/ui/Sidebar";
 
 const Workspace = () => {
   const { query, replace } = useRouter();
@@ -87,7 +84,7 @@ const Workspace = () => {
       ) : error ? (
         <WorkspaceError requestData={requestData} socket={socket} />
       ) : (
-        <div className='workspace'>
+        <div className="workspace">
           <Sidebar />
           <WorkspaceRoute />
         </div>
