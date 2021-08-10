@@ -16,11 +16,10 @@
   &__text {
     @include flex(column, space-evenly, auto);
     h1 {
-      font-size: $fs-l;
       font-family: $s-ff;
+      @include writing-style($dark-blue, extra-large, medium);
       text-transform: uppercase;
       margin: 1rem 0 2rem 0;
-      @include writing-style($dark-blue, extra-large, medium);
     }
     h4 {
       font-size: $fs-m;
@@ -34,13 +33,6 @@
   &__image {
     overflow: hidden;
     width: 50%;
-
-    &:hover {
-      box-shadow: 0px 0px 10px #5a5a5a;
-      transform: scale(1.005);
-      transition: 0.3s;
-      border-radius: radius(medium);
-    }
   }
 }
 //Features-Section
@@ -54,10 +46,10 @@
     text-align: center;
     h1 {
       font-size: $fs-l;
+      color: $dark-blue;
     }
     h4 {
       margin-top: 2rem;
-      // font-size: $fs-m;
       color: $dark-blue;
     }
     span {
@@ -68,12 +60,6 @@
     overflow: hidden;
     margin: 5rem;
     width: 60%;
-    &:hover {
-      box-shadow: 0px 0px 10px #5a5a5a;
-      transform: scale(1.005);
-      transition: 0.3s;
-      border-radius: radius(medium);
-    }
   }
 }
 //Board or Chat Section
@@ -91,6 +77,9 @@
     h4 {
       color: $purple;
     }
+    h2 {
+      color: $dark-blue;
+    }
     p {
       color: $gray-purple;
     }
@@ -98,12 +87,6 @@
   &__image {
     overflow: hidden;
     width: 100%;
-    &:hover {
-      box-shadow: 0px 0px 10px #5a5a5a;
-      transform: scale(1.005);
-      transition: 0.3s;
-      border-radius: radius(medium);
-    }
   }
 }
 //Dashboard section
@@ -121,18 +104,15 @@
     h5 {
       color: $purple;
     }
+    h2 {
+      color: $dark-blue;
+    }
     p {
       color: $gray-purple;
     }
   }
   &__image {
     width: 100%;
-    &:hover {
-      box-shadow: 0px 0px 10px #5a5a5a;
-      transform: scale(1.005);
-      transition: 0.3s;
-      border-radius: radius(medium);
-    }
   }
 }
 // Contact form
@@ -143,8 +123,12 @@
   width: 28rem;
   margin: 10rem auto;
   h2 {
+    color: $dark-blue;
     text-align: center;
     margin-bottom: 2rem;
+  }
+  label {
+    color: $dark-blue;
   }
   input,
   textarea {
