@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import io from "socket.io-client";
+import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation";
 import WorkspacesTable from "../../components/Workspaces/WorkspacesTable";
 import withAuthCheck from "../../HOC/withAuthCheck";
 import { IWorkspace } from "../../redux/actions/workspaceActions/actionInterface";
@@ -50,15 +51,15 @@ const Workspaces = () => {
   }, [user, router]);
 
   return (
-    <section className="workspaces">
+    <section className='workspaces'>
       {loading ? (
-        <h1>Loading...</h1>
+        <LoadingAnimation />
       ) : (
         <>
-          <div className="workspaces-header">
+          <div className='workspaces-header'>
             <h1>Workspaces</h1>
-            <Link href="/new-workspace" passHref>
-              <button className="button-primary">Create new project</button>
+            <Link href='/new-workspace' passHref>
+              <button className='button-primary'>Create new project</button>
             </Link>
           </div>
           <WorkspacesTable workspaces={workspaces} />
