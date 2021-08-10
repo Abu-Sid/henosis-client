@@ -9,7 +9,6 @@ import {
 } from "../../redux/actions/userActions";
 import { useRoute } from "./Navbar/DesktopNavbar";
 import Navbar from "./Navbar/Navbar";
-import Sidebar from "./Sidebar";
 
 const Layout = ({ children }) => {
   const dispatch = useDispatch();
