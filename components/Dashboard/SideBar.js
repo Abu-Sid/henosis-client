@@ -2,8 +2,8 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import Logo from "../../public/images/logo.png";
-import workspace from "../../public/images/icons/workspace.svg";
+import Logo from "../../public/images/logo.svg";
+import workspaces from "../../public/images/icons/workspaces.svg";
 import admins from "../../public/images/icons/admins.svg";
 import Logout from "../../public/images/icons/logout.svg";
 
@@ -27,7 +27,7 @@ const SideBar = () => {
           <li>
             <Link href="/dashboard/workspaces">
               <a>
-                <Image src={workspace} alt="logo" />
+                <Image src={workspaces} alt="logo" />
               </a>
             </Link>
           </li>
