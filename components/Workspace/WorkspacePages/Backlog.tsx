@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { io, Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
 import { RootState } from "../../../redux/reducers";
+import LoadingAnimation from "../../ui/Animation/LoadingAnimation";
 import BacklogSprint from "../BacklogComponents/BacklogSprint";
 import CreateSprint from "../BacklogComponents/CreateSprint";
 
@@ -57,6 +58,8 @@ const Backlog = () => {
 
   const [goals, setGoals] = useState([1]);
 
+  const [loading, setLoading] = useState(true);
+
   const [assignedMember, setAssignedMember] = useState<string[]>([]);
 
   useEffect(() => {
@@ -75,7 +78,10 @@ const Backlog = () => {
   useEffect(() => {
     if (socket !== null) {
       socket.on("send-current-sprint", (currentSprint: ISprint) => {
-        setSprint(currentSprint);
+        setLoading(false);
+        if (currentSprint) {
+          setSprint(currentSprint);
+        }
       });
 
       socket.on("created-sprint", (createdSprint: ISprint) => {
@@ -137,13 +143,24 @@ const Backlog = () => {
         Backlog
         <span> / {workspaceName}</span>
       </h2>
-      <BacklogSprint
-        sprint={sprint}
-        taskModal={taskModal}
-        setTaskModal={setTaskModal}
-        submit={handleSubmit}
-        setAssignedMember={setAssignedMember}
-      />
+      {loading ? (
+        <LoadingAnimation />
+      ) : sprint._id ? (
+        <BacklogSprint
+          sprint={sprint}
+          taskModal={taskModal}
+          setTaskModal={setTaskModal}
+          submit={handleSubmit}
+          setAssignedMember={setAssignedMember}
+        />
+      ) : (
+        <h1
+          style={{ textAlign: "center", color: "red" }}
+          className="alert-error"
+        >
+          No Sprint Here
+        </h1>
+      )}
       <CreateSprint
         modalIsOpen={modalIsOpen}
         setIsOpen={setIsOpen}
