@@ -14,7 +14,7 @@ const BacklogTask = ({ task, index }: IProps) => {
   );
 
   const assignedMembers = members.filter((member) =>
-    task.assignedMember.includes(member.email)
+    task.assignedMember?.includes(member.email)
   );
 
   return (

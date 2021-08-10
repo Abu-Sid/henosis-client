@@ -1,4 +1,5 @@
 import React from "react";
+import LoadingAnimation from "../../ui/Animation/LoadingAnimation";
 
 const Chat = () => {
   return (
