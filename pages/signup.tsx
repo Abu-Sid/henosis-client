@@ -20,6 +20,15 @@ const SignUp = () => {
       toast.dismiss(loadingId);
       toast.success("Account Created Successfully!");
       dispatch(authUserSuccess(user));
+
+      // sent data to database
+      fetch("https://intense-peak-24388.herokuapp.com/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, name }),
+      });
     } catch (error) {
       toast.dismiss(loadingId);
       toast.error(error.message);
