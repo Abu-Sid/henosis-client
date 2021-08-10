@@ -35,13 +35,13 @@ const BacklogTask = ({ task, index }: IProps) => {
           {task.currentStatus}
         </p>
         {assignedMembers.map(({ _id, name, photo }) => (
-          <p key={_id}>
+          <div key={_id}>
             {photo ? (
               <img className="assigned-img" src={photo} alt="" />
             ) : (
-              <span>{name}</span>
+              <p className="assigned-name">{name}</p>
             )}
-          </p>
+          </div>
         ))}
       </div>
     </div>

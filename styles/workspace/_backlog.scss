@@ -56,6 +56,10 @@
           width: 45px;
           margin-left: 8px;
         }
+        .assigned-name {
+          margin-left: 8px;
+          margin-bottom: 10px;
+        }
       }
     }
   }
@@ -111,4 +115,30 @@
   @include button($gray, $red);
   margin-left: auto;
   display: block;
+}
+
+.ReactModal__Content {
+  animation: modalAnimation 0.3s ease-in-out;
+}
+
+@keyframes modalAnimation {
+  0% {
+    top: 0%;
+  }
+  100% {
+    top: 50%;
+  }
+}
+
+@media (max-width: 620px) {
+  .backlog-section {
+    .sprint-section {
+      &__top {
+        @include flex(column, space-between);
+        button {
+          margin-top: 10px;
+        }
+      }
+    }
+  }
 }
