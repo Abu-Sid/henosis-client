@@ -35,6 +35,7 @@ body {
 @import "./navbar";
 @import "./sidebar";
 @import "./footer";
+@import "./animations/loading-animation";
 
 // button
 .button-primary {
@@ -70,14 +71,30 @@ body {
   }
 }
 
-// error alert
-.alert-error {
+// alert
+@mixin alert {
   padding: 5px;
-  color: #ff0000;
-  background-color: #ffd4d4;
   font-size: 16.5px;
   margin-bottom: 10px;
   border-radius: 5px;
+}
+
+.alert-error {
+  @include alert;
+  color: #ff0000;
+  background-color: #ffd4d4;
+}
+
+.in-progress {
+  @include alert;
+  color: #7c7000;
+  background-color: #fffec8;
+}
+
+.done {
+  @include alert;
+  color: #27ae60;
+  background-color: rgba(39, 174, 96, 0.25);
 }
 
 //Homepage design
