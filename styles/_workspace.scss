@@ -1,27 +1,27 @@
 .workspace {
   font-family: $s-ff;
-  margin: 4.5rem auto 1rem auto;
-  max-width: 85%;
+  padding-left: 100px;
+  width: 100%;
+}
+
+@import "./workspace/board";
+@import "./workspace/backlog";
+
+.workspace-error {
   text-align: center;
-  img {
-    max-width: 100%;
+  min-height: 100vh;
+  @include flex(column);
+  h1 {
+    color: $red;
   }
-  .workspace-error {
-    text-align: center;
-    min-height: 90vh;
-    @include flex(column);
-    h1 {
-      color: $red;
-    }
-    h2 {
-      margin-bottom: 1.2rem;
-      margin-top: 1.8rem;
-    }
-    button {
-      @include button;
-      color: $light-gray;
-      background-color: $purple;
-    }
+  h2 {
+    margin-bottom: 1.2rem;
+    margin-top: 1.8rem;
+  }
+  button {
+    @include button;
+    color: $light-gray;
+    background-color: $purple;
   }
 }
 

@@ -35,3 +35,17 @@
   width: 100%;
   margin: 12px auto;
 }
+
+@mixin button($text: $gray, $bg: $purple) {
+  color: $text;
+  border: 1px solid lightgray;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  outline: none;
+  font-size: 1.2rem;
+  margin: 0.2rem;
+  background-color: $bg;
+  &:focus {
+    box-shadow: 0 0 1px 3px $bg;
+  }
+}
