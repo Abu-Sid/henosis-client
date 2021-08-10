@@ -1,16 +1,15 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../redux/reducers";
+import { RootState } from "../../../../redux/reducers";
 
-const Board = () => {
+const BoardHeader = () => {
   const { workspace } = useSelector(
     (state: RootState) => state.workspaceReducer
   );
 
   const { workspaceName } = workspace;
-
   return (
-    <section className='board-section'>
+    <div>
       <div className='board-section__indicator'>
         <p>
           <span> Board </span> /{workspaceName}
@@ -21,20 +20,20 @@ const Board = () => {
           <h1>
             <span>{workspaceName}</span> / Sprint 1 objective
           </h1>
-          <ul>
+          <ol>
             <li>Getting started with project.</li>
             <li>Setting up initials.</li>
             <li>Designing the homepage.</li>
-          </ul>
+          </ol>
         </div>
         <div className='board-section__actions'>
           <p>Starts from 18 Jul, Ends in 25 Jul</p>
           <button className='button-primary'>End Scrum</button>
-          <button>...</button>
+          <button className='button-secondary'>...</button>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
-export default Board;
+export default BoardHeader;
