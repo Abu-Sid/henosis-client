@@ -1,0 +1,86 @@
+.loading {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 50%);
+}
+
+@keyframes animate-svg-fill-1 {
+  0% {
+    fill: transparent;
+  }
+
+  50% {
+    fill: rgb(23, 30, 60);
+  }
+
+  100% {
+    fill: transparent;
+  }
+}
+
+.animation-1 {
+  animation: animate-svg-fill-1 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0s
+    both infinite;
+}
+
+@keyframes animate-svg-fill-2 {
+  0% {
+    fill: transparent;
+  }
+
+  50% {
+    fill: rgb(23, 30, 60);
+  }
+
+  100% {
+    fill: transparent;
+  }
+}
+
+.animation-2 {
+  animation: animate-svg-fill-2 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.1s
+    both infinite;
+}
+
+@keyframes animate-svg-fill-3 {
+  0% {
+    fill: transparent;
+  }
+
+  50% {
+    fill: rgb(23, 30, 60);
+  }
+
+  100% {
+    fill: transparent;
+  }
+}
+
+.animation-3 {
+  animation: animate-svg-fill-3 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.2s
+    both infinite;
+}
+
+@keyframes animate-svg-fill-4 {
+  0% {
+    fill: transparent;
+  }
+
+  50% {
+    fill: rgb(23, 30, 60);
+  }
+
+  100% {
+    fill: transparent;
+  }
+}
+
+.animation-4 {
+  animation: animate-svg-fill-4 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.3s
+    both infinite;
+}
