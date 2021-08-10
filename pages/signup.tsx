@@ -22,7 +22,7 @@ const SignUp = () => {
       dispatch(authUserSuccess(user));
 
       // sent data to database
-      fetch("https://henosis.vercel.app/user", {
+      fetch("https://intense-peak-24388.herokuapp.com/user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
