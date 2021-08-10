@@ -20,6 +20,15 @@ const SignUp = () => {
       toast.dismiss(loadingId);
       toast.success("Account Created Successfully!");
       dispatch(authUserSuccess(user));
+      
+      // sent data to database
+      fetch("http://localhost:5000/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, name }),
+      });
     } catch (error) {
       toast.dismiss(loadingId);
       toast.error(error.message);
