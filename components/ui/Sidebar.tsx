@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import Logo from "../../public/images/logo.png";
+import Logo from "../../public/images/logo.svg";
 import Menu from "../../public/images/icons/menu.svg";
 import User from "../../public/images/icons/user.svg";
 import ClipBoard from "../../public/images/icons/clipboard-check.svg";
@@ -14,19 +14,11 @@ import Logout from "../../public/images/icons/logout.svg";
 
 const Sidebar = () => {
   const router = useRouter();
-  const route = router.pathname;
   const path = router.query.paths?.[0];
-  console.log(path);
 
-  let visibility;
-  if (!route.includes("workspaces/[...paths]")) {
-    visibility = "hidden";
-  } else {
-    visibility = null;
-  }
   return (
     <div className='sidebar-container'>
-      <div className={`sidebar ${visibility}`}>
+      <div className='sidebar'>
         <ul>
           <li className='sidebar__logo'>
             <Link href='/'>

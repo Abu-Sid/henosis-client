@@ -7,8 +7,8 @@ import {
   authPrivateLoading,
   authUserSuccess,
 } from "../../redux/actions/userActions";
+import { useRoute } from "./Navbar/DesktopNavbar";
 import Navbar from "./Navbar/Navbar";
-import Sidebar from "./Sidebar";
 
 const Layout = ({ children }) => {
   const dispatch = useDispatch();
@@ -30,11 +30,12 @@ const Layout = ({ children }) => {
     document.title = `Henosis ${path ? " - " + path : ""}`;
   }, [pathname]);
 
+  const path = useRoute();
+
   return (
     <>
       <Toaster toastOptions={{ className: "toast" }} />
-      <Navbar />
-      <Sidebar />
+      {!path.includes("workspaces/[...paths]") && <Navbar />}
       <main>{children}</main>
     </>
   );
