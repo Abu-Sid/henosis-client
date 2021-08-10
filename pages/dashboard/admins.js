@@ -47,7 +47,7 @@ const Admins = () => {
             </button>
             <Modal open={open} onClose={onCloseModal} center id="modal">
               <div className="admin-info">
-                <h2>Admin Infomation</h2>
+                <h2>Admin Information</h2>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <label>Admin Name</label>
                   <input {...register("name")} type="text" required />
