@@ -1,13 +1,66 @@
 .backlog-section {
   h2 {
     color: $purple;
-    font-weight: 600;
+    font-weight: 500;
     span {
       color: $gray-purple;
     }
   }
   button {
     @include button;
+  }
+  h1 {
+    margin: 10px 0;
+    font-size: 1.5rem;
+    color: $dark-blue;
+  }
+  .sprint-section {
+    background-color: $gray;
+    padding: 0.8em;
+    border-radius: 0.5em;
+    &__top {
+      @include flex(row, space-between);
+      button.edit-btn {
+        background-color: $light-gray-purple;
+        color: $gray-purple;
+        &:focus {
+          box-shadow: 0 0 1px 3px $gray-purple;
+        }
+        margin-left: 10px;
+      }
+    }
+    h3 {
+      text-align: center;
+      color: $gray-purple;
+    }
+    .task-name {
+      color: $dark-blue;
+      font-size: 1.5rem;
+      font-weight: 500;
+      span {
+        margin-left: 8px;
+        color: $dark-blue;
+      }
+    }
+    .single-task {
+      padding: 0.8rem;
+      background-color: $light-gray;
+      margin: 0.5rem 0;
+      border-radius: 0.5rem;
+      @include flex(row, space-between);
+      .assigned-section {
+        @include flex(row, flex-start);
+        .assigned-img {
+          border-radius: 50%;
+          height: 45px;
+          width: 45px;
+          margin-left: 8px;
+        }
+      }
+    }
+  }
+  .create-sprint-button {
+    margin-top: 10px;
   }
 }
 
@@ -45,6 +98,12 @@
   .goal {
     display: flex;
     align-items: center;
+  }
+  .basic-multi-select {
+    margin: 10px 0;
+    input {
+      box-shadow: none;
+    }
   }
 }
 
