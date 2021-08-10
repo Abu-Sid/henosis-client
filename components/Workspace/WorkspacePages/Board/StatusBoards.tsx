@@ -4,7 +4,7 @@ interface IProps {
   statusName: string;
 }
 
-const StatusBoards: React.FC<IProps> = ({ statusName }) => {
+const StatusBoards: React.FC<IProps> = ({ statusName, children }) => {
   let color;
   if (statusName.toLowerCase() === "to do") {
     color = "red";
@@ -16,6 +16,7 @@ const StatusBoards: React.FC<IProps> = ({ statusName }) => {
   return (
     <div className='status-board'>
       <p className={`status-board__indicator ${color}`}>{statusName}</p>
+      <div>{children}</div>
     </div>
   );
 };

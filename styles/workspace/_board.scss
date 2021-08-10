@@ -76,6 +76,28 @@
       margin-bottom: 10px;
     }
   }
+
+  .task-card {
+    background-color: $light-gray-purple;
+    border-radius: radius(medium);
+    padding: 10px;
+    &__info {
+      h1 {
+        @include writing-style($dark-blue, semi-large, medium);
+      }
+      p {
+        margin-top: 10px;
+        color: $purple;
+      }
+    }
+    &__members {
+      margin-top: 10px;
+      @include flex(row, flex-end);
+      div {
+        margin-left: 5px;
+      }
+    }
+  }
 }
 
 .red {
