@@ -1,0 +1,113 @@
+.board-section {
+  margin: 0;
+  padding: 10px 10px 10px 0;
+  height: 100vh;
+  &__indicator {
+    margin: 10px 0 20px 0;
+    color: $gray-purple;
+    span {
+      color: $purple;
+    }
+  }
+
+  &__header {
+    @include flex(row, space-between, flex-start);
+  }
+  &__objective {
+    h1 {
+      @include writing-style($gray-purple, small, thin);
+      span {
+        @include writing-style($dark-blue, large, regular);
+      }
+    }
+    ol {
+      margin-top: 10px;
+      color: $gray-purple;
+    }
+  }
+  &__actions {
+    @include flex;
+    p {
+      color: $gray-purple;
+    }
+    button {
+      margin: 0 10px;
+    }
+  }
+  &__members-container {
+    height: 80px;
+    width: 100%;
+    background-color: $gray;
+    padding: 0 20px;
+    margin-top: 20px;
+    border-radius: radius(large);
+    @include flex(row, space-between, center);
+  }
+  &__members {
+    @include flex;
+    button {
+      background-color: transparent;
+      height: 35px;
+      width: 35px;
+      outline: none;
+      border: $gray-purple 1px solid;
+      border-radius: 50%;
+    }
+    div {
+      margin-left: 10px;
+    }
+  }
+
+  .status-board-container {
+    @include flex(row, flex-start, flex-start);
+    width: 100%;
+    height: 100%;
+    margin: 20px 0 10px 0;
+  }
+  .status-board {
+    height: 100%;
+    width: 330px;
+    margin-right: 10px;
+    border-radius: radius(large);
+    background-color: $gray;
+    padding: 10px;
+    &__indicator {
+      font-weight: font-weight(bold);
+      margin-bottom: 10px;
+    }
+  }
+
+  .task-card {
+    background-color: $light-gray-purple;
+    border-radius: radius(medium);
+    padding: 10px;
+    &__info {
+      h1 {
+        @include writing-style($dark-blue, semi-large, medium);
+      }
+      p {
+        margin-top: 10px;
+        color: $purple;
+      }
+    }
+    &__members {
+      margin-top: 10px;
+      @include flex(row, flex-end);
+      div {
+        margin-left: 5px;
+      }
+    }
+  }
+}
+
+.red {
+  color: $red;
+}
+
+.orange {
+  color: $orange;
+}
+
+.green {
+  color: $green;
+}
