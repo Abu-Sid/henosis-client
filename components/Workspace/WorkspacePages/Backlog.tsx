@@ -66,17 +66,17 @@ const Backlog = () => {
     const socketIo = io("https://intense-peak-24388.herokuapp.com/sprint");
     setSocket(socketIo);
 
-    socketIo.emit("join-sprint", _id);
-
-    socketIo.emit("current-sprint", _id);
-
     return () => {
       socketIo.disconnect();
     };
-  }, [_id]);
+  }, []);
 
   useEffect(() => {
     if (socket !== null) {
+      socket.emit("join-sprint", _id);
+
+      socket.emit("current-sprint", _id);
+
       socket.on("send-current-sprint", (currentSprint: ISprint) => {
         setLoading(false);
         if (currentSprint) {
@@ -86,19 +86,19 @@ const Backlog = () => {
 
       socket.on("created-sprint", (createdSprint: ISprint) => {
         setIsOpen(false);
-        alert("created Successfully");
-        if (!sprint._id) {
-          setSprint(createdSprint);
-        }
+        toast.dismiss(toastId);
+        toast.success("created Successfully!");
+        setSprint((preValue) => (preValue._id ? preValue : createdSprint));
       });
 
       socket.on("added-task", (tasks) => {
         toast.dismiss(toastId);
         setTaskModal(false);
+        toast.success("Task Added Successfully!");
         setSprint((preValue) => ({ ...preValue, tasks }));
       });
     }
-  }, [sprint, socket, setSprint]);
+  }, [socket, _id]);
 
   const submit = (data: IData) => {
     const goalData: string[] = [];
@@ -117,6 +117,7 @@ const Backlog = () => {
     });
     if (socket !== null) {
       socket.emit("create-sprint", { ...sprintData, goals: goalData });
+      toastId = toast.loading("Loading...");
     }
   };
 
