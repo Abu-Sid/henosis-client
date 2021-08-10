@@ -7,6 +7,12 @@
   right: 0;
   left: 0;
   background-color: rgba(255, 255, 255, 50%);
+  @include flex;
+  .logo-animation {
+    svg {
+      width: 200px;
+    }
+  }
 }
 
 @keyframes animate-svg-fill-1 {

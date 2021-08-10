@@ -5,8 +5,6 @@ const LoadingAnimation = () => {
     <div className='loading'>
       <div className='logo-animation'>
         <svg
-          width='496'
-          height='141'
           viewBox='0 0 496 141'
           fill='none'
           xmlns='http://www.w3.org/2000/svg'
