@@ -20,9 +20,9 @@ const SignUp = () => {
       toast.dismiss(loadingId);
       toast.success("Account Created Successfully!");
       dispatch(authUserSuccess(user));
-      
+
       // sent data to database
-      fetch("http://localhost:5000/user", {
+      fetch("https://henosis.vercel.app/user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
