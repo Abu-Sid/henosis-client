@@ -15,7 +15,7 @@ const WorkspacesTable = ({ workspaces }: IProps) => {
         <div className='type'>Type</div>
         <div className='owner-name'>Owner</div>
       </div>
-      <tbody>
+      <div className='table__row'>
         {workspaces.map((workspace, index) => (
           <WorkspaceRow
             key={workspace._id}
@@ -23,7 +23,7 @@ const WorkspacesTable = ({ workspaces }: IProps) => {
             index={index}
           />
         ))}
-      </tbody>
+      </div>
     </div>
   );
 };

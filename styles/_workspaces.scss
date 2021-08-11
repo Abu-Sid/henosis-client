@@ -31,33 +31,38 @@
         width: 30%;
       }
     }
-    img {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      margin-right: 8px;
-    }
-    .owner {
-      @include flex;
-      margin-top: 6px;
-    }
-    tr {
-      text-align: center;
-      margin-top: 10px;
-      height: 45px;
-      border-radius: 10px;
-      background-color: $gray;
-      cursor: pointer;
-      &:hover {
-        background-color: $light-gray-purple;
-      }
-    }
-    thead tr {
-      cursor: default;
-      background-color: $gray-purple;
-      color: white;
-      &:hover {
-        background-color: $gray-purple;
+    &__row {
+      width: 100%;
+
+      .row-container {
+        height: 45px;
+        @include flex(row, flex-start, center);
+        cursor: pointer;
+        padding: 1em;
+        border-radius: radius(medium);
+        background-color: $gray;
+
+        &:hover {
+          background-color: $light-gray-purple;
+        }
+        .number {
+          width: 10%;
+        }
+        .name,
+        .type,
+        .owner-name {
+          width: 30%;
+        }
+        img {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          margin-right: 8px;
+        }
+        .owner {
+          @include flex;
+          margin-top: 6px;
+        }
       }
     }
   }
