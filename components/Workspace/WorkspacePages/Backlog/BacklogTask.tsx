@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { ITask } from "../../../redux/actions/sprintActions/actionInterface";
-import { RootState } from "../../../redux/reducers";
+import { ITask } from "../../../../redux/actions/sprintActions/actionInterface";
+import { RootState } from "../../../../redux/reducers";
 
 interface IProps {
   task: ITask;

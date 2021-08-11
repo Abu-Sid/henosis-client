@@ -1,9 +1,9 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import useForm from "../../../hooks/useForm";
-import ReactModal from "../../ReactModal/ReactModal";
-import { IData } from "../WorkspacePages/Backlog";
+import useForm from "../../../../hooks/useForm";
+import ReactModal from "../../../ReactModal/ReactModal";
+import { IData } from "./Backlog";
 
 interface IForm {
   handleInput: (e: any) => void;
