@@ -12,9 +12,25 @@
   button {
     font-size: $fs-s;
   }
-  table {
-    border-collapse: collapse;
+  .table {
     width: 100%;
+    &__header {
+      background-color: $gray-purple;
+      height: 45px;
+      width: 100%;
+      border-radius: radius(medium);
+      padding: 0 1em;
+      color: $white;
+      @include flex(row, flex-start, center);
+      .number {
+        width: 10%;
+      }
+      .name,
+      .type,
+      .owner-name {
+        width: 30%;
+      }
+    }
     img {
       width: 30px;
       height: 30px;
