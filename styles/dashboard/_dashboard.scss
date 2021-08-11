@@ -1,0 +1,84 @@
+.d-container {
+  margin-top: 100px;
+  width: 100%;
+  .d-row {
+    display: flex;
+    flex-wrap: wrap;
+    .col-left {
+      width: 10%;
+    }
+    .col-right {
+      width: 90%;
+      margin: 3rem 0 0 7rem;
+      .right-division {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .admin-button {
+        border: none;
+        padding: 10px;
+        background-color: #4a4fff;
+        color: white;
+        border-radius: 5px;
+        margin-right: 70px;
+        cursor: pointer;
+      }
+      table {
+        border-collapse: collapse;
+        width: 95%;
+        margin-top: 5%;
+        th {
+          background-color: #75798c;
+          text-align: center;
+          height: 45px;
+          color: white;
+        }
+        td {
+          text-align: center;
+          height: 45px;
+          background-color: #e6e8ea;
+        }
+      }
+    }
+  }
+}
+
+.react-responsive-modal-modal {
+  background: #e6e8ea !important;
+  border-radius: 5px;
+  width: 24rem;
+}
+.admin-info {
+  padding: 2rem;
+  h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  input,
+  select {
+    background-color: #d0d1d8;
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border: 0.02rem solid #d0d1d8;
+    border-radius: 0.4rem;
+    box-sizing: border-box;
+    margin: 0.5rem 0;
+    resize: vertical;
+  }
+
+  .button {
+    background-color: #4a4fff;
+    color: white;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 575px) {
+  .col-right {
+    margin: 3rem 0 0 6rem !important;
+  }
+}

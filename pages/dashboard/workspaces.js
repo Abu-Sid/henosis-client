@@ -1,13 +1,19 @@
-import React from 'react';
+import React from "react";
 import SideBar from "../../components/Dashboard/SideBar";
 
 const workspaces = () => {
-    return (
-        <div style={{marginTop:'60px'}}>
-            <SideBar />
-            <h1>/dashboard/workspaces</h1>
+  return (
+    <div className="d-container">
+      <div className="d-row">
+        <div className="col-left">
+          <SideBar />
         </div>
-    );
+        <div className="col-right">
+          <h1>Workspaces</h1>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default workspaces;

@@ -4,7 +4,7 @@ import HomePage from "../components/ui/HomePage/HomePage";
 const Home = () => {
   return (
     <section className='home-section'>
-      <HomePage/>
+      <HomePage />
     </section>
   );
 };

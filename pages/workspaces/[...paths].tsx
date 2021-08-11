@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import io, { Socket } from "socket.io-client";
-import { DefaultEventsMap } from "socket.io-client/build/typed-events";
 import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation";
-import Sidebar from "../../components/ui/Sidebar";
+import Sidebar from "../../components/ui/Sidebar/Sidebar";
 import WorkspaceError from "../../components/Workspace/WorkspaceError";
 import WorkspaceRoute from "../../components/Workspace/WorkspaceRoute";
 import withAuthCheck from "../../HOC/withAuthCheck";
+import useSocket from "../../hooks/useSocket";
+import { setEmptySprint } from "../../redux/actions/sprintActions";
 import {
   workspaceFailure,
   workspaceSuccess,
@@ -37,17 +37,11 @@ const Workspace = () => {
 
   const [loaded, setLoaded] = useState(false);
 
-  const [socket, setSocket] =
-    useState<Socket<DefaultEventsMap, DefaultEventsMap>>(null);
+  const socket = useSocket("/workspace");
 
   useEffect(() => {
-    const socketIo = io("https://intense-peak-24388.herokuapp.com/workspace");
-    setSocket(socketIo);
-
-    return () => {
-      socketIo.disconnect();
-    };
-  }, []);
+    dispatch(setEmptySprint());
+  }, [dispatch]);
 
   useEffect(() => {
     if (socket !== null) {
@@ -85,7 +79,7 @@ const Workspace = () => {
       ) : error ? (
         <WorkspaceError requestData={requestData} socket={socket} />
       ) : (
-        <section className="workspace">
+        <section className='workspace'>
           <Sidebar />
           <WorkspaceRoute />
         </section>

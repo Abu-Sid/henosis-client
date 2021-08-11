@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-import useForm from "../../../hooks/useForm";
-import { RootState } from "../../../redux/reducers";
+import useForm from "../../../../hooks/useForm";
+import { RootState } from "../../../../redux/reducers";
 
 const animatedComponents = makeAnimated();
 
