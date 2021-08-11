@@ -18,11 +18,11 @@ const BacklogTask = ({ task, index }: IProps) => {
   );
 
   return (
-    <div className="single-task">
-      <h2 className="task-name">
+    <div className='single-task'>
+      <h2 className='task-name'>
         #{index + 1} <span>{task.taskName}</span>
       </h2>
-      <div className="assigned-section">
+      <div className='assigned-section'>
         <p
           className={
             task.currentStatus === "TO DO"
@@ -37,9 +37,9 @@ const BacklogTask = ({ task, index }: IProps) => {
         {assignedMembers.map(({ _id, name, photo }) => (
           <div key={_id}>
             {photo ? (
-              <img className="assigned-img" src={photo} alt="" />
+              <img className='assigned-img' src={photo} alt='' />
             ) : (
-              <p className="assigned-name">{name}</p>
+              <p className='assigned-name'>{name}</p>
             )}
           </div>
         ))}
