@@ -19,7 +19,6 @@
     li {
       position: relative;
       margin: 10px;
-      transition: all 500ms ease-in-out;
       .tooltip {
         background-color: $gray;
         padding: 0.5em;
@@ -30,7 +29,6 @@
         border-radius: radius(small);
         transform: translateY(3px);
         display: none;
-        animation: tooltip-animation-out 500ms ease-in-out;
       }
       &:hover {
         .tooltip {

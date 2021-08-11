@@ -6,14 +6,15 @@ import { useRouter } from "next/router";
 interface IProps {
   icon: StaticImageData;
   className?: string;
+  href?: string;
 }
 
-const SidebarItem: React.FC<IProps> = ({ icon, className }) => {
+const SidebarItem: React.FC<IProps> = ({ icon, className, href }) => {
   const router = useRouter();
   const path = router.query.paths?.[0];
   return (
     <li className={className}>
-      <Link href={`${path}/personal-dashboard`}>
+      <Link href={href === "/" ? "/" : `${path}/${href}`}>
         <a>
           <Image src={icon} alt='user-icon' />
         </a>

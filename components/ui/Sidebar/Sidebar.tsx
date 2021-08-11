@@ -14,13 +14,13 @@ import SidebarContainer from "./SidebarContainer";
 const Sidebar = () => {
   return (
     <SidebarContainer>
-      <SidebarItem icon={Logo} className='sidebar__logo' />
-      {/* <SidebarItem icon={User} /> */}
-      <SidebarItem icon={ClipBoard} />
-      <SidebarItem icon={Boards} />
-      <SidebarItem icon={Chat} />
-      <SidebarItem icon={Mail} />
-      <SidebarItem icon={Settings} />
+      <SidebarItem icon={Logo} className='sidebar__logo' href='/' />
+      <SidebarItem icon={User} href='personal-dashboard' />
+      <SidebarItem icon={ClipBoard} href='backlog' />
+      <SidebarItem icon={Boards} href='board' />
+      <SidebarItem icon={Chat} href='chat' />
+      <SidebarItem icon={Mail} href='notifications' />
+      <SidebarItem icon={Settings} href='settings' />
       <SidebarItem icon={Logout} className='sidebar__logout' />
     </SidebarContainer>
   );
