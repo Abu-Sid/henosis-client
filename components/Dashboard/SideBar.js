@@ -8,13 +8,11 @@ import admins from "../../public/images/icons/admins.svg";
 import Logout from "../../public/images/icons/logout.svg";
 
 const SideBar = () => {
-  const router = useRouter();
-  const route = router.pathname;
-  const path = router.query.paths?.[0];
-  console.log(path);
-
   return (
-    <div className="sidebar-container" style={{ marginTop: "80px",height:'85vh' }}>
+    <div
+      className="sidebar-container"
+      style={{ marginTop: "80px", height: "85vh" }}
+    >
       <div className="sidebar">
         <ul>
           <li className="sidebar__logo">
