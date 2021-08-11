@@ -1,5 +1,5 @@
-import React from "react";
 import Link from "next/link";
+import React from "react";
 import { FaFacebookSquare, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
@@ -45,8 +45,7 @@ const Footer = () => {
         <div className="col-4">
           <div className="footer-sign-up">
             <p>
-              Sign up and get started with Henosis today. <br />A world of
-              productive teamwork awaits!
+              Sign up and get started with Henosis today. <br />A world of productive teamwork awaits!
             </p>
             <div className="act-input">
               <input type="text" placeholder="Email" />
