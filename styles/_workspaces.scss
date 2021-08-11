@@ -15,6 +15,7 @@
   .table {
     width: 100%;
     &__header {
+      margin-bottom: 10px;
       background-color: $gray-purple;
       height: 45px;
       width: 100%;
@@ -33,17 +34,19 @@
     }
     &__row {
       width: 100%;
-
       .row-container {
+        margin-bottom: 10px;
         height: 45px;
         @include flex(row, flex-start, center);
         cursor: pointer;
         padding: 1em;
         border-radius: radius(medium);
         background-color: $gray;
-
+        transition: color 300ms ease-in-out;
         &:hover {
           background-color: $light-gray-purple;
+          color: $purple;
+          animation: row-jiggle 200ms ease-in-out;
         }
         .number {
           width: 10%;
@@ -60,11 +63,32 @@
           margin-right: 8px;
         }
         .owner {
-          @include flex;
-          margin-top: 6px;
+          @include flex(row, flex-start);
         }
       }
     }
+  }
+}
+
+@keyframes row-jiggle {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(5px);
+  }
+
+  50% {
+    transform: translateX(0);
+  }
+
+  75% {
+    transform: translateX(-5px);
+  }
+
+  100% {
+    transform: translateX(0);
   }
 }
 
