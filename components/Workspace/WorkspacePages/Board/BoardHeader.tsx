@@ -10,13 +10,13 @@ const BoardHeader = () => {
   const { workspaceName } = workspace;
   return (
     <div>
-      <div className='board-section__indicator'>
+      <div className="board-section__indicator">
         <p>
-          <span> Board </span> /{workspaceName}
+          <span> Board </span> / {workspaceName}
         </p>
       </div>
-      <div className='board-section__header'>
-        <div className='board-section__objective'>
+      <div className="board-section__header">
+        <div className="board-section__objective">
           <h1>
             <span>{workspaceName}</span> / Sprint 1 objective
           </h1>
@@ -26,10 +26,10 @@ const BoardHeader = () => {
             <li>Designing the homepage.</li>
           </ol>
         </div>
-        <div className='board-section__actions'>
+        <div className="board-section__actions">
           <p>Starts from 18 Jul, Ends in 25 Jul</p>
-          <button className='button-primary'>End Scrum</button>
-          <button className='button-secondary'>...</button>
+          <button className="button-primary">End Scrum</button>
+          <button className="button-secondary">...</button>
         </div>
       </div>
     </div>
