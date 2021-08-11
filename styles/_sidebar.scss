@@ -17,7 +17,27 @@
     height: 100%;
     @include flex(column);
     li {
+      position: relative;
       margin: 10px;
+      transition: all 500ms ease-in-out;
+      .tooltip {
+        background-color: $gray;
+        padding: 0.5em;
+        position: absolute;
+        left: 45px;
+        width: 150px;
+        text-align: center;
+        border-radius: radius(small);
+        transform: translateY(3px);
+        display: none;
+        animation: tooltip-animation-out 500ms ease-in-out;
+      }
+      &:hover {
+        .tooltip {
+          display: inline-block;
+          animation: tooltip-animation-in 500ms ease-in-out;
+        }
+      }
     }
     .sidebar__logo {
       margin: 10px 0 auto 0;
@@ -26,5 +46,25 @@
     .sidebar__logout {
       margin: auto 0 10px 0;
     }
+  }
+}
+
+@keyframes tooltip-animation-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes tooltip-animation-out {
+  from {
+    opacity: 1;
+    display: inline-block;
+  }
+  to {
+    opacity: 0;
+    display: none;
   }
 }
