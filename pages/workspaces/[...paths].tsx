@@ -8,6 +8,7 @@ import Sidebar from "../../components/ui/Sidebar/Sidebar";
 import WorkspaceError from "../../components/Workspace/WorkspaceError";
 import WorkspaceRoute from "../../components/Workspace/WorkspaceRoute";
 import withAuthCheck from "../../HOC/withAuthCheck";
+import { setEmptySprint } from "../../redux/actions/sprintActions";
 import {
   workspaceFailure,
   workspaceSuccess,
@@ -48,6 +49,10 @@ const Workspace = () => {
       socketIo.disconnect();
     };
   }, []);
+
+  useEffect(() => {
+    dispatch(setEmptySprint());
+  }, [dispatch]);
 
   useEffect(() => {
     if (socket !== null) {
