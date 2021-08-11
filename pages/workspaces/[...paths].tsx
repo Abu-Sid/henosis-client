@@ -3,10 +3,12 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import io, { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
-import Sidebar from "../../components/ui/Sidebar";
+import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation";
+import Sidebar from "../../components/ui/Sidebar/Sidebar";
 import WorkspaceError from "../../components/Workspace/WorkspaceError";
 import WorkspaceRoute from "../../components/Workspace/WorkspaceRoute";
 import withAuthCheck from "../../HOC/withAuthCheck";
+import { setEmptySprint } from "../../redux/actions/sprintActions";
 import {
   workspaceFailure,
   workspaceSuccess,
@@ -49,6 +51,10 @@ const Workspace = () => {
   }, []);
 
   useEffect(() => {
+    dispatch(setEmptySprint());
+  }, [dispatch]);
+
+  useEffect(() => {
     if (socket !== null) {
       if (!loaded) {
         socket.emit("workspace", { id, userEmail: email });
@@ -80,11 +86,11 @@ const Workspace = () => {
   return (
     <>
       {loading ? (
-        <h1 style={{ marginTop: "4.5rem", textAlign: "center" }}>Loading..</h1>
+        <LoadingAnimation />
       ) : error ? (
         <WorkspaceError requestData={requestData} socket={socket} />
       ) : (
-        <section className="workspace">
+        <section className='workspace'>
           <Sidebar />
           <WorkspaceRoute />
         </section>

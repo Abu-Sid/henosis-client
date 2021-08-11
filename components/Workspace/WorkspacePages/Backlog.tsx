@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 import { io, Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
+import {
+  addTask,
+  createdSprint,
+  sendCurrentSprint,
+} from "../../../redux/actions/sprintActions";
+import {
+  ISprint,
+  ITask,
+} from "../../../redux/actions/sprintActions/actionInterface";
 import { RootState } from "../../../redux/reducers";
+import LoadingAnimation from "../../ui/Animation/LoadingAnimation";
 import BacklogSprint from "../BacklogComponents/BacklogSprint";
 import CreateSprint from "../BacklogComponents/CreateSprint";
-
-interface ITask {
-  taskName: string;
-  currentStatus: string;
-  taskTime: string;
-  assignedMember: string;
-}
 
 export interface IData {
   sprintName: string;
@@ -19,61 +23,71 @@ export interface IData {
   endDate: string;
 }
 
-interface ISprint {
-  status: string[];
-  tasks: ITask[];
-  sprintName: string;
-  startDate: Date;
-  endDate: Date;
-  workspaceId: string;
-  goals: string[];
-  _id?: string;
+export interface ITData {
+  taskName: string;
+  dueDate: string;
 }
+
+let toastId: string;
 
 const Backlog = () => {
   const { workspace } = useSelector(
     (state: RootState) => state.workspaceReducer
   );
 
+  const { loading, sprint } = useSelector(
+    (state: RootState) => state.sprintReducer
+  );
+
   const { workspaceName, _id } = workspace;
+
+  const dispatch = useDispatch();
 
   const [socket, setSocket] =
     useState<Socket<DefaultEventsMap, DefaultEventsMap>>(null);
 
-  const [sprint, setSprint] = useState<ISprint>({} as ISprint);
-
   const [modalIsOpen, setIsOpen] = useState(false);
+
+  const [taskModal, setTaskModal] = useState(false);
 
   const [goals, setGoals] = useState([1]);
 
+  const [assignedMember, setAssignedMember] = useState<string[]>([]);
+
   useEffect(() => {
-    const socketIo = io("http://localhost:5000/sprint");
+    const socketIo = io("https://intense-peak-24388.herokuapp.com/sprint");
     setSocket(socketIo);
-
-    socketIo.emit("join-sprint", _id);
-
-    socketIo.emit("current-sprint", _id);
 
     return () => {
       socketIo.disconnect();
     };
-  }, [_id]);
+  }, []);
 
   useEffect(() => {
     if (socket !== null) {
+      socket.emit("join-sprint", _id);
+
+      socket.emit("current-sprint", _id);
+
       socket.on("send-current-sprint", (currentSprint: ISprint) => {
-        setSprint(currentSprint);
+        dispatch(sendCurrentSprint(currentSprint));
       });
 
-      socket.on("created-sprint", (createdSprint: ISprint) => {
+      socket.on("created-sprint", (currentSprint: ISprint) => {
         setIsOpen(false);
-        alert("created Successfully");
-        if (!sprint._id) {
-          setSprint(createdSprint);
-        }
+        toast.dismiss(toastId);
+        toast.success("created Successfully!");
+        dispatch(createdSprint(currentSprint));
+      });
+
+      socket.on("added-task", (tasks) => {
+        toast.dismiss(toastId);
+        setTaskModal(false);
+        toast.success("Task Added Successfully!");
+        dispatch(addTask(tasks));
       });
     }
-  }, [sprint, socket, setSprint]);
+  }, [socket, _id, dispatch]);
 
   const submit = (data: IData) => {
     const goalData: string[] = [];
@@ -92,10 +106,26 @@ const Backlog = () => {
     });
     if (socket !== null) {
       socket.emit("create-sprint", { ...sprintData, goals: goalData });
+      toastId = toast.loading("Loading...");
     }
   };
 
-  console.log(sprint);
+  const handleSubmit = (data: ITData) => {
+    if (assignedMember.length) {
+      const taskData = {
+        ...data,
+        assignedMember,
+        currentStatus: "TO DO",
+        dueDate: new Date(data.dueDate),
+      };
+      if (socket !== null) {
+        socket.emit("add-task", sprint._id, [...sprint.tasks, taskData]);
+        toastId = toast.loading("Loading...");
+      }
+    } else {
+      alert("Please Assign Member");
+    }
+  };
 
   return (
     <section className="backlog-section">
@@ -103,7 +133,23 @@ const Backlog = () => {
         Backlog
         <span> / {workspaceName}</span>
       </h2>
-      <BacklogSprint />
+      {loading ? (
+        <LoadingAnimation />
+      ) : sprint._id ? (
+        <BacklogSprint
+          taskModal={taskModal}
+          setTaskModal={setTaskModal}
+          submit={handleSubmit}
+          setAssignedMember={setAssignedMember}
+        />
+      ) : (
+        <h1
+          style={{ textAlign: "center", color: "red" }}
+          className="alert-error"
+        >
+          No Sprint Here
+        </h1>
+      )}
       <CreateSprint
         modalIsOpen={modalIsOpen}
         setIsOpen={setIsOpen}

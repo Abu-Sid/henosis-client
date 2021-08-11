@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import LoadingAnimation from "../components/ui/Animation/LoadingAnimation";
 import addRouterState from "../redux/actions/routerStateActions";
 import { RootState } from "../redux/reducers";
 
@@ -23,9 +24,7 @@ const withAuthCheck = (Component: () => JSX.Element) => {
 
     if (user.email) return <Component />;
 
-    return (
-      <h1 style={{ marginTop: "100px", textAlign: "center" }}>Loading...</h1>
-    );
+    return <LoadingAnimation />;
   };
   return PrivateRoute;
 };
