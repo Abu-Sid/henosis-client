@@ -1,10 +1,9 @@
 import { useRouter } from "next/router";
-import React, { forwardRef, useEffect, useState } from "react";
+import React, { forwardRef, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import StripeCheckout, { Token } from "react-stripe-checkout";
-import io, { Socket } from "socket.io-client";
-import { DefaultEventsMap } from "socket.io-client/build/typed-events";
+import useSocket from "../../hooks/useSocket";
 import { IWorkspace } from "../../redux/actions/workspaceActions/actionInterface";
 import { RootState } from "../../redux/reducers";
 
@@ -19,25 +18,17 @@ const Payment = (
 ) => {
   const { user } = useSelector((state: RootState) => state.userReducer);
 
-  const [socket, setSocket] =
-    useState<Socket<DefaultEventsMap, DefaultEventsMap>>(null);
-
   const router = useRouter();
 
+  const socket = useSocket("/create-workspace");
+
   useEffect(() => {
-    const socketIo = io(
-      "https://intense-peak-24388.herokuapp.com/create-workspace"
-    );
-    setSocket(socketIo);
-
-    socketIo.on("workspace-created", (id) => {
-      router.replace(`/workspaces/${id}`);
-    });
-
-    return () => {
-      socketIo.disconnect();
-    };
-  }, [router]);
+    if (socket !== null) {
+      socket.on("workspace-created", (id) => {
+        router.replace(`/workspaces/${id}`);
+      });
+    }
+  }, [socket, router]);
 
   const handelCreateWorkspace = (loadingId: string) => {
     toast.dismiss(loadingId);

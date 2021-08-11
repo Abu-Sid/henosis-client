@@ -2,10 +2,10 @@ import { faEllipsisH, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../redux/reducers";
-import ReactModal from "../../ReactModal/ReactModal";
-import { ITData } from "../WorkspacePages/Backlog";
+import { RootState } from "../../../../redux/reducers";
+import ReactModal from "../../../ReactModal/ReactModal";
 import AddTaskModal from "./AddTaskModal";
+import { ITData } from "./Backlog";
 import BacklogTask from "./BacklogTask";
 
 interface IProps {
