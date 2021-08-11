@@ -7,9 +7,10 @@ interface IProps {
   icon: StaticImageData;
   className?: string;
   href?: string;
+  tooltip?: string;
 }
 
-const SidebarItem: React.FC<IProps> = ({ icon, className, href }) => {
+const SidebarItem: React.FC<IProps> = ({ icon, className, href, tooltip }) => {
   const router = useRouter();
   const path = router.query.paths?.[0];
   return (
@@ -19,7 +20,7 @@ const SidebarItem: React.FC<IProps> = ({ icon, className, href }) => {
           <Image src={icon} alt='user-icon' />
         </a>
       </Link>
-      <span className='tooltip'>Mir Hussain</span>
+      {tooltip && <span className='tooltip'>{tooltip}</span>}
     </li>
   );
 };

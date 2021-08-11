@@ -15,13 +15,13 @@ const Sidebar = () => {
   return (
     <SidebarContainer>
       <SidebarItem icon={Logo} className='sidebar__logo' href='/' />
-      <SidebarItem icon={User} href='personal-dashboard' />
-      <SidebarItem icon={ClipBoard} href='backlog' />
-      <SidebarItem icon={Boards} href='board' />
-      <SidebarItem icon={Chat} href='chat' />
-      <SidebarItem icon={Mail} href='notifications' />
-      <SidebarItem icon={Settings} href='settings' />
-      <SidebarItem icon={Logout} className='sidebar__logout' />
+      <SidebarItem icon={User} href='personal-dashboard' tooltip='Dashboard' />
+      <SidebarItem icon={ClipBoard} href='backlog' tooltip='Backlog' />
+      <SidebarItem icon={Boards} href='board' tooltip='Boards' />
+      <SidebarItem icon={Chat} href='chat' tooltip='Chats' />
+      <SidebarItem icon={Mail} href='notifications' tooltip='Notifications' />
+      <SidebarItem icon={Settings} href='settings' tooltip='Settings' />
+      <SidebarItem icon={Logout} className='sidebar__logout' tooltip='Logout' />
     </SidebarContainer>
   );
 };
