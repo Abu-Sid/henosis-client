@@ -8,16 +8,14 @@ interface IProps {
 
 const WorkspacesTable = ({ workspaces }: IProps) => {
   return (
-    <table className="workspace__table">
-      <thead>
-        <tr>
-          <th>No.</th>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Owner</th>
-        </tr>
-      </thead>
-      <tbody>
+    <div className='table'>
+      <div className='table__header'>
+        <div className='number'>No.</div>
+        <div className='name'>Name</div>
+        <div className='type'>Type</div>
+        <div className='owner-name'>Owner</div>
+      </div>
+      <div className='table__row'>
         {workspaces.map((workspace, index) => (
           <WorkspaceRow
             key={workspace._id}
@@ -25,8 +23,8 @@ const WorkspacesTable = ({ workspaces }: IProps) => {
             index={index}
           />
         ))}
-      </tbody>
-    </table>
+      </div>
+    </div>
   );
 };
 

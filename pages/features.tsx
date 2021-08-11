@@ -4,7 +4,6 @@ import FeatureSubSection from "../components/ui/Feature/FeatureSubSection";
 import FeaturesData from "../data/FeaturesData.json";
 
 const Features = () => {
-  console.log(FeaturesData);
   return (
     <section className='features-section'>
       <div className='features-section__intro'>

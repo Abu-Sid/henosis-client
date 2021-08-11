@@ -15,15 +15,15 @@ const WorkspaceRow = ({ workspace, index }: IProps) => {
 
   return (
     <Link passHref href={`/workspaces/${workspace._id}`}>
-      <tr>
-        <td>{index + 1}</td>
-        <td>{workspaceName}</td>
-        <td>{type}</td>
-        <td className="owner">
-          <img className="owner-image" src={photo || profileIcon.src} alt="" />
+      <div className='row-container'>
+        <div className='number'>{index + 1}</div>
+        <div className='name'>{workspaceName}</div>
+        <div className='type'>{type}</div>
+        <div className='owner owner-name'>
+          <img className='owner-image' src={photo || profileIcon.src} alt='' />
           {name}
-        </td>
-      </tr>
+        </div>
+      </div>
     </Link>
   );
 };
