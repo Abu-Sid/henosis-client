@@ -1,13 +1,14 @@
 import { faEllipsisH, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/reducers";
 import ReactModal from "../../ReactModal/ReactModal";
-import { ISprint, ITData } from "../WorkspacePages/Backlog";
+import { ITData } from "../WorkspacePages/Backlog";
 import AddTaskModal from "./AddTaskModal";
 import BacklogTask from "./BacklogTask";
 
 interface IProps {
-  sprint: ISprint;
   taskModal: boolean;
   setTaskModal: React.Dispatch<React.SetStateAction<boolean>>;
   setAssignedMember: React.Dispatch<React.SetStateAction<string[]>>;
@@ -15,12 +16,13 @@ interface IProps {
 }
 
 const BacklogSprint = ({
-  sprint,
   taskModal,
   setTaskModal,
   setAssignedMember,
   submit,
 }: IProps) => {
+  const { sprint } = useSelector((state: RootState) => state.sprintReducer);
+
   const { sprintName, startDate, endDate, tasks } = sprint;
 
   return (
@@ -40,8 +42,8 @@ const BacklogSprint = ({
           </div>
         </div>
         <div className="sprint-section__tasks">
-          {tasks?.length === 0 && <h3>No Task Added</h3>}
-          {tasks?.map((task, index) => (
+          {tasks.length === 0 && <h3>No Task Added</h3>}
+          {tasks.map((task, index) => (
             <BacklogTask key={task._id} task={task} index={index} />
           ))}
         </div>
