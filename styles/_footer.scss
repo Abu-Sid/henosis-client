@@ -1,12 +1,12 @@
 .container {
+  position: relative;
   margin-top: 10rem;
   width: 100%;
-  background-image: url(../public/images/cta.png);
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-color: $gray;
+  z-index: 1;
   .row {
     padding: 1.8rem;
+    padding-bottom: 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     h4 {
@@ -17,6 +17,7 @@
       font-size: 1.5rem;
       margin-right: 0.5rem;
       margin-top: 0.5rem;
+      color: $purple;
     }
     p {
       color: black;
@@ -30,6 +31,8 @@
   }
   .footer-sign-up {
     text-align: center;
+    position: relative;
+    z-index: 2;
     input {
       background-color: $light-gray-purple;
       padding: 0.4rem;
@@ -49,5 +52,45 @@
     p {
       color: #75798c;
     }
+  }
+}
+
+.footer-purple-ball {
+  height: 150px;
+  width: 150px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  overflow: hidden;
+  transform: rotate(-90deg);
+  &::after {
+    content: url("../public/images/purple-ball.svg");
+    height: 150px;
+    width: 150px;
+  }
+}
+
+.footer-purple-dots {
+  height: 150px;
+  width: 150px;
+  position: absolute;
+  bottom: -60px;
+  left: -30px;
+  &::after {
+    content: url("../public/images/purple-dots.svg");
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    left: 0;
+  }
+}
+
+.footer-gray-dots {
+  @extend .footer-purple-dots;
+  z-index: -1;
+  bottom: 10px;
+  left: 30px;
+  &::after {
+    content: url("../public/images/gray-dots.svg");
   }
 }

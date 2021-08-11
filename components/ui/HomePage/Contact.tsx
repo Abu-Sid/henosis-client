@@ -22,16 +22,16 @@ const Contact = () => {
       );
   };
   return (
-    <div className="contact-container">
+    <div className='contact-container'>
       <h2>Contact Us</h2>
-      <form className="contact-form" onSubmit={sendEmail}>
+      <form className='contact-form' onSubmit={sendEmail}>
         <label>Name</label>
-        <input type="text" name="name" required />
+        <input type='text' name='name' required />
         <label>Email</label>
-        <input type="email" name="email" required />
+        <input type='email' name='email' required />
         <label>Message</label>
-        <textarea name="message" cols="10" rows="8" required />
-        <input type="submit" value="Send" className="button" />
+        <textarea name='message' cols={10} rows={8} required />
+        <input type='submit' value='Send' className='button' />
       </form>
     </div>
   );
