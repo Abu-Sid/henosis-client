@@ -8,6 +8,7 @@ export interface IWorkspace {
   companyEmail?: string;
   memberEmail?: string;
   members: {
+    _id?: string;
     isCreator?: boolean;
     name: string;
     email: string;

@@ -51,7 +51,9 @@ const CreateSprint = ({
 
   return (
     <div>
-      <button onClick={() => setIsOpen(true)}>Create Sprint</button>
+      <button onClick={() => setIsOpen(true)} className="create-sprint-button">
+        Create Sprint
+      </button>
       <ReactModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen}>
         <form onSubmit={handleSubmit(submit)} className="create-sprint-form">
           <h2>Sprint Information</h2>
