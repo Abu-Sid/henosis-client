@@ -8,7 +8,7 @@
 
 .banner {
   padding: 4rem;
-  margin: 2rem;
+  margin: 2rem 2rem 10rem 2rem;
   @include flex(row, space-around, stretch);
   span {
     color: $purple;
@@ -38,6 +38,7 @@
 //Features-Section
 
 .features {
+  margin-bottom: 10rem;
   @include flex(column);
   &__text {
     // height: 4rem;
@@ -65,7 +66,7 @@
 //Board or Chat Section
 
 .chat {
-  margin: 2rem;
+  margin: 2rem 2rem 12rem 2rem;
   @include flex(row, space-around, stretch);
   span {
     color: $purple;
@@ -92,7 +93,7 @@
 //Dashboard section
 
 .dashboard {
-  margin: 2rem;
+  margin: 2rem 2rem 12rem 2rem;
   @include flex(row, space-around, stretch);
   span {
     color: $purple;
@@ -276,21 +277,6 @@
       width: 100%;
       text-align: center;
       @include flex(column, center);
-    }
-  }
-  //Action-To-Call Section
-
-  .act {
-    margin: 3rem 1rem;
-    &__body {
-      width: 100%;
-      padding: 1rem;
-      background-size: cover;
-      border-radius: 1.5rem;
-      box-shadow: 8px 16px 11px 0px rgba(0, 0, 0, 0.24);
-      h1 {
-        font-size: $fs-m;
-      }
     }
   }
 }
