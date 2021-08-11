@@ -84,3 +84,13 @@
     left: 0;
   }
 }
+
+.footer-gray-dots {
+  @extend .footer-purple-dots;
+  z-index: -1;
+  bottom: 10px;
+  left: 30px;
+  &::after {
+    content: url("../public/images/gray-dots.svg");
+  }
+}

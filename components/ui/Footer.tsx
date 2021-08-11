@@ -62,7 +62,7 @@ const Footer = () => {
       <div className='footer-bottom'>
         <p>
           &copy; Copyright {new Date().getFullYear()}. All Rights Reserved by
-          Henosis.{" "}
+          Henosis.
         </p>
       </div>
     </footer>
