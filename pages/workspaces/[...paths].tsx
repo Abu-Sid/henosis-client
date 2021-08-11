@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import io, { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
 import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation";
-import Sidebar from "../../components/ui/Sidebar";
+import Sidebar from "../../components/ui/Sidebar/Sidebar";
 import WorkspaceError from "../../components/Workspace/WorkspaceError";
 import WorkspaceRoute from "../../components/Workspace/WorkspaceRoute";
 import withAuthCheck from "../../HOC/withAuthCheck";
@@ -90,7 +90,7 @@ const Workspace = () => {
       ) : error ? (
         <WorkspaceError requestData={requestData} socket={socket} />
       ) : (
-        <section className="workspace">
+        <section className='workspace'>
           <Sidebar />
           <WorkspaceRoute />
         </section>
