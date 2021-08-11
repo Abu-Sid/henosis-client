@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React from "react";
 import NotFound from "../../pages/404";
-import Backlog from "./WorkspacePages/Backlog";
+import Backlog from "./WorkspacePages/Backlog/Backlog";
 import Board from "./WorkspacePages/Board/Board";
 import Chat from "./WorkspacePages/Chat";
 import Notification from "./WorkspacePages/Notification";

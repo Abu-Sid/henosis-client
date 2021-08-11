@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { io, Socket } from "socket.io-client";
-import { DefaultEventsMap } from "socket.io-client/build/typed-events";
+import useSocket from "../../../../hooks/useSocket";
 import {
   addTask,
   createdSprint,
   sendCurrentSprint,
-} from "../../../redux/actions/sprintActions";
+} from "../../../../redux/actions/sprintActions";
 import {
   ISprint,
   ITask,
-} from "../../../redux/actions/sprintActions/actionInterface";
-import { RootState } from "../../../redux/reducers";
-import LoadingAnimation from "../../ui/Animation/LoadingAnimation";
-import BacklogSprint from "../BacklogComponents/BacklogSprint";
-import CreateSprint from "../BacklogComponents/CreateSprint";
+} from "../../../../redux/actions/sprintActions/actionInterface";
+import { RootState } from "../../../../redux/reducers";
+import LoadingAnimation from "../../../ui/Animation/LoadingAnimation";
+import BacklogSprint from "./BacklogSprint";
+import CreateSprint from "./CreateSprint";
 
 export interface IData {
   sprintName: string;
@@ -43,8 +42,7 @@ const Backlog = () => {
 
   const dispatch = useDispatch();
 
-  const [socket, setSocket] =
-    useState<Socket<DefaultEventsMap, DefaultEventsMap>>(null);
+  const socket = useSocket("/sprint");
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -53,15 +51,6 @@ const Backlog = () => {
   const [goals, setGoals] = useState([1]);
 
   const [assignedMember, setAssignedMember] = useState<string[]>([]);
-
-  useEffect(() => {
-    const socketIo = io("https://intense-peak-24388.herokuapp.com/sprint");
-    setSocket(socketIo);
-
-    return () => {
-      socketIo.disconnect();
-    };
-  }, []);
 
   useEffect(() => {
     if (socket !== null) {
