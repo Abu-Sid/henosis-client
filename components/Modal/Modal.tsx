@@ -1,7 +1,9 @@
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { ReactElement } from "react";
-import Modal from "react-modal";
+import ReactModal from "react-modal";
+
 const customStyles = {
   content: {
     top: "50%",
@@ -19,7 +21,7 @@ const customStyles = {
   },
 };
 
-Modal.setAppElement("#__next");
+ReactModal.setAppElement("#__next");
 
 interface IProps {
   children: ReactElement<any, any>;
@@ -27,24 +29,32 @@ interface IProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ReactModal = ({ children, modalIsOpen, setIsOpen }: IProps) => {
+const Modal = ({ children, modalIsOpen, setIsOpen }: IProps) => {
   function closeModal() {
     setIsOpen(false);
   }
 
   return (
-    <Modal
+    <ReactModal
       isOpen={modalIsOpen}
       onRequestClose={closeModal}
       style={customStyles}
       contentLabel='Example Modal'
     >
+<<<<<<< HEAD:components/ReactModal/ReactModal.tsx
       <button className='close-btn' onClick={closeModal}>
         <FontAwesomeIcon style={{ fontSize: "25px" }} icon={faTimes} />
+=======
+      <button className="close-btn" onClick={closeModal}>
+        <FontAwesomeIcon
+          style={{ fontSize: "25px" }}
+          icon={faTimes as IconProp}
+        />
+>>>>>>> 8a4bc806c1a16fafd95a7e4fd8dc8df8717cbb26:components/Modal/Modal.tsx
       </button>
       {children}
-    </Modal>
+    </ReactModal>
   );
 };
 
-export default ReactModal;
+export default Modal;

@@ -1,16 +1,15 @@
-import React, { createContext } from "react";
-import { useRouter } from "next/router";
-
-import { useSelector } from "react-redux";
-import { RootState } from "../../../redux/reducers";
-import { logout } from "../../../auth/authManager";
-import { useDispatch } from "react-redux";
-import { authUserLogout } from "../../../redux/actions/userActions";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-
+import { useRouter } from "next/router";
+import React, { createContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../auth/authManager";
+import { authUserLogout } from "../../../redux/actions/userActions";
+import { RootState } from "../../../redux/reducers";
+import { DropdownItem, DropdownMenu } from "./DropDown";
 import Nav from "./Nav";
 import NavItem from "./NavItem";
-import { DropdownMenu, DropdownItem } from "./DropDown";
+
 export const DropdownContext = createContext([]);
 
 export interface INav {
@@ -18,7 +17,7 @@ export interface INav {
   name?: string;
   text?: string;
   href?: string;
-  icon?: any;
+  icon?: IconProp;
   functionality?: () => void;
 }
 
@@ -44,21 +43,24 @@ const DesktopNavbar = () => {
   };
 
   return (
-    <Nav className='desktop-navbar'>
-      <NavItem name='Features' href='/features' />
-      <NavItem name='Pricing' href='/pricing' />
+    <Nav className="desktop-navbar">
+      <NavItem name="Features" href="/features" />
+      <NavItem name="Pricing" href="/pricing" />
       <li className={path === "/" ? "divider-blue" : "divider-white"}></li>
-      <NavItem text={username ? username : "My account"} icon={faChevronDown}>
+      <NavItem
+        text={username ? username : "My account"}
+        icon={faChevronDown as IconProp}
+      >
         <DropdownMenu>
-          {!username && <DropdownItem href='/signup'>Sign Up</DropdownItem>}
-          {!username && <DropdownItem href='/signin'>Sign In</DropdownItem>}
+          {!username && <DropdownItem href="/signup">Sign Up</DropdownItem>}
+          {!username && <DropdownItem href="/signin">Sign In</DropdownItem>}
           {username && (
-            <DropdownItem href='/new-workspace'>
+            <DropdownItem href="/new-workspace">
               Create new workspace
             </DropdownItem>
           )}
           {username && (
-            <DropdownItem href='/workspaces'>Existing workspaces</DropdownItem>
+            <DropdownItem href="/workspaces">Existing workspaces</DropdownItem>
           )}
           {username && (
             <DropdownItem functionality={handleLogout}>Log out</DropdownItem>
