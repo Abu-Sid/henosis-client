@@ -30,6 +30,12 @@ const workspaceReducer = (state = initialState, action: IAction) => {
         error: action.payload,
       };
     }
+    case ActionType.ADD_MEMBERS: {
+      return {
+        ...state,
+        workspace: { ...state.workspace, members: action.payload },
+      };
+    }
     default:
       return state;
   }

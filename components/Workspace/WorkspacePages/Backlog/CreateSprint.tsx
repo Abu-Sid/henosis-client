@@ -1,9 +1,10 @@
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import useForm from "../../../hooks/useForm";
-import ReactModal from "../../ReactModal/ReactModal";
-import { IData } from "../WorkspacePages/Backlog";
+import useForm from "../../../../hooks/useForm";
+import Modal from "../../../Modal/Modal";
+import { IData } from "./Backlog";
 
 interface IForm {
   handleInput: (e: any) => void;
@@ -54,7 +55,7 @@ const CreateSprint = ({
       <button onClick={() => setIsOpen(true)} className="create-sprint-button">
         Create Sprint
       </button>
-      <ReactModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen}>
+      <Modal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen}>
         <form onSubmit={handleSubmit(submit)} className="create-sprint-form">
           <h2>Sprint Information</h2>
           {inputData.map(({ title, name, type }, index) => (
@@ -95,14 +96,17 @@ const CreateSprint = ({
                   }
                   className="add-btn"
                 >
-                  <FontAwesomeIcon style={{ fontSize: "22px" }} icon={faPlus} />
+                  <FontAwesomeIcon
+                    style={{ fontSize: "22px" }}
+                    icon={faPlus as IconProp}
+                  />
                 </label>
               )}
             </div>
           ))}
           <button type="submit">Create Sprint</button>
         </form>
-      </ReactModal>
+      </Modal>
     </div>
   );
 };

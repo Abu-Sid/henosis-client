@@ -1,6 +1,7 @@
 enum ActionType {
   WORKSPACE_SUCCESS = "WORKSPACE_SUCCESS",
   WORKSPACE_FAILURE = "WORKSPACE_FAILURE",
+  ADD_MEMBERS = "ADD_MEMBERS",
 }
 
 export default ActionType;

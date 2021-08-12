@@ -127,6 +127,9 @@
     color: $dark-blue;
     text-align: center;
     margin-bottom: 2rem;
+    // &:hover {
+    //   color: $purple;
+    // }
   }
   label {
     color: $dark-blue;
@@ -150,6 +153,9 @@
     border: none;
     border-radius: 0.5rem;
     cursor: pointer;
+    &:hover {
+      background-color: $gray-purple;
+    }
   }
 }
 

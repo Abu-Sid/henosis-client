@@ -45,14 +45,6 @@
   }
   &__members {
     @include flex;
-    button {
-      background-color: transparent;
-      height: 35px;
-      width: 35px;
-      outline: none;
-      border: $gray-purple 1px solid;
-      border-radius: 50%;
-    }
     div {
       margin-left: 10px;
     }
