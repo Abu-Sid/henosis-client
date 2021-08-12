@@ -22,9 +22,13 @@ const Board = () => {
     (state: RootState) => state.workspaceReducer
   );
 
-  const { loading } = useSelector((state: RootState) => state.sprintReducer);
+  const { loading, sprint } = useSelector(
+    (state: RootState) => state.sprintReducer
+  );
 
   const { _id, members } = workspace;
+
+  const { status, tasks } = sprint;
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -82,11 +86,15 @@ const Board = () => {
             setIsOpen={setIsOpen}
           />
           <div className="status-board-container">
-            <StatusBoards statusName="To Do">
-              <TaskCard />
-            </StatusBoards>
-            <StatusBoards statusName="In Progress"></StatusBoards>
-            <StatusBoards statusName="Done"> </StatusBoards>
+            {status.map((status) => (
+              <StatusBoards key={status} statusName={status}>
+                {tasks.map((task) =>
+                  task.currentStatus === status ? (
+                    <TaskCard key={task._id} task={task} />
+                  ) : null
+                )}
+              </StatusBoards>
+            ))}
           </div>
         </section>
       )}
