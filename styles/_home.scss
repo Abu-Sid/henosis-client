@@ -123,6 +123,7 @@
   padding: 2.5rem;
   width: 28rem;
   margin: 10rem auto;
+  box-sizing: border-box;
   h2 {
     color: $dark-blue;
     text-align: center;
@@ -150,6 +151,7 @@
     border: none;
     border-radius: 0.5rem;
     cursor: pointer;
+    
   }
 }
 
