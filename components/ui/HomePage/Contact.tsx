@@ -4,7 +4,6 @@ import React from "react";
 const Contact = () => {
   const sendEmail = (e) => {
     e.preventDefault();
-
     emailjs
       .sendForm(
         "service_73qb7cg",
@@ -14,7 +13,9 @@ const Contact = () => {
       )
       .then(
         (result) => {
-          console.log(result.text);
+          if (result) {
+            e.target.reset();
+          }
         },
         (error) => {
           console.log(error.text);
