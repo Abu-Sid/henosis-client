@@ -87,9 +87,9 @@ const Board = () => {
             setIsOpen={setIsOpen}
           />
           <div className="status-board-container">
-            {status?.map((status) => (
+            {status.map((status) => (
               <StatusBoards key={status} statusName={status}>
-                {tasks?.map((task) =>
+                {tasks.map((task) =>
                   task.currentStatus === status ? (
                     <TaskCard key={task._id} task={task} />
                   ) : null
@@ -99,10 +99,8 @@ const Board = () => {
           </div>
         </section>
       ) : (
-        <div style={{ textAlign: "center" }}>
-          <h1 style={{ color: "red" }} className="alert-error">
-            No Sprint Here
-          </h1>
+        <div className="board-error">
+          <h1 className="alert-error">No Sprint Here</h1>
           <Link href={`/workspaces/${_id}/backlog`} passHref>
             <button className="button-primary">Create A Sprint</button>
           </Link>

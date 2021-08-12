@@ -90,7 +90,9 @@ const Backlog = () => {
       goals: goalData,
     };
     goals.forEach((goal) => {
-      goalData.push(data["goal" + goal]);
+      if (data["goal" + goal]) {
+        goalData.push(data["goal" + goal]);
+      }
       delete sprintData["goal" + goal];
     });
     if (socket !== null) {
