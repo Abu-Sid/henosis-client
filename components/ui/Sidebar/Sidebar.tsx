@@ -1,16 +1,15 @@
+import { useRouter } from "next/router";
 import React from "react";
-import Logo from "../../../public/images/logo.svg";
-import Menu from "../../public/images/icons/menu.svg";
-import User from "../../../public/images/icons/user.svg";
-import ClipBoard from "../../../public/images/icons/clipboard-check.svg";
-import Boards from "../../../public/images/icons/view-boards.svg";
 import Chat from "../../../public/images/icons/chat.svg";
+import ClipBoard from "../../../public/images/icons/clipboard-check.svg";
+import Logout from "../../../public/images/icons/logout.svg";
 import Mail from "../../../public/images/icons/mail.svg";
 import Settings from "../../../public/images/icons/settings.svg";
-import Logout from "../../../public/images/icons/logout.svg";
-import SidebarItem from "./SidebarItem";
+import User from "../../../public/images/icons/user.svg";
+import Boards from "../../../public/images/icons/view-boards.svg";
+import Logo from "../../../public/images/logo.svg";
 import SidebarContainer from "./SidebarContainer";
-import { useRouter } from "next/router";
+import SidebarItem from "./SidebarItem";
 
 const Sidebar = () => {
   const router = useRouter();
@@ -18,39 +17,34 @@ const Sidebar = () => {
 
   return (
     <SidebarContainer>
-      <SidebarItem icon={Logo} className='sidebar__logo' href='/' />
-      <SidebarItem
-        icon={User}
-        pathName={path}
-        href='personal-dashboard'
-        tooltip='Dashboard'
-      />
+      <SidebarItem icon={Logo} className="sidebar__logo" href="/" />
+      <SidebarItem icon={User} pathName={path} href="" tooltip="Dashboard" />
       <SidebarItem
         icon={ClipBoard}
         pathName={path}
-        href='backlog'
-        tooltip='Backlog'
+        href="backlog"
+        tooltip="Backlog"
       />
       <SidebarItem
         icon={Boards}
         pathName={path}
-        href='board'
-        tooltip='Boards'
+        href="board"
+        tooltip="Boards"
       />
-      <SidebarItem icon={Chat} pathName={path} href='chat' tooltip='Chats' />
+      <SidebarItem icon={Chat} pathName={path} href="chat" tooltip="Chats" />
       <SidebarItem
         icon={Mail}
         pathName={path}
-        href='notifications'
-        tooltip='Notifications'
+        href="notifications"
+        tooltip="Notifications"
       />
       <SidebarItem
         icon={Settings}
         pathName={path}
-        href='settings'
-        tooltip='Settings'
+        href="settings"
+        tooltip="Settings"
       />
-      <SidebarItem icon={Logout} className='sidebar__logout' tooltip='Logout' />
+      <SidebarItem icon={Logout} className="sidebar__logout" tooltip="Logout" />
     </SidebarContainer>
   );
 };

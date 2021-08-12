@@ -24,8 +24,6 @@ const WorkspaceRoute = () => {
       return <Notification />;
     case "settings":
       return <Settings />;
-    case "personal-dashboard":
-      return <PersonalDashboard />;
     default:
       return <NotFound />;
   }
