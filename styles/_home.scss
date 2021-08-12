@@ -102,7 +102,7 @@
     width: 60%;
     padding: 2rem;
     @include flex(column, center, flex-start);
-    h5 {
+    h4 {
       color: $purple;
     }
     h2 {
