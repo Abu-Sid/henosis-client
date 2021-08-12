@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,7 +29,7 @@ const Board = () => {
 
   const { _id, members } = workspace;
 
-  const { status, tasks } = sprint;
+  const { status, tasks } = sprint || {};
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -77,7 +78,7 @@ const Board = () => {
     <>
       {loading ? (
         <LoadingAnimation />
-      ) : (
+      ) : sprint._id ? (
         <section className="board-section">
           <BoardHeader />
           <BoardMembers
@@ -86,9 +87,9 @@ const Board = () => {
             setIsOpen={setIsOpen}
           />
           <div className="status-board-container">
-            {status.map((status) => (
+            {status?.map((status) => (
               <StatusBoards key={status} statusName={status}>
-                {tasks.map((task) =>
+                {tasks?.map((task) =>
                   task.currentStatus === status ? (
                     <TaskCard key={task._id} task={task} />
                   ) : null
@@ -97,6 +98,15 @@ const Board = () => {
             ))}
           </div>
         </section>
+      ) : (
+        <div style={{ textAlign: "center" }}>
+          <h1 style={{ color: "red" }} className="alert-error">
+            No Sprint Here
+          </h1>
+          <Link href={`/workspaces/${_id}/backlog`} passHref>
+            <button className="button-primary">Create A Sprint</button>
+          </Link>
+        </div>
       )}
     </>
   );
