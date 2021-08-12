@@ -41,16 +41,11 @@ const Modal = ({ children, modalIsOpen, setIsOpen }: IProps) => {
       style={customStyles}
       contentLabel='Example Modal'
     >
-<<<<<<< HEAD:components/ReactModal/ReactModal.tsx
       <button className='close-btn' onClick={closeModal}>
-        <FontAwesomeIcon style={{ fontSize: "25px" }} icon={faTimes} />
-=======
-      <button className="close-btn" onClick={closeModal}>
         <FontAwesomeIcon
           style={{ fontSize: "25px" }}
           icon={faTimes as IconProp}
         />
->>>>>>> 8a4bc806c1a16fafd95a7e4fd8dc8df8717cbb26:components/Modal/Modal.tsx
       </button>
       {children}
     </ReactModal>
