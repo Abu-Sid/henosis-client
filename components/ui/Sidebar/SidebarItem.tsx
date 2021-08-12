@@ -8,14 +8,19 @@ interface IProps {
   className?: string;
   href?: string;
   tooltip?: string;
+  pathName?: string;
 }
 
-const SidebarItem: React.FC<IProps> = ({ icon, className, href, tooltip }) => {
-  const router = useRouter();
-  const path = router.query.paths?.[0];
+const SidebarItem: React.FC<IProps> = ({
+  icon,
+  className,
+  href,
+  tooltip,
+  pathName,
+}) => {
   return (
     <li className={className}>
-      <Link href={href === "/" ? "/" : `${path}/${href}`}>
+      <Link href={href === "/" ? "/" : `${pathName}/${href}`}>
         <a>
           <Image src={icon} alt='user-icon' />
         </a>

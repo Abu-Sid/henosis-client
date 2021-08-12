@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
+import { useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { auth, setUser } from "../../auth/authManager";
@@ -32,11 +33,11 @@ const Layout = ({ children }) => {
   }, [pathname]);
 
   const path = useRoute();
-
   return (
     <>
       <Toaster toastOptions={{ className: "toast" }} />
-      {!path.includes("workspaces/[...paths]") && <Navbar />}
+      {!path.includes("workspaces/[...paths]") &&
+        !path.includes("dashboard") && <Navbar />}
       <main>{children}</main>
     </>
   );
