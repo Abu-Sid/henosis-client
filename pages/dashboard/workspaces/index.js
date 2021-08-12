@@ -6,7 +6,9 @@ import { useForm } from "react-hook-form";
 const Workspaces = () => {
   const [workspaceInfo, setWorkspaceInfo] = useState([]);
   const [loading, setLoading] = useState(true);
+  console.log(loading);
   const { register, handleSubmit } = useForm();
+  console.log(workspaceInfo);
   useEffect(() => {
     fetch("https://intense-peak-24388.herokuapp.com/workspace/all")
       .then((res) => res.json())
@@ -29,10 +31,12 @@ const Workspaces = () => {
   };
 
   useEffect(() => {
-    if (workspaceInfo.length !== 0) {
+    if (workspaceInfo.length === 0) {
+      setLoading(true);
+    } else {
       setLoading(false);
     }
-  }, []);
+  }, [workspaceInfo]);
 
   return (
     <div className='d-container'>
@@ -61,11 +65,15 @@ const Workspaces = () => {
                 <th>Members</th>
               </tr>
             </thead>
-            <tbody>
-              {workspaceInfo.map((info, index) => (
-                <WorkspaceRow key={info._id} info={info} index={index} />
-              ))}
-            </tbody>
+            {loading ? (
+              <LoadingAnimation />
+            ) : (
+              <tbody>
+                {workspaceInfo.map((info, index) => (
+                  <WorkspaceRow key={info._id} info={info} index={index} />
+                ))}
+              </tbody>
+            )}
           </table>
         </div>
       </div>
