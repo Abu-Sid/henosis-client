@@ -42,6 +42,10 @@ const Board = () => {
     }
   }, [socket, _id, dispatch]);
 
+  const handleAddMember = (data: any) => {
+    console.log(data);
+  };
+
   return (
     <>
       {loading ? (
@@ -49,7 +53,7 @@ const Board = () => {
       ) : (
         <section className="board-section">
           <BoardHeader />
-          <BoardMembers />
+          <BoardMembers submit={handleAddMember} />
           <div className="status-board-container">
             <StatusBoards statusName="To Do">
               <TaskCard />

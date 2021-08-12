@@ -11,7 +11,7 @@ const useForm = (defaultValue={}) => {
 
         const handleError = (isError, provider) => setError(preError => ({...preError, [provider||name]: isError}));
 
-        if (required&&name==='email'||required&&name==='companyEmail') {
+        if (required&&name.includes('email')||required&&name==='companyEmail') {
             const isValid = /\S+@\S+\.\S+/.test(value);
             if (isValid) {
                 handleError(false);
@@ -94,7 +94,7 @@ const useForm = (defaultValue={}) => {
     const handleInvalid = e => {
         e.preventDefault();
         const node = e.target.parentNode;
-        handleFocus(node.tagName==="FORM"?node:node.parentNode);
+        handleFocus(node.tagName==="FORM"?node:node.parentNode.tagName==="FORM"?node.parentNode:node.parentNode.parentNode);
         const { name } = e.target;
         if (!inputData[name]) {
             setError(preError => ({...preError, [name]: true}));
