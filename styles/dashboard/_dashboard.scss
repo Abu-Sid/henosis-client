@@ -1,3 +1,22 @@
+.select {
+  background-color: #d0d1d8;
+  padding: 0.6rem 1rem;
+  border: 0.02rem solid #d0d1d8;
+  border-radius: 0.4rem;
+  box-sizing: border-box;
+  margin: 0.5rem 0;
+  resize: vertical;
+}
+
+.btn {
+  background-color: #4a4fff;
+  color: white;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
 .d-container {
   margin-top: 100px;
   width: 100%;
@@ -14,6 +33,13 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        position: relative;
+        .button, select {
+          @extend .btn;
+          width: 60%;
+          margin-left: 5px;
+          margin-top: 5px;
+        }
       }
       .admin-button {
         border: none;
@@ -28,16 +54,18 @@
         border-collapse: collapse;
         width: 95%;
         margin-top: 5%;
-        th {
-          background-color: #75798c;
-          text-align: center;
+        tr {
           height: 45px;
-          color: white;
-        }
-        td {
           text-align: center;
-          height: 45px;
-          background-color: #e6e8ea;
+          background-color: $gray;
+          cursor: pointer;
+          &:hover {
+            background-color: $light-gray-purple;
+          }
+          th {
+            background-color: #75798c;
+            color: white;
+          }
         }
       }
     }
@@ -57,23 +85,12 @@
   }
   input,
   select {
-    background-color: #d0d1d8;
+    @extend .select;
     width: 100%;
-    padding: 0.6rem 1rem;
-    border: 0.02rem solid #d0d1d8;
-    border-radius: 0.4rem;
-    box-sizing: border-box;
-    margin: 0.5rem 0;
-    resize: vertical;
   }
 
   .button {
-    background-color: #4a4fff;
-    color: white;
-    padding: 0.6rem 1rem;
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
+    @extend .btn;
   }
 }
 

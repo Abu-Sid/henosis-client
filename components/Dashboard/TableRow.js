@@ -1,7 +1,7 @@
 import React from "react";
 
 const TableRow = (props) => {
-  const { name, email, role } = props.info;
+  const { name, email, role="User" } = props.info;
   const index = props.index;
   return (
     <tr>
