@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import TableRow from "../../components/Dashboard/TableRow";
 import SideBar from "../../components/Dashboard/SideBar";
 import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation.tsx";
+import AdminSidebar from "../../components/ui/AdminSidebar/AdminSidebar";
 
 const Admins = () => {
   const [adminInfo, setAdminInfo] = useState([]);
@@ -47,7 +48,7 @@ const Admins = () => {
     <section className='d-container'>
       <div className='d-row'>
         <div className='col-left'>
-          <SideBar />
+          <AdminSidebar />
         </div>
         <div className='col-right'>
           <div className='right-division'>

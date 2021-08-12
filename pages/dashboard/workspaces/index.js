@@ -3,6 +3,7 @@ import SideBar from "../../../components/Dashboard/SideBar";
 import WorkspaceRow from "../../../components/Dashboard/WorkspaceRow";
 import LoadingAnimation from "../../../components/ui/Animation/LoadingAnimation";
 import { useForm } from "react-hook-form";
+import AdminSidebar from "../../../components/ui/AdminSidebar/AdminSidebar";
 const Workspaces = () => {
   const [workspaceInfo, setWorkspaceInfo] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,9 +32,7 @@ const Workspaces = () => {
   };
 
   useEffect(() => {
-    if (workspaceInfo.length === 0) {
-      setLoading(true);
-    } else {
+    if (workspaceInfo.length !== 0) {
       setLoading(false);
     }
   }, [workspaceInfo]);
@@ -42,7 +41,7 @@ const Workspaces = () => {
     <div className='d-container'>
       <div className='d-row'>
         <div className='col-left'>
-          <SideBar />
+          <AdminSidebar />
         </div>
         <div className='col-right'>
           <div className='right-division'>
