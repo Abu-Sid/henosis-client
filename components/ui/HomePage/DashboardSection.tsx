@@ -6,9 +6,9 @@ const DashboardSection = () => {
   return (
     <div className="dashboard">
       <div className="dashboard__text">
-        <h5 data-aos="fade-right" data-aos-delay="100">
+        <h4 data-aos="fade-right" data-aos-delay="100">
           Dive into the details.
-        </h5>
+        </h4>
         <h2 data-aos="fade-right" data-aos-delay="200">
           Your <span>dashboard</span> contains everything that you need to know.
         </h2>
