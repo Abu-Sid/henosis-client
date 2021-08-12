@@ -96,6 +96,7 @@ const Backlog = () => {
     if (socket !== null) {
       socket.emit("create-sprint", { ...sprintData, goals: goalData });
       toastId = toast.loading("Loading...");
+      setIsOpen(false);
     }
   };
 

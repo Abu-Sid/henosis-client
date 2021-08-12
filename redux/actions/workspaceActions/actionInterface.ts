@@ -1,3 +1,4 @@
+import { IUser } from "../../../auth/authManager";
 import ActionType from "./actionTypes";
 
 export interface IWorkspace {
@@ -27,4 +28,9 @@ interface FailureAction {
   payload: string;
 }
 
-export type IAction = SuccessAction | FailureAction;
+interface AddMemberAction {
+  type: ActionType.ADD_MEMBERS;
+  payload: IUser[];
+}
+
+export type IAction = SuccessAction | FailureAction | AddMemberAction;

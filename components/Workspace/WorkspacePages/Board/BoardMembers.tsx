@@ -12,16 +12,16 @@ import PlusIcon from "./PlusIcon";
 
 interface IProps {
   submit: (data: any) => void;
+  modalIsOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const BoardMembers = ({ submit }: IProps) => {
+const BoardMembers = ({ submit, modalIsOpen, setIsOpen }: IProps) => {
   const { workspace } = useSelector(
     (state: RootState) => state.workspaceReducer
   );
 
   const { members } = workspace;
-
-  const [modalIsOpen, setIsOpen] = useState(false);
 
   const [memberInputs, setMemberInputs] = useState([1]);
 
@@ -37,7 +37,7 @@ const BoardMembers = ({ submit }: IProps) => {
         {members.map(({ _id, photo }, index) => (
           <div key={_id}>
             <img
-              src={photo || index + (1 % 2) === 0 ? orange.src : purple.src}
+              src={photo || index % 2 === 0 ? orange.src : purple.src}
               alt="user-icon"
             />
           </div>
