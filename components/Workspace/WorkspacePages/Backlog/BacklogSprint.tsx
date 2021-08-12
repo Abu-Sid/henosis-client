@@ -1,9 +1,10 @@
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faEllipsisH, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../redux/reducers";
-import ReactModal from "../../../ReactModal/ReactModal";
+import Modal from "../../../Modal/Modal";
 import AddTaskModal from "./AddTaskModal";
 import { ITData } from "./Backlog";
 import BacklogTask from "./BacklogTask";
@@ -37,7 +38,7 @@ const BacklogSprint = ({
           <div>
             <button>End Sprint</button>
             <button className="edit-btn">
-              <FontAwesomeIcon icon={faEllipsisH} />
+              <FontAwesomeIcon icon={faEllipsisH as IconProp} />
             </button>
           </div>
         </div>
@@ -48,13 +49,16 @@ const BacklogSprint = ({
           ))}
         </div>
         <button onClick={() => setTaskModal(true)}>
-          <FontAwesomeIcon style={{ marginRight: "5px" }} icon={faPlus} /> Add
-          Task
+          <FontAwesomeIcon
+            style={{ marginRight: "5px" }}
+            icon={faPlus as IconProp}
+          />{" "}
+          Add Task
         </button>
       </div>
-      <ReactModal modalIsOpen={taskModal} setIsOpen={setTaskModal}>
+      <Modal modalIsOpen={taskModal} setIsOpen={setTaskModal}>
         <AddTaskModal submit={submit} setAssignedMember={setAssignedMember} />
-      </ReactModal>
+      </Modal>
     </div>
   );
 };
