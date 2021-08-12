@@ -4,9 +4,9 @@ import board from "../../../public/images/board.png";
 
 const FeaturesSection = () => {
   return (
-    <div className='features'>
-      <div className='features__text'>
-        <div data-aos='fade-up'>
+    <div className="features">
+      <div className="features__text">
+        <div data-aos="fade-up">
           <h1>
             It’s more than work. It’s a way of working <span>together</span> .
           </h1>
@@ -17,8 +17,13 @@ const FeaturesSection = () => {
           </h4>
         </div>
       </div>
-      <div className='features__image'>
-        <Image src={board} alt='board' />
+      <div
+        data-aos="zoom-in"
+        data-aos-duration="500"
+        data-aos-delay="500"
+        className="features__image"
+      >
+        <Image src={board} alt="board" />
       </div>
     </div>
   );
