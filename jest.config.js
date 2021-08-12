@@ -4,6 +4,8 @@ module.exports = {
     testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
     moduleNameMapper: {
       '\\.(scss|sass|css)$': 'identity-obj-proxy',
+      
+      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "identity-obj-proxy"
     },
     // transform: {
     //     '^.+\\.(js|jsx|ts|tsx)$': '<rootDir>/node_modules/babel-jest',

@@ -4,7 +4,7 @@ import React from "react";
 import banner from "../../../public/images/banner.png";
 const Banner = () => {
   return (
-    <div className="banner">
+    <div data-testid="banner-test" className="banner">
       <div className="banner__text">
         <div data-aos="fade-down" data-aos-duration="1000">
           <h1>
@@ -28,7 +28,12 @@ const Banner = () => {
         </Link>
       </div>
 
-      <div className="banner__image">
+      <div
+        data-aos="fade-left"
+        data-aos-duration="1000"
+        data-aos-delay="1000"
+        className="banner__image"
+      >
         <Image src={banner} alt="banner" />
       </div>
     </div>

@@ -6,6 +6,7 @@
   right: 0;
   left: 0;
   z-index: 900;
+
   @include flex(row, space-between);
   .logo {
     height: 100%;
@@ -29,6 +30,9 @@
       font-size: 1.1rem;
       position: relative;
       @include flex;
+      &:hover {
+        color: $purple;
+      }
       .username {
         cursor: default;
       }
