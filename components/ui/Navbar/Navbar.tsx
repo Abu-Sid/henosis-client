@@ -24,7 +24,6 @@ export const useRoute = () => {
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-
   return (
     <DropdownContext.Provider value={[open, setOpen]}>
       <DesktopNavbar />
