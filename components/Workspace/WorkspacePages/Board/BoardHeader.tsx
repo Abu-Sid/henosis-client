@@ -29,7 +29,7 @@ const BoardHeader = () => {
             <span>{workspaceName}</span> / {sprintName}
           </h1>
           <ol>
-            {goals.map((goal, index) => (
+            {goals?.map((goal, index) => (
               <li key={index}>
                 {index + 1}. {goal}
               </li>
