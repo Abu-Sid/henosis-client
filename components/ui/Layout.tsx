@@ -12,7 +12,6 @@ import { useRoute } from "./Navbar/DesktopNavbar";
 import Navbar from "./Navbar/Navbar";
 
 const Layout = ({ children }) => {
-  const [keyword, setKeyword] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
