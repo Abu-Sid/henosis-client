@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,9 +23,13 @@ const Board = () => {
     (state: RootState) => state.workspaceReducer
   );
 
-  const { loading } = useSelector((state: RootState) => state.sprintReducer);
+  const { loading, sprint } = useSelector(
+    (state: RootState) => state.sprintReducer
+  );
 
   const { _id, members } = workspace;
+
+  const { status, tasks } = sprint || {};
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -73,7 +78,7 @@ const Board = () => {
     <>
       {loading ? (
         <LoadingAnimation />
-      ) : (
+      ) : sprint._id ? (
         <section className="board-section">
           <BoardHeader />
           <BoardMembers
@@ -82,13 +87,24 @@ const Board = () => {
             setIsOpen={setIsOpen}
           />
           <div className="status-board-container">
-            <StatusBoards statusName="To Do">
-              <TaskCard />
-            </StatusBoards>
-            <StatusBoards statusName="In Progress"></StatusBoards>
-            <StatusBoards statusName="Done"> </StatusBoards>
+            {status.map((status) => (
+              <StatusBoards key={status} statusName={status}>
+                {tasks.map((task) =>
+                  task.currentStatus === status ? (
+                    <TaskCard key={task._id} task={task} />
+                  ) : null
+                )}
+              </StatusBoards>
+            ))}
           </div>
         </section>
+      ) : (
+        <div className="board-error">
+          <h1 className="alert-error">No Sprint Here</h1>
+          <Link href={`/workspaces/${_id}/backlog`} passHref>
+            <button className="button-primary">Create A Sprint</button>
+          </Link>
+        </div>
       )}
     </>
   );

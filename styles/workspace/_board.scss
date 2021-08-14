@@ -73,6 +73,7 @@
     background-color: $light-gray-purple;
     border-radius: radius(medium);
     padding: 10px;
+    margin-bottom: 10px;
     &__info {
       h1 {
         @include writing-style($dark-blue, semi-large, medium);
@@ -89,6 +90,16 @@
         margin-left: 5px;
       }
     }
+  }
+}
+
+.board-error {
+  text-align: center;
+  h1 {
+    font-size: 1.5rem;
+  }
+  button {
+    @include button;
   }
 }
 
