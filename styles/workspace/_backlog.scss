@@ -15,9 +15,13 @@
     color: $dark-blue;
   }
   .sprint-section {
+    overflow-x: auto;
     background-color: $gray;
-    padding: 0.8em;
     border-radius: 0.5em;
+    &__inner {
+      padding: 1em;
+      min-width: 420px;
+    }
     &__top {
       @include flex(row, space-between);
       button.edit-btn {
@@ -49,16 +53,19 @@
       border-radius: 0.5rem;
       @include flex(row, space-between);
       .assigned-section {
-        @include flex(row, flex-start);
+        @include flex;
+        .task-status {
+          margin-bottom: 0;
+        }
         .assigned-img {
           border-radius: 50%;
-          height: 45px;
-          width: 45px;
+          height: 40px;
+          width: 40px;
           margin-left: 8px;
+          cursor: pointer;
         }
         .assigned-name {
           margin-left: 8px;
-          margin-bottom: 10px;
         }
       }
     }
@@ -75,7 +82,7 @@
   }
   input {
     @include input;
-    background-color: #d0d1d8;
+    background-color: #d2d4d8;
     &:focus {
       box-shadow: 0 0 1px 2px #6161ff;
     }
@@ -89,7 +96,7 @@
       font-size: $fs-xs;
     }
   }
-  button {
+  button[type="submit"] {
     @include button;
     width: 100%;
   }
@@ -105,6 +112,22 @@
   }
   .basic-multi-select {
     margin: 10px 0;
+    .css-1pahdxg-control,
+    .css-yk16xz-control {
+      background-color: #d2d4d8;
+    }
+    .css-1rhbuit-multiValue,
+    .css-1okebmr-indicatorSeparator {
+      background-color: #bebebe;
+    }
+    .css-tj5bde-Svg {
+      fill: #818181;
+    }
+    .css-1pahdxg-control {
+      .css-tj5bde-Svg {
+        fill: #3f3f3f;
+      }
+    }
     input {
       box-shadow: none;
     }
@@ -133,11 +156,17 @@
 @media (max-width: 620px) {
   .backlog-section {
     .sprint-section {
+      &__inner {
+        padding: 0.8em;
+      }
       &__top {
         @include flex(column, space-between);
         button {
           margin-top: 10px;
         }
+      }
+      .task-name {
+        font-size: 1.3rem;
       }
     }
   }

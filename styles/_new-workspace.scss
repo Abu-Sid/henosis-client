@@ -50,7 +50,7 @@
 .workspace-select-category {
   width: 100%;
   display: grid;
-  gap: 3rem;
+  gap: 1rem;
   grid-template-columns: repeat(2, 1fr);
   &-option {
     max-width: fit-content;
@@ -61,11 +61,19 @@
     padding: 1rem;
     .workspace-select-icon {
       display: block;
+      width: 320px;
+      height: 320px;
     }
     button {
       @include button;
       background-color: $purple;
     }
+  }
+}
+
+@media (max-width: 970px) {
+  .workspace-select-category {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -75,8 +83,13 @@
   }
 }
 
-@media (max-width: 970px) {
+@media (max-width: 370px) {
   .workspace-select-category {
-    grid-template-columns: 1fr;
+    &-option {
+      .workspace-select-icon {
+        width: 270px;
+        height: 270px;
+      }
+    }
   }
 }

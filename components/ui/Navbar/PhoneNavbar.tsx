@@ -7,12 +7,10 @@ import { authUserLogout } from "../../../redux/actions/userActions";
 import { RootState } from "../../../redux/reducers";
 import { DropdownItem, DropdownMenu } from "./DropDown";
 import Nav from "./Nav";
-import { useRoute } from "./Navbar";
 import NavItem from "./NavItem";
 
 const PhoneNavbar = () => {
   const dispatch = useDispatch();
-  const path = useRoute();
 
   const { user } = useSelector((state: RootState) => state.userReducer);
   const username = user?.name;
@@ -25,6 +23,7 @@ const PhoneNavbar = () => {
       console.log(error);
     }
   };
+
   return (
     <Nav className="phone-navbar">
       <NavItem icon={faBars as IconProp}>
