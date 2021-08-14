@@ -7,7 +7,7 @@ import { INav } from "./Navbar";
 const Nav: React.FC<INav> = ({ children, className }) => {
   const path = useRoute();
 
-  let color;
+  let color: string;
   if (path === "/") {
     color = "white-bg";
   } else {
@@ -15,9 +15,9 @@ const Nav: React.FC<INav> = ({ children, className }) => {
   }
   return (
     <nav className={`${color} ${className}`}>
-      <Link href='/' passHref>
-        <div className='logo'>
-          <div className='logo__image'>
+      <Link href="/" passHref>
+        <div className="logo">
+          <div className="logo__image">
             <Logo color={path === "/" ? "white" : "color"} />
           </div>
           <h1 className={path === "/" ? "blue logo__text" : "white logo__text"}>

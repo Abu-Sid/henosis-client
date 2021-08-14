@@ -37,8 +37,9 @@ const BoardMembers = ({ submit, modalIsOpen, setIsOpen }: IProps) => {
         {members.map(({ _id, photo }, index) => (
           <div key={_id}>
             <img
-              src={photo || index % 2 === 0 ? orange.src : purple.src}
+              src={photo || (index % 2 === 0 ? orange.src : purple.src)}
               alt="user-icon"
+              className="user-icon"
             />
           </div>
         ))}

@@ -1,11 +1,10 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import io, { Socket } from "socket.io-client";
-import { DefaultEventsMap } from "socket.io-client/build/typed-events";
 import SelectCategory from "../components/NewWorkspace/SelectCategory";
 import WorkspaceForm from "../components/NewWorkspace/WorkspaceForm";
 import withAuthCheck from "../HOC/withAuthCheck";
+import useSocket from "../hooks/useSocket";
 import { RootState } from "../redux/reducers";
 
 interface IData {
@@ -20,26 +19,18 @@ const Workspace = () => {
 
   const router = useRouter();
 
-  const [socket, setSocket] =
-    useState<Socket<DefaultEventsMap, DefaultEventsMap>>(null);
+  const socket = useSocket("/create-workspace");
 
   useEffect(() => {
-    const socketIo = io(
-      "https://intense-peak-24388.herokuapp.com/create-workspace"
-    );
-    setSocket(socketIo);
-
-    socketIo.on("workspace-created", (id) => {
-      router.replace(`/workspaces/${id}`);
-    });
-
-    return () => {
-      socketIo.disconnect();
-    };
-  }, [router]);
+    if (socket !== null) {
+      socket.on("workspace-created", (id) => {
+        router.replace(`/workspaces/${id}`);
+      });
+    }
+  }, [socket, router]);
 
   const submit = (data: IData) => {
-    if (socket) {
+    if (socket !== null) {
       const workspace = {
         ...data,
         type: "Personal",
