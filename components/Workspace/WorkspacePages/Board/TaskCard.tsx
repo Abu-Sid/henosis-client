@@ -17,7 +17,7 @@ const TaskCard = ({ task }: IProps) => {
   );
 
   const assignedMembers = members.filter((member) =>
-    task.assignedMember?.includes(member.email)
+    assignedMember.includes(member.email)
   );
 
   return (
@@ -30,8 +30,9 @@ const TaskCard = ({ task }: IProps) => {
         {assignedMembers.map(({ _id, photo }, index) => (
           <div className="member-icon" key={_id}>
             <img
-              src={photo || index % 2 === 0 ? orange.src : purple.src}
+              src={photo || (index % 2 === 0 ? orange.src : purple.src)}
               alt="user-icon"
+              className="user-icon"
             />
           </div>
         ))}

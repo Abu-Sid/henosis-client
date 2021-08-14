@@ -50,6 +50,13 @@
     }
   }
 
+  .user-icon {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
   .status-board-container {
     @include flex(row, flex-start, flex-start);
     width: 100%;
