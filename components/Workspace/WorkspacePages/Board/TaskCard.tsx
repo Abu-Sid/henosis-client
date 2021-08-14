@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { useSelector } from "react-redux";
 import orange from "../../../../public/images/icons/orange.svg";
 import purple from "../../../../public/images/icons/purple.svg";
@@ -9,7 +9,10 @@ interface IProps {
   task: ITask;
 }
 
-const TaskCard = ({ task }: IProps) => {
+const TaskCard = (
+  { task, ...rest }: IProps,
+  ref: React.MutableRefObject<undefined>
+) => {
   const { taskName, dueDate, assignedMember } = task;
 
   const { members } = useSelector(
@@ -21,7 +24,7 @@ const TaskCard = ({ task }: IProps) => {
   );
 
   return (
-    <div className="task-card">
+    <div className="task-card" ref={ref} {...rest}>
       <div className="task-card__info">
         <h1>{taskName}</h1>
         <p>{new Date(dueDate).toDateString()}</p>
@@ -41,4 +44,4 @@ const TaskCard = ({ task }: IProps) => {
   );
 };
 
-export default TaskCard;
+export default forwardRef(TaskCard);
