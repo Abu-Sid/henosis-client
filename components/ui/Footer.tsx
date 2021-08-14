@@ -2,9 +2,9 @@ import Link from "next/link";
 import React from "react";
 import {
   FaFacebook,
+  FaInstagram,
   FaLinkedinIn,
   FaTwitter,
-  FaInstagram,
 } from "react-icons/fa";
 
 const Footer = () => {
