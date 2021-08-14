@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import { useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { auth, setUser } from "../../auth/authManager";
@@ -10,7 +9,6 @@ import {
 } from "../../redux/actions/userActions";
 import { useRoute } from "./Navbar/DesktopNavbar";
 import Navbar from "./Navbar/Navbar";
-
 
 const Layout = ({ children }) => {
   const dispatch = useDispatch();

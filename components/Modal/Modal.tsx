@@ -39,9 +39,9 @@ const Modal = ({ children, modalIsOpen, setIsOpen }: IProps) => {
       isOpen={modalIsOpen}
       onRequestClose={closeModal}
       style={customStyles}
-      contentLabel='Example Modal'
+      contentLabel="Example Modal"
     >
-      <button className='close-btn' onClick={closeModal}>
+      <button className="close-btn" onClick={closeModal}>
         <FontAwesomeIcon
           style={{ fontSize: "25px" }}
           icon={faTimes as IconProp}

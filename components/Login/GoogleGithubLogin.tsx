@@ -1,13 +1,11 @@
-import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React from "react";
 import toast from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { githubLogin, googleLogin, IUser } from "../../auth/authManager";
 import {
   authUserFailure,
   authUserSuccess,
 } from "../../redux/actions/userActions";
-import { RootState } from "../../redux/reducers";
 import GitHubIcon from "./GitHubIcon";
 import GoogleIcon from "./GoogleIcon";
 
