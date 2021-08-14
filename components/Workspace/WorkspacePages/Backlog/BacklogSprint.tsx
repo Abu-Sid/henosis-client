@@ -30,31 +30,33 @@ const BacklogSprint = ({
     <div>
       <h1>{sprintName}</h1>
       <div className="sprint-section">
-        <div className="sprint-section__top">
-          <p>
-            {new Date(startDate).toDateString()} -{" "}
-            {new Date(endDate).toDateString()}
-          </p>
-          <div>
-            <button>End Sprint</button>
-            <button className="edit-btn">
-              <FontAwesomeIcon icon={faEllipsisH as IconProp} />
-            </button>
+        <div className="sprint-section__inner">
+          <div className="sprint-section__top">
+            <p>
+              {new Date(startDate).toDateString()} -{" "}
+              {new Date(endDate).toDateString()}
+            </p>
+            <div>
+              <button>End Sprint</button>
+              <button className="edit-btn">
+                <FontAwesomeIcon icon={faEllipsisH as IconProp} />
+              </button>
+            </div>
           </div>
+          <div className="sprint-section__tasks">
+            {tasks.length === 0 && <h3>No Task Added</h3>}
+            {tasks.map((task, index) => (
+              <BacklogTask key={task._id} task={task} index={index} />
+            ))}
+          </div>
+          <button onClick={() => setTaskModal(true)}>
+            <FontAwesomeIcon
+              style={{ marginRight: "5px" }}
+              icon={faPlus as IconProp}
+            />{" "}
+            Add Task
+          </button>
         </div>
-        <div className="sprint-section__tasks">
-          {tasks.length === 0 && <h3>No Task Added</h3>}
-          {tasks.map((task, index) => (
-            <BacklogTask key={task._id} task={task} index={index} />
-          ))}
-        </div>
-        <button onClick={() => setTaskModal(true)}>
-          <FontAwesomeIcon
-            style={{ marginRight: "5px" }}
-            icon={faPlus as IconProp}
-          />{" "}
-          Add Task
-        </button>
       </div>
       <Modal modalIsOpen={taskModal} setIsOpen={setTaskModal}>
         <AddTaskModal submit={submit} setAssignedMember={setAssignedMember} />

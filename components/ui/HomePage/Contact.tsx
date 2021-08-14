@@ -1,21 +1,26 @@
 import emailjs from "emailjs-com";
 import React from "react";
+import toast from "react-hot-toast";
 
 const Contact = () => {
-  const sendEmail = (e) => {
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const target = e.currentTarget;
+    const loadingId = toast.loading("Loading...");
+
     emailjs
       .sendForm(
         "service_73qb7cg",
         "template_oznqcux",
-        e.target,
+        target,
         "user_yHYAoZsap8fcwMhDqGTPM"
       )
       .then(
         (result) => {
           if (result) {
-            e.target.reset();
-            alert('Your message was sent to Henosis');
+            target.reset();
+            toast.dismiss(loadingId);
+            toast.success("Email Send Successfully!");
           }
         },
         (error) => {
@@ -23,6 +28,7 @@ const Contact = () => {
         }
       );
   };
+
   return (
     <div
       data-testid="contact-header"
