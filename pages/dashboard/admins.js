@@ -63,7 +63,7 @@ const Admins = () => {
                   <label>Admin Name</label>
                   <input {...register("name")} type='text' required />
                   <label>Email</label>
-                  <input {...register("email")} type='email' />
+                  <input {...register("email")} type='email' required />
                   <label>Role</label>
                   <select {...register("role")} type='text'>
                     <option value='admin'>Admin</option>
