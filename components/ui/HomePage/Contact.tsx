@@ -15,6 +15,7 @@ const Contact = () => {
         (result) => {
           if (result) {
             e.target.reset();
+            alert('Your message was sent to Henosis');
           }
         },
         (error) => {
