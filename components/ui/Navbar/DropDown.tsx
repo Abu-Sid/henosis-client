@@ -1,30 +1,19 @@
-import React, { useContext, useRef, useEffect } from "react";
+import React, { useContext, useRef } from "react";
 import Link from "next/link";
 import { DropdownContext } from "./Navbar";
 import { INav } from "./Navbar";
-import HandleOutsideClick from "../HandleOutsideClick";
-
-const useOutsideClickHandler = (ref) => {
-  const [open, setOpen] = useContext(DropdownContext);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setOpen(!open);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [ref]);
-};
+import { useDetectClickOutside } from "react-detect-click-outside";
 
 export const DropdownMenu = ({ children }) => {
-  const wrapperRef = useRef(null);
-  useOutsideClickHandler(wrapperRef);
+  const [open, setOpen] = useContext(DropdownContext);
+
+  const closeDropdown = () => {
+    setOpen(!open);
+  };
+
+  const ref = useDetectClickOutside({ onTriggered: closeDropdown });
   return (
-    <div ref={wrapperRef}>
+    <div ref={ref}>
       <div className='dropdown'>{children}</div>
     </div>
   );
@@ -39,7 +28,6 @@ export const DropdownItem: React.FC<INav> = ({
 
   const handleClick = () => {
     functionality();
-    setOpen(!open);
   };
   return (
     <div className='dropdown__item'>
