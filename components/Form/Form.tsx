@@ -1,20 +1,38 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
 interface IForm {
+  children: React.ReactNode;
+  width?: number;
+  onSubmit?: () => void;
+}
+
+interface IFormHeader {
+  children: string;
+}
+
+interface IFormInput {
   name: string;
   type: string;
   row?: number;
 }
 
-export const Form: React.FC = ({ children }) => {
-  return <form className='general-form'>{children}</form>;
+export const Form: React.FC<IForm> = ({ children, width, onSubmit }) => {
+  return (
+    <form
+      style={{ width: `${width}px` }}
+      className='general-form'
+      onSubmit={onSubmit}
+    >
+      {children}
+    </form>
+  );
 };
 
-export const FormHeader: React.FC = ({ children }) => {
+export const FormHeader: React.FC<IFormHeader> = ({ children }) => {
   return <h1 className='general-form__header'>{children}</h1>;
 };
 
-export const FormInputField: React.FC<IForm> = ({
+export const FormInputField: React.FC<IFormInput> = ({
   children,
   name,
   type,
