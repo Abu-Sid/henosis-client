@@ -3,9 +3,11 @@ import LoadingAnimation from "../../ui/Animation/LoadingAnimation";
 
 const Chat = () => {
   return (
-    <div>
-      <h1>This is chat</h1>
-    </div>
+    <section className='chat-portal'>
+      <div className='channel'></div>
+      <div className='body'></div>
+      <div className='members'></div>
+    </section>
   );
 };
 
