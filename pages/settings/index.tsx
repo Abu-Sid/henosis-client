@@ -1,10 +1,12 @@
 import React from "react";
-
+import SidebarContainer from "../../components/ui/Sidebar/SidebarContainer";
+import SidebarItem from "../../components/ui/Sidebar/SidebarItem";
+import Logo from "../../public/images/logo.svg";
 const Settings = () => {
   return (
-    <div>
-      <h1>This is settings</h1>
-    </div>
+    <SidebarContainer>
+      <SidebarItem icon={Logo} className='sidebar__logo' href='/' />
+    </SidebarContainer>
   );
 };
 
