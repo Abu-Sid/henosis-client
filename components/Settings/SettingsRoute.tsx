@@ -7,7 +7,8 @@ import Customization from "./SettingsPages/Customization";
 import NotFound from "../../pages/404";
 
 const SettingsRoute = () => {
-  const [, path] = useRouter().query.paths;
+  const router = useRouter();
+  let path = router?.query?.paths?.[0];
   switch (path) {
     case "profile":
       return <Profile />;

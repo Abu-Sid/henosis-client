@@ -12,14 +12,30 @@ const SettingsSidebar: React.FC = () => {
   return (
     <SidebarContainer>
       <SidebarItem icon={Logo} className='sidebar__logo' href='/' />
-      <SidebarItem icon={Profile} pathName='/settings' href='profile' />
-      <SidebarItem icon={Account} pathName='/settings' href='account' />
+      <SidebarItem
+        icon={Profile}
+        tooltip='Profile'
+        pathName='/settings'
+        href='profile'
+      />
+      <SidebarItem
+        icon={Account}
+        tooltip='Account'
+        pathName='/settings'
+        href='account'
+      />
       <SidebarItem
         icon={Customization}
+        tooltip='Customization'
         pathName='/settings'
-        href='/customization'
+        href='customization'
       />
-      <SidebarItem icon={Billing} pathName='/settings' href='billing' />
+      <SidebarItem
+        icon={Billing}
+        tooltip='Billing'
+        pathName='/settings'
+        href='billing'
+      />
       <SidebarItem icon={Logout} className='sidebar__logout' />
     </SidebarContainer>
   );
