@@ -1,7 +1,9 @@
 import React from "react";
 
 interface IForm {
-  header: string;
+  name: string;
+  type: string;
+  row?: number;
 }
 
 export const Form: React.FC = ({ children }) => {
@@ -12,11 +14,19 @@ export const FormHeader: React.FC = ({ children }) => {
   return <h1 className='general-form__header'>{children}</h1>;
 };
 
-export const InputField: React.FC = () => {
+export const FormInputField: React.FC<IForm> = ({
+  children,
+  name,
+  type,
+  row,
+}) => {
   return (
     <div className='general-form__input-field'>
-      <label htmlFor='name'>Name</label>
-      <input type='text' name='name' id='name' />
+      <label htmlFor={name}>{children}</label>
+      {type === "text" && <input type={type} name={name} id={name} />}
+      {type === "textarea" && (
+        <textarea name={name} id={name} rows={row}></textarea>
+      )}
     </div>
   );
 };
