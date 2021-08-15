@@ -99,7 +99,7 @@ const Board = () => {
       newItems[findIndex] = { ...findItem, currentStatus };
       dispatch(addTask(newItems));
       sendTask(newItems);
-    } else {
+    } else if (source.index !== destination.index) {
       dispatch(addTask(items));
       sendTask(items);
     }

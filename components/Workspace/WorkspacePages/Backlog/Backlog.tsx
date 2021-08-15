@@ -38,6 +38,10 @@ const Backlog = () => {
     (state: RootState) => state.sprintReducer
   );
 
+  const { name, email } = useSelector(
+    (state: RootState) => state.userReducer.user
+  );
+
   const { workspaceName, _id } = workspace;
 
   const dispatch = useDispatch();
@@ -69,14 +73,23 @@ const Backlog = () => {
         dispatch(createdSprint(currentSprint));
       });
 
-      socket.on("added-task", (tasks) => {
-        toast.dismiss(toastId);
-        setTaskModal(false);
-        toast.success("Task Added Successfully!");
-        dispatch(addTask(tasks));
-      });
+      socket.on(
+        "added-task",
+        (tasks, user: { name: string; email: string }) => {
+          if (user) {
+            toast.dismiss(toastId);
+            setTaskModal(false);
+            if (user.email === email) {
+              toast.success("Your Task Added Successfully!");
+            } else {
+              toast.success(`${user.name} Added A Task!`);
+            }
+          }
+          dispatch(addTask(tasks));
+        }
+      );
     }
-  }, [socket, _id, dispatch]);
+  }, [socket, _id, dispatch, email]);
 
   const submit = (data: IData) => {
     const goalData: string[] = [];
@@ -111,7 +124,10 @@ const Backlog = () => {
         dueDate: new Date(data.dueDate),
       };
       if (socket !== null) {
-        socket.emit("add-task", sprint._id, [...sprint.tasks, taskData]);
+        socket.emit("add-task", sprint._id, [...sprint.tasks, taskData], {
+          name,
+          email,
+        });
         toastId = toast.loading("Loading...");
       }
     } else {
