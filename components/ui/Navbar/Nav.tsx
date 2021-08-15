@@ -1,8 +1,7 @@
-import React from "react";
 import Link from "next/link";
-import { useRoute } from "./Navbar";
+import React from "react";
 import Logo from "../Logo";
-import { INav } from "./Navbar";
+import { INav, useRoute } from "./Navbar";
 
 const Nav: React.FC<INav> = ({ children, className }) => {
   const path = useRoute();

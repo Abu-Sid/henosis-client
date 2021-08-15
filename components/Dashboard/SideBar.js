@@ -1,12 +1,11 @@
-import React from "react";
-import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import Logo from "../../public/images/logo.svg";
-import workspaces from "../../public/images/icons/workspaces.svg";
-import users from "../../public/images/icons/user.svg";
+import Link from "next/link";
+import React from "react";
 import admins from "../../public/images/icons/admins.svg";
 import Logout from "../../public/images/icons/logout.svg";
+import users from "../../public/images/icons/user.svg";
+import workspaces from "../../public/images/icons/workspaces.svg";
+import Logo from "../../public/images/logo.svg";
 
 const SideBar = () => {
   return (

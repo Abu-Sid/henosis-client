@@ -1,18 +1,24 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { DropResult } from "react-beautiful-dnd";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { IUser } from "../../../../auth/authManager";
 import useSocket from "../../../../hooks/useSocket";
-import { sendCurrentSprint } from "../../../../redux/actions/sprintActions";
-import { ISprint } from "../../../../redux/actions/sprintActions/actionInterface";
+import {
+  addTask,
+  sendCurrentSprint,
+} from "../../../../redux/actions/sprintActions";
+import {
+  ISprint,
+  ITask,
+} from "../../../../redux/actions/sprintActions/actionInterface";
 import { addMembers } from "../../../../redux/actions/workspaceActions";
 import { RootState } from "../../../../redux/reducers";
 import LoadingAnimation from "../../../ui/Animation/LoadingAnimation";
 import BoardHeader from "./BoardHeader";
+import BoardMain from "./BoardMain";
 import BoardMembers from "./BoardMembers";
-import StatusBoards from "./StatusBoards";
-import TaskCard from "./TaskCard";
 
 let toastId: string;
 
@@ -27,9 +33,9 @@ const Board = () => {
     (state: RootState) => state.sprintReducer
   );
 
-  const { _id, members } = workspace;
+  const { tasks } = sprint;
 
-  const { status, tasks } = sprint || {};
+  const { _id, members } = workspace;
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -51,12 +57,9 @@ const Board = () => {
         toast.success("Member Added Successfully!");
       });
 
-      // socket.on("added-task", (tasks) => {
-      //   toast.dismiss(toastId);
-      //   setTaskModal(false);
-      //   toast.success("Task Added Successfully!");
-      //   dispatch(addTask(tasks));
-      // });
+      socket.on("added-task", (tasks) => {
+        dispatch(addTask(tasks));
+      });
     }
   }, [socket, _id, dispatch]);
 
@@ -74,6 +77,34 @@ const Board = () => {
     }
   };
 
+  const sendTask = (items: ITask[]) => {
+    if (socket !== null) {
+      socket.emit("add-task", sprint._id, items);
+    }
+  };
+
+  const handleOnDragEnd = (result: DropResult) => {
+    const { source, destination, draggableId } = result;
+    if (!destination) return;
+
+    const items = Array.from(tasks);
+    const [reorderedItem] = items.splice(source.index, 1);
+    items.splice(destination.index, 0, reorderedItem);
+
+    if (source.droppableId !== destination.droppableId) {
+      const currentStatus = destination.droppableId;
+      const findItem = items.find((item) => item._id === draggableId);
+      const findIndex = items.findIndex((item) => item._id === draggableId);
+      const newItems = [...items];
+      newItems[findIndex] = { ...findItem, currentStatus };
+      dispatch(addTask(newItems));
+      sendTask(newItems);
+    } else {
+      dispatch(addTask(items));
+      sendTask(items);
+    }
+  };
+
   return (
     <>
       {loading ? (
@@ -86,17 +117,7 @@ const Board = () => {
             modalIsOpen={modalIsOpen}
             setIsOpen={setIsOpen}
           />
-          <div className="status-board-container">
-            {status.map((status) => (
-              <StatusBoards key={status} statusName={status}>
-                {tasks.map((task) =>
-                  task.currentStatus === status ? (
-                    <TaskCard key={task._id} task={task} />
-                  ) : null
-                )}
-              </StatusBoards>
-            ))}
-          </div>
+          <BoardMain handleOnDragEnd={handleOnDragEnd} />
         </section>
       ) : (
         <div className="board-error">

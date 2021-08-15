@@ -1,11 +1,15 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
 interface IProps {
   statusName: string;
+  children: React.ReactNode;
 }
 
-const StatusBoards: React.FC<IProps> = ({ statusName, children }) => {
-  let color;
+const StatusBoards = (
+  { statusName, children, ...rest }: IProps,
+  ref: React.MutableRefObject<undefined>
+) => {
+  let color: string;
   if (statusName.toLowerCase() === "to do") {
     color = "red";
   } else if (statusName.toLowerCase() === "in progress") {
@@ -13,12 +17,13 @@ const StatusBoards: React.FC<IProps> = ({ statusName, children }) => {
   } else if (statusName.toLowerCase() === "done") {
     color = "green";
   }
+
   return (
-    <div className='status-board'>
+    <div className="status-board" ref={ref} {...rest}>
       <p className={`status-board__indicator ${color}`}>{statusName}</p>
       <div>{children}</div>
     </div>
   );
 };
 
-export default StatusBoards;
+export default forwardRef(StatusBoards);
