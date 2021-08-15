@@ -1,10 +1,11 @@
 import React from "react";
+import { Form, FormHeader } from "../components/Form/Form";
 
 const form = () => {
   return (
     <div>
-      <form className='general-form'>
-        <h1 className='general-form__header'>Personal Information</h1>
+      <Form>
+        <FormHeader>Personal Info</FormHeader>
         <div className='general-form__input-field'>
           <label htmlFor='name'>Name</label>
           <input type='text' name='name' id='name' />
@@ -17,7 +18,11 @@ const form = () => {
           <label htmlFor='name'>Name</label>
           <input type='text' name='name' id='name' />
         </div>
-      </form>
+        <div className='general-form__input-field'>
+          <label htmlFor='note'>Name</label>
+          <textarea name='note' id='note' rows={10}></textarea>
+        </div>
+      </Form>
     </div>
   );
 };
