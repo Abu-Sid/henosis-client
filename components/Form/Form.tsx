@@ -11,9 +11,10 @@ interface IFormHeader {
 }
 
 interface IFormInput {
-  name: string;
+  name?: string;
   type: string;
   row?: number;
+  value?: string;
 }
 
 export const Form: React.FC<IForm> = ({ children, width, onSubmit }) => {
@@ -37,14 +38,16 @@ export const FormInputField: React.FC<IFormInput> = ({
   name,
   type,
   row,
+  value,
 }) => {
   return (
     <div className='general-form__input-field'>
-      <label htmlFor={name}>{children}</label>
+      {children && <label htmlFor={name}>{children}</label>}
       {type === "text" && <input type={type} name={name} id={name} />}
       {type === "textarea" && (
         <textarea name={name} id={name} rows={row}></textarea>
       )}
+      {type === "submit" && <input type={type} value={value} />}
     </div>
   );
 };

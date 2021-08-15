@@ -15,6 +15,7 @@ const form = () => {
         <FormInputField name='note' type='textarea' row={8}>
           Hello
         </FormInputField>
+        <FormInputField type='submit' />
       </Form>
     </div>
   );

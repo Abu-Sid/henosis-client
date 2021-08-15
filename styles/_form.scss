@@ -36,5 +36,25 @@
       font-family: $s-ff;
       @include writing-style($dark-blue, medium, thin);
     }
+    input[type="submit"] {
+      background-color: $purple;
+      color: $white;
+      cursor: pointer;
+      transition: all 200ms ease-in-out;
+      &:hover {
+        background-color: $gray-purple;
+      }
+    }
   }
+}
+
+.button-p {
+  font-size: 1rem;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  background-color: $purple;
+  color: white;
+  display: block;
+  border: none;
+  outline: none;
 }
