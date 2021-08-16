@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import { IUser } from "../../auth/authManager";
 import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation";
 import Sidebar from "../../components/ui/Sidebar/Sidebar";
 import WorkspaceError from "../../components/Workspace/WorkspaceError";
@@ -9,6 +11,7 @@ import withAuthCheck from "../../HOC/withAuthCheck";
 import useSocket from "../../hooks/useSocket";
 import { setEmptySprint } from "../../redux/actions/sprintActions";
 import {
+  addMembers,
   workspaceFailure,
   workspaceSuccess,
 } from "../../redux/actions/workspaceActions";
@@ -18,7 +21,10 @@ import { RootState } from "../../redux/reducers";
 export interface RequestData {
   creatorEmail: string;
   workspaceName: string;
+  id: string;
 }
+
+let toastId: string;
 
 const Workspace = () => {
   const { query, replace } = useRouter();
@@ -27,7 +33,9 @@ const Workspace = () => {
 
   const { error } = useSelector((state: RootState) => state.workspaceReducer);
 
-  const { email } = useSelector((state: RootState) => state.userReducer.user);
+  const { email, name } = useSelector(
+    (state: RootState) => state.userReducer.user
+  );
 
   const dispatch = useDispatch();
 
@@ -44,6 +52,15 @@ const Workspace = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    if (socket) {
+      socket.on("added-member", (updatedMembers: IUser[]) => {
+        toast.success("Member Added Successfully!");
+        dispatch(addMembers(updatedMembers));
+      });
+    }
+  }, [socket, dispatch]);
+
+  useEffect(() => {
     if (socket !== null) {
       if (!loaded) {
         socket.emit("workspace", { id, userEmail: email });
@@ -56,7 +73,7 @@ const Workspace = () => {
           dispatch(workspaceFailure(message));
           setLoading(false);
           if (creatorEmail) {
-            setRequestData({ creatorEmail, workspaceName });
+            setRequestData({ creatorEmail, workspaceName, id });
           }
         }
       );
@@ -65,23 +82,53 @@ const Workspace = () => {
         setLoading(false);
         setRequestData({} as RequestData);
       });
-
-      socket.on("mail-sended", (message: string) => {
-        console.log(message);
-      });
     }
   }, [replace, dispatch, email, id, loaded, socket]);
+
+  useEffect(() => {
+    if (socket !== null) {
+      socket.on(
+        "mail-sended",
+        ({ message, isSended }: { message: string; isSended: boolean }) => {
+          toast.dismiss(toastId);
+          if (isSended) {
+            toast.success(message);
+          } else {
+            toast.error(message);
+          }
+        }
+      );
+    }
+  }, [socket]);
+
+  const handleSendEmail = ({
+    creatorEmail,
+    workspaceName,
+    id,
+  }: RequestData) => {
+    socket.emit("send-access-email", {
+      email,
+      name,
+      toEmail: creatorEmail,
+      workspaceName,
+      id,
+    });
+    toastId = toast.loading("Loading...");
+  };
 
   return (
     <>
       {loading ? (
         <LoadingAnimation />
       ) : error ? (
-        <WorkspaceError requestData={requestData} socket={socket} />
+        <WorkspaceError
+          requestData={requestData}
+          handleSendEmail={handleSendEmail}
+        />
       ) : (
-        <section className='workspace'>
+        <section className="workspace">
           <Sidebar />
-          <WorkspaceRoute />
+          <WorkspaceRoute socket={socket} />
         </section>
       )}
     </>

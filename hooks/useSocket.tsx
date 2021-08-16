@@ -7,7 +7,7 @@ const useSocket = (path: string) => {
     useState<Socket<DefaultEventsMap, DefaultEventsMap>>(null);
 
   useEffect(() => {
-    const socketIo = io(`https://intense-peak-24388.herokuapp.com${path}`);
+    const socketIo = io(`http://localhost:5000${path}`);
     setSocket(socketIo);
 
     return () => {
