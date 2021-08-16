@@ -1,18 +1,15 @@
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { addDays } from "date-fns";
 import React from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import useForm from "../../../../hooks/useForm";
-import ReactModal from "../../../ReactModal/ReactModal";
+import Modal from "../../../Modal/Modal";
 import { IData } from "./Backlog";
 
-interface IForm {
-  handleInput: (e: any) => void;
-  handleInvalid: (e: any) => void;
-  handleSubmit: (submit: (data: IData) => void) => (e: any) => void;
-  error: any;
-}
-
-const inputData = [
+const inputsData = [
   {
     title: "Sprint Name",
     name: "sprintName",
@@ -45,7 +42,17 @@ const CreateSprint = ({
   goals,
   setGoals,
 }: IProps) => {
-  const { handleInput, handleInvalid, handleSubmit, error }: IForm = useForm();
+  const {
+    handleInput,
+    handleInvalid,
+    handleSubmit,
+    handleDateChange,
+    error,
+    inputData,
+  } = useForm({
+    startDate: new Date(),
+    endDate: addDays(new Date(), 7),
+  });
 
   const lastGoal = goals[goals.length - 1];
 
@@ -54,21 +61,33 @@ const CreateSprint = ({
       <button onClick={() => setIsOpen(true)} className="create-sprint-button">
         Create Sprint
       </button>
-      <ReactModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen}>
+      <Modal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen}>
         <form onSubmit={handleSubmit(submit)} className="create-sprint-form">
           <h2>Sprint Information</h2>
-          {inputData.map(({ title, name, type }, index) => (
+          {inputsData.map(({ title, name, type }, index) => (
             <div key={index}>
               <label htmlFor={name}>{title}</label>
-              <input
-                id={name}
-                type={type}
-                name={name}
-                placeholder={title}
-                onChange={handleInput}
-                required
-                onInvalid={handleInvalid}
-              />
+              {type !== "date" ? (
+                <input
+                  id={name}
+                  type={type}
+                  name={name}
+                  placeholder={title}
+                  onChange={handleInput}
+                  required
+                  onInvalid={handleInvalid}
+                />
+              ) : (
+                <DatePicker
+                  selected={inputData[name]}
+                  onChange={(date) => handleDateChange(date, name)}
+                  minDate={new Date()}
+                  showDisabledMonthNavigation
+                  dateFormat="dd/MM/yyyy"
+                  placeholderText={title}
+                  className={name}
+                />
+              )}
               {error[name] && (
                 <p className="alert-error">{title} is required</p>
               )}
@@ -95,14 +114,17 @@ const CreateSprint = ({
                   }
                   className="add-btn"
                 >
-                  <FontAwesomeIcon style={{ fontSize: "22px" }} icon={faPlus} />
+                  <FontAwesomeIcon
+                    style={{ fontSize: "22px" }}
+                    icon={faPlus as IconProp}
+                  />
                 </label>
               )}
             </div>
           ))}
           <button type="submit">Create Sprint</button>
         </form>
-      </ReactModal>
+      </Modal>
     </div>
   );
 };

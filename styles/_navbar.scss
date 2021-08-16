@@ -6,6 +6,7 @@
   right: 0;
   left: 0;
   z-index: 900;
+
   @include flex(row, space-between);
   .logo {
     height: 100%;
@@ -29,6 +30,9 @@
       font-size: 1.1rem;
       position: relative;
       @include flex;
+      &:hover {
+        color: $purple;
+      }
       .username {
         cursor: default;
       }
@@ -60,13 +64,14 @@
 
 .dropdown {
   position: absolute;
-  width: 200%;
+  width: 250%;
   top: 30px;
   right: 50%;
   padding: 0.5em;
   transform: translateX(30%);
   border-radius: radius(small);
   background-color: $gray;
+  animation: dropdown-in 300ms ease-in-out;
   &__item {
     transition: background 300ms ease-in-out;
     a {
@@ -78,8 +83,21 @@
       cursor: pointer;
       &:hover {
         background-color: $light-gray-purple;
+        color: $purple;
       }
     }
+  }
+}
+
+@keyframes dropdown-in {
+  from {
+    opacity: 0;
+    top: 20px;
+  }
+
+  to {
+    opacity: 1;
+    top: 30px;
   }
 }
 
@@ -128,5 +146,11 @@
     transform: translateX(20%);
     border-radius: radius(small);
     background-color: $gray;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .phone-navbar {
+    padding: 0 1.2em;
   }
 }

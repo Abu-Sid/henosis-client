@@ -6,6 +6,7 @@ import "../styles/main.scss";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import ScrollToTop from "react-scroll-to-top";
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -15,6 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <Provider store={store}>
       <Layout>
         <Component {...pageProps} />
+        <ScrollToTop smooth color='white' style={{backgroundColor:'#4a4fff', padding:'10px', fontWeight:600}} />
       </Layout>
     </Provider>
   );

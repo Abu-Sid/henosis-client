@@ -1,16 +1,15 @@
-import React, { createContext } from "react";
-import { useRouter } from "next/router";
-
-import { useSelector } from "react-redux";
-import { RootState } from "../../../redux/reducers";
-import { logout } from "../../../auth/authManager";
-import { useDispatch } from "react-redux";
-import { authUserLogout } from "../../../redux/actions/userActions";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-
+import { useRouter } from "next/router";
+import React, { createContext, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../auth/authManager";
+import { authUserLogout } from "../../../redux/actions/userActions";
+import { RootState } from "../../../redux/reducers";
+import { DropdownItem, DropdownMenu } from "./DropDown";
 import Nav from "./Nav";
 import NavItem from "./NavItem";
-import { DropdownMenu, DropdownItem } from "./DropDown";
+
 export const DropdownContext = createContext([]);
 
 export interface INav {
@@ -18,7 +17,7 @@ export interface INav {
   name?: string;
   text?: string;
   href?: string;
-  icon?: any;
+  icon?: IconProp;
   functionality?: () => void;
 }
 
@@ -30,9 +29,19 @@ export const useRoute = () => {
 const DesktopNavbar = () => {
   const dispatch = useDispatch();
   const path = useRoute();
+  const [admins, setAdmins] = useState([]);
 
   const { user } = useSelector((state: RootState) => state.userReducer);
+  console.log(user);
   const username = user?.name;
+  const email = user?.email;
+  const admin = admins.find((admin) => admin.email === email);
+
+  useEffect(() => {
+    fetch("https://intense-peak-24388.herokuapp.com/admin")
+      .then((res) => res.json())
+      .then((data) => setAdmins(data.data));
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -47,8 +56,12 @@ const DesktopNavbar = () => {
     <Nav className='desktop-navbar'>
       <NavItem name='Features' href='/features' />
       <NavItem name='Pricing' href='/pricing' />
+      {admin && <NavItem name='Admin' href='/dashboard/admins' />}
       <li className={path === "/" ? "divider-blue" : "divider-white"}></li>
-      <NavItem text={username ? username : "My account"} icon={faChevronDown}>
+      <NavItem
+        text={username ? username : "My account"}
+        icon={faChevronDown as IconProp}
+      >
         <DropdownMenu>
           {!username && <DropdownItem href='/signup'>Sign Up</DropdownItem>}
           {!username && <DropdownItem href='/signin'>Sign In</DropdownItem>}
@@ -60,6 +73,7 @@ const DesktopNavbar = () => {
           {username && (
             <DropdownItem href='/workspaces'>Existing workspaces</DropdownItem>
           )}
+          {username && <DropdownItem href='/settings'>Settings</DropdownItem>}
           {username && (
             <DropdownItem functionality={handleLogout}>Log out</DropdownItem>
           )}

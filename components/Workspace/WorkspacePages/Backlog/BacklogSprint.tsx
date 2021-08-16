@@ -1,9 +1,10 @@
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faEllipsisH, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../redux/reducers";
-import ReactModal from "../../../ReactModal/ReactModal";
+import Modal from "../../../Modal/Modal";
 import AddTaskModal from "./AddTaskModal";
 import { ITData } from "./Backlog";
 import BacklogTask from "./BacklogTask";
@@ -29,32 +30,37 @@ const BacklogSprint = ({
     <div>
       <h1>{sprintName}</h1>
       <div className="sprint-section">
-        <div className="sprint-section__top">
-          <p>
-            {new Date(startDate).toDateString()} -{" "}
-            {new Date(endDate).toDateString()}
-          </p>
-          <div>
-            <button>End Sprint</button>
-            <button className="edit-btn">
-              <FontAwesomeIcon icon={faEllipsisH} />
-            </button>
+        <div className="sprint-section__inner">
+          <div className="sprint-section__top">
+            <p>
+              {new Date(startDate).toDateString()} -{" "}
+              {new Date(endDate).toDateString()}
+            </p>
+            <div>
+              <button>End Sprint</button>
+              <button className="edit-btn">
+                <FontAwesomeIcon icon={faEllipsisH as IconProp} />
+              </button>
+            </div>
           </div>
+          <div className="sprint-section__tasks">
+            {tasks.length === 0 && <h3>No Task Added</h3>}
+            {tasks.map((task, index) => (
+              <BacklogTask key={task._id} task={task} index={index} />
+            ))}
+          </div>
+          <button onClick={() => setTaskModal(true)}>
+            <FontAwesomeIcon
+              style={{ marginRight: "5px" }}
+              icon={faPlus as IconProp}
+            />{" "}
+            Add Task
+          </button>
         </div>
-        <div className="sprint-section__tasks">
-          {tasks.length === 0 && <h3>No Task Added</h3>}
-          {tasks.map((task, index) => (
-            <BacklogTask key={task._id} task={task} index={index} />
-          ))}
-        </div>
-        <button onClick={() => setTaskModal(true)}>
-          <FontAwesomeIcon style={{ marginRight: "5px" }} icon={faPlus} /> Add
-          Task
-        </button>
       </div>
-      <ReactModal modalIsOpen={taskModal} setIsOpen={setTaskModal}>
+      <Modal modalIsOpen={taskModal} setIsOpen={setTaskModal}>
         <AddTaskModal submit={submit} setAssignedMember={setAssignedMember} />
-      </ReactModal>
+      </Modal>
     </div>
   );
 };

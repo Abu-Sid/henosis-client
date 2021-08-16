@@ -34,12 +34,12 @@ const PricingCard = ({ data, isAnnual }: IProps) => {
       <h3 className="pricing-section__main__card__price">
         {monthlyPrice
           ? "Price: " + (isAnnual ? "$" + annualPrice : "$" + monthlyPrice)
-          : "Free"}
+          : "Free (Personal Use)"}
       </h3>
       <Link
         href={
           title === "Basic"
-            ? "/workspaces"
+            ? "/new-workspace"
             : {
                 pathname: "/information",
                 query: { name: title.toLowerCase(), isAnnual },
