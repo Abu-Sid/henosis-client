@@ -1,14 +1,10 @@
+@import "./chat-header";
+
 .chat-portal {
   height: 100vh;
   width: 100%;
   padding: 10px 10px 10px 0;
   @include flex(column, flex-start, stretch);
-  &__header {
-    height: 60px;
-    width: 100%;
-    background-color: $gray;
-    border-radius: radius(large);
-  }
 
   &__body {
     padding-top: 10px;
