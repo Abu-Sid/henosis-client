@@ -6,7 +6,7 @@ import NotFound from "../../pages/404";
 import AcceptRequest from "./WorkspacePages/AcceptRequest";
 import Backlog from "./WorkspacePages/Backlog/Backlog";
 import Board from "./WorkspacePages/Board/Board";
-import Chat from "./WorkspacePages/Chat";
+import Chat from "./WorkspacePages/Chat/Chat";
 import Notification from "./WorkspacePages/Notification";
 import PersonalDashboard from "./WorkspacePages/PersonalDashboard";
 import Settings from "./WorkspacePages/Settings";

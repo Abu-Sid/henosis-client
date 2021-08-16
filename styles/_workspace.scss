@@ -1,12 +1,14 @@
 .workspace {
   font-family: $s-ff;
-  margin: 15px auto 1rem auto;
-  max-width: 95%;
-  padding-left: 92px;
+  // margin: 15px auto 1rem auto;
+  // max-width: 95%;
+  // padding-left: 92px;
+  padding-left: 100px;
 }
 
 @import "./workspace/board";
 @import "./workspace/backlog";
+@import "./workspace/chat/chat";
 
 .workspace-error {
   text-align: center;
