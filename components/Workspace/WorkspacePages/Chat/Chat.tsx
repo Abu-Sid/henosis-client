@@ -1,5 +1,5 @@
 import React from "react";
-import LoadingAnimation from "../../../ui/Animation/LoadingAnimation";
+import ChatChannel from "./ChatChannel";
 import ChatHeader from "./ChatHeader";
 
 const Chat = () => {
@@ -7,7 +7,7 @@ const Chat = () => {
     <section className='chat-portal'>
       <ChatHeader />
       <div className='chat-portal__body'>
-        <div className='channel'></div>
+        <ChatChannel />
         <div className='chat-body'></div>
         <div className='members'></div>
       </div>
