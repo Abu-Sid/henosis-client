@@ -1,7 +1,7 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../auth/authManager";
 import { authUserLogout } from "../../../redux/actions/userActions";
@@ -32,6 +32,7 @@ const DesktopNavbar = () => {
   const [admins, setAdmins] = useState([]);
 
   const { user } = useSelector((state: RootState) => state.userReducer);
+  console.log(user);
   const username = user?.name;
   const email = user?.email;
   const admin = admins.find((admin) => admin.email === email);
@@ -72,6 +73,7 @@ const DesktopNavbar = () => {
           {username && (
             <DropdownItem href='/workspaces'>Existing workspaces</DropdownItem>
           )}
+          {username && <DropdownItem href='/settings'>Settings</DropdownItem>}
           {username && (
             <DropdownItem functionality={handleLogout}>Log out</DropdownItem>
           )}

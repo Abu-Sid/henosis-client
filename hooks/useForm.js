@@ -75,9 +75,18 @@ const useForm = (defaultValue={}) => {
         setInputData(data=> ({...data, [name]: name==='image'?files[0]:value}));
     }
 
+    const handleDateChange = (date, name) => {
+        setInputData((preData) => ({ ...preData, [name]: date }));
+        if(date){
+            setError(preError => ({...preError, [name]: false}))
+        }
+        else{
+            setError(preError => ({...preError, [name]: true}))
+        }
+    };
+
     const handleFocus = useCallback(node => {
-        const required = [...node].map(item=> item.required&&item.name).filter(Boolean);
-        
+        const required = [...node].map(item=> item.required?item.name:item.className.includes('Date')&&item.className).filter(Boolean);
         const filtered = required.filter(item => {
             if (!inputData[item]) {
                 return true;
@@ -86,8 +95,9 @@ const useForm = (defaultValue={}) => {
         });
 
         if (filtered.length){
-            [...node].forEach(item=> item.name===filtered[0]&&item.focus());
+            [...node].forEach(item=> item.name===filtered[0]&&item.focus()||item.className===filtered[0]&&item.focus());
         }
+        
         return filtered;
     }, [error, inputData])
 
@@ -118,7 +128,8 @@ const useForm = (defaultValue={}) => {
         handleSubmit,
         error,
         inputData,
-        handleInvalid
+        handleInvalid,
+        handleDateChange
     }
 };
 

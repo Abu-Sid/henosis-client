@@ -1,7 +1,6 @@
-import React from "react";
-import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import Link from "next/link";
+import React from "react";
 
 interface IProps {
   icon: StaticImageData;
@@ -22,10 +21,10 @@ const SidebarItem: React.FC<IProps> = ({
     <li className={className}>
       <Link href={href === "/" ? "/" : `${pathName}/${href}`}>
         <a>
-          <Image src={icon} alt='user-icon' />
+          <Image src={icon} alt="user-icon" />
         </a>
       </Link>
-      {tooltip && <span className='tooltip'>{tooltip}</span>}
+      {tooltip && <span className="tooltip">{tooltip}</span>}
     </li>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { useSelector } from "react-redux";
 import orange from "../../../../public/images/icons/orange.svg";
 import purple from "../../../../public/images/icons/purple.svg";
@@ -9,7 +9,10 @@ interface IProps {
   task: ITask;
 }
 
-const TaskCard = ({ task }: IProps) => {
+const TaskCard = (
+  { task, ...rest }: IProps,
+  ref: React.MutableRefObject<undefined>
+) => {
   const { taskName, dueDate, assignedMember } = task;
 
   const { members } = useSelector(
@@ -17,11 +20,11 @@ const TaskCard = ({ task }: IProps) => {
   );
 
   const assignedMembers = members.filter((member) =>
-    task.assignedMember?.includes(member.email)
+    assignedMember.includes(member.email)
   );
 
   return (
-    <div className="task-card">
+    <div className="task-card" ref={ref} {...rest}>
       <div className="task-card__info">
         <h1>{taskName}</h1>
         <p>{new Date(dueDate).toDateString()}</p>
@@ -30,8 +33,9 @@ const TaskCard = ({ task }: IProps) => {
         {assignedMembers.map(({ _id, photo }, index) => (
           <div className="member-icon" key={_id}>
             <img
-              src={photo || index % 2 === 0 ? orange.src : purple.src}
+              src={photo || (index % 2 === 0 ? orange.src : purple.src)}
               alt="user-icon"
+              className="user-icon"
             />
           </div>
         ))}
@@ -40,4 +44,4 @@ const TaskCard = ({ task }: IProps) => {
   );
 };
 
-export default TaskCard;
+export default forwardRef(TaskCard);

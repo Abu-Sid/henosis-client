@@ -3,7 +3,7 @@ import React from "react";
 import NotFound from "../../pages/404";
 import Backlog from "./WorkspacePages/Backlog/Backlog";
 import Board from "./WorkspacePages/Board/Board";
-import Chat from "./WorkspacePages/Chat";
+import Chat from "./WorkspacePages/Chat/Chat";
 import Notification from "./WorkspacePages/Notification";
 import PersonalDashboard from "./WorkspacePages/PersonalDashboard";
 import Settings from "./WorkspacePages/Settings";
@@ -24,8 +24,6 @@ const WorkspaceRoute = () => {
       return <Notification />;
     case "settings":
       return <Settings />;
-    case "personal-dashboard":
-      return <PersonalDashboard />;
     default:
       return <NotFound />;
   }

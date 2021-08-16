@@ -3,8 +3,6 @@ import React from "react";
 const BusinessIcon = () => {
   return (
     <svg
-      width="320"
-      height="320"
       viewBox="0 0 277 254"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

@@ -1,0 +1,23 @@
+@import "./chat-header";
+@import "./chat-channel";
+
+.chat-portal {
+  height: 100vh;
+  width: 100%;
+  padding: 10px 10px 10px 0;
+  @include flex(column, flex-start, stretch);
+
+  &__body {
+    padding-top: 10px;
+    height: 100%;
+    @include flex;
+    .chat-body {
+      @extend .chat-channel;
+      margin: 0 10px;
+      width: 60%;
+    }
+    .members {
+      @extend .chat-channel;
+    }
+  }
+}
