@@ -28,7 +28,12 @@ const ChatHeader: React.FC = () => {
           <label htmlFor='search'>
             <Image src={Search} alt='search-icon' />
           </label>
-          <input type='text' name='search' id='search' />
+          <input
+            type='text'
+            name='search'
+            id='search'
+            placeholder='search...'
+          />
         </div>
       </div>
     </div>
