@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Tag from "../../../../public/images/icons/tag.svg";
 import Bell from "../../../../public/images/icons/bell.svg";
+import Search from "../../../../public/images/icons/search.svg";
 
 const ChatHeader: React.FC = () => {
   return (
@@ -22,7 +23,14 @@ const ChatHeader: React.FC = () => {
           <Image src={Tag} alt='tag-icon' />
         </div>
       </div>
-      <div className='search-container'></div>
+      <div className='search-container'>
+        <div className='search-box'>
+          <label htmlFor='search'>
+            <Image src={Search} alt='search-icon' />
+          </label>
+          <input type='text' name='search' id='search' />
+        </div>
+      </div>
     </div>
   );
 };
