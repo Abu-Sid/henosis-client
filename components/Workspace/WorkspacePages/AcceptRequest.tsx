@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
 import { IUser } from "../../../auth/authManager";
@@ -24,8 +24,6 @@ const AcceptRequest = ({ socket }: IProps) => {
   const { members, _id } = useSelector(
     (state: RootState) => state.workspaceReducer.workspace
   );
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (query.email) {
@@ -51,12 +49,6 @@ const AcceptRequest = ({ socket }: IProps) => {
       replace("/");
     }
   }, [query, replace, socket, members]);
-
-  useEffect(() => {
-    if (socket !== null) {
-      socket.emit("join-workspace", _id);
-    }
-  }, [socket, _id]);
 
   useEffect(() => {
     if (socket !== null) {

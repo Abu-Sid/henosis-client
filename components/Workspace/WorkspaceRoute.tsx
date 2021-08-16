@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
 import NotFound from "../../pages/404";
@@ -16,13 +16,19 @@ interface IProps {
 }
 
 const WorkspaceRoute = ({ socket }: IProps) => {
-  const [, path] = useRouter().query.paths;
+  const [id, path] = useRouter().query.paths;
+
+  useEffect(() => {
+    if (socket !== null) {
+      socket.emit("join-workspace", id);
+    }
+  }, [socket, id]);
 
   switch (path) {
     case undefined:
       return <PersonalDashboard />;
     case "board":
-      return <Board />;
+      return <Board workspaceSocket={socket} />;
     case "backlog":
       return <Backlog />;
     case "chat":

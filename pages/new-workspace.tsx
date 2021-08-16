@@ -35,6 +35,7 @@ const Workspace = () => {
         ...data,
         type: "Personal",
         members: [{ ...user, isCreator: true }],
+        previousMails: [] as string[],
       };
       socket.emit("create-workspace", workspace);
     }

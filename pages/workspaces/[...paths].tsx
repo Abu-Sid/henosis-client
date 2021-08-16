@@ -89,29 +89,42 @@ const Workspace = () => {
     if (socket !== null) {
       socket.on(
         "mail-sended",
-        ({ message, isSended }: { message: string; isSended: boolean }) => {
+        ({
+          message,
+          isSended,
+          isRedirect,
+        }: {
+          message: string;
+          isSended: boolean;
+          isRedirect: boolean;
+        }) => {
           toast.dismiss(toastId);
           if (isSended) {
             toast.success(message);
           } else {
             toast.error(message);
           }
+          if (isRedirect) {
+            replace("/");
+          }
         }
       );
     }
-  }, [socket]);
+  }, [socket, replace]);
 
   const handleSendEmail = ({
     creatorEmail,
     workspaceName,
     id,
   }: RequestData) => {
+    const origin = window.location.origin;
     socket.emit("send-access-email", {
       email,
       name,
       toEmail: creatorEmail,
       workspaceName,
       id,
+      origin,
     });
     toastId = toast.loading("Loading...");
   };
