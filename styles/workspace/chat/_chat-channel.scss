@@ -1,0 +1,50 @@
+.chat-channel {
+  background-color: $gray;
+  width: 20%;
+  height: 100%;
+  padding: 10px;
+  border-radius: radius(large);
+  @include flex(column, flex-start, center);
+  &__text {
+    width: 100%;
+    height: 100%;
+  }
+  &__text-header {
+    @include flex(row, space-between, center);
+    h1 {
+      @include writing-style($dark-blue, semi-large, thin);
+    }
+    button {
+      height: 20px;
+      width: 20px;
+      border: none;
+      outline: none;
+      border-radius: radius(small);
+      color: $dark-blue;
+      cursor: pointer;
+      background-color: $light-gray-purple;
+      transition: all 300ms ease-in-out;
+      &:hover {
+        background-color: $purple;
+        color: $white;
+      }
+    }
+  }
+  &__options {
+    background-color: $light-gray-purple;
+    width: 100%;
+    height: 80px;
+    padding: 0 10px;
+    border-radius: radius(medium);
+    @include flex(row, flex-end, center);
+    .options-icon {
+      transform: translateY(2px);
+      padding-left: 5px;
+      cursor: pointer;
+    }
+    .options-user-pp {
+      margin-right: auto;
+      cursor: pointer;
+    }
+  }
+}
