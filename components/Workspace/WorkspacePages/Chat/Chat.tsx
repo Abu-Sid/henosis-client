@@ -8,7 +8,12 @@ const Chat = () => {
       <ChatHeader />
       <div className='chat-portal__body'>
         <div className='channel'>
-          <div className='channel__text'></div>
+          <div className='channel__text'>
+            <div className='channel__text-header'>
+              <h1>Text Channels</h1>
+              <button>+</button>
+            </div>
+          </div>
           <div className='channel__options'></div>
         </div>
         <div className='chat-body'></div>
