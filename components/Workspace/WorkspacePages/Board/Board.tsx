@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { DropResult } from "react-beautiful-dnd";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import { Socket } from "socket.io-client";
+import { DefaultEventsMap } from "socket.io-client/build/typed-events";
 import { IUser } from "../../../../auth/authManager";
 import useSocket from "../../../../hooks/useSocket";
 import {
@@ -20,13 +22,21 @@ import BoardHeader from "./BoardHeader";
 import BoardMain from "./BoardMain";
 import BoardMembers from "./BoardMembers";
 
+interface IProps {
+  workspaceSocket: Socket<DefaultEventsMap, DefaultEventsMap>;
+}
+
 let toastId: string;
 
-const Board = () => {
+const Board = ({ workspaceSocket }: IProps) => {
   const socket = useSocket("/sprint");
 
   const { workspace } = useSelector(
     (state: RootState) => state.workspaceReducer
+  );
+
+  const { email, name } = useSelector(
+    (state: RootState) => state.userReducer.user
   );
 
   const { loading, sprint } = useSelector(
@@ -35,7 +45,7 @@ const Board = () => {
 
   const { tasks } = sprint;
 
-  const { _id, members } = workspace;
+  const { _id, workspaceName, previousMails } = workspace;
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -63,15 +73,29 @@ const Board = () => {
     }
   }, [socket, _id, dispatch]);
 
+  useEffect(() => {
+    if (workspaceSocket !== null) {
+      workspaceSocket.on("mail-sended", () => {
+        toast.dismiss(toastId);
+      });
+    }
+  }, [workspaceSocket]);
+
   const handleAddMember = (data: any) => {
-    const newMembers = Object.values(data).map((email: string) => ({
-      email,
-      name: email.split("@")[0],
-      photo: "",
-      emailVerified: true,
-    }));
-    if (socket !== null) {
-      socket.emit("add-member", _id, [...members, ...newMembers]);
+    const newMembers = Object.values(data).join(", ");
+
+    if (workspaceSocket !== null) {
+      const origin = window.location.origin;
+      workspaceSocket.emit("send-access-email", {
+        email,
+        name,
+        toEmail: newMembers,
+        workspaceName,
+        id: _id,
+        path: "accept-request",
+        origin,
+        previousMails,
+      });
       toastId = toast.loading("Loading...");
       setIsOpen(false);
     }
