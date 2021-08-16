@@ -1,9 +1,7 @@
-import React, { useContext } from "react";
-import Link from "next/link";
-import { useRoute } from "./Navbar";
-import { DropdownContext } from "./Navbar";
-import { INav } from "./Navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
+import React, { useContext } from "react";
+import { DropdownContext, INav, useRoute } from "./Navbar";
 
 const NavItem: React.FC<INav> = ({ children, href, name, text, icon }) => {
   const path = useRoute();
@@ -24,7 +22,7 @@ const NavItem: React.FC<INav> = ({ children, href, name, text, icon }) => {
           onClick={() => setOpen(!open)}
         >
           <p>{text}</p>
-          <FontAwesomeIcon className='toggle-icon' icon={icon} />
+          <FontAwesomeIcon className="toggle-icon" icon={icon} />
         </button>
       )}
       {open && children}

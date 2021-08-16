@@ -1,8 +1,9 @@
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
 interface IFeature {
   feature: {
@@ -48,10 +49,13 @@ const FeatureSubSection: React.FC<IFeature> = ({ feature }) => {
         <h1>{featureHeader}</h1>
         <p>{details}</p>
         <div>
-          <Link href='/features'>
+          <Link href="/features">
             <a>
               Read More
-              <FontAwesomeIcon className='read-more-icon' icon={faArrowRight} />
+              <FontAwesomeIcon
+                className="read-more-icon"
+                icon={faArrowRight as IconProp}
+              />
             </a>
           </Link>
         </div>

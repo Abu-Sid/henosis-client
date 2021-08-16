@@ -3,7 +3,7 @@ const PersonalDashboard = () => {
   return (
     <div>
       <h1>Welcome to Henosis Workspace</h1>
-      <h3>Lets drive into it</h3>
+      <h3>Lets drive into git</h3>
       <br />
       <br />
       <br />

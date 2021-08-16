@@ -11,7 +11,7 @@ const useForm = (defaultValue={}) => {
 
         const handleError = (isError, provider) => setError(preError => ({...preError, [provider||name]: isError}));
 
-        if (required&&name==='email'||required&&name==='companyEmail') {
+        if (required&&name.includes('email')||required&&name==='companyEmail') {
             const isValid = /\S+@\S+\.\S+/.test(value);
             if (isValid) {
                 handleError(false);
@@ -75,9 +75,18 @@ const useForm = (defaultValue={}) => {
         setInputData(data=> ({...data, [name]: name==='image'?files[0]:value}));
     }
 
+    const handleDateChange = (date, name) => {
+        setInputData((preData) => ({ ...preData, [name]: date }));
+        if(date){
+            setError(preError => ({...preError, [name]: false}))
+        }
+        else{
+            setError(preError => ({...preError, [name]: true}))
+        }
+    };
+
     const handleFocus = useCallback(node => {
-        const required = [...node].map(item=> item.required&&item.name).filter(Boolean);
-        
+        const required = [...node].map(item=> item.required?item.name:item.className.includes('Date')&&item.className).filter(Boolean);
         const filtered = required.filter(item => {
             if (!inputData[item]) {
                 return true;
@@ -86,15 +95,16 @@ const useForm = (defaultValue={}) => {
         });
 
         if (filtered.length){
-            [...node].forEach(item=> item.name===filtered[0]&&item.focus());
+            [...node].forEach(item=> item.name===filtered[0]&&item.focus()||item.className===filtered[0]&&item.focus());
         }
+        
         return filtered;
     }, [error, inputData])
 
     const handleInvalid = e => {
         e.preventDefault();
         const node = e.target.parentNode;
-        handleFocus(node.tagName==="FORM"?node:node.parentNode);
+        handleFocus(node.tagName==="FORM"?node:node.parentNode.tagName==="FORM"?node.parentNode:node.parentNode.parentNode);
         const { name } = e.target;
         if (!inputData[name]) {
             setError(preError => ({...preError, [name]: true}));
@@ -118,7 +128,8 @@ const useForm = (defaultValue={}) => {
         handleSubmit,
         error,
         inputData,
-        handleInvalid
+        handleInvalid,
+        handleDateChange
     }
 };
 

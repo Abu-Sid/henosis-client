@@ -1,0 +1,60 @@
+.general-form {
+  background-color: $gray;
+  border-radius: radius(large);
+  padding: 40px;
+  width: 500px;
+  &__header {
+    text-align: center;
+    margin-bottom: 20px;
+    @include writing-style($dark-blue, extra-large, regular);
+  }
+  &__input-field {
+    @include flex(column, center, flex-start);
+    margin-top: 20px;
+    label {
+      margin-bottom: 10px;
+      color: $dark-blue;
+    }
+    input {
+      background-color: $light-gray-purple;
+      height: 40px;
+      width: 100%;
+      border: none;
+      outline: none;
+      padding: 0 10px;
+      border-radius: radius(small);
+      @include writing-style($dark-blue, medium, thin);
+    }
+    textarea {
+      background-color: $light-gray-purple;
+      width: 100%;
+      border: none;
+      outline: none;
+      border-radius: radius(small);
+      resize: vertical;
+      padding: 10px;
+      font-family: $s-ff;
+      @include writing-style($dark-blue, medium, thin);
+    }
+    input[type="submit"] {
+      background-color: $purple;
+      color: $white;
+      cursor: pointer;
+      transition: all 200ms ease-in-out;
+      &:hover {
+        background-color: $gray-purple;
+      }
+    }
+  }
+}
+
+.button-p {
+  font-size: 1rem;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  background-color: $purple;
+  color: white;
+  display: block;
+  border: none;
+  outline: none;
+}

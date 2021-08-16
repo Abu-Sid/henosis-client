@@ -45,17 +45,16 @@
   }
   &__members {
     @include flex;
-    button {
-      background-color: transparent;
-      height: 35px;
-      width: 35px;
-      outline: none;
-      border: $gray-purple 1px solid;
-      border-radius: 50%;
-    }
     div {
       margin-left: 10px;
     }
+  }
+
+  .user-icon {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
   }
 
   .status-board-container {
@@ -81,6 +80,7 @@
     background-color: $light-gray-purple;
     border-radius: radius(medium);
     padding: 10px;
+    margin-bottom: 10px;
     &__info {
       h1 {
         @include writing-style($dark-blue, semi-large, medium);
@@ -97,6 +97,16 @@
         margin-left: 5px;
       }
     }
+  }
+}
+
+.board-error {
+  text-align: center;
+  h1 {
+    font-size: 1.5rem;
+  }
+  button {
+    @include button;
   }
 }
 

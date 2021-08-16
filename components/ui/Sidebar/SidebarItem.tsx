@@ -1,26 +1,30 @@
-import React from "react";
-import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import Link from "next/link";
+import React from "react";
 
 interface IProps {
   icon: StaticImageData;
   className?: string;
   href?: string;
   tooltip?: string;
+  pathName?: string;
 }
 
-const SidebarItem: React.FC<IProps> = ({ icon, className, href, tooltip }) => {
-  const router = useRouter();
-  const path = router.query.paths?.[0];
+const SidebarItem: React.FC<IProps> = ({
+  icon,
+  className,
+  href,
+  tooltip,
+  pathName,
+}) => {
   return (
     <li className={className}>
-      <Link href={href === "/" ? "/" : `${path}/${href}`}>
+      <Link href={href === "/" ? "/" : `${pathName}/${href}`}>
         <a>
-          <Image src={icon} alt='user-icon' />
+          <Image src={icon} alt="user-icon" />
         </a>
       </Link>
-      {tooltip && <span className='tooltip'>{tooltip}</span>}
+      {tooltip && <span className="tooltip">{tooltip}</span>}
     </li>
   );
 };

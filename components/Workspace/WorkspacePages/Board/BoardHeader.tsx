@@ -1,3 +1,6 @@
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../redux/reducers";
@@ -7,7 +10,12 @@ const BoardHeader = () => {
     (state: RootState) => state.workspaceReducer
   );
 
+  const { sprintName, goals, startDate, endDate } = useSelector(
+    (state: RootState) => state.sprintReducer.sprint
+  );
+
   const { workspaceName } = workspace;
+
   return (
     <div>
       <div className="board-section__indicator">
@@ -18,18 +26,25 @@ const BoardHeader = () => {
       <div className="board-section__header">
         <div className="board-section__objective">
           <h1>
-            <span>{workspaceName}</span> / Sprint 1 objective
+            <span>{workspaceName}</span> / {sprintName}
           </h1>
           <ol>
-            <li>Getting started with project.</li>
-            <li>Setting up initials.</li>
-            <li>Designing the homepage.</li>
+            {goals.map((goal, index) => (
+              <li key={index}>
+                {index + 1}. {goal}
+              </li>
+            ))}
           </ol>
         </div>
         <div className="board-section__actions">
-          <p>Starts from 18 Jul, Ends in 25 Jul</p>
-          <button className="button-primary">End Scrum</button>
-          <button className="button-secondary">...</button>
+          <p>
+            {new Date(startDate).toDateString()} -{" "}
+            {new Date(endDate).toDateString()}
+          </p>
+          <button className="button-primary">End Sprint</button>
+          <button className="button-secondary">
+            <FontAwesomeIcon icon={faEllipsisH as IconProp} />
+          </button>
         </div>
       </div>
     </div>
