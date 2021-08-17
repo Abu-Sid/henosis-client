@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 import useSocket from "../../../../hooks/useSocket";
 import {
   addTask,
@@ -73,7 +74,19 @@ const Backlog = () => {
       socket.emit("add-task", sprint._id, newTasks, {
         name,
         email,
-        isUpdate: true,
+        isUpdate: "Updated",
+      });
+      toastId = toast.loading("Loading...");
+    }
+  };
+
+  const handleTaskDelete = (_id: string) => {
+    const newTasks = sprint.tasks.filter((task) => task._id !== _id);
+    if (socket !== null) {
+      socket.emit("add-task", sprint._id, newTasks, {
+        name,
+        email,
+        isUpdate: "Deleted",
       });
       toastId = toast.loading("Loading...");
     }
@@ -98,18 +111,19 @@ const Backlog = () => {
 
       socket.on(
         "added-task",
-        (tasks, user: { name: string; email: string; isUpdate: boolean }) => {
+        (tasks, user: { name: string; email: string; isUpdate?: string }) => {
           if (user) {
             toast.dismiss(toastId);
             setTaskModal(false);
             if (user.email === email) {
               toast.success(
-                `Your Task ${user.isUpdate ? "Updated" : "Added"} Successfully!`
+                `Your Task ${user.isUpdate || "Added"} Successfully!`
               );
+              if (user.isUpdate === "Deleted") {
+                Swal.fire("Deleted!", "Your task has been deleted.", "success");
+              }
             } else {
-              toast.success(
-                `${user.name} ${user.isUpdate ? "Updated" : "Added"} A Task!`
-              );
+              toast.success(`${user.name} ${user.isUpdate || "Added"} A Task!`);
             }
           }
           dispatch(addTask(tasks));
@@ -178,6 +192,7 @@ const Backlog = () => {
           setAssignedMember={setAssignedMember}
           handleUpdateTask={handleUpdateTask}
           setMember={setMember}
+          handleTaskDelete={handleTaskDelete}
         />
       ) : (
         <h1

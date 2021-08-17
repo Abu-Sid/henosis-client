@@ -18,6 +18,7 @@ interface IProps {
   submit: (data: ITData) => void;
   handleUpdateTask: (data: ITask) => void;
   setMember: React.Dispatch<React.SetStateAction<string[]>>;
+  handleTaskDelete: (_id: string) => void;
 }
 
 const BacklogSprint = ({
@@ -27,6 +28,7 @@ const BacklogSprint = ({
   submit,
   handleUpdateTask,
   setMember,
+  handleTaskDelete,
 }: IProps) => {
   const { sprint } = useSelector((state: RootState) => state.sprintReducer);
 
@@ -66,6 +68,7 @@ const BacklogSprint = ({
                 task={task}
                 index={index}
                 setTaskModal={setTaskModal}
+                handleTaskDelete={handleTaskDelete}
               />
             ))}
           </div>
