@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import TableRow from "../../components/Dashboard/TableRow";
-import SideBar from "../../components/Dashboard/SideBar";
+import UsersRow from "../../components/Dashboard/UsersRow";
 import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation";
 import AdminSidebar from "../../components/ui/AdminSidebar/AdminSidebar";
 
@@ -44,7 +43,7 @@ const All_signup_users = () => {
             ) : (
               <tbody>
                 {userInfo.map((info, index) => (
-                  <TableRow key={info._id} info={info} index={index} />
+                  <UsersRow key={info._id} info={info} index={index} />
                 ))}
               </tbody>
             )}

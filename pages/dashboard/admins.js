@@ -10,7 +10,7 @@ import AdminSidebar from "../../components/ui/AdminSidebar/AdminSidebar";
 const Admins = () => {
   const [adminInfo, setAdminInfo] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log(loading);
+  // console.log(loading);
   useEffect(() => {
     fetch("https://intense-peak-24388.herokuapp.com/admin")
       .then((res) => res.json())
@@ -41,36 +41,37 @@ const Admins = () => {
       });
       e.target.reset();
       setOpen(false);
+      // window.location.reload()
     }
   };
 
   return (
-    <section className='d-container'>
-      <div className='d-row'>
-        <div className='col-left'>
+    <section className="d-container">
+      <div className="d-row">
+        <div className="col-left">
           <AdminSidebar />
         </div>
-        <div className='col-right'>
-          <div className='right-division'>
+        <div className="col-right">
+          <div className="right-division">
             <h2>Admins</h2>
-            <button className='admin-button' onClick={onOpenModal}>
+            <button className="admin-button" onClick={onOpenModal}>
               Add New Admin
             </button>
-            <Modal open={open} onClose={onCloseModal} center id='modal'>
-              <div className='admin-info'>
+            <Modal open={open} onClose={onCloseModal} center id="modal">
+              <div className="admin-info">
                 <h2>Admin Information</h2>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <label>Admin Name</label>
-                  <input {...register("name")} type='text' required />
+                  <input {...register("name")} type="text" required />
                   <label>Email</label>
-                  <input {...register("email")} type='email' required />
+                  <input {...register("email")} type="email" required />
                   <label>Role</label>
-                  <select {...register("role")} type='text'>
-                    <option value='admin'>Admin</option>
-                    <option value='editor'>Editor</option>
-                    <option value='other'>other</option>
+                  <select {...register("role")} type="text">
+                    <option value="admin">Admin</option>
+                    <option value="editor">Editor</option>
+                    <option value="other">other</option>
                   </select>
-                  <input type='submit' value='Add Admin' className='button' />
+                  <input type="submit" value="Add Admin" className="button" />
                 </form>
               </div>
             </Modal>
@@ -82,6 +83,7 @@ const Admins = () => {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Role</th>
+                <th>Action</th>
               </tr>
             </thead>
             {loading ? (
