@@ -56,6 +56,29 @@ const Backlog = () => {
 
   const [assignedMember, setAssignedMember] = useState<string[]>([]);
 
+  const [selectMember, setMember] = useState<string[]>([]);
+
+  const handleUpdateTask = ({ _id, ...rest }: ITask) => {
+    const updateAble = sprint.tasks.find((task) => task._id === _id);
+    const index = sprint.tasks.findIndex((task) => task._id === _id);
+    const newTasks = [...sprint.tasks];
+    newTasks[index] = {
+      ...updateAble,
+      ...rest,
+      assignedMember: selectMember.length
+        ? selectMember
+        : updateAble.assignedMember,
+    };
+    if (socket !== null) {
+      socket.emit("add-task", sprint._id, newTasks, {
+        name,
+        email,
+        isUpdate: true,
+      });
+      toastId = toast.loading("Loading...");
+    }
+  };
+
   useEffect(() => {
     if (socket !== null) {
       socket.emit("join-sprint", _id);
@@ -75,14 +98,18 @@ const Backlog = () => {
 
       socket.on(
         "added-task",
-        (tasks, user: { name: string; email: string }) => {
+        (tasks, user: { name: string; email: string; isUpdate: boolean }) => {
           if (user) {
             toast.dismiss(toastId);
             setTaskModal(false);
             if (user.email === email) {
-              toast.success("Your Task Added Successfully!");
+              toast.success(
+                `Your Task ${user.isUpdate ? "Updated" : "Added"} Successfully!`
+              );
             } else {
-              toast.success(`${user.name} Added A Task!`);
+              toast.success(
+                `${user.name} ${user.isUpdate ? "Updated" : "Added"} A Task!`
+              );
             }
           }
           dispatch(addTask(tasks));
@@ -149,6 +176,8 @@ const Backlog = () => {
           setTaskModal={setTaskModal}
           submit={handleSubmit}
           setAssignedMember={setAssignedMember}
+          handleUpdateTask={handleUpdateTask}
+          setMember={setMember}
         />
       ) : (
         <h1

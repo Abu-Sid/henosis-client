@@ -25,20 +25,20 @@ const PhoneNavbar = () => {
   };
 
   return (
-    <Nav className='phone-navbar'>
+    <Nav className="phone-navbar">
       <NavItem icon={faBars as IconProp}>
         <DropdownMenu width={250}>
-          <DropdownItem href='/features'>Features</DropdownItem>
-          <DropdownItem href='/pricing'>Pricing</DropdownItem>
-          {!username && <DropdownItem href='/signup'>Sign Up</DropdownItem>}
-          {!username && <DropdownItem href='/signin'>Sign In</DropdownItem>}
+          <DropdownItem href="/features">Features</DropdownItem>
+          <DropdownItem href="/pricing">Pricing</DropdownItem>
+          {!username && <DropdownItem href="/signup">Sign Up</DropdownItem>}
+          {!username && <DropdownItem href="/signin">Sign In</DropdownItem>}
           {username && (
-            <DropdownItem href='/new-workspace'>
+            <DropdownItem href="/new-workspace">
               Create new workspace
             </DropdownItem>
           )}
           {username && (
-            <DropdownItem href='/workspaces'>Existing workspaces</DropdownItem>
+            <DropdownItem href="/workspaces">Existing workspaces</DropdownItem>
           )}
           {username && (
             <DropdownItem functionality={handleLogout}>Log out</DropdownItem>
