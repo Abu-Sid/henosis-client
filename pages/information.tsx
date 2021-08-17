@@ -35,6 +35,7 @@ const Information = () => {
       ...data,
       type: "Business",
       members: [{ ...user, isCreator: true }],
+      previousMails: [] as string[],
     };
     setWorkspaceData(workspace);
   };

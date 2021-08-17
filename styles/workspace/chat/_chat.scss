@@ -1,4 +1,5 @@
 @import "./chat-header";
+@import "./chat-channel";
 
 .chat-portal {
   height: 100vh;
@@ -10,19 +11,21 @@
     padding-top: 10px;
     height: 100%;
     @include flex;
-    .channel {
-      background-color: $gray;
-      width: 20%;
-      height: 100%;
-      border-radius: radius(large);
-    }
     .chat-body {
-      @extend .channel;
+      @extend .chat-channel;
       margin: 0 10px;
       width: 60%;
     }
     .members {
-      @extend .channel;
+      @extend .chat-channel;
+      @include flex(column, flex-start, flex-start);
+      &__online {
+        background-color: red;
+        width: 100%;
+      }
+      &__offline {
+        @extend .members__online;
+      }
     }
   }
 }

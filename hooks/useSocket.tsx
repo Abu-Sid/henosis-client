@@ -7,7 +7,7 @@ const useSocket = (path: string) => {
     useState<Socket<DefaultEventsMap, DefaultEventsMap>>(null);
 
   useEffect(() => {
-    const socketIo = io(`https://intense-peak-24388.herokuapp.com${path}`);
+    const socketIo = io(`https://henosis-server.herokuapp.com${path}`);
     setSocket(socketIo);
 
     return () => {
