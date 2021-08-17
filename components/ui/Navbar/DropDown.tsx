@@ -5,19 +5,28 @@ import { DropdownContext, INav } from "./Navbar";
 
 interface IDropdown {
   width: number;
+  setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const DropdownMenu = ({ children, width }) => {
+export const DropdownMenu: React.FC<IDropdown> = ({
+  children,
+  width,
+  setIsOpen,
+}) => {
   const [open, setOpen] = useContext(DropdownContext);
 
   const closeDropdown = () => {
-    setOpen(!open);
+    if (setIsOpen === undefined) {
+      setOpen(!open);
+    } else {
+      setIsOpen((preValue) => !preValue);
+    }
   };
 
   const ref = useDetectClickOutside({ onTriggered: closeDropdown });
   return (
     <div ref={ref}>
-      <div style={{ width: `${width}px` }} className='dropdown'>
+      <div style={{ width: `${width}px` }} className="dropdown">
         {children}
       </div>
     </div>
@@ -35,7 +44,7 @@ export const DropdownItem: React.FC<INav> = ({
     functionality();
   };
   return (
-    <div className='dropdown__item'>
+    <div className="dropdown__item">
       {!href && <a onClick={handleClick}>{children}</a>}
       {href && (
         <Link href={href}>

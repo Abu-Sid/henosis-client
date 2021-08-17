@@ -1,8 +1,10 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faEllipsisH, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addTask } from "../../../../redux/actions/sprintActions";
+import { ITask } from "../../../../redux/actions/sprintActions/actionInterface";
 import { RootState } from "../../../../redux/reducers";
 import Modal from "../../../Modal/Modal";
 import AddTaskModal from "./AddTaskModal";
@@ -14,6 +16,8 @@ interface IProps {
   setTaskModal: React.Dispatch<React.SetStateAction<boolean>>;
   setAssignedMember: React.Dispatch<React.SetStateAction<string[]>>;
   submit: (data: ITData) => void;
+  handleUpdateTask: (data: ITask) => void;
+  setMember: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const BacklogSprint = ({
@@ -21,10 +25,20 @@ const BacklogSprint = ({
   setTaskModal,
   setAssignedMember,
   submit,
+  handleUpdateTask,
+  setMember,
 }: IProps) => {
   const { sprint } = useSelector((state: RootState) => state.sprintReducer);
 
   const { sprintName, startDate, endDate, tasks } = sprint;
+
+  const [updateTask, setUpdateTask] = useState<ITask>(null as ITask);
+
+  useEffect(() => {
+    if (!taskModal) {
+      setUpdateTask(null as ITask);
+    }
+  }, [taskModal]);
 
   return (
     <div>
@@ -46,7 +60,13 @@ const BacklogSprint = ({
           <div className="sprint-section__tasks">
             {tasks.length === 0 && <h3>No Task Added</h3>}
             {tasks.map((task, index) => (
-              <BacklogTask key={task._id} task={task} index={index} />
+              <BacklogTask
+                setUpdateTask={setUpdateTask}
+                key={task._id}
+                task={task}
+                index={index}
+                setTaskModal={setTaskModal}
+              />
             ))}
           </div>
           <button onClick={() => setTaskModal(true)}>
@@ -59,7 +79,15 @@ const BacklogSprint = ({
         </div>
       </div>
       <Modal modalIsOpen={taskModal} setIsOpen={setTaskModal}>
-        <AddTaskModal submit={submit} setAssignedMember={setAssignedMember} />
+        {updateTask ? (
+          <AddTaskModal
+            submit={handleUpdateTask}
+            setAssignedMember={setMember}
+            updateTask={updateTask}
+          />
+        ) : (
+          <AddTaskModal submit={submit} setAssignedMember={setAssignedMember} />
+        )}
       </Modal>
     </div>
   );
