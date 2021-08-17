@@ -53,10 +53,10 @@ const DesktopNavbar = () => {
   };
 
   return (
-    <Nav className='desktop-navbar'>
-      <NavItem name='Features' href='/features' />
-      <NavItem name='Pricing' href='/pricing' />
-      {admin && <NavItem name='Admin' href='/dashboard/admins' />}
+    <Nav className="desktop-navbar">
+      <NavItem name="Features" href="/features" />
+      <NavItem name="Pricing" href="/pricing" />
+      {admin && <NavItem name="Admin" href="/dashboard/admins" />}
       <li className={path === "/" ? "divider-blue" : "divider-white"}></li>
       <NavItem
         text={username ? username : "My account"}
@@ -64,17 +64,17 @@ const DesktopNavbar = () => {
         // icon={FaChevronDown}
       >
         <DropdownMenu width={250}>
-          {!username && <DropdownItem href='/signup'>Sign Up</DropdownItem>}
-          {!username && <DropdownItem href='/signin'>Sign In</DropdownItem>}
+          {!username && <DropdownItem href="/signup">Sign Up</DropdownItem>}
+          {!username && <DropdownItem href="/signin">Sign In</DropdownItem>}
           {username && (
-            <DropdownItem href='/new-workspace'>
+            <DropdownItem href="/new-workspace">
               Create new workspace
             </DropdownItem>
           )}
           {username && (
-            <DropdownItem href='/workspaces'>Existing workspaces</DropdownItem>
+            <DropdownItem href="/workspaces">Existing workspaces</DropdownItem>
           )}
-          {username && <DropdownItem href='/settings'>Settings</DropdownItem>}
+          {username && <DropdownItem href="/settings">Settings</DropdownItem>}
           {username && (
             <DropdownItem functionality={handleLogout}>Log out</DropdownItem>
           )}
