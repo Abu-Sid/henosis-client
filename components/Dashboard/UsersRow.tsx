@@ -1,6 +1,10 @@
 import React from "react";
 
-const UsersRow = (props) => {
+interface IProps {
+  info: { name: String; email: String; role: String };
+  index: number;
+}
+const UsersRow = (props: IProps) => {
   const { name, email, role = "User" } = props.info;
   const index = props.index;
   return (

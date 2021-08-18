@@ -15,6 +15,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/dashboard/index.js", "pages/dashboard/all_signup_users.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/dashboard/index.tsx", "pages/dashboard/all_signup_users.tsx"],
   "exclude": ["node_modules"]
 }

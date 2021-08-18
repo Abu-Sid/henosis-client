@@ -1,10 +1,15 @@
 import React from "react";
 import { MdDeleteForever } from "react-icons/md";
+interface IProps {
+  info: { _id: Number; name: String; email: String; role: String };
+  index: number;
+}
 
-const TableRow = (props) => {
+const AdminRow = (props: IProps) => {
   const { _id, name, email, role } = props.info;
   const index = props.index;
-  const handleDelete = (id) => {
+
+  const handleDelete = (id: Number) => {
     fetch(`https://intense-peak-24388.herokuapp.com/admin/${id}`, {
       method: "DELETE",
       headers: {
@@ -41,4 +46,4 @@ const TableRow = (props) => {
   );
 };
 
-export default TableRow;
+export default AdminRow;

@@ -3,10 +3,18 @@ import UsersRow from "../../components/Dashboard/UsersRow";
 import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation";
 import AdminSidebar from "../../components/ui/AdminSidebar/AdminSidebar";
 
+interface UserType {
+  name: String;
+  email: String;
+  role: String;
+  _id: number;
+}
+
 const All_signup_users = () => {
-  const [userInfo, setUserInfo] = useState([]);
+  const [userInfo, setUserInfo] = useState<UserType[]>([]);
   const [loading, setLoading] = useState(true);
-  console.log(userInfo);
+  // console.log(userInfo);
+
   useEffect(() => {
     fetch("https://intense-peak-24388.herokuapp.com/user")
       .then((res) => res.json())
@@ -20,12 +28,12 @@ const All_signup_users = () => {
   }, [userInfo]);
 
   return (
-    <section className='d-container'>
-      <div className='d-row'>
-        <div className='col-left'>
+    <section className="d-container">
+      <div className="d-row">
+        <div className="col-left">
           <AdminSidebar />
         </div>
-        <div className='col-right'>
+        <div className="col-right">
           <div style={{ textAlign: "center" }}>
             <h2>All Signup Users</h2>
           </div>
