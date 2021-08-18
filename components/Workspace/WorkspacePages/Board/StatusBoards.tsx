@@ -1,12 +1,14 @@
 import React, { forwardRef } from "react";
+import { HiOutlinePlus } from "react-icons/hi";
 
 interface IProps {
   statusName: string;
   children: React.ReactNode;
+  handleAddTask: (status: string) => void;
 }
 
 const StatusBoards = (
-  { statusName, children, ...rest }: IProps,
+  { statusName, children, handleAddTask, ...rest }: IProps,
   ref: React.MutableRefObject<undefined>
 ) => {
   let color: string;
@@ -22,6 +24,9 @@ const StatusBoards = (
     <div className="status-board" ref={ref} {...rest}>
       <p className={`status-board__indicator ${color}`}>{statusName}</p>
       <div>{children}</div>
+      <button onClick={() => handleAddTask(statusName)}>
+        <HiOutlinePlus />
+      </button>
     </div>
   );
 };
