@@ -173,6 +173,30 @@ const Board = ({ workspaceSocket }: IProps) => {
     });
   };
 
+  const handleSubmit = (
+    data: ITask,
+    assignedMember: string[],
+    currentStatus?: string
+  ) => {
+    if (assignedMember.length) {
+      const taskData = {
+        ...data,
+        assignedMember,
+        currentStatus: currentStatus || "TO DO",
+        dueDate: new Date(data.dueDate),
+      };
+      if (socket !== null) {
+        socket.emit("add-task", sprint._id, [...sprint.tasks, taskData], {
+          name,
+          email,
+        });
+        toastId = toast.loading("Loading...");
+      }
+    } else {
+      Swal.fire("Please Assign Member!", "", "error");
+    }
+  };
+
   return (
     <>
       {loading ? (
@@ -188,6 +212,7 @@ const Board = ({ workspaceSocket }: IProps) => {
           <BoardMain
             handleOnDragEnd={handleOnDragEnd}
             handleDelete={handleDelete}
+            handleSubmit={handleSubmit}
           />
         </section>
       ) : (
