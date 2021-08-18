@@ -14,7 +14,6 @@ const SignUp = () => {
   const submit = async (data: ILoginData) => {
     const loadingId = toast.loading("Loading...");
     const { email, password, name } = data;
-
     try {
       const user = await createUser(email, password, name);
       toast.dismiss(loadingId);
@@ -22,12 +21,19 @@ const SignUp = () => {
       dispatch(authUserSuccess(user));
 
       // sent data to database
-      fetch("https://intense-peak-24388.herokuapp.com/user", {
+      fetch("http://localhost:5000/user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, name }),
+        body: JSON.stringify({
+          email,
+          name,
+          imageURL: "",
+          githubLink: "",
+          location: "",
+          bio: "",
+        }),
       });
     } catch (error) {
       toast.dismiss(loadingId);

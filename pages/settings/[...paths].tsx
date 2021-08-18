@@ -4,9 +4,15 @@ import SettingsSidebar from "../../components/Settings/SettingsSidebar";
 
 const SettingsPage = () => {
   return (
-    <div>
-      <SettingsSidebar />
-      <SettingsRoute />
+    <div className="d-container">
+      <div className="d-row">
+        <div className="col-left">
+          <SettingsSidebar />
+        </div>
+        <div className="col-right">
+          <SettingsRoute />
+        </div>
+      </div>
     </div>
   );
 };
