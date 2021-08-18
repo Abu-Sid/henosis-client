@@ -5,11 +5,13 @@ import {
   Droppable,
   DropResult,
 } from "react-beautiful-dnd";
+import { HiOutlinePlus } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import { ITask } from "../../../../redux/actions/sprintActions/actionInterface";
 import { RootState } from "../../../../redux/reducers";
 import Modal from "../../../Modal/Modal";
 import AddTaskModal from "../Backlog/AddTaskModal";
+import AddStatus from "./AddStatus";
 import StatusBoards from "./StatusBoards";
 import TaskCard from "./TaskCard";
 
@@ -21,9 +23,15 @@ interface IProps {
     assignedMember: string[],
     currentStatus: string
   ) => void;
+  handleAddStatus: (data: { status: string }) => void;
 }
 
-const BoardMain = ({ handleOnDragEnd, handleDelete, handleSubmit }: IProps) => {
+const BoardMain = ({
+  handleOnDragEnd,
+  handleDelete,
+  handleSubmit,
+  handleAddStatus,
+}: IProps) => {
   const { status, tasks } = useSelector(
     (state: RootState) => state.sprintReducer.sprint
   );
@@ -36,9 +44,16 @@ const BoardMain = ({ handleOnDragEnd, handleDelete, handleSubmit }: IProps) => {
 
   const [selectedStatus, setSelectedStatus] = useState("");
 
+  const [isAddStatus, setIsAddStatus] = useState(false);
+
   const handleAddTask = (status: string) => {
     setSelectedStatus(status);
     setIsOpen(true);
+  };
+
+  const handleAdd = (data: { status: string }) => {
+    handleAddStatus(data);
+    setIsAddStatus(false);
   };
 
   const submit = (data: ITask) => {
@@ -85,9 +100,15 @@ const BoardMain = ({ handleOnDragEnd, handleDelete, handleSubmit }: IProps) => {
             </Droppable>
           ))}
         </DragDropContext>
+        <button className="plus-btn" onClick={() => setIsAddStatus(true)}>
+          <HiOutlinePlus />
+        </button>
       </div>
       <Modal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen}>
         <AddTaskModal submit={submit} setAssignedMember={setAssignedMember} />
+      </Modal>
+      <Modal modalIsOpen={isAddStatus} setIsOpen={setIsAddStatus}>
+        <AddStatus submit={handleAdd} />
       </Modal>
     </>
   );

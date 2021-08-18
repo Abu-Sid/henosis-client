@@ -34,6 +34,12 @@ const sprintReducer = (state = initialState, action: IAction) => {
         sprint: { ...state.sprint, tasks: action.payload },
       };
     }
+    case ActionType.UPDATE_STATUS: {
+      return {
+        ...state,
+        sprint: { ...state.sprint, status: action.payload },
+      };
+    }
     case ActionType.SET_EMPTY_SPRINT: {
       return {
         sprint: {} as ISprint,
