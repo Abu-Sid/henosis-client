@@ -1,21 +1,35 @@
 import React, { useEffect, useState } from "react";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
-import { useForm } from "react-hook-form";
-import TableRow from "../../components/Dashboard/TableRow";
-import SideBar from "../../components/Dashboard/SideBar";
-import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation.tsx";
+import { useForm, SubmitHandler } from "react-hook-form";
+import AdminRow from "../../components/Dashboard/AdminRow";
+import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation";
 import AdminSidebar from "../../components/ui/AdminSidebar/AdminSidebar";
 
+enum RoleEnum {
+  admin = "admin",
+  editor = "editor",
+  other = "other",
+}
+
+interface IFormInput {
+  name: String;
+  email: String;
+  role: RoleEnum;
+  _id: number;
+}
+
 const Admins = () => {
-  const [adminInfo, setAdminInfo] = useState([]);
+  const [adminInfo, setAdminInfo] = useState<IFormInput[]>([]);
   const [loading, setLoading] = useState(true);
-  console.log(loading);
+  // console.log(loading);
+  
   useEffect(() => {
     fetch("https://intense-peak-24388.herokuapp.com/admin")
       .then((res) => res.json())
       .then((data) => setAdminInfo(data.data));
   }, []);
+  
   useEffect(() => {
     if (adminInfo.length === 0) {
       setLoading(true);
@@ -23,12 +37,18 @@ const Admins = () => {
       setLoading(false);
     }
   }, [adminInfo]);
+  
+  // modal 
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
 
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data, e) => {
+  // react hook form
+  const { register, handleSubmit } = useForm<IFormInput>();
+  const onSubmit: SubmitHandler<IFormInput> = (
+    data,
+    e: React.BaseSyntheticEvent<object>
+  ) => {
     if (data) {
       const { name, email, role } = data;
       // sent data to database
@@ -45,32 +65,32 @@ const Admins = () => {
   };
 
   return (
-    <section className='d-container'>
-      <div className='d-row'>
-        <div className='col-left'>
+    <section className="d-container">
+      <div className="d-row">
+        <div className="col-left">
           <AdminSidebar />
         </div>
-        <div className='col-right'>
-          <div className='right-division'>
+        <div className="col-right">
+          <div className="right-division">
             <h2>Admins</h2>
-            <button className='admin-button' onClick={onOpenModal}>
+            <button className="admin-button" onClick={onOpenModal}>
               Add New Admin
             </button>
-            <Modal open={open} onClose={onCloseModal} center id='modal'>
-              <div className='admin-info'>
+            <Modal open={open} onClose={onCloseModal} center>
+              <div className="admin-info">
                 <h2>Admin Information</h2>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <label>Admin Name</label>
-                  <input {...register("name")} type='text' required />
+                  <input {...register("name")} type="text" required />
                   <label>Email</label>
-                  <input {...register("email")} type='email' required />
+                  <input {...register("email")} type="email" required />
                   <label>Role</label>
-                  <select {...register("role")} type='text'>
-                    <option value='admin'>Admin</option>
-                    <option value='editor'>Editor</option>
-                    <option value='other'>other</option>
+                  <select {...register("role")}>
+                    <option value="admin">Admin</option>
+                    <option value="editor">Editor</option>
+                    <option value="other">other</option>
                   </select>
-                  <input type='submit' value='Add Admin' className='button' />
+                  <input type="submit" value="Add Admin" className="button" />
                 </form>
               </div>
             </Modal>
@@ -82,6 +102,7 @@ const Admins = () => {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Role</th>
+                <th>Action</th>
               </tr>
             </thead>
             {loading ? (
@@ -89,7 +110,7 @@ const Admins = () => {
             ) : (
               <tbody>
                 {adminInfo.map((info, index) => (
-                  <TableRow key={info._id} info={info} index={index} />
+                  <AdminRow key={info._id} info={info} index={index} />
                 ))}
               </tbody>
             )}
