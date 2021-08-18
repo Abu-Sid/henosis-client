@@ -1,22 +1,12 @@
 import React from "react";
-import { Form, FormHeader, FormInputField } from "../components/Form/Form";
+import Account from "../components/Settings/SettingsPages/Account";
+import Profile from "../components/Settings/SettingsPages/Profile";
 
 const form = () => {
   return (
-    <div>
-      <Form width={400}>
-        <FormHeader>Personal Info</FormHeader>
-        <FormInputField name='hello' type='text'>
-          Hello
-        </FormInputField>
-        <FormInputField name='hello' type='text'>
-          Hello
-        </FormInputField>
-        <FormInputField name='note' type='textarea' row={8}>
-          Hello
-        </FormInputField>
-        <FormInputField type='submit' />
-      </Form>
+    <div className="Setting">
+      <Profile />
+      <Account />
     </div>
   );
 };
