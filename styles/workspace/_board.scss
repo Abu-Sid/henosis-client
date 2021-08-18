@@ -74,6 +74,14 @@
       font-weight: font-weight(bold);
       margin-bottom: 10px;
     }
+    button {
+      @include button;
+      padding: 3px 12px;
+      svg {
+        margin-top: 3px;
+        font-size: 25px;
+      }
+    }
   }
 
   .task-card {

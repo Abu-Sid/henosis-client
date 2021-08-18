@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   FaFacebook,
   FaInstagram,
@@ -8,6 +8,12 @@ import {
 } from "react-icons/fa";
 
 const Footer = () => {
+  const [ users, setUsers ] = useState([])
+  useEffect(()=>{
+    fetch(`https://intense-peak-24388.herokuapp.com/user`)
+    .then(res=>res.json())
+    .then(data => setUsers(data.data))
+  },[])
   return (
     <footer className="container">
       <div className="row">
@@ -55,6 +61,7 @@ const Footer = () => {
         </div>
         <div>
           <div className="footer-sign-up">
+            <h3>We have {users.length-1}+ users</h3>
             <p>
               Sign up and get started with Henosis today. <br />A world of
               productive teamwork awaits!

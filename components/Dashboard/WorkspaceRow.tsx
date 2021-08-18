@@ -1,6 +1,10 @@
 import React from "react";
+interface IProps {
+  info: { workspaceName: String; type: String; members: Number[] };
+  index: number;
+}
 
-const WorkspaceRow = (props) => {
+const WorkspaceRow = (props: IProps) => {
   const { workspaceName, type, members } = props.info;
   const index = props.index;
   return (

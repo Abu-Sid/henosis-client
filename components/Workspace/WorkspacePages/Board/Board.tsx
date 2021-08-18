@@ -72,19 +72,21 @@ const Board = ({ workspaceSocket }: IProps) => {
         "added-task",
         (
           tasks: ITask[],
-          user: { name: string; email: string; isUpdate?: string }
+          user?: { name: string; email: string; isUpdate?: string }
         ) => {
           toast.dismiss(toastId);
           dispatch(addTask(tasks));
-          if (user.email === email) {
-            toast.success(
-              `Your Task ${user.isUpdate || "Added"} Successfully!`
-            );
-            if (user.isUpdate === "Deleted") {
-              Swal.fire("Deleted!", "Your task has been deleted.", "success");
+          if (user) {
+            if (user.email === email) {
+              toast.success(
+                `Your Task ${user.isUpdate || "Added"} Successfully!`
+              );
+              if (user.isUpdate === "Deleted") {
+                Swal.fire("Deleted!", "Your task has been deleted.", "success");
+              }
+            } else {
+              toast.success(`${user.name} ${user.isUpdate || "Added"} A Task!`);
             }
-          } else {
-            toast.success(`${user.name} ${user.isUpdate || "Added"} A Task!`);
           }
         }
       );
@@ -171,6 +173,30 @@ const Board = ({ workspaceSocket }: IProps) => {
     });
   };
 
+  const handleSubmit = (
+    data: ITask,
+    assignedMember: string[],
+    currentStatus?: string
+  ) => {
+    if (assignedMember.length) {
+      const taskData = {
+        ...data,
+        assignedMember,
+        currentStatus: currentStatus || "TO DO",
+        dueDate: new Date(data.dueDate),
+      };
+      if (socket !== null) {
+        socket.emit("add-task", sprint._id, [...sprint.tasks, taskData], {
+          name,
+          email,
+        });
+        toastId = toast.loading("Loading...");
+      }
+    } else {
+      Swal.fire("Please Assign Member!", "", "error");
+    }
+  };
+
   return (
     <>
       {loading ? (
@@ -186,6 +212,7 @@ const Board = ({ workspaceSocket }: IProps) => {
           <BoardMain
             handleOnDragEnd={handleOnDragEnd}
             handleDelete={handleDelete}
+            handleSubmit={handleSubmit}
           />
         </section>
       ) : (
