@@ -72,19 +72,21 @@ const Board = ({ workspaceSocket }: IProps) => {
         "added-task",
         (
           tasks: ITask[],
-          user: { name: string; email: string; isUpdate?: string }
+          user?: { name: string; email: string; isUpdate?: string }
         ) => {
           toast.dismiss(toastId);
           dispatch(addTask(tasks));
-          if (user.email === email) {
-            toast.success(
-              `Your Task ${user.isUpdate || "Added"} Successfully!`
-            );
-            if (user.isUpdate === "Deleted") {
-              Swal.fire("Deleted!", "Your task has been deleted.", "success");
+          if (user) {
+            if (user.email === email) {
+              toast.success(
+                `Your Task ${user.isUpdate || "Added"} Successfully!`
+              );
+              if (user.isUpdate === "Deleted") {
+                Swal.fire("Deleted!", "Your task has been deleted.", "success");
+              }
+            } else {
+              toast.success(`${user.name} ${user.isUpdate || "Added"} A Task!`);
             }
-          } else {
-            toast.success(`${user.name} ${user.isUpdate || "Added"} A Task!`);
           }
         }
       );
