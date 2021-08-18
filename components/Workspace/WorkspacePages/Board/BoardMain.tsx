@@ -12,9 +12,10 @@ import TaskCard from "./TaskCard";
 
 interface IProps {
   handleOnDragEnd: (result: DropResult) => void;
+  handleDelete: (_id: string) => void;
 }
 
-const BoardMain = ({ handleOnDragEnd }: IProps) => {
+const BoardMain = ({ handleOnDragEnd, handleDelete }: IProps) => {
   const { status, tasks } = useSelector(
     (state: RootState) => state.sprintReducer.sprint
   );
@@ -43,6 +44,7 @@ const BoardMain = ({ handleOnDragEnd }: IProps) => {
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
                           ref={provided.innerRef}
+                          handleDelete={handleDelete}
                         />
                       )}
                     </Draggable>

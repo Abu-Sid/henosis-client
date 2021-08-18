@@ -34,10 +34,10 @@ const BacklogTask = ({
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = (name: "edit" | "delete", task: ITask) => {
+    setIsOpen(false);
     if (name === "edit") {
       setUpdateTask(task);
       setTaskModal(true);
-      setIsOpen(false);
     } else {
       Swal.fire({
         title: "Are you sure?",

@@ -111,7 +111,10 @@ const Backlog = () => {
 
       socket.on(
         "added-task",
-        (tasks, user: { name: string; email: string; isUpdate?: string }) => {
+        (
+          tasks: ITask[],
+          user: { name: string; email: string; isUpdate?: string }
+        ) => {
           if (user) {
             toast.dismiss(toastId);
             setTaskModal(false);
@@ -170,9 +173,10 @@ const Backlog = () => {
           email,
         });
         toastId = toast.loading("Loading...");
+        setAssignedMember([] as string[]);
       }
     } else {
-      alert("Please Assign Member");
+      Swal.fire("Please Assign Member!", "", "error");
     }
   };
 
