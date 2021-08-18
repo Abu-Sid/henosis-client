@@ -61,6 +61,7 @@ const DesktopNavbar = () => {
       <NavItem
         text={username ? username : "My account"}
         icon={faChevronDown as IconProp}
+        // icon={FaChevronDown}
       >
         <DropdownMenu width={250}>
           {!username && <DropdownItem href="/signup">Sign Up</DropdownItem>}
