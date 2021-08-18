@@ -58,3 +58,6 @@
   border: none;
   outline: none;
 }
+.Setting {
+  @include flex(column, center, center);
+}
