@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 import useSocket from "../../../../hooks/useSocket";
 import {
   addTask,
@@ -56,6 +57,41 @@ const Backlog = () => {
 
   const [assignedMember, setAssignedMember] = useState<string[]>([]);
 
+  const [selectMember, setMember] = useState<string[]>([]);
+
+  const handleUpdateTask = ({ _id, ...rest }: ITask) => {
+    const updateAble = sprint.tasks.find((task) => task._id === _id);
+    const index = sprint.tasks.findIndex((task) => task._id === _id);
+    const newTasks = [...sprint.tasks];
+    newTasks[index] = {
+      ...updateAble,
+      ...rest,
+      assignedMember: selectMember.length
+        ? selectMember
+        : updateAble.assignedMember,
+    };
+    if (socket !== null) {
+      socket.emit("add-task", sprint._id, newTasks, {
+        name,
+        email,
+        isUpdate: "Updated",
+      });
+      toastId = toast.loading("Loading...");
+    }
+  };
+
+  const handleTaskDelete = (_id: string) => {
+    const newTasks = sprint.tasks.filter((task) => task._id !== _id);
+    if (socket !== null) {
+      socket.emit("add-task", sprint._id, newTasks, {
+        name,
+        email,
+        isUpdate: "Deleted",
+      });
+      toastId = toast.loading("Loading...");
+    }
+  };
+
   useEffect(() => {
     if (socket !== null) {
       socket.emit("join-sprint", _id);
@@ -75,14 +111,22 @@ const Backlog = () => {
 
       socket.on(
         "added-task",
-        (tasks, user: { name: string; email: string }) => {
+        (
+          tasks: ITask[],
+          user: { name: string; email: string; isUpdate?: string }
+        ) => {
           if (user) {
             toast.dismiss(toastId);
             setTaskModal(false);
             if (user.email === email) {
-              toast.success("Your Task Added Successfully!");
+              toast.success(
+                `Your Task ${user.isUpdate || "Added"} Successfully!`
+              );
+              if (user.isUpdate === "Deleted") {
+                Swal.fire("Deleted!", "Your task has been deleted.", "success");
+              }
             } else {
-              toast.success(`${user.name} Added A Task!`);
+              toast.success(`${user.name} ${user.isUpdate || "Added"} A Task!`);
             }
           }
           dispatch(addTask(tasks));
@@ -129,9 +173,10 @@ const Backlog = () => {
           email,
         });
         toastId = toast.loading("Loading...");
+        setAssignedMember([] as string[]);
       }
     } else {
-      alert("Please Assign Member");
+      Swal.fire("Please Assign Member!", "", "error");
     }
   };
 
@@ -149,6 +194,9 @@ const Backlog = () => {
           setTaskModal={setTaskModal}
           submit={handleSubmit}
           setAssignedMember={setAssignedMember}
+          handleUpdateTask={handleUpdateTask}
+          setMember={setMember}
+          handleTaskDelete={handleTaskDelete}
         />
       ) : (
         <h1

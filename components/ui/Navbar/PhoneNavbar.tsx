@@ -27,7 +27,7 @@ const PhoneNavbar = () => {
   return (
     <Nav className="phone-navbar">
       <NavItem icon={faBars as IconProp}>
-        <DropdownMenu>
+        <DropdownMenu width={250}>
           <DropdownItem href="/features">Features</DropdownItem>
           <DropdownItem href="/pricing">Pricing</DropdownItem>
           {!username && <DropdownItem href="/signup">Sign Up</DropdownItem>}

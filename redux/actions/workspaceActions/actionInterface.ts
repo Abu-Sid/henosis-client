@@ -8,6 +8,7 @@ export interface IWorkspace {
   companyName?: string;
   companyEmail?: string;
   memberEmail?: string;
+  previousMails: string[];
   members: {
     _id?: string;
     isCreator?: boolean;

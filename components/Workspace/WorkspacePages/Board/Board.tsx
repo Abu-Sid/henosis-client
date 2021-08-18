@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import { DropResult } from "react-beautiful-dnd";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import { Socket } from "socket.io-client";
+import { DefaultEventsMap } from "socket.io-client/build/typed-events";
+import Swal from "sweetalert2";
 import { IUser } from "../../../../auth/authManager";
 import useSocket from "../../../../hooks/useSocket";
 import {
@@ -20,13 +23,21 @@ import BoardHeader from "./BoardHeader";
 import BoardMain from "./BoardMain";
 import BoardMembers from "./BoardMembers";
 
+interface IProps {
+  workspaceSocket: Socket<DefaultEventsMap, DefaultEventsMap>;
+}
+
 let toastId: string;
 
-const Board = () => {
+const Board = ({ workspaceSocket }: IProps) => {
   const socket = useSocket("/sprint");
 
   const { workspace } = useSelector(
     (state: RootState) => state.workspaceReducer
+  );
+
+  const { email, name } = useSelector(
+    (state: RootState) => state.userReducer.user
   );
 
   const { loading, sprint } = useSelector(
@@ -35,7 +46,7 @@ const Board = () => {
 
   const { tasks } = sprint;
 
-  const { _id, members } = workspace;
+  const { _id, workspaceName, previousMails } = workspace;
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -57,21 +68,52 @@ const Board = () => {
         toast.success("Member Added Successfully!");
       });
 
-      socket.on("added-task", (tasks) => {
-        dispatch(addTask(tasks));
+      socket.on(
+        "added-task",
+        (
+          tasks: ITask[],
+          user: { name: string; email: string; isUpdate?: string }
+        ) => {
+          toast.dismiss(toastId);
+          dispatch(addTask(tasks));
+          if (user.email === email) {
+            toast.success(
+              `Your Task ${user.isUpdate || "Added"} Successfully!`
+            );
+            if (user.isUpdate === "Deleted") {
+              Swal.fire("Deleted!", "Your task has been deleted.", "success");
+            }
+          } else {
+            toast.success(`${user.name} ${user.isUpdate || "Added"} A Task!`);
+          }
+        }
+      );
+    }
+  }, [socket, _id, dispatch, email]);
+
+  useEffect(() => {
+    if (workspaceSocket !== null) {
+      workspaceSocket.on("mail-sended", () => {
+        toast.dismiss(toastId);
       });
     }
-  }, [socket, _id, dispatch]);
+  }, [workspaceSocket]);
 
   const handleAddMember = (data: any) => {
-    const newMembers = Object.values(data).map((email: string) => ({
-      email,
-      name: email.split("@")[0],
-      photo: "",
-      emailVerified: true,
-    }));
-    if (socket !== null) {
-      socket.emit("add-member", _id, [...members, ...newMembers]);
+    const newMembers = Object.values(data).join(", ");
+
+    if (workspaceSocket !== null) {
+      const origin = window.location.origin;
+      workspaceSocket.emit("send-access-email", {
+        email,
+        name,
+        toEmail: newMembers,
+        workspaceName,
+        id: _id,
+        path: "accept-request",
+        origin,
+        previousMails,
+      });
       toastId = toast.loading("Loading...");
       setIsOpen(false);
     }
@@ -105,6 +147,30 @@ const Board = () => {
     }
   };
 
+  const handleDelete = (_id: string) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const newTasks = sprint.tasks.filter((task) => task._id !== _id);
+        if (socket !== null) {
+          socket.emit("add-task", sprint._id, newTasks, {
+            name,
+            email,
+            isUpdate: "Deleted",
+          });
+          toastId = toast.loading("Loading...");
+        }
+      }
+    });
+  };
+
   return (
     <>
       {loading ? (
@@ -117,7 +183,10 @@ const Board = () => {
             modalIsOpen={modalIsOpen}
             setIsOpen={setIsOpen}
           />
-          <BoardMain handleOnDragEnd={handleOnDragEnd} />
+          <BoardMain
+            handleOnDragEnd={handleOnDragEnd}
+            handleDelete={handleDelete}
+          />
         </section>
       ) : (
         <div className="board-error">
