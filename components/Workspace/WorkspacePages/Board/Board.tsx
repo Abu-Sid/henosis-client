@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
+import Swal from "sweetalert2";
 import { IUser } from "../../../../auth/authManager";
 import useSocket from "../../../../hooks/useSocket";
 import {
@@ -67,11 +68,28 @@ const Board = ({ workspaceSocket }: IProps) => {
         toast.success("Member Added Successfully!");
       });
 
-      socket.on("added-task", (tasks) => {
-        dispatch(addTask(tasks));
-      });
+      socket.on(
+        "added-task",
+        (
+          tasks: ITask[],
+          user: { name: string; email: string; isUpdate?: string }
+        ) => {
+          toast.dismiss(toastId);
+          dispatch(addTask(tasks));
+          if (user.email === email) {
+            toast.success(
+              `Your Task ${user.isUpdate || "Added"} Successfully!`
+            );
+            if (user.isUpdate === "Deleted") {
+              Swal.fire("Deleted!", "Your task has been deleted.", "success");
+            }
+          } else {
+            toast.success(`${user.name} ${user.isUpdate || "Added"} A Task!`);
+          }
+        }
+      );
     }
-  }, [socket, _id, dispatch]);
+  }, [socket, _id, dispatch, email]);
 
   useEffect(() => {
     if (workspaceSocket !== null) {
@@ -129,6 +147,30 @@ const Board = ({ workspaceSocket }: IProps) => {
     }
   };
 
+  const handleDelete = (_id: string) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const newTasks = sprint.tasks.filter((task) => task._id !== _id);
+        if (socket !== null) {
+          socket.emit("add-task", sprint._id, newTasks, {
+            name,
+            email,
+            isUpdate: "Deleted",
+          });
+          toastId = toast.loading("Loading...");
+        }
+      }
+    });
+  };
+
   return (
     <>
       {loading ? (
@@ -141,7 +183,10 @@ const Board = ({ workspaceSocket }: IProps) => {
             modalIsOpen={modalIsOpen}
             setIsOpen={setIsOpen}
           />
-          <BoardMain handleOnDragEnd={handleOnDragEnd} />
+          <BoardMain
+            handleOnDragEnd={handleOnDragEnd}
+            handleDelete={handleDelete}
+          />
         </section>
       ) : (
         <div className="board-error">
