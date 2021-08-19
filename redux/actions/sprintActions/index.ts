@@ -22,6 +22,13 @@ export const addTask = (tasks: ITask[]): IAction => {
   };
 };
 
+export const updateStatus = (status: string[]): IAction => {
+  return {
+    type: ActionType.UPDATE_STATUS,
+    payload: status,
+  };
+};
+
 export const setEmptySprint = (): IAction => {
   return {
     type: ActionType.SET_EMPTY_SPRINT,

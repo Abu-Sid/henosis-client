@@ -42,10 +42,10 @@ body {
 // button
 .button-primary {
   font-family: $s-ff;
-  font-size: medium;
+  font-size: $fs-m;
   color: $light-gray;
   background-color: $purple;
-  padding: 0.75rem 1.5rem;
+  padding: 0.5rem 1rem;
   margin: 0.5rem 0;
   border-radius: 5px;
   transition: all ease-in-out 200ms;
@@ -53,7 +53,10 @@ body {
   cursor: pointer;
   &:hover {
     background-color: $gray-purple;
-    transition: 0.3s;
+    transition: background-color 0.3s;
+  }
+  &:focus {
+    box-shadow: 0 0 1px 3px $purple;
   }
 }
 .button-secondary {
