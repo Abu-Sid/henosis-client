@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import useSocket from "../../../../hooks/useSocket";
+import errorIcon from "../../../../public/images/warning.gif";
 import {
   addTask,
   createdSprint,
@@ -12,6 +13,7 @@ import {
   ITask,
 } from "../../../../redux/actions/sprintActions/actionInterface";
 import { RootState } from "../../../../redux/reducers";
+import PromptModal from "../../../Modal/PromptModal";
 import LoadingAnimation from "../../../ui/Animation/LoadingAnimation";
 import BacklogSprint from "./BacklogSprint";
 import CreateSprint from "./CreateSprint";
@@ -56,6 +58,43 @@ const Backlog = () => {
 
   const [assignedMember, setAssignedMember] = useState<string[]>([]);
 
+  const [selectMember, setMember] = useState<string[]>([]);
+
+  const [assignModal, setAssignModal] = useState(false);
+
+  const handleUpdateTask = ({ _id, ...rest }: ITask) => {
+    const updateAble = sprint.tasks.find((task) => task._id === _id);
+    const index = sprint.tasks.findIndex((task) => task._id === _id);
+    const newTasks = [...sprint.tasks];
+    newTasks[index] = {
+      ...updateAble,
+      ...rest,
+      assignedMember: selectMember.length
+        ? selectMember
+        : updateAble.assignedMember,
+    };
+    if (socket !== null) {
+      socket.emit("add-task", sprint._id, newTasks, {
+        name,
+        email,
+        status: "Updated",
+      });
+      toastId = toast.loading("Loading...");
+    }
+  };
+
+  const handleTaskDelete = (_id: string) => {
+    const newTasks = sprint.tasks.filter((task) => task._id !== _id);
+    if (socket !== null) {
+      socket.emit("add-task", sprint._id, newTasks, {
+        name,
+        email,
+        status: "Deleted",
+      });
+      toastId = toast.loading("Loading...");
+    }
+  };
+
   useEffect(() => {
     if (socket !== null) {
       socket.emit("join-sprint", _id);
@@ -75,14 +114,19 @@ const Backlog = () => {
 
       socket.on(
         "added-task",
-        (tasks, user: { name: string; email: string }) => {
+        (
+          tasks: ITask[],
+          user: { name: string; email: string; status?: string }
+        ) => {
           if (user) {
             toast.dismiss(toastId);
             setTaskModal(false);
             if (user.email === email) {
-              toast.success("Your Task Added Successfully!");
+              toast.success(
+                `Your Task ${user.status || "Added"} Successfully!`
+              );
             } else {
-              toast.success(`${user.name} Added A Task!`);
+              toast.success(`${user.name} ${user.status || "Added"} A Task!`);
             }
           }
           dispatch(addTask(tasks));
@@ -129,43 +173,57 @@ const Backlog = () => {
           email,
         });
         toastId = toast.loading("Loading...");
+        setAssignedMember([] as string[]);
       }
     } else {
-      alert("Please Assign Member");
+      setAssignModal(true);
     }
   };
 
   return (
-    <section className="backlog-section">
-      <h2>
-        Backlog
-        <span> / {workspaceName}</span>
-      </h2>
-      {loading ? (
-        <LoadingAnimation />
-      ) : sprint._id ? (
-        <BacklogSprint
-          taskModal={taskModal}
-          setTaskModal={setTaskModal}
-          submit={handleSubmit}
-          setAssignedMember={setAssignedMember}
+    <>
+      <section className="backlog-section">
+        <h2>
+          Backlog
+          <span> / {workspaceName}</span>
+        </h2>
+        {loading ? (
+          <LoadingAnimation />
+        ) : sprint._id ? (
+          <BacklogSprint
+            taskModal={taskModal}
+            setTaskModal={setTaskModal}
+            submit={handleSubmit}
+            setAssignedMember={setAssignedMember}
+            handleUpdateTask={handleUpdateTask}
+            setMember={setMember}
+            handleTaskDelete={handleTaskDelete}
+          />
+        ) : (
+          <h1
+            style={{ textAlign: "center", color: "red" }}
+            className="alert-error"
+          >
+            No Sprint Here
+          </h1>
+        )}
+        <CreateSprint
+          modalIsOpen={modalIsOpen}
+          setIsOpen={setIsOpen}
+          submit={submit}
+          goals={goals}
+          setGoals={setGoals}
         />
-      ) : (
-        <h1
-          style={{ textAlign: "center", color: "red" }}
-          className="alert-error"
-        >
-          No Sprint Here
-        </h1>
-      )}
-      <CreateSprint
-        modalIsOpen={modalIsOpen}
-        setIsOpen={setIsOpen}
-        submit={submit}
-        goals={goals}
-        setGoals={setGoals}
+      </section>
+      <PromptModal
+        modalIsOpen={assignModal}
+        setIsOpen={setAssignModal}
+        tittle="You Not Assigned Member!"
+        isOk
+        icon={errorIcon}
+        iconHeight="180px"
       />
-    </section>
+    </>
   );
 };
 

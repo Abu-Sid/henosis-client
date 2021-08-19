@@ -18,6 +18,14 @@
     }
     .members {
       @extend .chat-channel;
+      @include flex(column, flex-start, flex-start);
+      &__online {
+        background-color: red;
+        width: 100%;
+      }
+      &__offline {
+        @extend .members__online;
+      }
     }
   }
 }

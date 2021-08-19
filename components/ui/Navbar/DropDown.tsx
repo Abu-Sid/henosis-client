@@ -3,17 +3,32 @@ import React, { useContext } from "react";
 import { useDetectClickOutside } from "react-detect-click-outside";
 import { DropdownContext, INav } from "./Navbar";
 
-export const DropdownMenu = ({ children }) => {
+interface IDropdown {
+  width: number;
+  setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const DropdownMenu: React.FC<IDropdown> = ({
+  children,
+  width,
+  setIsOpen,
+}) => {
   const [open, setOpen] = useContext(DropdownContext);
 
   const closeDropdown = () => {
-    setOpen(!open);
+    if (setIsOpen === undefined) {
+      setOpen(!open);
+    } else {
+      setIsOpen((preValue) => !preValue);
+    }
   };
 
   const ref = useDetectClickOutside({ onTriggered: closeDropdown });
   return (
     <div ref={ref}>
-      <div className="dropdown">{children}</div>
+      <div style={{ width: `${width}px` }} className="dropdown">
+        {children}
+      </div>
     </div>
   );
 };

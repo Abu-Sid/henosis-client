@@ -17,23 +17,14 @@
     color: $dark-blue;
   }
   .sprint-section {
-    overflow-x: auto;
     background-color: $gray;
     border-radius: 0.5em;
     &__inner {
       padding: 1em;
-      min-width: 420px;
+      min-width: 450px;
     }
     &__top {
       @include flex(row, space-between);
-      button.edit-btn {
-        background-color: $light-gray-purple;
-        color: $gray-purple;
-        &:focus {
-          box-shadow: 0 0 1px 3px $gray-purple;
-        }
-        margin-left: 10px;
-      }
     }
     h3 {
       text-align: center;
@@ -70,6 +61,18 @@
           margin-left: 8px;
         }
       }
+    }
+    button.edit-btn {
+      background-color: $light-gray-purple;
+      color: $gray-purple;
+      &:focus {
+        box-shadow: 0 0 1px 3px $gray-purple;
+      }
+      margin-left: 8px;
+    }
+    .backlog-dropdown {
+      position: relative;
+      right: 30px;
     }
   }
   .create-sprint-button {
@@ -142,8 +145,8 @@
   display: block;
 }
 
-.ReactModal__Content {
-  animation: modalAnimation 0.3s ease-in-out;
+.ReactModal__Overlay {
+  background-color: #2a2a2a8c !important;
 }
 
 @keyframes modalAnimation {
@@ -155,9 +158,20 @@
   }
 }
 
+@keyframes modalAnimation2 {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
 @media (max-width: 620px) {
   .backlog-section {
+    width: 100%;
     .sprint-section {
+      overflow-x: auto;
       &__inner {
         padding: 0.8em;
       }
@@ -168,7 +182,7 @@
         }
       }
       .task-name {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
       }
     }
   }

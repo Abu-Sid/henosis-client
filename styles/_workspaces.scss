@@ -19,7 +19,7 @@
       background-color: $gray-purple;
       height: 45px;
       width: 100%;
-      min-width: 450px;
+      min-width: 500px;
       border-radius: radius(medium);
       padding: 0 1em;
       color: $white;
@@ -35,7 +35,7 @@
     }
     &__row {
       width: 100%;
-      min-width: 450px;
+      min-width: 500px;
       .row-container {
         margin-bottom: 10px;
         height: 45px;
@@ -110,7 +110,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 510px) {
   .workspaces {
     .table {
       overflow-x: auto;
