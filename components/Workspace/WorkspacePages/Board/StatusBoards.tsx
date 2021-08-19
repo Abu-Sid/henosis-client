@@ -24,7 +24,7 @@ const StatusBoards = (
     <div className="status-board" ref={ref} {...rest}>
       <p className={`status-board__indicator ${color}`}>{statusName}</p>
       <div>{children}</div>
-      <button onClick={() => handleAddTask(statusName)}>
+      <button className="plus-btn" onClick={() => handleAddTask(statusName)}>
         <HiOutlinePlus />
       </button>
     </div>

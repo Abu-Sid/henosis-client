@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import Swal from "sweetalert2";
 import useSocket from "../../../../hooks/useSocket";
+import errorIcon from "../../../../public/images/warning.gif";
 import {
   addTask,
   createdSprint,
@@ -13,6 +13,7 @@ import {
   ITask,
 } from "../../../../redux/actions/sprintActions/actionInterface";
 import { RootState } from "../../../../redux/reducers";
+import PromptModal from "../../../Modal/PromptModal";
 import LoadingAnimation from "../../../ui/Animation/LoadingAnimation";
 import BacklogSprint from "./BacklogSprint";
 import CreateSprint from "./CreateSprint";
@@ -59,6 +60,8 @@ const Backlog = () => {
 
   const [selectMember, setMember] = useState<string[]>([]);
 
+  const [assignModal, setAssignModal] = useState(false);
+
   const handleUpdateTask = ({ _id, ...rest }: ITask) => {
     const updateAble = sprint.tasks.find((task) => task._id === _id);
     const index = sprint.tasks.findIndex((task) => task._id === _id);
@@ -74,7 +77,7 @@ const Backlog = () => {
       socket.emit("add-task", sprint._id, newTasks, {
         name,
         email,
-        isUpdate: "Updated",
+        status: "Updated",
       });
       toastId = toast.loading("Loading...");
     }
@@ -86,7 +89,7 @@ const Backlog = () => {
       socket.emit("add-task", sprint._id, newTasks, {
         name,
         email,
-        isUpdate: "Deleted",
+        status: "Deleted",
       });
       toastId = toast.loading("Loading...");
     }
@@ -113,20 +116,17 @@ const Backlog = () => {
         "added-task",
         (
           tasks: ITask[],
-          user: { name: string; email: string; isUpdate?: string }
+          user: { name: string; email: string; status?: string }
         ) => {
           if (user) {
             toast.dismiss(toastId);
             setTaskModal(false);
             if (user.email === email) {
               toast.success(
-                `Your Task ${user.isUpdate || "Added"} Successfully!`
+                `Your Task ${user.status || "Added"} Successfully!`
               );
-              if (user.isUpdate === "Deleted") {
-                Swal.fire("Deleted!", "Your task has been deleted.", "success");
-              }
             } else {
-              toast.success(`${user.name} ${user.isUpdate || "Added"} A Task!`);
+              toast.success(`${user.name} ${user.status || "Added"} A Task!`);
             }
           }
           dispatch(addTask(tasks));
@@ -176,44 +176,54 @@ const Backlog = () => {
         setAssignedMember([] as string[]);
       }
     } else {
-      Swal.fire("Please Assign Member!", "", "error");
+      setAssignModal(true);
     }
   };
 
   return (
-    <section className="backlog-section">
-      <h2>
-        Backlog
-        <span> / {workspaceName}</span>
-      </h2>
-      {loading ? (
-        <LoadingAnimation />
-      ) : sprint._id ? (
-        <BacklogSprint
-          taskModal={taskModal}
-          setTaskModal={setTaskModal}
-          submit={handleSubmit}
-          setAssignedMember={setAssignedMember}
-          handleUpdateTask={handleUpdateTask}
-          setMember={setMember}
-          handleTaskDelete={handleTaskDelete}
+    <>
+      <section className="backlog-section">
+        <h2>
+          Backlog
+          <span> / {workspaceName}</span>
+        </h2>
+        {loading ? (
+          <LoadingAnimation />
+        ) : sprint._id ? (
+          <BacklogSprint
+            taskModal={taskModal}
+            setTaskModal={setTaskModal}
+            submit={handleSubmit}
+            setAssignedMember={setAssignedMember}
+            handleUpdateTask={handleUpdateTask}
+            setMember={setMember}
+            handleTaskDelete={handleTaskDelete}
+          />
+        ) : (
+          <h1
+            style={{ textAlign: "center", color: "red" }}
+            className="alert-error"
+          >
+            No Sprint Here
+          </h1>
+        )}
+        <CreateSprint
+          modalIsOpen={modalIsOpen}
+          setIsOpen={setIsOpen}
+          submit={submit}
+          goals={goals}
+          setGoals={setGoals}
         />
-      ) : (
-        <h1
-          style={{ textAlign: "center", color: "red" }}
-          className="alert-error"
-        >
-          No Sprint Here
-        </h1>
-      )}
-      <CreateSprint
-        modalIsOpen={modalIsOpen}
-        setIsOpen={setIsOpen}
-        submit={submit}
-        goals={goals}
-        setGoals={setGoals}
+      </section>
+      <PromptModal
+        modalIsOpen={assignModal}
+        setIsOpen={setAssignModal}
+        tittle="You Not Assigned Member!"
+        isOk
+        icon={errorIcon}
+        iconHeight="180px"
       />
-    </section>
+    </>
   );
 };
 
