@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from "react";
-import "react-responsive-modal/styles.css";
-import { Modal } from "react-responsive-modal";
-import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
+import { Modal } from "react-responsive-modal";
+import "react-responsive-modal/styles.css";
 import { RootState } from "../../../redux/reducers";
 import ProfileDetails from "../ProfileDetails";
 
 interface IFormInput {
   name: string;
-    email: string;
-    githubLink: string;
-    location: string;
-    imageURL: any;
-    bio: string;
-    _id: number;
+  email: string;
+  githubLink: string;
+  location: string;
+  imageURL: any;
+  bio: string;
+  _id: number;
 }
 
 const Profile = () => {
   const { email } = useSelector((state: RootState) => state.userReducer.user);
   const [profile, setProfile] = useState<IFormInput[]>([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/user/${email}`, {
+    fetch(`https://intense-peak-24388.herokuapp.com/user/${email}`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -33,7 +33,9 @@ const Profile = () => {
       });
   }, [email]);
 
-  const [imageURL, setImageURL] = useState<any>("https://i.ibb.co/KrCxTCv/user.png");
+  const [imageURL, setImageURL] = useState<any>(
+    "https://i.ibb.co/KrCxTCv/user.png"
+  );
   // modal
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
@@ -48,7 +50,7 @@ const Profile = () => {
     if (data) {
       const { githubLink, location, bio } = data;
       // sent data to database
-      fetch(`http://localhost:5000/user/${email}`, {
+      fetch(`https://intense-peak-24388.herokuapp.com/user/${email}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

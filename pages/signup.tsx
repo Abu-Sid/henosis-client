@@ -21,7 +21,7 @@ const SignUp = () => {
       dispatch(authUserSuccess(user));
 
       // sent data to database
-      fetch("http://localhost:5000/user", {
+      fetch("https://intense-peak-24388.herokuapp.com/user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
