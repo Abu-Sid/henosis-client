@@ -27,12 +27,12 @@ const SignUp = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email,
-          name,
-          imageURL: "",
-          githubLink: "",
-          location: "",
-          bio: "",
+          email: user.email,
+          name: user.name,
+          imageURL: "https://i.ibb.co/KrCxTCv/user.png",
+          githubLink: "https://github.com/username",
+          location: "street no. cityname, countryname",
+          bio: "your favorite things",
         }),
       });
     } catch (error) {

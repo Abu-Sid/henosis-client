@@ -10,12 +10,6 @@ import GitHubIcon from "./GitHubIcon";
 import GoogleIcon from "./GoogleIcon";
 
 const GoogleGithubLogin = () => {
-  const [usersInfo, setUsersInfo] = useState([]);
-  useEffect(() => {
-    fetch("http://localhost:5000/user")
-      .then((res) => res.json())
-      .then((data) => setUsersInfo(data.data));
-  }, []);
   const dispatch = useDispatch();
 
   const handleLogin = async (provider: () => Promise<IUser>) => {
@@ -28,20 +22,20 @@ const GoogleGithubLogin = () => {
       dispatch(authUserSuccess(user));
 
       // sent data to database
-        fetch("http://localhost:5000/user", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: user.email,
-            name: user.name,
-            imageURL: "",
-            githubLink: "",
-            location: "",
-            bio: "",
-          }),
-        });
+      fetch("http://localhost:5000/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: user.email,
+          name: user.name,
+          imageURL: "https://i.ibb.co/KrCxTCv/user.png",
+          githubLink: "https://github.com/username",
+          location: "street no. cityname, countryname",
+          bio: "your favorite things",
+        }),
+      });
     } catch (error) {
       toast.dismiss(loadingId);
       toast.error(error.message);
