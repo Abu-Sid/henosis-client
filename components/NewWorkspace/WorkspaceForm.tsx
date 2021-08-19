@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import useForm from "../../hooks/useForm";
 import { RootState } from "../../redux/reducers";
+import useForm from "../../hooks/useForm";
 
 interface IForm {
   handleInput: (e: any) => void;

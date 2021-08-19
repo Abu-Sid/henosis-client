@@ -14,7 +14,6 @@ const SignUp = () => {
   const submit = async (data: ILoginData) => {
     const loadingId = toast.loading("Loading...");
     const { email, password, name } = data;
-
     try {
       const user = await createUser(email, password, name);
       toast.dismiss(loadingId);
@@ -27,7 +26,14 @@ const SignUp = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, name }),
+        body: JSON.stringify({
+          email: user.email,
+          name: user.name,
+          imageURL: "https://i.ibb.co/KrCxTCv/user.png",
+          githubLink: "https://github.com/username",
+          location: "street no. cityname, countryname",
+          bio: "your favorite things",
+        }),
       });
     } catch (error) {
       toast.dismiss(loadingId);

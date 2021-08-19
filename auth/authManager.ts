@@ -82,7 +82,8 @@ export const githubLogin = async () => {
 export const logout = async () => {
   await auth().signOut();
 };
-export const passwordUpdate = async (newPassword) => {
+
+export const passwordUpdate = async (newPassword: string) => {
   const user = firebase.auth().currentUser;
   await user.updatePassword(newPassword);
 };
