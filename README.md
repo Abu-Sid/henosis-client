@@ -7,7 +7,7 @@
       <img src="https://miro.medium.com/max/6000/1*ZQywXQQMs32Dray68Sjptg.jpeg" alt="conference-events"  width="500px" /> </br>
 </p>
 
-- Server Code : [Henosis Server Repo](https://github.com/mir-hussain/henosis-server)
+- Server Code : [Henosis Server Repo](https://github.com/nrd141913/henosis-server)
 
 - Live Site : [Henosis Live Site](henosis.vercel.app)
 

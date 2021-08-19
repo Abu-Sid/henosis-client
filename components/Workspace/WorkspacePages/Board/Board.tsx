@@ -5,12 +5,13 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
-import Swal from "sweetalert2";
 import { IUser } from "../../../../auth/authManager";
 import useSocket from "../../../../hooks/useSocket";
+import errorIcon from "../../../../public/images/warning.gif";
 import {
   addTask,
   sendCurrentSprint,
+  updateStatus,
 } from "../../../../redux/actions/sprintActions";
 import {
   ISprint,
@@ -18,6 +19,7 @@ import {
 } from "../../../../redux/actions/sprintActions/actionInterface";
 import { addMembers } from "../../../../redux/actions/workspaceActions";
 import { RootState } from "../../../../redux/reducers";
+import PromptModal from "../../../Modal/PromptModal";
 import LoadingAnimation from "../../../ui/Animation/LoadingAnimation";
 import BoardHeader from "./BoardHeader";
 import BoardMain from "./BoardMain";
@@ -44,11 +46,13 @@ const Board = ({ workspaceSocket }: IProps) => {
     (state: RootState) => state.sprintReducer
   );
 
-  const { tasks } = sprint;
+  const { tasks, status } = sprint;
 
   const { _id, workspaceName, previousMails } = workspace;
 
   const [modalIsOpen, setIsOpen] = useState(false);
+
+  const [assignModal, setAssignModal] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -72,20 +76,17 @@ const Board = ({ workspaceSocket }: IProps) => {
         "added-task",
         (
           tasks: ITask[],
-          user?: { name: string; email: string; isUpdate?: string }
+          user?: { name: string; email: string; status?: string }
         ) => {
           toast.dismiss(toastId);
           dispatch(addTask(tasks));
           if (user) {
             if (user.email === email) {
               toast.success(
-                `Your Task ${user.isUpdate || "Added"} Successfully!`
+                `Your Task ${user.status || "Added"} Successfully!`
               );
-              if (user.isUpdate === "Deleted") {
-                Swal.fire("Deleted!", "Your task has been deleted.", "success");
-              }
             } else {
-              toast.success(`${user.name} ${user.isUpdate || "Added"} A Task!`);
+              toast.success(`${user.name} ${user.status || "Added"} A Task!`);
             }
           }
         }
@@ -100,6 +101,16 @@ const Board = ({ workspaceSocket }: IProps) => {
       });
     }
   }, [workspaceSocket]);
+
+  useEffect(() => {
+    if (socket !== null) {
+      socket.on("added-status", (singleStatus: string[]) => {
+        toast.dismiss(toastId);
+        toast.success("Status Added Successfully!");
+        dispatch(updateStatus(singleStatus));
+      });
+    }
+  }, [socket, dispatch]);
 
   const handleAddMember = (data: any) => {
     const newMembers = Object.values(data).join(", ");
@@ -150,27 +161,15 @@ const Board = ({ workspaceSocket }: IProps) => {
   };
 
   const handleDelete = (_id: string) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const newTasks = sprint.tasks.filter((task) => task._id !== _id);
-        if (socket !== null) {
-          socket.emit("add-task", sprint._id, newTasks, {
-            name,
-            email,
-            isUpdate: "Deleted",
-          });
-          toastId = toast.loading("Loading...");
-        }
-      }
-    });
+    const newTasks = sprint.tasks.filter((task) => task._id !== _id);
+    if (socket !== null) {
+      socket.emit("add-task", sprint._id, newTasks, {
+        name,
+        email,
+        status: "Deleted",
+      });
+      toastId = toast.loading("Loading...");
+    }
   };
 
   const handleSubmit = (
@@ -193,7 +192,16 @@ const Board = ({ workspaceSocket }: IProps) => {
         toastId = toast.loading("Loading...");
       }
     } else {
-      Swal.fire("Please Assign Member!", "", "error");
+      setAssignModal(true);
+    }
+  };
+
+  const handleAddStatus = (data: { status: string }) => {
+    if (socket !== null) {
+      const singleStatus = data.status.toUpperCase();
+      const newStatus = [...status, singleStatus];
+      socket.emit("add-status", sprint._id, newStatus);
+      toastId = toast.loading("Loading...");
     }
   };
 
@@ -213,6 +221,7 @@ const Board = ({ workspaceSocket }: IProps) => {
             handleOnDragEnd={handleOnDragEnd}
             handleDelete={handleDelete}
             handleSubmit={handleSubmit}
+            handleAddStatus={handleAddStatus}
           />
         </section>
       ) : (
@@ -223,6 +232,13 @@ const Board = ({ workspaceSocket }: IProps) => {
           </Link>
         </div>
       )}
+      <PromptModal
+        modalIsOpen={assignModal}
+        setIsOpen={setAssignModal}
+        tittle="You Not Assigned Member!"
+        isOk
+        icon={errorIcon}
+      />
     </>
   );
 };

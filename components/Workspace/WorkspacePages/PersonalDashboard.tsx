@@ -1,10 +1,9 @@
 import React from "react";
-
 const PersonalDashboard = () => {
   return (
-    <div style={{ color: "#171e3c" }}>
+    <div>
       <h1>Welcome to Henosis Workspace</h1>
-      <h3>Lets drive into it</h3>
+      <h3>Lets drive into git</h3>
       <br />
       <br />
       <br />

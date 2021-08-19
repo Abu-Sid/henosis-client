@@ -29,8 +29,17 @@ interface ITaskAction {
   payload: ITask[];
 }
 
+interface IAddStatusAction {
+  type: ActionType.UPDATE_STATUS;
+  payload: string[];
+}
+
 interface ISprintEmpty {
   type: ActionType.SET_EMPTY_SPRINT;
 }
 
-export type IAction = ISprintAction | ITaskAction | ISprintEmpty;
+export type IAction =
+  | ISprintAction
+  | ITaskAction
+  | IAddStatusAction
+  | ISprintEmpty;
