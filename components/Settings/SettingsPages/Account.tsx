@@ -6,18 +6,18 @@ import { Form, FormHeader, FormInputField } from "../../Form/Form";
 
 const Account: React.FC = () => {
   const { handleInput, handleInvalid, handleSubmit, error } = useForm();
-  const submit = async (data) => {
+  const submit = async (data: any) => {
     console.log(data);
     try {
       await passwordUpdate(data.password);
-      toast.success("Account Created Successfully!");
+      toast.success("Password Updated Successfully!");
     } catch (error) {
       console.log(error);
       toast.error("Please Check your Password!");
     }
   };
   return (
-    <div style={{ marginLeft: "150px" }}>
+    <div style={{ marginLeft: "20%", marginTop: "10%" }}>
       <Form width={800} onSubmit={handleSubmit(submit)}>
         <FormHeader>Change Password</FormHeader>
         <FormInputField name="password" type="password" onChange={handleInput}>
@@ -41,7 +41,16 @@ const Account: React.FC = () => {
         >
           Confirm New Password
         </FormInputField>
-        <FormInputField type="submit" value={"Set New Password"} />
+        <div style={{ display: "flex", alignItems: "flex-end" }}>
+          <FormInputField
+            width={180}
+            type="submit"
+            value={"Set New Password"}
+          />
+          <small style={{ color: "#4a4fff", marginLeft: "10px" }}>
+            Forgot Password?
+          </small>
+        </div>
       </Form>
     </div>
   );

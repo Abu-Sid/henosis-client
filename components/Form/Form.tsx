@@ -16,6 +16,7 @@ interface IFormInput {
   row?: number;
   value?: string;
   required?: boolean;
+  width?: number;
   onChange?: () => void;
   onInvalid?: () => void;
 }
@@ -45,6 +46,7 @@ export const FormInputField: React.FC<IFormInput> = ({
   required,
   onInvalid,
   onChange,
+  width,
   ...rest
 }) => {
   return (
@@ -65,7 +67,9 @@ export const FormInputField: React.FC<IFormInput> = ({
       {type === "textarea" && (
         <textarea name={name} id={name} rows={row}></textarea>
       )}
-      {type === "submit" && <input type={type} value={value} />}
+      {type === "submit" && (
+        <input type={type} value={value} style={{ width: `${width}px` }} />
+      )}
     </div>
   );
 };
