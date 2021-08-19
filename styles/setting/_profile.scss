@@ -1,0 +1,16 @@
+#profile-body {
+  width: 70vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin: 5% auto 0 auto;
+  padding: 4rem 1rem;
+  border-radius: 0.4rem;
+  overflow: hidden;
+  box-sizing: border-box;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
+  .profile-left #image{
+    border-radius: 50%;
+  }
+}

@@ -1,10 +1,9 @@
-import React from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { githubLogin, googleLogin, IUser } from "../../auth/authManager";
 import {
   authUserFailure,
-  authUserSuccess,
+  authUserSuccess
 } from "../../redux/actions/userActions";
 import GitHubIcon from "./GitHubIcon";
 import GoogleIcon from "./GoogleIcon";
@@ -20,6 +19,22 @@ const GoogleGithubLogin = () => {
       toast.dismiss(loadingId);
       toast.success("Login Successfully!");
       dispatch(authUserSuccess(user));
+
+      // sent data to database
+      fetch("https://intense-peak-24388.herokuapp.com/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: user.email,
+          name: user.name,
+          imageURL: "https://i.ibb.co/KrCxTCv/user.png",
+          githubLink: "https://github.com/username",
+          location: "street no. cityname, countryname",
+          bio: "your favorite things",
+        }),
+      });
     } catch (error) {
       toast.dismiss(loadingId);
       toast.error(error.message);
