@@ -6,6 +6,7 @@ import Purple from "../../../../public/images/icons/purple.svg";
 import Green from "../../../../public/images/icons/green.svg";
 import Pink from "../../../../public/images/icons/pink.svg";
 import Orange from "../../../../public/images/icons/orange.svg";
+import Send from "../../../../public/images/icons/paper-airplane.svg";
 
 const Chat = () => {
   return (
@@ -13,7 +14,12 @@ const Chat = () => {
       <ChatHeader />
       <div className='chat-portal__body'>
         <ChatChannel />
-        <div className='chat-body'></div>
+        <div className='chat-body'>
+          <div className='type-box'>
+            <input type='text' />
+            <Image src={Send} alt='send icon' />
+          </div>
+        </div>
         <div className='members'>
           <div className='members__online'>
             <h3>Online (2)</h3>
