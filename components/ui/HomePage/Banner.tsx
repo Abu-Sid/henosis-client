@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import banner from "../../../public/images/banner.png";
+
 const Banner = () => {
   return (
     <div data-testid="banner-test" className="banner">
@@ -16,7 +17,7 @@ const Banner = () => {
           </h4>
         </div>
 
-        <Link href="/signup" passHref>
+        <Link href="/workspaces" passHref>
           <button
             data-aos="fade-right"
             data-aos-duration="1000"
