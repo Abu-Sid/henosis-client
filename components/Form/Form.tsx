@@ -3,7 +3,7 @@ import React from "react";
 interface IForm {
   children: React.ReactNode;
   width?: number;
-  onSubmit?: () => void;
+  onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 interface IFormHeader {
@@ -17,8 +17,8 @@ interface IFormInput {
   value?: string;
   required?: boolean;
   width?: number;
-  onChange?: () => void;
-  onInvalid?: () => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onInvalid?: (e: React.FormEvent<HTMLInputElement>) => void;
 }
 
 export const Form: React.FC<IForm> = ({ children, width, onSubmit }) => {

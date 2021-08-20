@@ -8,7 +8,7 @@ import withAuthCheck from "../HOC/withAuthCheck";
 import { IWorkspace } from "../redux/actions/workspaceActions/actionInterface";
 import { RootState } from "../redux/reducers";
 
-interface IData {
+export interface IWorkspaceData {
   companyName: string;
   companyEmail: string;
   workspaceName: string;
@@ -30,7 +30,7 @@ const Information = () => {
     }
   }, [workspaceData]);
 
-  const submit = (data: IData) => {
+  const submit = (data: IWorkspaceData) => {
     const workspace = {
       ...data,
       type: "Business",

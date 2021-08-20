@@ -3,14 +3,15 @@ import ReactDatePicker from "react-datepicker";
 import { useSelector } from "react-redux";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-import useForm from "../../../../hooks/useForm";
+import useForm, { IUseForm } from "../../../../hooks/useForm";
 import { ITask } from "../../../../redux/actions/sprintActions/actionInterface";
 import { RootState } from "../../../../redux/reducers";
+import { ITData } from "./Backlog";
 
 const animatedComponents = makeAnimated();
 
 interface IProps {
-  submit: (data: any) => void;
+  submit: (data: ITData | ITask) => void;
   setAssignedMember: React.Dispatch<React.SetStateAction<string[]>>;
   updateTask?: ITask;
 }
@@ -42,10 +43,10 @@ const AddTaskModal = ({ submit, setAssignedMember, updateTask }: IProps) => {
     error,
     inputData,
     handleDateChange,
-  } = useForm(
+  } = useForm<(ITData | ITask) & IUseForm>(
     updateTask
-      ? { taskName, dueDate: new Date(dueDate), _id }
-      : { dueDate: new Date() }
+      ? ({ taskName, dueDate: new Date(dueDate), _id } as ITData | ITask)
+      : ({ dueDate: new Date() } as ITData | ITask)
   );
 
   const { members } = useSelector(
@@ -102,7 +103,7 @@ const AddTaskModal = ({ submit, setAssignedMember, updateTask }: IProps) => {
           ) : (
             <ReactDatePicker
               selected={inputData[name]}
-              onChange={(date) => handleDateChange(date, name)}
+              onChange={(date) => handleDateChange(date as Date, name)}
               minDate={new Date()}
               showDisabledMonthNavigation
               dateFormat="dd/MM/yyyy"

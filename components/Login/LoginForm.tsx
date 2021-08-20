@@ -8,15 +8,9 @@ interface IProps {
   newUser?: boolean;
 }
 
-interface IForm {
-  handleInput: (e: any) => void;
-  handleInvalid: (e: any) => void;
-  handleSubmit: (submit: (data: ILoginData) => void) => (e: any) => void;
-  error: any;
-}
-
 const LoginForm = ({ submit, newUser }: IProps) => {
-  const { handleInput, handleInvalid, handleSubmit, error }: IForm = useForm();
+  const { handleInput, handleInvalid, handleSubmit, error } =
+    useForm<ILoginData>();
 
   const [showPassword, setShowPassword] = useState(false);
 

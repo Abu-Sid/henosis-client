@@ -6,11 +6,7 @@ import WorkspaceForm from "../components/NewWorkspace/WorkspaceForm";
 import withAuthCheck from "../HOC/withAuthCheck";
 import useSocket from "../hooks/useSocket";
 import { RootState } from "../redux/reducers";
-
-interface IData {
-  workspaceName: string;
-  memberEmail: string;
-}
+import { IWorkspaceData } from "./information";
 
 const Workspace = () => {
   const [select, setSelect] = useState("");
@@ -29,7 +25,7 @@ const Workspace = () => {
     }
   }, [socket, router]);
 
-  const submit = (data: IData) => {
+  const submit = (data: IWorkspaceData) => {
     if (socket !== null) {
       const workspace = {
         ...data,
