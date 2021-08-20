@@ -35,7 +35,6 @@ const PromptModal = ({
 
   const styles = {
     animation: "modalAnimation2 0.3s ease-in-out",
-    marginLeft: "100000px",
   };
 
   return (
