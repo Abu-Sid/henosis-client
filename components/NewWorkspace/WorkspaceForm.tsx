@@ -1,30 +1,20 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import useForm, { IUseForm } from "../../hooks/useForm";
+import { IWorkspaceData } from "../../pages/information";
 import { RootState } from "../../redux/reducers";
-import useForm from "../../hooks/useForm";
-
-interface IForm {
-  handleInput: (e: any) => void;
-  handleInvalid: (e: any) => void;
-  handleSubmit: (submit: any) => (e: any) => void;
-  error: any;
-}
 
 interface IProps {
-  submit: (submit: any) => void;
+  submit: (submit: IWorkspaceData) => void;
   isCompany?: boolean;
 }
 
 const WorkspaceForm = ({ submit, isCompany }: IProps) => {
   const { email } = useSelector((state: RootState) => state.userReducer.user);
 
-  const { handleInput, handleInvalid, handleSubmit, error }: IForm = useForm(
-    isCompany
-      ? {
-          companyEmail: email,
-        }
-      : {}
-  );
+  const { handleInput, handleInvalid, handleSubmit, error } = useForm<
+    IWorkspaceData & IUseForm
+  >(isCompany && ({ companyEmail: email } as IWorkspaceData));
 
   return (
     <form onSubmit={handleSubmit(submit)} className="workspace-form">
