@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import SelectCategory from "../components/NewWorkspace/SelectCategory";
 import WorkspaceForm from "../components/NewWorkspace/WorkspaceForm";
@@ -7,6 +8,8 @@ import withAuthCheck from "../HOC/withAuthCheck";
 import useSocket from "../hooks/useSocket";
 import { RootState } from "../redux/reducers";
 import { IWorkspaceData } from "./information";
+
+let loadingId: string;
 
 const Workspace = () => {
   const [select, setSelect] = useState("");
@@ -20,6 +23,8 @@ const Workspace = () => {
   useEffect(() => {
     if (socket !== null) {
       socket.on("workspace-created", (id) => {
+        toast.dismiss(loadingId);
+        toast.success("Workspace Created Successfully!");
         router.replace(`/workspaces/${id}`);
       });
     }
@@ -34,6 +39,7 @@ const Workspace = () => {
         previousMails: [] as string[],
       };
       socket.emit("create-workspace", workspace);
+      loadingId = toast.loading("Loading...");
     }
   };
 
