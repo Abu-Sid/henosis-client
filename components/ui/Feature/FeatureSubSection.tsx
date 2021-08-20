@@ -17,6 +17,7 @@ interface IFeature {
 
 const FeatureSubSection: React.FC<IFeature> = ({ feature }) => {
   const { id, image, featureHeader, details, textPosition } = feature;
+
   return (
     <div
       className={
