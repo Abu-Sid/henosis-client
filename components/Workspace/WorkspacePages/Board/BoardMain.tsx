@@ -64,43 +64,48 @@ const BoardMain = ({
 
   return (
     <>
-      <div className="status-board-container">
-        <DragDropContext onDragEnd={handleOnDragEnd}>
-          {status.map((singleStatus) => (
-            <Droppable key={singleStatus} droppableId={singleStatus}>
-              {(provided) => (
-                <StatusBoards
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                  statusName={singleStatus}
-                  handleAddTask={handleAddTask}
-                >
-                  {tasks.map((task, index) =>
-                    task.currentStatus === singleStatus ? (
-                      <Draggable
-                        key={task._id}
-                        draggableId={task._id}
-                        index={index}
-                      >
-                        {(provided) => (
-                          <TaskCard
-                            task={task}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            ref={provided.innerRef}
-                            handleDelete={handleDelete}
-                          />
-                        )}
-                      </Draggable>
-                    ) : null
-                  )}
-                  {provided.placeholder}
-                </StatusBoards>
-              )}
-            </Droppable>
-          ))}
-        </DragDropContext>
-        <button className="plus-btn" onClick={() => setIsAddStatus(true)}>
+      <div className="board-main-section">
+        <div className="status-board-container">
+          <DragDropContext onDragEnd={handleOnDragEnd}>
+            {status.map((singleStatus) => (
+              <Droppable key={singleStatus} droppableId={singleStatus}>
+                {(provided) => (
+                  <StatusBoards
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                    statusName={singleStatus}
+                    handleAddTask={handleAddTask}
+                  >
+                    {tasks.map((task, index) =>
+                      task.currentStatus === singleStatus ? (
+                        <Draggable
+                          key={task._id}
+                          draggableId={task._id}
+                          index={index}
+                        >
+                          {(provided) => (
+                            <TaskCard
+                              task={task}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              ref={provided.innerRef}
+                              handleDelete={handleDelete}
+                            />
+                          )}
+                        </Draggable>
+                      ) : null
+                    )}
+                    {provided.placeholder}
+                  </StatusBoards>
+                )}
+              </Droppable>
+            ))}
+          </DragDropContext>
+        </div>
+        <button
+          className="plus-btn status-plus"
+          onClick={() => setIsAddStatus(true)}
+        >
           <HiOutlinePlus />
         </button>
       </div>
