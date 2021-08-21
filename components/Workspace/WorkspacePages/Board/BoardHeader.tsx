@@ -28,23 +28,25 @@ const BoardHeader = () => {
           <h1>
             <span>{workspaceName}</span> / {sprintName}
           </h1>
-          <ol>
+          <ul>
             {goals.map((goal, index) => (
               <li key={index}>
                 {index + 1}. {goal}
               </li>
             ))}
-          </ol>
+          </ul>
         </div>
         <div className="board-section__actions">
           <p>
             {new Date(startDate).toDateString()} -{" "}
             {new Date(endDate).toDateString()}
           </p>
-          <button className="button-primary">End Sprint</button>
-          <button className="button-secondary">
-            <FontAwesomeIcon icon={faEllipsisH as IconProp} />
-          </button>
+          <div>
+            <button className="button-primary">End Sprint</button>
+            <button className="button-secondary">
+              <FontAwesomeIcon icon={faEllipsisH as IconProp} />
+            </button>
+          </div>
         </div>
       </div>
     </div>
