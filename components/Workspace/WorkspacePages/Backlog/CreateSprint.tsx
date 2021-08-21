@@ -5,7 +5,7 @@ import { addDays } from "date-fns";
 import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import useForm from "../../../../hooks/useForm";
+import useForm, { IUseForm } from "../../../../hooks/useForm";
 import Modal from "../../../Modal/Modal";
 import { IData } from "./Backlog";
 
@@ -49,10 +49,10 @@ const CreateSprint = ({
     handleDateChange,
     error,
     inputData,
-  } = useForm({
+  } = useForm<IData & IUseForm>({
     startDate: new Date(),
     endDate: addDays(new Date(), 7),
-  });
+  } as unknown as IData);
 
   const lastGoal = goals[goals.length - 1];
 
@@ -80,7 +80,7 @@ const CreateSprint = ({
               ) : (
                 <DatePicker
                   selected={inputData[name]}
-                  onChange={(date) => handleDateChange(date, name)}
+                  onChange={(date) => handleDateChange(date as Date, name)}
                   minDate={new Date()}
                   showDisabledMonthNavigation
                   dateFormat="dd/MM/yyyy"

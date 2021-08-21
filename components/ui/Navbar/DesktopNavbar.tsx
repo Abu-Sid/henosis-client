@@ -32,7 +32,7 @@ const DesktopNavbar = () => {
   const [admins, setAdmins] = useState([]);
 
   const { user } = useSelector((state: RootState) => state.userReducer);
-  console.log(user);
+
   const username = user?.name;
   const email = user?.email;
   const admin = admins.find((admin) => admin.email === email);
@@ -61,7 +61,6 @@ const DesktopNavbar = () => {
       <NavItem
         text={username ? username : "My account"}
         icon={faChevronDown as IconProp}
-        // icon={FaChevronDown}
       >
         <DropdownMenu width={250}>
           {!username && <DropdownItem href="/signup">Sign Up</DropdownItem>}

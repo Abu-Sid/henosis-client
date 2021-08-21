@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import chat from "../../../public/images/chat.png";
+
 const BoardSection = () => {
   return (
     <div className="chat">
