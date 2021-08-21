@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import "react-responsive-modal/styles.css";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { Modal } from "react-responsive-modal";
-import { useForm, SubmitHandler } from "react-hook-form";
+import "react-responsive-modal/styles.css";
 import AdminRow from "../../components/Dashboard/AdminRow";
-import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation";
 import AdminSidebar from "../../components/ui/AdminSidebar/AdminSidebar";
+import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation";
 
 enum RoleEnum {
   admin = "admin",
@@ -23,13 +23,13 @@ const Admins = () => {
   const [adminInfo, setAdminInfo] = useState<IFormInput[]>([]);
   const [loading, setLoading] = useState(true);
   // console.log(loading);
-  
+
   useEffect(() => {
     fetch("https://intense-peak-24388.herokuapp.com/admin")
       .then((res) => res.json())
       .then((data) => setAdminInfo(data.data));
   }, []);
-  
+
   useEffect(() => {
     if (adminInfo.length === 0) {
       setLoading(true);
@@ -37,8 +37,8 @@ const Admins = () => {
       setLoading(false);
     }
   }, [adminInfo]);
-  
-  // modal 
+
+  // modal
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);

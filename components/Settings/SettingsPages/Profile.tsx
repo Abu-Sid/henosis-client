@@ -19,9 +19,9 @@ interface IFormInput {
 
 const Profile = () => {
   const { email } = useSelector((state: RootState) => state.userReducer.user);
-  const [profile, setProfile] = useState<IFormInput[]>([]);
+  const [profile, setProfile] = useState<IFormInput>({} as IFormInput);
   useEffect(() => {
-    fetch(`https://intense-peak-24388.herokuapp.com/user/${email}`, {
+    fetch(`http://localhost:5000/user/${email}`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -29,13 +29,11 @@ const Profile = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setProfile(data.data);
+        setProfile(data.data[0]);
       });
   }, [email]);
 
-  const [imageURL, setImageURL] = useState<any>(
-    "https://i.ibb.co/KrCxTCv/user.png"
-  );
+  const [imageURL, setImageURL] = useState<any>(null);
   // modal
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
@@ -49,8 +47,8 @@ const Profile = () => {
   ) => {
     if (data) {
       const { githubLink, location, bio } = data;
-      // sent data to database
-      fetch(`https://intense-peak-24388.herokuapp.com/user/${email}`, {
+      e.target.reset();
+      fetch(`http://localhost:5000/user/${email}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -61,10 +59,21 @@ const Profile = () => {
           location,
           bio,
         }),
-      });
-      e.target.reset();
-      setOpen(false);
-      window.location.reload();
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data) {
+            const newProfile = {
+              ...profile,
+              imageURL,
+              githubLink,
+              location,
+              bio,
+            };
+            setProfile(newProfile);
+            setOpen(false);
+          }
+        });
     }
   };
 
@@ -111,9 +120,9 @@ const Profile = () => {
         </Modal>
       </div>
       <div className="user-content">
-        {profile.map((info) => (
-          <ProfileDetails key={info._id} info={info} />
-        ))}
+        {/* {profile.map((info) => ( */}
+        <ProfileDetails info={profile} />
+        {/* ))} */}
       </div>
     </div>
   );

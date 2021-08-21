@@ -13,7 +13,8 @@ interface IProps {
 }
 
 const ProfileDetails = (props: IProps) => {
-  const { name, email, githubLink, location, bio, imageURL } = props.info;
+  console.log(props);
+  const { name, email, githubLink, location, bio, imageURL } = props.info || {};
   return (
     <div id="profile-body">
       <div

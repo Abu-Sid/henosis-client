@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { githubLogin, googleLogin, IUser } from "../../auth/authManager";
 import {
   authUserFailure,
-  authUserSuccess
+  authUserSuccess,
 } from "../../redux/actions/userActions";
 import GitHubIcon from "./GitHubIcon";
 import GoogleIcon from "./GoogleIcon";
