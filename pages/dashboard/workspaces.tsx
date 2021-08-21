@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import WorkspaceRow from "../../components/Dashboard/WorkspaceRow";
-import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation";
-import { useForm, SubmitHandler } from "react-hook-form";
 import AdminSidebar from "../../components/ui/AdminSidebar/AdminSidebar";
+import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation";
 
 enum FilterEnum {
   all = "all",
@@ -12,7 +12,7 @@ enum FilterEnum {
 
 interface IFormInput {
   filter: FilterEnum;
-  _id:number;
+  _id: number;
   workspaceName: String;
   type: String;
   members: Number[];
@@ -24,13 +24,13 @@ const Workspaces = () => {
   // console.log(loading);
   const { register, handleSubmit } = useForm();
   // console.log(workspaceInfo);
-  
+
   useEffect(() => {
     fetch("https://intense-peak-24388.herokuapp.com/workspace/all")
       .then((res) => res.json())
       .then((data) => setWorkspaceInfo(data.data));
   }, []);
-  
+
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     if (data.filter === "personal") {
       fetch("https://intense-peak-24388.herokuapp.com/workspace/personal")
