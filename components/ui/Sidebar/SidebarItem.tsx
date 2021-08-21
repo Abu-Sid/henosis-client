@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 interface IProps {
   icon: StaticImageData;
@@ -17,15 +18,37 @@ const SidebarItem: React.FC<IProps> = ({
   tooltip,
   pathName,
 }) => {
+  const [visible, setVisible] = useState(false);
+  const variants = {
+    visible: { opacity: 1, x: 0 },
+    hidden: { opacity: 0, x: -50 },
+  };
   return (
-    <li className={className}>
+    <motion.li
+      onHoverStart={() => {
+        setVisible(!visible);
+      }}
+      onHoverEnd={() => {
+        setVisible(!visible);
+      }}
+      className={className}
+    >
       <Link href={href === "/" ? "/" : `${pathName}/${href}`}>
         <a>
-          <Image src={icon} alt="user-icon" />
+          <Image src={icon} alt='user-icon' />
         </a>
       </Link>
-      {tooltip && <span className="tooltip">{tooltip}</span>}
-    </li>
+      {tooltip && visible && (
+        <motion.span
+          initial='hidden'
+          animate='visible'
+          variants={variants}
+          className='tooltip'
+        >
+          {tooltip}
+        </motion.span>
+      )}
+    </motion.li>
   );
 };
 
