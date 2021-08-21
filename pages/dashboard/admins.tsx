@@ -51,6 +51,7 @@ const Admins = () => {
   ) => {
     if (data) {
       const { name, email, role } = data;
+      e.target.reset();
       // sent data to database
       fetch("https://intense-peak-24388.herokuapp.com/admin", {
         method: "POST",
@@ -58,8 +59,15 @@ const Admins = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, name, role }),
-      });
-      e.target.reset();
+      })
+        // .then((res) => res.json())
+        // .then((data) => {
+        //   console.log(data);
+        //   if (data) {
+        //     const newAdminInfo = [...adminInfo, data];
+        //     setAdminInfo(newAdminInfo);
+          // }
+        // });
       setOpen(false);
     }
   };

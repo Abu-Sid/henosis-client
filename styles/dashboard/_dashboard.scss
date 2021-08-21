@@ -47,8 +47,15 @@
           margin-left: 5px;
           margin-top: 5px;
           &:hover {
-            background-color: $gray-purple;
+            background-color: $gray-purple !important;
           }
+        }
+        .disable-button {
+          background-color: $gray-purple !important;
+          color: white;
+          padding: 0.6rem 1rem;
+          border: none;
+          border-radius: 0.5rem;
         }
       }
       .admin-button {
@@ -85,6 +92,8 @@
   }
 }
 
+.disable-button {
+}
 .react-responsive-modal-modal {
   background: #e6e8ea !important;
   border-radius: 5px;

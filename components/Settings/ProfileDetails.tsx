@@ -6,20 +6,19 @@ interface IProps {
     email: string;
     githubLink: string;
     location: string;
-    imageURL: any;
+    imageURL?: any;
     bio: string;
     _id: number;
   };
 }
 
 const ProfileDetails = (props: IProps) => {
-  console.log(props);
   const { name, email, githubLink, location, bio, imageURL } = props.info || {};
   return (
     <div id="profile-body">
       <div
         className="profile-left"
-        
+      
       >
         <Image src={imageURL} width={200} height={200} id="image" alt="pro-pic" />
       </div>

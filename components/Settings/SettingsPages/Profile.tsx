@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import { RootState } from "../../../redux/reducers";
+import LoadingAnimation from "../../ui/Animation/LoadingAnimation";
 import ProfileDetails from "../ProfileDetails";
 
 interface IFormInput {
@@ -12,7 +13,7 @@ interface IFormInput {
   email: string;
   githubLink: string;
   location: string;
-  imageURL: any;
+  imageURL?: any;
   bio: string;
   _id: number;
 }
@@ -21,16 +22,13 @@ const Profile = () => {
   const { email } = useSelector((state: RootState) => state.userReducer.user);
   const [profile, setProfile] = useState<IFormInput>({} as IFormInput);
   useEffect(() => {
-    fetch(`http://localhost:5000/user/${email}`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-      },
-    })
+    fetch(`https://intense-peak-24388.herokuapp.com/user/${email}`)
       .then((res) => res.json())
       .then((data) => {
+        console.log("data", data);
         setProfile(data.data[0]);
-      });
+      })
+      .catch((err) => console.log(err));
   }, [email]);
 
   const [imageURL, setImageURL] = useState<any>(null);
@@ -41,14 +39,11 @@ const Profile = () => {
 
   // react hook form
   const { register, handleSubmit } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (
-    data,
-    e: React.BaseSyntheticEvent<object>
-  ) => {
+  const onSubmit: SubmitHandler<IFormInput> = (data, e) => {
     if (data) {
       const { githubLink, location, bio } = data;
-      e.target.reset();
-      fetch(`http://localhost:5000/user/${email}`, {
+
+      fetch(`https://intense-peak-24388.herokuapp.com/user/${email}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -71,10 +66,12 @@ const Profile = () => {
               bio,
             };
             setProfile(newProfile);
-            setOpen(false);
+            e.target.reset();
           }
         });
     }
+
+    setOpen(false);
   };
 
   const handleImageUpload = (event) => {
@@ -91,6 +88,7 @@ const Profile = () => {
         console.log(error);
       });
   };
+
   return (
     <div>
       <div className="right-division">
@@ -110,20 +108,34 @@ const Profile = () => {
               <input {...register("bio")} type="text" required />
               <label>Upload Image</label>
               <input type="file" onChange={handleImageUpload} required />
-              <input
-                type="submit"
-                value="Save Profile Information"
-                className="button"
-              />
+
+              {imageURL ? (
+                <input
+                  type="submit"
+                  value="Save Profile Information"
+                  className="button"
+                />
+              ) : (
+                <input
+                  type="submit"
+                  value="Save Profile Information"
+                  className="disable-button"
+                  disabled
+                />
+              )}
             </form>
           </div>
         </Modal>
       </div>
-      <div className="user-content">
-        {/* {profile.map((info) => ( */}
-        <ProfileDetails info={profile} />
-        {/* ))} */}
-      </div>
+      {profile.email ? (
+        <div className="user-content">
+          <ProfileDetails info={profile} />
+        </div>
+      ) : (
+        <div className="user-content">
+          <LoadingAnimation />
+        </div>
+      )}
     </div>
   );
 };
