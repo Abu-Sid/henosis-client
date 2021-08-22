@@ -22,13 +22,20 @@ const Payment = (
 
   const socket = useSocket("/create-workspace");
 
+  const socket2 = useSocket("/chat", "https://henosis-server-bd.herokuapp.com");
+
   useEffect(() => {
     if (socket !== null) {
       socket.on("workspace-created", (id) => {
+        socket2.emit("create-channel", {
+          chatName: "general",
+          workspaceId: id,
+          users: [],
+        });
         router.replace(`/workspaces/${id}`);
       });
     }
-  }, [socket, router]);
+  }, [socket, router, socket2]);
 
   const handelCreateWorkspace = (loadingId: string) => {
     toast.dismiss(loadingId);

@@ -1,19 +1,20 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
+import { useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../auth/authManager";
 import { authUserLogout } from "../../../redux/actions/userActions";
 import { RootState } from "../../../redux/reducers";
 import { DropdownItem, DropdownMenu } from "./DropDown";
 import Nav from "./Nav";
+import { UserContext } from "./Navbar";
 import NavItem from "./NavItem";
 
 const PhoneNavbar = () => {
-  const dispatch = useDispatch();
+  const { username, admin } = useContext(UserContext);
 
-  const { user } = useSelector((state: RootState) => state.userReducer);
-  const username = user?.name;
+  const dispatch = useDispatch();
 
   const handleLogout = async () => {
     try {
@@ -25,20 +26,21 @@ const PhoneNavbar = () => {
   };
 
   return (
-    <Nav className="phone-navbar">
+    <Nav className='phone-navbar'>
       <NavItem icon={faBars as IconProp}>
         <DropdownMenu width={250}>
-          <DropdownItem href="/features">Features</DropdownItem>
-          <DropdownItem href="/pricing">Pricing</DropdownItem>
-          {!username && <DropdownItem href="/signup">Sign Up</DropdownItem>}
-          {!username && <DropdownItem href="/signin">Sign In</DropdownItem>}
+          <DropdownItem href='/features'>Features</DropdownItem>
+          <DropdownItem href='/pricing'>Pricing</DropdownItem>
+          {admin && <NavItem name='Admin' href='/dashboard/admins' />}
+          {!username && <DropdownItem href='/signup'>Sign Up</DropdownItem>}
+          {!username && <DropdownItem href='/signin'>Sign In</DropdownItem>}
           {username && (
-            <DropdownItem href="/new-workspace">
+            <DropdownItem href='/new-workspace'>
               Create new workspace
             </DropdownItem>
           )}
           {username && (
-            <DropdownItem href="/workspaces">Existing workspaces</DropdownItem>
+            <DropdownItem href='/workspaces'>Existing workspaces</DropdownItem>
           )}
           {username && (
             <DropdownItem functionality={handleLogout}>Log out</DropdownItem>

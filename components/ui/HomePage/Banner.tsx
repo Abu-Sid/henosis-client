@@ -1,13 +1,13 @@
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import banner from "../../../public/images/banner.png";
 
 const Banner = () => {
   return (
-    <div data-testid="banner-test" className="banner">
-      <div className="banner__text">
-        <div data-aos="fade-down" data-aos-duration="1000">
+    <div data-testid='banner-test' className='banner'>
+      <div className='banner__text'>
+        <div data-aos='fade-down' data-aos-duration='1000'>
           <h1>
             Get your work done. <br /> <span>Together.</span>
           </h1>
@@ -17,12 +17,12 @@ const Banner = () => {
           </h4>
         </div>
 
-        <Link href="/workspaces" passHref>
+        <Link href='/workspaces' passHref>
           <button
-            data-aos="fade-right"
-            data-aos-duration="1000"
-            data-aos-delay="1000"
-            className="button-primary"
+            data-aos='fade-right'
+            data-aos-duration='1000'
+            data-aos-delay='1000'
+            className='button-primary'
           >
             GET STARTED
           </button>
@@ -30,12 +30,12 @@ const Banner = () => {
       </div>
 
       <div
-        data-aos="fade-left"
-        data-aos-duration="1000"
-        data-aos-delay="1000"
-        className="banner__image"
+        data-aos='fade-left'
+        data-aos-duration='1000'
+        data-aos-delay='1000'
+        className='banner__image'
       >
-        <Image src={banner} alt="banner" />
+        <Image src={banner} alt='banner' />
       </div>
     </div>
   );

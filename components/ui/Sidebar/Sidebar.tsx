@@ -17,34 +17,33 @@ const Sidebar = () => {
 
   return (
     <SidebarContainer>
-      <SidebarItem icon={Logo} className="sidebar__logo" href="/" />
-      <SidebarItem icon={User} pathName={path} href="" tooltip="Dashboard" />
+      <SidebarItem icon={Logo} className='sidebar__logo' href='/' />
       <SidebarItem
         icon={ClipBoard}
         pathName={path}
-        href="backlog"
-        tooltip="Backlog"
+        href='backlog'
+        tooltip='Backlog'
       />
       <SidebarItem
         icon={Boards}
         pathName={path}
-        href="board"
-        tooltip="Boards"
+        href='board'
+        tooltip='Boards'
       />
-      <SidebarItem icon={Chat} pathName={path} href="chat" tooltip="Chats" />
+      <SidebarItem icon={Chat} pathName={path} href='chat' tooltip='Chats' />
       <SidebarItem
         icon={Mail}
         pathName={path}
-        href="notifications"
-        tooltip="Notifications"
+        href='notifications'
+        tooltip='Notifications'
       />
       <SidebarItem
         icon={Settings}
         pathName={path}
-        href="settings"
-        tooltip="Settings"
+        href='settings'
+        tooltip='Settings'
       />
-      <SidebarItem icon={Logout} className="sidebar__logout" tooltip="Logout" />
+      <SidebarItem icon={Logout} className='sidebar__logout' tooltip='Logout' />
     </SidebarContainer>
   );
 };
