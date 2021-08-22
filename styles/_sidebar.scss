@@ -19,7 +19,11 @@
     li {
       position: relative;
       margin: 10px;
-
+      button {
+        background-color: transparent;
+        border: none;
+        outline: none;
+      }
       // .tooltip {
       //   background-color: $gray;
       //   padding: 0.5em;

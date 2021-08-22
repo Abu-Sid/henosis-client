@@ -1,7 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React from "react";
+import { motion, useAnimation } from "framer-motion";
+import { logout } from "../../../auth/authManager";
+import { authUserLogout } from "../../../redux/actions/userActions";
+import { useDispatch } from "react-redux";
 
 interface IProps {
   icon: StaticImageData;
@@ -18,30 +21,52 @@ const SidebarItem: React.FC<IProps> = ({
   tooltip,
   pathName,
 }) => {
-  const [visible, setVisible] = useState(false);
+  const dispatch = useDispatch();
+  const control = useAnimation();
   const variants = {
-    visible: { opacity: 1, x: 0 },
     hidden: { opacity: 0, x: -50 },
+  };
+
+  const handleLogoutClick = async () => {
+    try {
+      await logout();
+      dispatch(authUserLogout());
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <motion.li
-      onHoverStart={() => {
-        setVisible(!visible);
+      onMouseEnter={() => {
+        control.start({
+          opacity: 1,
+          x: 0,
+        });
       }}
-      onHoverEnd={() => {
-        setVisible(!visible);
+      onMouseLeave={() => {
+        control.start({
+          opacity: 0,
+          x: -50,
+        });
       }}
       className={className}
     >
-      <Link href={href === "/" ? "/" : `${pathName}/${href}`}>
-        <a>
-          <Image src={icon} alt='user-icon' />
-        </a>
-      </Link>
-      {tooltip && visible && (
+      {href && (
+        <Link href={href === "/" ? "/" : `${pathName}/${href}`}>
+          <a>
+            <Image src={icon} alt='icon' />
+          </a>
+        </Link>
+      )}
+      {className === "sidebar__logout" && (
+        <button onClick={handleLogoutClick}>
+          <Image src={icon} alt='icon' />
+        </button>
+      )}
+      {tooltip && (
         <motion.span
           initial='hidden'
-          animate='visible'
+          animate={control}
           variants={variants}
           className='tooltip'
         >
