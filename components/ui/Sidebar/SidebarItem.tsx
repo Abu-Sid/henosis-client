@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { logout } from "../../../auth/authManager";
 import { authUserLogout } from "../../../redux/actions/userActions";
@@ -22,6 +22,7 @@ const SidebarItem: React.FC<IProps> = ({
   pathName,
 }) => {
   const dispatch = useDispatch();
+  const [visible, setVisible] = useState(false);
   const control = useAnimation();
   const variants = {
     hidden: { opacity: 0, x: -50 },
@@ -41,12 +42,14 @@ const SidebarItem: React.FC<IProps> = ({
         control.start({
           opacity: 1,
           x: 0,
+          display: "inline-block",
         });
       }}
       onMouseLeave={() => {
         control.start({
           opacity: 0,
           x: -50,
+          display: "none",
         });
       }}
       className={className}
@@ -64,14 +67,16 @@ const SidebarItem: React.FC<IProps> = ({
         </button>
       )}
       {tooltip && (
-        <motion.span
-          initial='hidden'
-          animate={control}
-          variants={variants}
-          className='tooltip'
-        >
-          {tooltip}
-        </motion.span>
+        <Link href={`${pathName}/${href}`} passHref>
+          <motion.span
+            initial='hidden'
+            animate={control}
+            variants={variants}
+            className='tooltip'
+          >
+            {tooltip}
+          </motion.span>
+        </Link>
       )}
     </motion.li>
   );
