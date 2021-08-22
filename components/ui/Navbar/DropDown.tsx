@@ -56,7 +56,7 @@ export const DropdownItem: React.FC<INav> = ({
 }) => {
   const [open, setOpen] = useContext(DropdownContext);
   const dropdownItemVariant = {
-    hidden: { opacity: 0, y: -100 },
+    hidden: { opacity: 0, y: -20 },
     visible: { opacity: 1, y: 0 },
   };
   const handleClick = () => {
