@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import Logo from "../Logo";
+import { motion } from "framer-motion";
 import { INav, useRoute } from "./Navbar";
 
 const Nav: React.FC<INav> = ({ children, className }) => {
@@ -13,10 +14,14 @@ const Nav: React.FC<INav> = ({ children, className }) => {
     color = "colored-bg";
   }
   return (
-    <nav className={`${color} ${className}`}>
-      <Link href="/" passHref>
-        <div className="logo">
-          <div className="logo__image">
+    <motion.nav
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className={`${color} ${className}`}
+    >
+      <Link href='/' passHref>
+        <div className='logo'>
+          <div className='logo__image'>
             <Logo color={path === "/" ? "white" : "color"} />
           </div>
           <h1 className={path === "/" ? "blue logo__text" : "white logo__text"}>
@@ -25,7 +30,7 @@ const Nav: React.FC<INav> = ({ children, className }) => {
         </div>
       </Link>
       <ul>{children}</ul>
-    </nav>
+    </motion.nav>
   );
 };
 
