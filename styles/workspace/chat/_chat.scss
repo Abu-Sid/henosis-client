@@ -32,6 +32,41 @@
           outline: none;
           background-color: transparent;
         }
+        button {
+          background-color: transparent;
+          border: none;
+          outline: none;
+          cursor: pointer;
+        }
+      }
+      .messages {
+        width: 100%;
+        margin-bottom: 10px;
+        img {
+          border-radius: 50%;
+          height: 40px;
+          width: 40px;
+          cursor: pointer;
+        }
+        @mixin message {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          margin-top: 8px;
+        }
+        .message-right {
+          @include message;
+          img {
+            margin-left: 8px;
+          }
+        }
+        .message-left {
+          @include message;
+          flex-direction: row-reverse;
+          img {
+            margin-right: 8px;
+          }
+        }
       }
     }
     .members {
@@ -46,19 +81,19 @@
           opacity: 0.5;
         }
       }
-      .chat-member {
-        padding: 5px;
-        border-radius: radius(small);
-        transition: all 300ms ease-in-out;
-        cursor: pointer;
-        p {
-          margin-left: 10px;
-        }
-        &:hover {
-          background-color: $light-gray-purple;
-        }
-        @include flex(row, flex-start, center);
+    }
+    .chat-member {
+      padding: 5px;
+      border-radius: radius(small);
+      transition: all 300ms ease-in-out;
+      cursor: pointer;
+      p {
+        margin-left: 10px;
       }
+      &:hover {
+        background-color: $light-gray-purple;
+      }
+      @include flex(row, flex-start, center);
     }
   }
 }
