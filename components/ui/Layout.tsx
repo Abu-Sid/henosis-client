@@ -37,7 +37,8 @@ const Layout = ({ children }) => {
       {!path.includes("workspaces/[...paths]") &&
         !path.includes("dashboard") &&
         !path.includes("settings") &&
-        !path.includes("form") && <Navbar />}
+        !path.includes("form") &&
+        !path.includes("test") && <Navbar />}
       <main>{children}</main>
     </>
   );

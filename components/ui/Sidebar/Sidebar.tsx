@@ -18,7 +18,6 @@ const Sidebar = () => {
   return (
     <SidebarContainer>
       <SidebarItem icon={Logo} className='sidebar__logo' href='/' />
-      <SidebarItem icon={User} pathName={path} href='' tooltip='Dashboard' />
       <SidebarItem
         icon={ClipBoard}
         pathName={path}

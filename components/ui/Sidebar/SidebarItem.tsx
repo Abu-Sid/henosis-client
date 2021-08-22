@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React from "react";
+import { motion, useAnimation } from "framer-motion";
 import { logout } from "../../../auth/authManager";
 import { authUserLogout } from "../../../redux/actions/userActions";
 import { useDispatch } from "react-redux";
@@ -22,9 +22,8 @@ const SidebarItem: React.FC<IProps> = ({
   pathName,
 }) => {
   const dispatch = useDispatch();
-  const [visible, setVisible] = useState(false);
+  const control = useAnimation();
   const variants = {
-    visible: { opacity: 1, x: 0 },
     hidden: { opacity: 0, x: -50 },
   };
 
@@ -38,11 +37,17 @@ const SidebarItem: React.FC<IProps> = ({
   };
   return (
     <motion.li
-      onHoverStart={() => {
-        setVisible(!visible);
+      onMouseEnter={() => {
+        control.start({
+          opacity: 1,
+          x: 0,
+        });
       }}
-      onHoverEnd={() => {
-        setVisible(!visible);
+      onMouseLeave={() => {
+        control.start({
+          opacity: 0,
+          x: -50,
+        });
       }}
       className={className}
     >
@@ -58,10 +63,10 @@ const SidebarItem: React.FC<IProps> = ({
           <Image src={icon} alt='icon' />
         </button>
       )}
-      {tooltip && visible && (
+      {tooltip && (
         <motion.span
           initial='hidden'
-          animate='visible'
+          animate={control}
           variants={variants}
           className='tooltip'
         >
