@@ -45,6 +45,8 @@
       .tooltip {
         background-color: $gray;
         padding: 0.5em;
+        color: $dark-blue;
+        cursor: pointer;
         position: absolute;
         left: 45px;
         width: 150px;
