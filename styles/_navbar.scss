@@ -71,7 +71,6 @@
   transform: translateX(30%);
   border-radius: radius(small);
   background-color: $gray;
-  // animation: dropdown-in 300ms ease-in-out;
   &__item {
     transition: background 300ms ease-in-out;
     a {
