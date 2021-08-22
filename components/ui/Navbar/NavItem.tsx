@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import React, { useContext } from "react";
 import { DropdownContext, INav, useRoute } from "./Navbar";
+import { AnimatePresence } from "framer-motion";
 
 const NavItem: React.FC<INav> = ({ children, href, name, text, icon }) => {
   const path = useRoute();
@@ -25,7 +26,7 @@ const NavItem: React.FC<INav> = ({ children, href, name, text, icon }) => {
           <FontAwesomeIcon className='toggle-icon' icon={icon} />
         </button>
       )}
-      {open && children}
+      <AnimatePresence>{open && children}</AnimatePresence>
     </li>
   );
 };

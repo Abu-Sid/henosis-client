@@ -2,7 +2,7 @@ import Link from "next/link";
 import React, { useContext } from "react";
 import { useDetectClickOutside } from "react-detect-click-outside";
 import { DropdownContext, INav } from "./Navbar";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface IDropdown {
   width: number;
@@ -37,6 +37,7 @@ export const DropdownMenu: React.FC<IDropdown> = ({
   return (
     <div ref={ref}>
       <motion.div
+        exit={{ opacity: 0 }}
         initial='hidden'
         animate='visible'
         variants={dropdownVariant}
