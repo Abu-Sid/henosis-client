@@ -20,7 +20,7 @@ const Workspace = () => {
 
   const socket = useSocket("/create-workspace");
 
-  const socket2 = useSocket("/chat", "http://localhost:5000");
+  const socket2 = useSocket("/chat", "https://henosis-server-bd.herokuapp.com");
 
   useEffect(() => {
     if (socket !== null) {

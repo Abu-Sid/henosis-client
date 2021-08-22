@@ -7,7 +7,7 @@ import Orange from "../../../../public/images/icons/orange.svg";
 import Pink from "../../../../public/images/icons/pink.svg";
 import Purple from "../../../../public/images/icons/purple.svg";
 import { RootState } from "../../../../redux/reducers";
-import ChatBody from "./chatBody";
+import ChatBody from "./ChatBody";
 import ChatChannel from "./ChatChannel";
 import ChatHeader from "./ChatHeader";
 
@@ -19,7 +19,7 @@ export interface IChannel {
 }
 
 const Chat = () => {
-  const socket = useSocket("/chat", "http://localhost:5000");
+  const socket = useSocket("/chat", "https://henosis-server-bd.herokuapp.com");
 
   const { _id } = useSelector(
     (state: RootState) => state.workspaceReducer.workspace
