@@ -55,7 +55,9 @@ const Workspace = () => {
     if (socket) {
       socket.on("added-member", (updatedMembers: IUser[]) => {
         toast.success("Member Added Successfully!");
-        dispatch(addMembers(updatedMembers));
+        if (updatedMembers) {
+          dispatch(addMembers(updatedMembers));
+        }
       });
     }
   }, [socket, dispatch]);
