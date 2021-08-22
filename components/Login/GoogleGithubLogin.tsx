@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { githubLogin, googleLogin, IUser } from "../../auth/authManager";
 import {
   authUserFailure,
-  authUserSuccess
+  authUserSuccess,
 } from "../../redux/actions/userActions";
 import GitHubIcon from "./GitHubIcon";
 import GoogleIcon from "./GoogleIcon";
@@ -29,7 +29,7 @@ const GoogleGithubLogin = () => {
         body: JSON.stringify({
           email: user.email,
           name: user.name,
-          imageURL: "https://i.ibb.co/KrCxTCv/user.png",
+          imageURL: "https://i.ibb.co/Cv782Sw/user.png",
           githubLink: "https://github.com/username",
           location: "street no. cityname, countryname",
           bio: "your favorite things",
