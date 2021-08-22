@@ -65,9 +65,13 @@ const AcceptRequest = ({ socket }: IProps) => {
 
   const handleClick = () => {
     if (socket !== null) {
-      socket.emit("add-member", _id, [...members, currentUser]);
-      toastId = toast.loading("Loading...");
-      replace(`/workspaces/${_id}/`);
+      if (currentUser) {
+        socket.emit("add-member", _id, [...members, currentUser]);
+        toastId = toast.loading("Loading...");
+        replace(`/workspaces/${_id}/`);
+      } else {
+        toast.error("The User Not Found");
+      }
     }
   };
 
