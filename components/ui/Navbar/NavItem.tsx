@@ -5,7 +5,7 @@ import { DropdownContext, INav, useRoute } from "./Navbar";
 
 const NavItem: React.FC<INav> = ({ children, href, name, text, icon }) => {
   const path = useRoute();
-  const [open, setOpen] = useContext(DropdownContext);
+  const { open, setOpen } = useContext(DropdownContext);
 
   return (
     <li className={path === "/" ? "blue" : "white"}>
@@ -22,7 +22,7 @@ const NavItem: React.FC<INav> = ({ children, href, name, text, icon }) => {
           onClick={() => setOpen(!open)}
         >
           <p>{text}</p>
-          <FontAwesomeIcon className="toggle-icon" icon={icon} />
+          <FontAwesomeIcon className='toggle-icon' icon={icon} />
         </button>
       )}
       {open && children}

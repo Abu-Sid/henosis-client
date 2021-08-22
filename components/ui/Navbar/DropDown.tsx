@@ -14,7 +14,7 @@ export const DropdownMenu: React.FC<IDropdown> = ({
   width,
   setIsOpen,
 }) => {
-  const [open, setOpen] = useContext(DropdownContext);
+  const { open, setOpen } = useContext(DropdownContext);
   const dropdownVariant = {
     hidden: { opacity: 0 },
     visible: {
@@ -54,7 +54,7 @@ export const DropdownItem: React.FC<INav> = ({
   href,
   functionality,
 }) => {
-  const [open, setOpen] = useContext(DropdownContext);
+  const { open, setOpen } = useContext(DropdownContext);
   const dropdownItemVariant = {
     hidden: { opacity: 0, y: -20 },
     visible: { opacity: 1, y: 0 },
