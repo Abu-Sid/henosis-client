@@ -19,7 +19,7 @@ const ProfileDetails = (props: IProps) => {
         className="profile-left"
       
       >
-        <img src={imageURL} width={200} height={200} id="image" alt="pro-pic" />
+        <img src={imageURL} width={200} height={200} id="image" alt="profile-pic" />
       </div>
       <div className="profile-right">
         <div>
