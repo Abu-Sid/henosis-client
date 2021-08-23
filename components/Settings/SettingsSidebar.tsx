@@ -11,32 +11,32 @@ import Logout from "../../public/images/icons/logout.svg";
 const SettingsSidebar: React.FC = () => {
   return (
     <SidebarContainer>
-      <SidebarItem icon={Logo} className='sidebar__logo' href='/' />
+      <SidebarItem icon={Logo} className="sidebar__logo" href="/" />
       <SidebarItem
         icon={Profile}
-        tooltip='Profile'
-        pathName='/settings'
-        href='profile'
+        tooltip="Profile"
+        pathName="/settings"
+        href="profile"
       />
       <SidebarItem
         icon={Account}
-        tooltip='Account'
-        pathName='/settings'
-        href='account'
+        tooltip="Account"
+        pathName="/settings"
+        href="account"
       />
       <SidebarItem
         icon={Customization}
-        tooltip='Customization'
-        pathName='/settings'
-        href='customization'
+        tooltip="Customization"
+        pathName="/settings"
+        href="customization"
       />
       <SidebarItem
         icon={Billing}
-        tooltip='Billing'
-        pathName='/settings'
-        href='billing'
+        tooltip="Billing"
+        pathName="/settings"
+        href="billing"
       />
-      <SidebarItem icon={Logout} className='sidebar__logout' />
+      <SidebarItem icon={Logout} className="sidebar__logout" tooltip="Logout" />
     </SidebarContainer>
   );
 };

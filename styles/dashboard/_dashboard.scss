@@ -91,11 +91,37 @@
     }
   }
 }
-
-.disable-button {
+.delete-confirm {
+  .text {
+    text-align: center;
+    h2 {
+      margin-bottom: 0.5rem;
+    }
+    p {
+      color: gray;
+    }
+  }
+  #button-group {
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+  .cancel-button {
+    @extend .btn;
+    background-color: rgb(163, 161, 161);
+    margin-right: 0.4rem;
+    font-size: 1rem
+  }
+  .delete-button {
+    @extend .btn;
+    background-color: #f15e5e;
+    margin-left: 0.4rem;
+    font-size: 1rem
+  }
 }
+
 .react-responsive-modal-modal {
-  background: #e6e8ea !important;
+  background: #fefcfc !important;
   border-radius: 5px;
   width: 24rem;
 }

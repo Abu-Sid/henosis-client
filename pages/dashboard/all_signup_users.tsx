@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import UsersRow from "../../components/Dashboard/UsersRow";
-import AdminSidebar from "../../components/ui/AdminSidebar/AdminSidebar";
+import AdminSidebar from "../../components/Dashboard/AdminSidebar";
 import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation";
 
 interface UserType {
