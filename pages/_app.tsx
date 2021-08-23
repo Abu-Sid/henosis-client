@@ -16,7 +16,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <Provider store={store}>
       <Layout>
         <Component {...pageProps} />
-        <ScrollToTop smooth color='white' style={{backgroundColor:'#4a4fff', padding:'10px', fontWeight:600}} />
+        <div className='scroll-to-top'>
+          <ScrollToTop smooth color='white' className='scroll-to-top__button' />
+        </div>
       </Layout>
     </Provider>
   );

@@ -2,6 +2,7 @@ import Link from "next/link";
 import React, { useContext } from "react";
 import { useDetectClickOutside } from "react-detect-click-outside";
 import { DropdownContext, INav } from "./Navbar";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface IDropdown {
   width: number;
@@ -13,7 +14,17 @@ export const DropdownMenu: React.FC<IDropdown> = ({
   width,
   setIsOpen,
 }) => {
-  const [open, setOpen] = useContext(DropdownContext);
+  const { open, setOpen } = useContext(DropdownContext);
+  const dropdownVariant = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        when: "beforeChildren",
+        staggerChildren: 0.2,
+      },
+    },
+  };
 
   const closeDropdown = () => {
     if (setIsOpen === undefined) {
@@ -26,9 +37,16 @@ export const DropdownMenu: React.FC<IDropdown> = ({
   const ref = useDetectClickOutside({ onTriggered: closeDropdown });
   return (
     <div ref={ref}>
-      <div style={{ width: `${width}px` }} className="dropdown">
+      <motion.div
+        exit={{ opacity: 0 }}
+        initial='hidden'
+        animate='visible'
+        variants={dropdownVariant}
+        style={{ width: `${width}px` }}
+        className='dropdown'
+      >
         {children}
-      </div>
+      </motion.div>
     </div>
   );
 };
@@ -38,17 +56,29 @@ export const DropdownItem: React.FC<INav> = ({
   href,
   functionality,
 }) => {
-  const [open, setOpen] = useContext(DropdownContext);
-
+  const { open, setOpen } = useContext(DropdownContext);
+  const dropdownItemVariant = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0 },
+  };
   const handleClick = () => {
     functionality();
   };
   return (
-    <div className="dropdown__item">
-      {!href && <a onClick={handleClick}>{children}</a>}
+    <div className='dropdown__item'>
+      {!href && (
+        <motion.a variants={dropdownItemVariant} onClick={handleClick}>
+          {children}
+        </motion.a>
+      )}
       {href && (
-        <Link href={href}>
-          <a onClick={() => setOpen(!open)}>{children}</a>
+        <Link href={href} passHref>
+          <motion.a
+            variants={dropdownItemVariant}
+            onClick={() => setOpen(!open)}
+          >
+            {children}
+          </motion.a>
         </Link>
       )}
     </div>
