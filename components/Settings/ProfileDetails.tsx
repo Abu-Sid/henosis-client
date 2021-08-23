@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 interface IProps {
   info: {
     name: string;
@@ -20,7 +19,7 @@ const ProfileDetails = (props: IProps) => {
         className="profile-left"
       
       >
-        <Image src={imageURL} width={200} height={200} id="image" alt="pro-pic" />
+        <img src={imageURL} width={200} height={200} id="image" alt="pro-pic" />
       </div>
       <div className="profile-right">
         <div>
