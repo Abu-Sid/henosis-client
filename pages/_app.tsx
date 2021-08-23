@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import ScrollToTop from "react-scroll-to-top";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { AnimatePresence } from "framer-motion";
 import Preloader from "../components/ui/Animation/Preloader";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -24,12 +25,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 3000);
   });
 
   return (
     <>
-      {loading && <Preloader />}
+      <AnimatePresence>{loading && <Preloader />}</AnimatePresence>
       {!loading && (
         <Provider store={store}>
           <Layout>
