@@ -1,11 +1,11 @@
 import React from "react";
 import withAuthCheck from "../../HOC/withAuthCheck";
-import SideBar from "../../components/Dashboard/SideBar";
+import AdminSidebar from "../../components/Dashboard/AdminSidebar";
 
 const Dashboard = () => {
   return (
     <div>
-      <SideBar />
+      <AdminSidebar/>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import WorkspaceRow from "../../components/Dashboard/WorkspaceRow";
-import AdminSidebar from "../../components/ui/AdminSidebar/AdminSidebar";
+import AdminSidebar from "../../components/Dashboard/AdminSidebar";
 import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation";
 
 enum FilterEnum {

@@ -3,8 +3,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import AdminRow from "../../components/Dashboard/AdminRow";
-import AdminSidebar from "../../components/ui/AdminSidebar/AdminSidebar";
+import AdminSidebar from "../../components/Dashboard/AdminSidebar";
 import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation";
+import toast from "react-hot-toast";
 
 enum RoleEnum {
   admin = "admin",
@@ -51,7 +52,7 @@ const Admins = () => {
   ) => {
     if (data) {
       const { name, email, role } = data;
-      e.target.reset();
+      const loadingId = toast.loading("Loading...");
       // sent data to database
       fetch("https://intense-peak-24388.herokuapp.com/admin", {
         method: "POST",
@@ -60,18 +61,42 @@ const Admins = () => {
         },
         body: JSON.stringify({ email, name, role }),
       })
-        // .then((res) => res.json())
-        // .then((data) => {
-        //   console.log(data);
-        //   if (data) {
-        //     const newAdminInfo = [...adminInfo, data];
-        //     setAdminInfo(newAdminInfo);
-          // }
-        // });
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data) {
+          const newAdminInfo = [...adminInfo, data.data];
+          setAdminInfo(newAdminInfo);
+          toast.dismiss(loadingId);
+          toast.success("New Admin Record Reserved!");
+      }
+      });
       setOpen(false);
     }
   };
 
+  const handleDelete = (id: Number) => {
+    const loadingId = toast.loading("Loading...");
+    fetch(`https://intense-peak-24388.herokuapp.com/admin/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) {
+          const newAdminInfo = adminInfo.filter((rest) => rest._id !== id);
+          setAdminInfo(newAdminInfo);
+          onCloseModal();
+          toast.dismiss(loadingId);
+          toast.success("Admin Record Removed Successfully!");
+        }
+      })
+      .catch((err) => {
+        console.log("error", err);
+      });
+  };
   return (
     <section className="d-container">
       <div className="d-row">
@@ -118,7 +143,12 @@ const Admins = () => {
             ) : (
               <tbody>
                 {adminInfo.map((info, index) => (
-                  <AdminRow key={info._id} info={info} index={index} />
+                  <AdminRow
+                    key={info._id}
+                    info={info}
+                    index={index}
+                    handleDelete={handleDelete}
+                  />
                 ))}
               </tbody>
             )}

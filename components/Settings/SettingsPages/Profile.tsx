@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
@@ -7,13 +6,13 @@ import "react-responsive-modal/styles.css";
 import { RootState } from "../../../redux/reducers";
 import LoadingAnimation from "../../ui/Animation/LoadingAnimation";
 import ProfileDetails from "../ProfileDetails";
+import toast from "react-hot-toast";
 
 interface IFormInput {
   name: string;
   email: string;
   githubLink: string;
   location: string;
-  imageURL?: any;
   bio: string;
   _id: number;
 }
@@ -25,13 +24,12 @@ const Profile = () => {
     fetch(`https://intense-peak-24388.herokuapp.com/user/${email}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log("data", data);
+        // console.log("data", data);
         setProfile(data.data[0]);
       })
       .catch((err) => console.log(err));
   }, [email]);
 
-  const [imageURL, setImageURL] = useState<any>(null);
   // modal
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
@@ -39,9 +37,10 @@ const Profile = () => {
 
   // react hook form
   const { register, handleSubmit } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data, e) => {
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
     if (data) {
       const { githubLink, location, bio } = data;
+      const loadingId = toast.loading("Loading...");
 
       fetch(`https://intense-peak-24388.herokuapp.com/user/${email}`, {
         method: "PUT",
@@ -49,7 +48,6 @@ const Profile = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          imageURL,
           githubLink,
           location,
           bio,
@@ -60,33 +58,21 @@ const Profile = () => {
           if (data) {
             const newProfile = {
               ...profile,
-              imageURL,
               githubLink,
               location,
               bio,
             };
             setProfile(newProfile);
-            e.target.reset();
+            toast.dismiss(loadingId);
+            toast.success("Profile Updated Successfully!");
           }
         });
     }
-
     setOpen(false);
   };
-
-  const handleImageUpload = (event) => {
-    const imageData = new FormData();
-    imageData.set("key", "5025c7b89b9227cb3def831a08b2a19e");
-    imageData.append("image", event.target.files[0]);
-
-    axios
-      .post("https://api.imgbb.com/1/upload", imageData)
-      .then(function (response) {
-        setImageURL(response.data.data.display_url);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  const [data, setData] = useState(false);
+  const handleDisable = () => {
+    setData(true);
   };
 
   return (
@@ -94,22 +80,35 @@ const Profile = () => {
       <div className="right-division">
         <h2>Profile</h2>
         <button className="admin-button" onClick={onOpenModal}>
-          Edit Profile
+          Edit Information
         </button>
         <Modal open={open} onClose={onCloseModal} center>
           <div className="admin-info">
             <h2>User Information</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
               <label>Github Link</label>
-              <input {...register("githubLink")} type="text" required />
+              <input
+                {...register("githubLink")}
+                type="text"
+                onBlur={handleDisable}
+                defaultValue={profile.githubLink}
+              />
               <label>Address</label>
-              <input {...register("location")} type="text" required />
+              <input
+                {...register("location")}
+                type="text"
+                onBlur={handleDisable}
+                defaultValue={profile.location}
+              />
               <label>Bio</label>
-              <input {...register("bio")} type="text" required />
-              <label>Upload Image</label>
-              <input type="file" onChange={handleImageUpload} required />
+              <input
+                {...register("bio")}
+                type="text"
+                onBlur={handleDisable}
+                defaultValue={profile.bio}
+              />
 
-              {imageURL ? (
+              {data ? (
                 <input
                   type="submit"
                   value="Save Profile Information"
