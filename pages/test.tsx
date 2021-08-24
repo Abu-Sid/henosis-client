@@ -5,13 +5,16 @@ const Test = () => {
   const [selectedId, setSelectedId] = useState(null);
   return (
     <>
-      <div className='faq-card' onClick={() => setSelectedId("mir")}>
-        <h1>What is Henosis ?</h1>
-      </div>
+      {selectedId === null && (
+        <div onClick={() => setSelectedId("mir")}>
+          <h5>Mir</h5>
+        </div>
+      )}
+
       {selectedId && (
         <div>
+          <h5>Mir Hussain</h5>
           <button onClick={() => setSelectedId(null)}>Close</button>
-          <h1>Fuck you</h1>
         </div>
       )}
     </>

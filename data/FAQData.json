@@ -1,0 +1,24 @@
+{
+  "FAQ": [
+    {
+      "id": "001",
+      "question": "What does Henosis means?",
+      "answer": "Henosis is a greek word. It means unity."
+    },
+    {
+      "id": "002",
+      "question": "Why henosis ?",
+      "answer": "Answer to the question number 2 "
+    },
+    {
+      "id": "003",
+      "question": "What does Henosis means?",
+      "answer": "Answer to the question number 3 "
+    },
+    {
+      "id": "004",
+      "question": "What does Henosis means?",
+      "answer": "Answer to the question number 4 "
+    }
+  ]
+}

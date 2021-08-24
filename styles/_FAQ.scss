@@ -7,13 +7,37 @@
     padding: 1em;
   }
   &__cards-container {
-    background-color: green;
     width: 50%;
     height: 100%;
-  }
-}
+    @include flex(column);
+    .faq-card {
+      position: relative;
+      &__question {
+        width: 500px;
+        background-color: $light-gray-purple;
+        margin-bottom: 0.5em;
+        padding: 0.5em;
+        border-radius: radius(small);
+        h2 {
+          color: $dark-blue;
+        }
+      }
 
-.faq-card {
-  width: 500px;
-  background-color: red;
+      &__answer {
+        width: 500px;
+        background-color: $purple;
+        margin-bottom: 0.5em;
+        padding: 0.5em;
+        border-radius: radius(small);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        p {
+          color: $white;
+        }
+      }
+    }
+  }
 }
