@@ -9,10 +9,17 @@
 
   &__body {
     padding-top: 10px;
-    height: 100%;
     @include flex;
     .chat-body {
       @extend .chat-channel;
+      height: 91vh;
+      ::-webkit-scrollbar {
+        max-width: 8px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: #bbbbbb;
+        border-radius: 3px;
+      }
       margin: 0 10px;
       width: 60%;
       @include flex(column, flex-end);
@@ -40,22 +47,25 @@
         }
       }
       .messages {
+        overflow-y: scroll;
         width: 100%;
         margin-bottom: 10px;
         img {
           border-radius: 50%;
-          height: 40px;
-          width: 40px;
+          height: 35px;
+          width: 35px;
           cursor: pointer;
+          margin-right: 8px;
         }
         @mixin message {
           display: flex;
-          align-items: center;
           justify-content: flex-end;
+          align-items: flex-end;
           margin-top: 8px;
         }
         .message-right {
           @include message;
+          text-align: end;
           img {
             margin-left: 8px;
           }
@@ -63,8 +73,17 @@
         .message-left {
           @include message;
           flex-direction: row-reverse;
-          img {
-            margin-right: 8px;
+        }
+        .main-message {
+          background-color: $light-gray-purple;
+          padding: 0.5em;
+          border-radius: 8px;
+          small {
+            font-weight: 500;
+          }
+          p {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
           }
         }
       }
@@ -74,6 +93,7 @@
       @include flex(column, flex-start, flex-start);
       &__online {
         width: 100%;
+        margin-bottom: 15px;
       }
       &__offline {
         @extend .members__online;
@@ -81,19 +101,31 @@
           opacity: 0.5;
         }
       }
+      h3 {
+        margin-bottom: 5px;
+      }
     }
     .chat-member {
       padding: 5px;
       border-radius: radius(small);
       transition: all 300ms ease-in-out;
       cursor: pointer;
+      img {
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+      }
       p {
         margin-left: 10px;
       }
-      &:hover {
+      &:hover,
+      &.active-channel {
         background-color: $light-gray-purple;
       }
       @include flex(row, flex-start, center);
+      a {
+        color: #1a1a1a;
+      }
     }
   }
 }
