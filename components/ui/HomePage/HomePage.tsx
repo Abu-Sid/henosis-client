@@ -5,6 +5,7 @@ import BoardSection from "./BoardSection";
 import Contact from "./Contact";
 import DashboardSection from "./DashboardSection";
 import FeaturesSection from "./FeaturesSection";
+import Testimonial from "./Testimonial";
 
 const HomePage = () => {
   return (
@@ -13,6 +14,7 @@ const HomePage = () => {
       <FeaturesSection />
       <BoardSection />
       <DashboardSection />
+      <Testimonial />
       <Contact />
       <Footer />
     </>
