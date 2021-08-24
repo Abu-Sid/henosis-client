@@ -7,7 +7,7 @@ const DashboardSection = () => {
     <div className="dashboard">
       <div className="dashboard__text">
         <h4 data-aos="fade-right" data-aos-delay="100">
-          Dive into the details.
+          Manage everything in one workspace .
         </h4>
         <h2 data-aos="fade-right" data-aos-delay="200">
           Your <span>dashboard</span> contains everything that you need to know.

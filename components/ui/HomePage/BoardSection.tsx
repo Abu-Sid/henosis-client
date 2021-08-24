@@ -15,15 +15,16 @@ const BoardSection = () => {
       </div>
       <div className="chat__text">
         <h4 data-aos="fade-left" data-aos-delay="100">
-          Group Chat
+          Real Time Communication
         </h4>
         <h2 data-aos="fade-left" data-aos-delay="200">
           The board is just the <span>beginning</span>
         </h2>
         <br />
         <p data-aos="fade-left" data-aos-delay="300">
-          You can <span>chat with other developers</span> in your group, while
-          working on a feature or solving a problem.
+          Add comments and tag your team on any task or document. Assign action
+          items,<span>chat in real-time</span> , share attachments, and never
+          miss a beat with fluid team communication
         </p>
       </div>
     </div>

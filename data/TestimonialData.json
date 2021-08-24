@@ -1,0 +1,34 @@
+{
+  "testimonials": [
+    {
+      "image": "https://web.programming-hero.com/public/1607429059803.png",
+      "name": "Jhankar Mahbub",
+      "title": "CEO, Programming Hero",
+      "review": "Best Project Management software in the industry.The platform is robust, very intuitive and a pleasure to spend time in."
+    },
+    {
+      "image": "https://avatars.githubusercontent.com/u/76878792?v=4",
+      "name": "Mir Hussain Mortaza",
+      "title": "CEO, Apple",
+      "review": "Henosis has made processes and communication seamless and we truly wouldn’t be able to work the same without it."
+    },
+    {
+      "image": "https://avatars.githubusercontent.com/u/61420758?v=4",
+      "name": "Saiful Islam Sojib",
+      "title": "GM, Google",
+      "review": "Henosis was and is the only product that that delivers exactly the tools and features a fast-moving marketing team like ours needs. "
+    },
+    {
+      "image": "https://avatars.githubusercontent.com/u/74054107?v=4",
+      "name": "Md Naimur Rahman Durjoy",
+      "title": "Chairman, Microsoft",
+      "review": "Henosis is by far the best productivity tool I've ever used. They have consolidated so many tools down to one for my team, without compromising the experience."
+    },
+    {
+      "image": "https://rainerboshoff.co.za/wp-content/uploads/2014/08/Profile-Pic-Demo.png",
+      "name": "Abu Siddique",
+      "title": "MD, Tesla",
+      "review": "We’ve seen a 40% decrease in emails within the marketing team and it has made our communication much more central."
+    }
+  ]
+}

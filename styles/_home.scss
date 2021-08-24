@@ -93,7 +93,7 @@
 //Dashboard section
 
 .dashboard {
-  margin: 2rem 2rem 12rem 2rem;
+  margin: 2rem 2rem 6rem 2rem;
   @include flex(row, space-around, stretch);
   span {
     color: $purple;
@@ -116,6 +116,37 @@
     width: 100%;
   }
 }
+//Testimonial
+.testimonial {
+  text-align: center;
+  h1 {
+    font-size: $fs-l;
+    color: $dark-blue;
+  }
+  span {
+    color: $purple;
+  }
+  &__container {
+    position: relative;
+    &__card {
+      border-radius: 10px;
+      box-sizing: border-box;
+      text-align: center;
+      img {
+        width: 8rem;
+        border-radius: 50%;
+        border: 5px solid white;
+      }
+      h4 {
+        color: $purple;
+      }
+      p {
+        color: $dark-blue;
+      }
+    }
+  }
+}
+
 // Contact form
 .contact-container {
   border-radius: 0.5rem;
@@ -153,7 +184,7 @@
     border: none;
     border-radius: 0.5rem;
     cursor: pointer;
-    
+
     &:hover {
       background-color: $gray-purple !important;
     }
