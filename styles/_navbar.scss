@@ -54,6 +54,7 @@
       height: 25px;
       width: 0;
       border-left: $dark-blue solid 2px;
+      transition: border-left 300ms ease-in-out;
     }
     .divider-white {
       @extend .divider-blue;
@@ -70,7 +71,6 @@
   transform: translateX(30%);
   border-radius: radius(small);
   background-color: $gray;
-  // animation: dropdown-in 300ms ease-in-out;
   &__item {
     transition: background 300ms ease-in-out;
     a {
@@ -111,18 +111,22 @@
 
 .colored-bg {
   background-color: $dark-blue;
+  transition: background-color 300ms ease-in-out;
 }
 
 .white-bg {
   background-color: $white;
+  transition: background-color 300ms ease-in-out;
 }
 
 .blue {
   color: $dark-blue;
+  transition: color 300ms ease-in-out;
 }
 
 .white {
   color: $gray;
+  transition: color 300ms ease-in-out;
 }
 
 .hidden {

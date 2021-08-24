@@ -22,7 +22,6 @@ const SidebarItem: React.FC<IProps> = ({
   pathName,
 }) => {
   const dispatch = useDispatch();
-  const [visible, setVisible] = useState(false);
   const control = useAnimation();
   const variants = {
     hidden: { opacity: 0, x: -50 },
