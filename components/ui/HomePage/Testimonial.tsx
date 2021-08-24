@@ -3,7 +3,7 @@ import ReactCardCarousel from "react-card-carousel";
 import TestimonialData from "../../../data/TestimonialData.json";
 
 interface ITestimonial {
-  testimonial: {
+  testimonial?: {
     image?: string;
     name?: string;
     title?: string;
@@ -47,7 +47,7 @@ const Testimonial: React.FC<ITestimonial> = () => {
       <div>
         <div className="testimonial__container" style={CONTAINER_STYLE}>
           <ReactCardCarousel autoplay={true} autoplay_speed={3500}>
-            {TestimonialData.testimonials.map((test) => (
+            {TestimonialData?.testimonials?.map((test) => (
               <div
                 key="test.name"
                 style={CARD_STYLE}
