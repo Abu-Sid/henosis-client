@@ -13,6 +13,8 @@
       p {
         font-size: 1.3rem;
         font-weight: 500;
+        margin-top: 2px;
+        padding: 0.4rem;
       }
     }
   }
@@ -22,18 +24,19 @@
       @include writing-style($dark-blue, semi-large, thin);
     }
     button {
-      height: 20px;
-      width: 20px;
-      border: none;
-      outline: none;
-      border-radius: radius(small);
-      color: $dark-blue;
-      cursor: pointer;
-      background-color: $light-gray-purple;
+      @include button($dark-blue, $light-gray-purple);
       transition: all 300ms ease-in-out;
+      padding: 3px 12px;
+      &:focus {
+        box-shadow: 0 0 1px 3px $purple;
+      }
       &:hover {
         background-color: $purple;
         color: $white;
+      }
+      svg {
+        margin-top: 3px;
+        font-size: 1.3rem;
       }
     }
   }
