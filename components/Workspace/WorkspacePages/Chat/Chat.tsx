@@ -35,7 +35,7 @@ const Chat = () => {
 
   const [actives, setActives] = useState<IActive[]>([]);
 
-  const socket = useSocket("/chat", "http://localhost:5000");
+  const socket = useSocket("/chat", "https://henosis-server-bd.herokuapp.com");
 
   const offline = members.filter(
     (member) =>
