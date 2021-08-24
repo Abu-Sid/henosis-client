@@ -1,5 +1,6 @@
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
@@ -9,7 +10,7 @@ import { RootState } from "../../../../redux/reducers";
 import { IChannel } from "./Chat";
 
 interface IProps {
-  channel: IChannel;
+  channels: IChannel[];
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 }
 
@@ -22,8 +23,10 @@ interface IMessage {
   seen: string[];
 }
 
-const ChatBody = ({ channel, socket }: IProps) => {
-  const { _id } = channel || {};
+const ChatBody = ({ channels, socket }: IProps) => {
+  const router = useRouter();
+
+  const id = router.query.paths[2] || channels[0]?._id;
 
   const { members } = useSelector(
     (state: RootState) => state.workspaceReducer.workspace
@@ -33,24 +36,43 @@ const ChatBody = ({ channel, socket }: IProps) => {
 
   const [messages, setMessages] = useState<IMessage[]>([]);
 
+  const [messageLoading, setMessageLoading] = useState(true);
+
   const [inputData, setInputData] = useState("");
 
+  const [previousRoom, setPreviousRoom] = useState("");
+
+  const [messageError, setMessageError] = useState("");
+
   useEffect(() => {
-    if (_id && socket !== null) {
+    if (id && socket !== null) {
+      setMessages([]);
+      setMessageError("");
+      setMessageLoading(true);
       socket.emit(
         "previous-message",
-        _id,
+        id,
         (error: Error, messages: IMessage[]) => {
           if (error) {
-            console.log(error);
+            setMessageError(error.message);
+            setMessageLoading(false);
           } else {
             setMessages(messages);
+            setMessageLoading(false);
           }
         }
       );
-      socket.emit("join-channel", _id);
     }
-  }, [_id, socket]);
+  }, [id, socket]);
+
+  useEffect(() => {
+    if (socket !== null) {
+      socket.emit("join-channel", id, previousRoom, () => {
+        setPreviousRoom(id);
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [socket, id]);
 
   useEffect(() => {
     if (socket !== null) {
@@ -67,7 +89,7 @@ const ChatBody = ({ channel, socket }: IProps) => {
       const user = members.find((member) => member.email === email);
       const newMessage = {
         message: inputData,
-        channelId: _id,
+        channelId: id,
         userId: user._id,
         date: new Date(),
         seen: [],
@@ -80,9 +102,19 @@ const ChatBody = ({ channel, socket }: IProps) => {
     setInputData(e.currentTarget.value);
   };
 
+  const chatRef = useRef(null as HTMLDivElement);
+
+  useEffect(() => {
+    chatRef.current?.scrollIntoView(
+      messageLoading ? {} : { behavior: "smooth" }
+    );
+  }, [messages, messageLoading]);
+
   return (
     <div className="chat-body">
       <div className="messages">
+        {messageLoading && <h1>Loading...</h1>}
+        {messageError && <h1>{messageError}</h1>}
         {messages.map((message) => {
           const sender = members.find(
             (member) => member._id === message.userId
@@ -94,11 +126,15 @@ const ChatBody = ({ channel, socket }: IProps) => {
                 sender.email === email ? "message-right" : "message-left"
               }
             >
-              <p>{message.message}</p>
+              <div className="main-message">
+                <p>{message.message}</p>
+                <small>{sender.name}</small>
+              </div>
               <img src={sender.photo || personImage.src} alt="" />
             </div>
           );
         })}
+        <div ref={chatRef}></div>
       </div>
       <form onSubmit={handleSubmit} className="type-box">
         <input

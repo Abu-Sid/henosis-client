@@ -6,6 +6,7 @@ import Contact from "./Contact";
 import DashboardSection from "./DashboardSection";
 import FAQ from "./FAQ";
 import FeaturesSection from "./FeaturesSection";
+import Testimonial from "./Testimonial";
 
 const HomePage = () => {
   return (
@@ -14,7 +15,11 @@ const HomePage = () => {
       <FeaturesSection />
       <BoardSection />
       <DashboardSection />
+<<<<<<< HEAD
       <FAQ />
+=======
+      <Testimonial />
+>>>>>>> c6c3488f2d717cf19c6188797a7fca8dafc320da
       <Contact />
       <Footer />
     </>

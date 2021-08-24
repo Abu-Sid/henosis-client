@@ -7,9 +7,7 @@ const FeaturesSection = () => {
     <div className="features">
       <div className="features__text">
         <div data-aos="fade-up">
-          <h1>
-            It’s more than work. It’s a way of working <span>together</span> .
-          </h1>
+          <h1>Streamline, centralize, and modernize project management</h1>
           <h4>
             Start with a <span>Henosis </span> board. Customize and expand with
             more features as your teamwork grows. Manage projects, organize
