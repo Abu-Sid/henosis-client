@@ -4,10 +4,10 @@ import TestimonialData from "../../../data/TestimonialData.json";
 
 interface ITestimonial {
   testimonial: {
-    image: string;
-    name: string;
-    title: string;
-    review: string;
+    image?: string;
+    name?: string;
+    title?: string;
+    review?: string;
   };
 }
 const Testimonial: React.FC<ITestimonial> = () => {
