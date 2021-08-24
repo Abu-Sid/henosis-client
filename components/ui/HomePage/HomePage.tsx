@@ -4,6 +4,7 @@ import Banner from "./Banner";
 import BoardSection from "./BoardSection";
 import Contact from "./Contact";
 import DashboardSection from "./DashboardSection";
+import FAQ from "./FAQ";
 import FeaturesSection from "./FeaturesSection";
 
 const HomePage = () => {
@@ -13,6 +14,7 @@ const HomePage = () => {
       <FeaturesSection />
       <BoardSection />
       <DashboardSection />
+      <FAQ />
       <Contact />
       <Footer />
     </>
