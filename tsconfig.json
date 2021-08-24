@@ -19,7 +19,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "components/ui/HomePage/Testimonial.js"
+    "components/ui/HomePage/Testimonial.tsx"
   ],
   "exclude": ["node_modules"]
 }

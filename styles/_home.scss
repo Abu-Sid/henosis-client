@@ -126,18 +126,24 @@
   span {
     color: $purple;
   }
-}
-
-.testimonial__container__card {
-  img {
-    width: 8rem;
-    border-radius: 50%;
-  }
-  h4 {
-    color: $purple;
-  }
-  p {
-    color: $dark-blue;
+  &__container {
+    position: relative;
+    &__card {
+      border-radius: 10px;
+      box-sizing: border-box;
+      text-align: center;
+      img {
+        width: 8rem;
+        border-radius: 50%;
+        border: 5px solid white;
+      }
+      h4 {
+        color: $purple;
+      }
+      p {
+        color: $dark-blue;
+      }
+    }
   }
 }
 
