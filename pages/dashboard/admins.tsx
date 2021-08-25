@@ -6,6 +6,7 @@ import AdminRow from "../../components/Dashboard/AdminRow";
 import AdminSidebar from "../../components/Dashboard/AdminSidebar";
 import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation";
 import toast from "react-hot-toast";
+import verifyAdmin from "../../HOC/verifyAdmin";
 
 enum RoleEnum {
   admin = "admin",
@@ -159,4 +160,4 @@ const Admins = () => {
   );
 };
 
-export default Admins;
+export default verifyAdmin(Admins);

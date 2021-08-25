@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import UsersRow from "../../components/Dashboard/UsersRow";
 import AdminSidebar from "../../components/Dashboard/AdminSidebar";
 import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation";
+import verifyAdmin from "../../HOC/verifyAdmin";
+
 
 interface UserType {
   name: String;
@@ -62,4 +64,4 @@ const All_signup_users = () => {
   );
 };
 
-export default All_signup_users;
+export default verifyAdmin(All_signup_users);
