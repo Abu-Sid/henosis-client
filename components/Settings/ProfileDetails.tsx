@@ -1,4 +1,5 @@
 import React from "react";
+import ProfileImage from "./ProfileImage";
 interface IProps {
   info: {
     name: string;
@@ -12,14 +13,11 @@ interface IProps {
 }
 
 const ProfileDetails = (props: IProps) => {
-  const { name, email, githubLink, location, bio, imageURL } = props.info || {};
+  const { name, email, githubLink, location, bio } = props.info || {};
   return (
     <div id="profile-body">
-      <div
-        className="profile-left"
-      
-      >
-        <img src={imageURL} width={200} height={200} id="image" alt="profile-pic" />
+      <div className="profile-left">
+        <ProfileImage />
       </div>
       <div className="profile-right">
         <div>
