@@ -57,6 +57,27 @@ const FAQ = () => {
                     onClick={() => setSelectedId(data.id)}
                   >
                     <h2>{data.question}</h2>
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className='down-indicator'
+                    >
+                      <svg
+                        width='20'
+                        height='10'
+                        viewBox='0 0 116 46'
+                        fill='none'
+                        xmlns='http://www.w3.org/2000/svg'
+                      >
+                        <path
+                          d='M8 8L58 36.4672L108 8'
+                          stroke='#171E3C'
+                          strokeWidth='15'
+                          strokeLinecap='round'
+                        />
+                      </svg>
+                    </motion.div>
                   </motion.div>
                 ))}
               </>
