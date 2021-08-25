@@ -15,11 +15,8 @@ const HomePage = () => {
       <FeaturesSection />
       <BoardSection />
       <DashboardSection />
-<<<<<<< HEAD
       <FAQ />
-=======
       <Testimonial />
->>>>>>> c6c3488f2d717cf19c6188797a7fca8dafc320da
       <Contact />
       <Footer />
     </>

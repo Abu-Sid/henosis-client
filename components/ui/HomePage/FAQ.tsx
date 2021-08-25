@@ -1,16 +1,18 @@
 import React from "react";
 import Image from "next/image";
-import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import FAQBanner from "../../../public/images/banner.png";
 import { useState } from "react";
 import FAQData from "../../../data/FAQData.json";
 
 const FAQ = () => {
   const [selectedId, setSelectedId] = useState(null);
-  console.log(selectedId);
   const data = FAQData.FAQ;
   const answer = data?.find((data) => data.id === selectedId)?.answer;
-  console.log(answer);
+  const popupVariant = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
   return (
     <section className='faq'>
       <div className='faq__banner'>
@@ -25,12 +27,20 @@ const FAQ = () => {
               </motion.div>
             </motion.div>
           ))}
-          {selectedId && (
-            <motion.div className='faq-card__answer'>
-              <button onClick={() => setSelectedId(null)}>Close</button>
-              <p>{answer}</p>
-            </motion.div>
-          )}
+          <AnimatePresence>
+            {selectedId && (
+              <motion.div
+                className='faq-card__answer'
+                initial='hidden'
+                animate='visible'
+                exit={{ opacity: 0 }}
+                variants={popupVariant}
+              >
+                <button onClick={() => setSelectedId(null)}>Close</button>
+                <p>{answer}</p>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </section>
