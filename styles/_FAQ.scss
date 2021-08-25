@@ -22,12 +22,14 @@
         padding: 0.5em 1em;
         border-radius: radius(small);
         cursor: pointer;
-        @include flex(row, space-between);
-        .down-indicator {
-          display: none;
-        }
-        h2 {
-          color: $dark-blue;
+        div {
+          @include flex(row, space-between);
+          .down-indicator {
+            display: none;
+          }
+          p {
+            color: $dark-blue;
+          }
         }
         &:hover {
           .down-indicator {
@@ -38,21 +40,20 @@
 
       &__answer {
         width: 400px;
-        height: 200px;
         background-color: $dark-blue;
         margin-bottom: 0.5em;
         padding: 0.5em;
         border-radius: radius(small);
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        margin: auto;
+        padding: 1em;
         button {
           position: absolute;
-          top: 10px;
-          right: 10px;
+          top: 5px;
+          right: 5px;
+          background-color: transparent;
+          border: none;
+          outline: none;
+          cursor: pointer;
         }
         p {
           color: $white;
