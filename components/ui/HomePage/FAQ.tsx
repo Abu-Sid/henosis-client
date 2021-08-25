@@ -10,8 +10,14 @@ const FAQ = () => {
   const data = FAQData.FAQ;
   const answer = data?.find((data) => data.id === selectedId)?.answer;
   const popupVariant = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 },
+    hidden: { opacity: 0, y: -100 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+      },
+    },
   };
   return (
     <section className='faq'>

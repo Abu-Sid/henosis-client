@@ -18,22 +18,25 @@
         margin-bottom: 0.5em;
         padding: 0.5em;
         border-radius: radius(small);
+        cursor: pointer;
         h2 {
           color: $dark-blue;
         }
       }
 
       &__answer {
-        width: 500px;
+        width: 80%;
+        height: 80%;
         background-color: $purple;
         margin-bottom: 0.5em;
         padding: 0.5em;
         border-radius: radius(small);
         position: absolute;
         top: 0;
-        bottom: 0;
-        right: 0;
         left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
         p {
           color: $white;
         }
