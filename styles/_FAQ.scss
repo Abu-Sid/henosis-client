@@ -9,10 +9,14 @@
   &__cards-container {
     width: 50%;
     height: 100%;
+    background-color: red;
     @include flex(column);
     .faq-card {
-      width: 70%;
+      width: 400px;
+      height: 100%;
       position: relative;
+      @include flex(column);
+      background-color: green;
       &__question {
         width: 100%;
         background-color: $light-gray-purple;
