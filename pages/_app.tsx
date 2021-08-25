@@ -1,16 +1,14 @@
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { AnimatePresence } from "framer-motion";
 import type { AppProps } from "next/app";
+import { useEffect, useState } from "react";
 import { Provider } from "react-redux";
+import ScrollToTop from "react-scroll-to-top";
+import Preloader from "../components/ui/Animation/Preloader";
 import Layout from "../components/ui/Layout";
 import store from "../redux/store";
 import "../styles/main.scss";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import { useEffect } from "react";
-import ScrollToTop from "react-scroll-to-top";
-import { useState } from "react";
-import { useRouter } from "next/router";
-import { AnimatePresence } from "framer-motion";
-import Preloader from "../components/ui/Animation/Preloader";
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -35,11 +33,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Provider store={store}>
           <Layout>
             <Component {...pageProps} />
-            <div className='scroll-to-top'>
+            <div className="scroll-to-top">
               <ScrollToTop
                 smooth
-                color='white'
-                className='scroll-to-top__button'
+                color="white"
+                className="scroll-to-top__button"
               />
             </div>
           </Layout>
