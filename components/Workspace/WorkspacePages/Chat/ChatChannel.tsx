@@ -43,12 +43,11 @@ const ChatChannel = ({ channels, handleAddChannel }: IProps) => {
   const [assignedMember, setAssignedMember] = useState<string[]>([]);
 
   useEffect(() => {
-    members.forEach((member) => {
-      setMemberOptions((preValue) => [
-        ...preValue,
-        { value: member.email, label: member.name },
-      ]);
-    });
+    const options: IOption[] = members.map((member) => ({
+      value: member.email,
+      label: member.name,
+    }));
+    setMemberOptions(options);
     const value = members.map((member) => member.email);
     setAssignedMember(value);
   }, [members]);
@@ -85,16 +84,15 @@ const ChatChannel = ({ channels, handleAddChannel }: IProps) => {
           </div>
           <div className="chat-channels">
             {channels.map(({ _id, chatName }) => (
-              <p
-                key={_id}
-                className={
-                  path === _id ? "chat-member active-channel" : "chat-member"
-                }
-              >
-                <Link href={`/workspaces/${id}/chat/${_id}`}>
-                  {"#" + chatName}
-                </Link>
-              </p>
+              <Link passHref key={_id} href={`/workspaces/${id}/chat/${_id}`}>
+                <p
+                  className={
+                    path === _id ? "chat-member active-channel" : "chat-member"
+                  }
+                >
+                  {"# " + chatName}
+                </p>
+              </Link>
             ))}
           </div>
         </div>

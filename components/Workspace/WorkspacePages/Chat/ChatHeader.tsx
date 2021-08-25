@@ -27,12 +27,12 @@ const ChatHeader = ({ channels }: IProps) => {
     <div className="chat-portal__header">
       <div className="indicator-container">
         <p className="indicator">
-          <span> chat </span> / {workspaceName}
+          <span> Chat </span> / {workspaceName}
         </p>
       </div>
       <div className="options-container">
         <div className="channel-name">
-          <h2>{"#" + (currentChannel?.chatName || "general")}</h2>
+          <h2>{"# " + (currentChannel?.chatName || "general")}</h2>
         </div>
         <div className="options-icon">
           <Image src={Bell} alt="bell-icon" />

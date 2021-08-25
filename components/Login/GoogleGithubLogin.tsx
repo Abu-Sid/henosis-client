@@ -29,10 +29,19 @@ const GoogleGithubLogin = () => {
         body: JSON.stringify({
           email: user.email,
           name: user.name,
-          imageURL: "https://i.ibb.co/Cv782Sw/user.png",
           githubLink: "https://github.com/username",
           location: "street no. cityname, countryname",
           bio: "your favorite things",
+        }),
+      });
+      fetch("https://intense-peak-24388.herokuapp.com/userimage", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: user.email,
+          imageURL: "https://i.ibb.co/Cv782Sw/user.png",
         }),
       });
     } catch (error) {
