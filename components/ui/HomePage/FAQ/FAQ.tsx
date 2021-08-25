@@ -1,9 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
-import FAQBanner from "../../../public/images/banner.png";
+import FAQBanner from "../../../../public/images/banner.png";
 import { useState } from "react";
-import FAQData from "../../../data/FAQData.json";
+import FAQData from "../../../../data/FAQData.json";
+import FAQQuestionCard from "./FAQQuestionCard";
 
 const FAQ = () => {
   const [selectedId, setSelectedId] = useState(null);
@@ -11,22 +12,7 @@ const FAQ = () => {
   const answer = data?.find((data) => data.id === selectedId)?.answer;
 
   const control = useAnimation();
-  // const containerVariant = {
-  //   hidden: { opacity: 0, y: -100 },
-  //   visible: {
-  //     opacity: 1,
-  //     y: 0,
-  //     transition: {
-  //       delay: 0.5,
-  //       when: "beforeChildren",
-  //       staggerChildren: 0.2,
-  //     },
-  //   },
-  // };
-  const cardVariant = {
-    hidden: { opacity: 0, y: -100 },
-    visible: { opacity: 1, y: 0 },
-  };
+
   const popupVariant = {
     hidden: { opacity: 0, y: -100 },
     visible: { opacity: 1, y: 0 },
@@ -38,46 +24,17 @@ const FAQ = () => {
         <Image src={FAQBanner} alt='banner' />
       </div>
       <div className='faq__cards-container'>
-        <motion.div
-          // initial='hidden'
-          // animate='visible'
-          // variants={containerVariant}
-          className='faq-card'
-        >
+        <motion.div className='faq-card'>
           <AnimatePresence>
             {selectedId === null && (
               <>
                 {data.map((data) => (
-                  <motion.div
-                    className='faq-card__question'
-                    initial='hidden'
-                    animate='visible'
-                    whileHover={{ scale: 1.05 }}
-                    variants={cardVariant}
-                    exit={{ opacity: 0, y: -100 }}
+                  <FAQQuestionCard
                     key={data.id}
-                    onClick={() => setSelectedId(data.id)}
-                  >
-                    <motion.div>
-                      <p>{data.question}</p>
-                      <div className='down-indicator'>
-                        <svg
-                          width='20'
-                          height='10'
-                          viewBox='0 0 116 46'
-                          fill='none'
-                          xmlns='http://www.w3.org/2000/svg'
-                        >
-                          <path
-                            d='M8 8L58 36.4672L108 8'
-                            stroke='#171E3C'
-                            strokeWidth='10'
-                            strokeLinecap='round'
-                          />
-                        </svg>
-                      </div>
-                    </motion.div>
-                  </motion.div>
+                    id={data.id}
+                    question={data.question}
+                    setSelectedId={setSelectedId}
+                  />
                 ))}
               </>
             )}

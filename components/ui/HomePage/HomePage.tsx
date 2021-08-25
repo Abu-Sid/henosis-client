@@ -4,7 +4,7 @@ import Banner from "./Banner";
 import BoardSection from "./BoardSection";
 import Contact from "./Contact";
 import DashboardSection from "./DashboardSection";
-import FAQ from "./FAQ";
+import FAQ from "./FAQ/FAQ";
 import FeaturesSection from "./FeaturesSection";
 import Testimonial from "./Testimonial";
 
