@@ -9,6 +9,10 @@ const FAQ = () => {
   const [selectedId, setSelectedId] = useState(null);
   const data = FAQData.FAQ;
   const answer = data?.find((data) => data.id === selectedId)?.answer;
+  const cardVariant = {
+    hidden: { opacity: 1 },
+    visible: { opacity: 0.5 },
+  };
   const popupVariant = {
     hidden: { opacity: 0, y: -100 },
     visible: {
@@ -19,6 +23,7 @@ const FAQ = () => {
       },
     },
   };
+
   return (
     <section className='faq'>
       <div className='faq__banner'>
@@ -26,20 +31,30 @@ const FAQ = () => {
       </div>
       <div className='faq__cards-container'>
         <div className='faq-card'>
-          {data.map((data) => (
-            <motion.div className='faq-card__question' key={data.id}>
-              <motion.div onClick={() => setSelectedId(data.id)}>
-                <h2>{data.question}</h2>
-              </motion.div>
-            </motion.div>
-          ))}
+          {selectedId === null && (
+            <>
+              {data.map((data) => (
+                <motion.div className='faq-card__question' key={data.id}>
+                  <motion.div onClick={() => setSelectedId(data.id)}>
+                    <h2>{data.question}</h2>
+                  </motion.div>
+                </motion.div>
+              ))}
+            </>
+          )}
           <AnimatePresence>
             {selectedId && (
               <motion.div
                 className='faq-card__answer'
                 initial='hidden'
                 animate='visible'
-                exit={{ opacity: 0 }}
+                exit={{
+                  opacity: 0,
+                  y: -100,
+                  transition: {
+                    duration: 0.5,
+                  },
+                }}
                 variants={popupVariant}
               >
                 <button onClick={() => setSelectedId(null)}>Close</button>
