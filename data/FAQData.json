@@ -2,23 +2,28 @@
   "FAQ": [
     {
       "id": "001",
-      "question": "What does Henosis means?",
-      "answer": "Henosis is a greek word. It means unity."
+      "question": "What 'Henosis' is all about?",
+      "answer": "Henosis is a complete project management platform, where you can break your project into smaller tasks and assign them to members. You can also communicate with your team by using our built in chat portal."
     },
     {
       "id": "002",
-      "question": "Why henosis ?",
-      "answer": "Answer to the question number 2 "
+      "question": "What does 'Henosis' means?",
+      "answer": "'Henosis' is a greek word. It means unity."
     },
     {
       "id": "003",
-      "question": "What does Henosis means?",
-      "answer": "Answer to the question number 3 "
+      "question": "Who can use 'Henosis'? ",
+      "answer": "With help of our backlog, kanban boards and chat portal you can plan and organize a large scale project pretty easily. However, you can use Henosis as a personal task manager."
     },
     {
       "id": "004",
-      "question": "What does Henosis means?",
-      "answer": "Answer to the question number 4 "
+      "question": "Do you have any free plan?",
+      "answer": "'Henosis' is totally free for personal use."
+    },
+    {
+      "id": "005",
+      "question": "How can I pay for my subscription?",
+      "answer": "We accept visa and mastercard. There is also support for Bkash, Nagad and Rocket payment."
     }
   ]
 }
