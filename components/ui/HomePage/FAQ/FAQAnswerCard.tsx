@@ -1,11 +1,14 @@
 import React from "react";
 import { motion, useAnimation } from "framer-motion";
 
-interface IAnswer {}
+interface IAnswer {
+  answer: string;
+  setSelectedId: React.Dispatch<React.SetStateAction<string>>;
+}
 
-const FAQAnswerCard = () => {
+const FAQAnswerCard: React.FC<IAnswer> = ({ answer, setSelectedId }) => {
   const control = useAnimation();
-
+  console.log(answer);
   const popupVariant = {
     hidden: { opacity: 0, y: -100 },
     visible: { opacity: 1, y: 0 },
