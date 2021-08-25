@@ -28,6 +28,16 @@
     button {
       width: 50%;
     }
+    &__key {
+      padding: 1.5rem 6rem 0 0;
+      @include flex(row, space-between);
+      h4 {
+        @include writing-style($dark-blue, medium, medium);
+      }
+      &__icon {
+        color: $purple;
+      }
+    }
   }
 
   &__image {
