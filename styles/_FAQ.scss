@@ -9,14 +9,12 @@
   &__cards-container {
     width: 50%;
     height: 100%;
-    background-color: red;
     @include flex(column);
     .faq-card {
       width: 400px;
       height: 100%;
       position: relative;
       @include flex(column);
-      background-color: green;
       &__question {
         width: 100%;
         background-color: $light-gray-purple;
@@ -32,7 +30,7 @@
       &__answer {
         width: 400px;
         height: 200px;
-        background-color: $purple;
+        background-color: $dark-blue;
         margin-bottom: 0.5em;
         padding: 0.5em;
         border-radius: radius(small);

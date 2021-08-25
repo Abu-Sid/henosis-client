@@ -9,15 +9,18 @@ const FAQ = () => {
   const [selectedId, setSelectedId] = useState(null);
   const data = FAQData.FAQ;
   const answer = data?.find((data) => data.id === selectedId)?.answer;
-  const containerVariant = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
+  // const containerVariant = {
+  //   hidden: { opacity: 0, y: -100 },
+  //   visible: {
+  //     opacity: 1,
+  //     y: 0,
+  //     transition: {
+  //       delay: 0.5,
+  //       when: "beforeChildren",
+  //       staggerChildren: 0.2,
+  //     },
+  //   },
+  // };
   const cardVariant = {
     hidden: { opacity: 0, y: -100 },
     visible: { opacity: 1, y: 0 },
@@ -34,9 +37,9 @@ const FAQ = () => {
       </div>
       <div className='faq__cards-container'>
         <motion.div
-          initial='hidden'
-          animate='visible'
-          variants={containerVariant}
+          // initial='hidden'
+          // animate='visible'
+          // variants={containerVariant}
           className='faq-card'
         >
           <AnimatePresence>
@@ -47,6 +50,7 @@ const FAQ = () => {
                     className='faq-card__question'
                     initial='hidden'
                     animate='visible'
+                    whileHover={{ scale: 1.05 }}
                     variants={cardVariant}
                     exit={{ opacity: 0, y: -100 }}
                     key={data.id}
