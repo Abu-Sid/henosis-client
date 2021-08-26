@@ -45,6 +45,30 @@
     width: 50%;
   }
 }
+//partner
+.partner {
+  margin-bottom: 5rem;
+  color: $dark-blue;
+  text-align: center;
+  @include flex(column);
+  background-image: url(../public/images/bg__with-dotted.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  &__image {
+    padding: 1.5rem;
+    // flex-wrap: wrap;
+    // @include flex(column, space-between);
+    &__logo {
+      @include flex();
+      flex-wrap: wrap;
+      img {
+        padding: 2.2rem;
+        width: 10rem;
+        height: auto;
+      }
+    }
+  }
+}
 //Features-Section
 
 .features {
@@ -288,16 +312,23 @@
       h4 {
         text-align: center;
       }
+      &__key {
+        padding: 1rem 1rem 0 1rem;
+      }
     }
 
     &__image {
       width: 100%;
     }
   }
+  //partner section
+  .partner {
+    margin-top: 3rem;
+  }
   //Features-Section
 
   .features {
-    margin: 3rem;
+    margin: 1.5rem;
     @include flex(column);
     &__text {
       margin: 2rem, 0;
@@ -318,10 +349,11 @@
   //Board or Chat Section
 
   .chat {
-    margin: 1rem;
+    margin: 1.5rem;
     @include flex(column-reverse);
     &__text {
       width: 100%;
+      padding: 0;
       text-align: center;
       @include flex(column);
     }
@@ -333,8 +365,13 @@
     @include flex(column);
     &__text {
       width: 100%;
+      padding: 0;
       text-align: center;
       @include flex(column, center);
     }
+  }
+  //Testimonials
+  .testimonial {
+    margin: 1rem;
   }
 }

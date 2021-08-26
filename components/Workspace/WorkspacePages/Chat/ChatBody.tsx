@@ -44,6 +44,8 @@ const ChatBody = ({ channels, socket }: IProps) => {
 
   const [messageError, setMessageError] = useState("");
 
+  const currentChannel = channels.find((channel) => channel?._id === id);
+
   useEffect(() => {
     if (id && socket !== null) {
       setMessages([]);
@@ -114,7 +116,7 @@ const ChatBody = ({ channels, socket }: IProps) => {
     <div className="chat-body">
       <div className="messages">
         {messageLoading && <h1>Loading...</h1>}
-        {messageError && <h1>{messageError}</h1>}
+        {messageError && messages.length === 0 && <h1>{messageError}</h1>}
         {messages.map((message) => {
           const sender = members.find(
             (member) => member._id === message.userId
@@ -138,7 +140,9 @@ const ChatBody = ({ channels, socket }: IProps) => {
       </div>
       <form onSubmit={handleSubmit} className="type-box">
         <input
-          placeholder="send a message"
+          placeholder={`Send a message to # ${
+            currentChannel?.chatName || "general"
+          }`}
           onChange={handleInput}
           value={inputData}
           type="text"

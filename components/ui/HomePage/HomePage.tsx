@@ -5,12 +5,14 @@ import BoardSection from "./BoardSection";
 import Contact from "./Contact";
 import DashboardSection from "./DashboardSection";
 import FeaturesSection from "./FeaturesSection";
+import Partner from "./Partner";
 import Testimonial from "./Testimonial";
 
 const HomePage = () => {
   return (
     <>
       <Banner />
+      <Partner />
       <FeaturesSection />
       <BoardSection />
       <DashboardSection />
