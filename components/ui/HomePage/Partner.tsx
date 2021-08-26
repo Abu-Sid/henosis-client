@@ -1,12 +1,6 @@
 import React from "react";
 
-interface IPartner {
-  partner: {
-    image: string;
-    name: string;
-  };
-}
-const Partner: React.FC<IPartner> = () => {
+const Partner = () => {
   return (
     <div className="partner">
       <h1>Trusted by companies from all corners of the world</h1>
