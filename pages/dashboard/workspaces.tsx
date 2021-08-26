@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import WorkspaceRow from "../../components/Dashboard/WorkspaceRow";
-import AdminSidebar from "../../components/ui/AdminSidebar/AdminSidebar";
+import AdminSidebar from "../../components/Dashboard/AdminSidebar";
 import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation";
+import verifyAdmin from "../../HOC/verifyAdmin";
 
 enum FilterEnum {
   all = "all",
@@ -55,45 +56,45 @@ const Workspaces = () => {
 
   return (
     <div className="d-container">
-      <div className="d-row">
-        <div className="col-left">
-          <AdminSidebar />
-        </div>
-        <div className="col-right">
-          <div className="right-division">
-            <h2>Workspaces</h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <select {...register("filter")}>
-                <option value="all">All</option>
-                <option value="personal">Personal</option>
-                <option value="business">Business</option>
-              </select>
-              <input type="submit" value="Filter" className="button" />
-            </form>
+      {loading ? (
+        <LoadingAnimation />
+      ) : (
+        <div className="d-row">
+          <div className="col-left">
+            <AdminSidebar />
           </div>
-          <table>
-            <thead>
-              <tr>
-                <th>No.</th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Members</th>
-              </tr>
-            </thead>
-            {loading ? (
-              <LoadingAnimation />
-            ) : (
+          <div className="col-right">
+            <div className="right-division">
+              <h2>Workspaces</h2>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <select {...register("filter")}>
+                  <option value="all">All</option>
+                  <option value="personal">Personal</option>
+                  <option value="business">Business</option>
+                </select>
+                <input type="submit" value="Filter" className="button" />
+              </form>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Members</th>
+                </tr>
+              </thead>
               <tbody>
                 {workspaceInfo.map((info, index) => (
                   <WorkspaceRow key={info._id} info={info} index={index} />
                 ))}
               </tbody>
-            )}
-          </table>
+            </table>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
 
-export default Workspaces;
+export default verifyAdmin(Workspaces);
