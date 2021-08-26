@@ -1,32 +1,23 @@
-import React from "react";
-import { motion, useAnimation } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
 
 const Test = () => {
-  const control = useAnimation();
-  const styles = {
-    height: 200,
-    width: 200,
-    backgroundColor: "red",
-  };
+  const [selectedId, setSelectedId] = useState(null);
   return (
-    <div>
-      <div
-        style={{ background: "green" }}
-        onMouseEnter={() => {
-          control.start({
-            x: 200,
-          });
-        }}
-        onMouseLeave={() => {
-          control.start({
-            x: 0,
-          });
-        }}
-      >
-        Click me
-      </div>
-      <motion.div animate={control} style={styles}></motion.div>
-    </div>
+    <>
+      {selectedId === null && (
+        <div onClick={() => setSelectedId("mir")}>
+          <h5>Mir</h5>
+        </div>
+      )}
+
+      {selectedId && (
+        <div>
+          <h5>Mir Hussain</h5>
+          <button onClick={() => setSelectedId(null)}>Close</button>
+        </div>
+      )}
+    </>
   );
 };
 
