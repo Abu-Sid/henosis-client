@@ -16,7 +16,7 @@ const DashboardSection = () => {
         <p data-aos="fade-right" data-aos-delay="300">
           Your dashboard is a portal to your <span>personal work flow</span> .
           You can track your daily progress as well as overall progress. To
-          better organize your task, there is a option for adding sub-tasks.
+          better organize your task, break down big projects with subtasks.
         </p>
       </div>
       <div
