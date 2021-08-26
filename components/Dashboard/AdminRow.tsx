@@ -30,7 +30,7 @@ const AdminRow = (props: IProps & IDelete) => {
       <td>{email}</td>
       <td>{role}</td>
       <td>
-        <MdDeleteForever className="delete-icon" onClick={onOpenModal} />
+        <MdDeleteForever className="delete-icon" onClick={onOpenModal} title="Remove Admin" />
         <Modal open={open} onClose={onCloseModal} center>
           <div className="admin-info delete-confirm">
             <Image src={deleteImg} alt="" />

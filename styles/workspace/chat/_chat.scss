@@ -25,10 +25,9 @@
       @include flex(column, flex-end);
       .type-box {
         width: 100%;
-        height: 70px;
         border-radius: radius(medium);
         background-color: $light-gray-purple;
-        padding: 10px;
+        padding: 13px 10px;
         @include flex(row, space-between, center);
         input {
           height: 100%;
@@ -44,13 +43,19 @@
           border: none;
           outline: none;
           cursor: pointer;
+          margin-top: 3px;
         }
       }
       .messages {
         overflow-y: scroll;
         width: 100%;
         margin-bottom: 10px;
-        img {
+        .skeleton {
+          animation: skeleton-animation 1s linear infinite alternate;
+          opacity: 0.7;
+        }
+        img,
+        .skeleton-img {
           border-radius: 50%;
           height: 35px;
           width: 35px;
@@ -66,8 +71,12 @@
         .message-right {
           @include message;
           text-align: end;
-          img {
+          img,
+          .skeleton-img {
             margin-left: 8px;
+          }
+          small.skeleton-name {
+            margin-left: auto;
           }
         }
         .message-left {
@@ -79,11 +88,24 @@
           padding: 0.5em;
           border-radius: 8px;
           small {
-            font-weight: 500;
+            span {
+              font-weight: 500;
+              color: black;
+            }
+            color: #646464;
+          }
+          small.skeleton-name {
+            display: block;
+            height: 0.8rem;
+            width: 100px;
           }
           p {
             font-size: 1.1rem;
             margin-bottom: 4px;
+          }
+          p.skeleton-message {
+            width: 150px;
+            height: 1.3rem;
           }
         }
       }
@@ -118,14 +140,22 @@
       p {
         margin-left: 10px;
       }
-      &:hover,
-      &.active-channel {
+      &:hover {
         background-color: $light-gray-purple;
       }
-      @include flex(row, flex-start, center);
-      a {
-        color: #1a1a1a;
+      &.active-channel {
+        background-color: #c5c8d6;
       }
+      @include flex(row, flex-start, center);
     }
+  }
+}
+
+@keyframes skeleton-animation {
+  0% {
+    background-color: hsl(200, 20%, 70%);
+  }
+  100% {
+    background-color: hsl(200, 20%, 95%);
   }
 }
