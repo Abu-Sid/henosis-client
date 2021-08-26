@@ -43,6 +43,8 @@ const ChatBody = ({ channels, socket }: IProps) => {
 
   const [scrolling, setScrolling] = useState(true);
 
+  const [smooth, setSmooth] = useState(false);
+
   const [inputData, setInputData] = useState("");
 
   const [previousRoom, setPreviousRoom] = useState("");
@@ -54,12 +56,11 @@ const ChatBody = ({ channels, socket }: IProps) => {
   const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
+    setSmooth(false);
     setScrolling(true);
     setMessages([]);
     setMessageCount(0);
   }, [id]);
-
-  console.log(messages);
 
   const observer = useRef(null);
   const lastMessageRef = useCallback(
@@ -113,6 +114,7 @@ const ChatBody = ({ channels, socket }: IProps) => {
   useEffect(() => {
     if (socket !== null) {
       socket.on("message-sended", (newMessage: IMessage) => {
+        setSmooth(true);
         setScrolling(true);
         setMessages((preMessages) => [...preMessages, newMessage]);
       });
@@ -143,9 +145,9 @@ const ChatBody = ({ channels, socket }: IProps) => {
 
   useEffect(() => {
     if (scrolling) {
-      chatRef.current?.scrollIntoView();
+      chatRef.current?.scrollIntoView(smooth ? { behavior: "smooth" } : {});
     }
-  }, [messages, scrolling]);
+  }, [messages, scrolling, smooth]);
 
   const newArray = Array.from(Array(12));
 
@@ -194,7 +196,7 @@ const ChatBody = ({ channels, socket }: IProps) => {
               className={
                 sender.email === email ? "message-right" : "message-left"
               }
-              ref={index === 3 ? lastMessageRef : null}
+              ref={index === 0 ? lastMessageRef : null}
             >
               <div className="main-message">
                 <p>{message.message}</p>
