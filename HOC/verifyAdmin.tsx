@@ -34,7 +34,6 @@ const verifyAdmin = (Component: () => JSX.Element) => {
           const data = await res.json();
           setAdmins(data.data);
           setLoading(false);
-          console.log(data);
         } catch (error) {
           console.log(error);
           setLoading(false);
