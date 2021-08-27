@@ -10,13 +10,10 @@ import Layout from "../components/ui/Layout";
 import store from "../redux/store";
 import "../styles/main.scss";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps, router }: AppProps) {
   useEffect(() => {
     AOS.init();
   }, []);
-
-  // const pageIsReady = useRouter().isReady;
-  // console.log(router.isReady);
 
   const [loading, setLoading] = useState(true);
 
@@ -32,12 +29,14 @@ function MyApp({ Component, pageProps }: AppProps) {
       {!loading && (
         <Provider store={store}>
           <Layout>
-            <Component {...pageProps} />
-            <div className="scroll-to-top">
+            <AnimatePresence exitBeforeEnter>
+              <Component {...pageProps} key={router.route} />
+            </AnimatePresence>
+            <div className='scroll-to-top'>
               <ScrollToTop
                 smooth
-                color="white"
-                className="scroll-to-top__button"
+                color='white'
+                className='scroll-to-top__button'
               />
             </div>
           </Layout>

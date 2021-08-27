@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { features } from "./PriceData";
 import SelectIcon from "./SelectIcon";
+import { motion } from "framer-motion";
 
 interface IProps {
   data: {
@@ -15,11 +16,30 @@ interface IProps {
   isAnnual: boolean;
 }
 
+const cardVariant = {
+  initial: {
+    y: 100,
+    opacity: 0,
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
+
 const PricingCard = ({ data, isAnnual }: IProps) => {
   const { title, monthlyPrice, userLimit, annualPrice, workspaceLimit } = data;
 
   return (
-    <div className="pricing-section__main__card">
+    <motion.div
+      variants={cardVariant}
+      animate='animate'
+      initial='initial'
+      className='pricing-section__main__card'
+    >
       <h3>{title}</h3>
       {features.map(({ id, featureName, available }) => (
         <p key={id}>
@@ -31,7 +51,7 @@ const PricingCard = ({ data, isAnnual }: IProps) => {
             : ""}
         </p>
       ))}
-      <h3 className="pricing-section__main__card__price">
+      <h3 className='pricing-section__main__card__price'>
         {monthlyPrice
           ? "Price: " + (isAnnual ? "$" + annualPrice : "$" + monthlyPrice)
           : "Free (Personal Use)"}
@@ -51,7 +71,7 @@ const PricingCard = ({ data, isAnnual }: IProps) => {
           {title === "Basic" ? "Get Started" : "Start 7 day trial"}
         </button>
       </Link>
-    </div>
+    </motion.div>
   );
 };
 
