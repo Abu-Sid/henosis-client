@@ -1,0 +1,36 @@
+.personal-dashboard__header {
+  @include flex(column, flex-start, flex-start);
+  &__time {
+    color: $gray-purple;
+    span {
+      color: $purple;
+    }
+  }
+  &__info {
+    height: 100%;
+    width: 100%;
+    border-radius: radius(large);
+    @include flex;
+    .info__image {
+      width: 50%;
+      height: 100%;
+      @include flex;
+    }
+    .info__text {
+      width: 50%;
+      height: 100%;
+      padding: 0 2em;
+      @include flex(column, center, flex-start);
+      h1 {
+        @include writing-style($dark-blue, extra-large, extra-thin);
+        span {
+          @include writing-style($dark-blue, extra-large, regular);
+        }
+      }
+      p {
+        margin: 10px 0;
+        color: $gray-purple;
+      }
+    }
+  }
+}

@@ -1,32 +1,43 @@
 import React from "react";
-import { motion, useAnimation } from "framer-motion";
+import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
 
 const Test = () => {
-  const control = useAnimation();
-  const styles = {
-    height: 200,
-    width: 200,
-    backgroundColor: "red",
+  const stagger = {
+    animate: {
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const item = {
+    initial: {
+      x: 200,
+    },
+    animate: {
+      x: 0,
+    },
   };
   return (
-    <div>
-      <div
-        style={{ background: "green" }}
-        onMouseEnter={() => {
-          control.start({
-            x: 200,
-          });
-        }}
-        onMouseLeave={() => {
-          control.start({
-            x: 0,
-          });
-        }}
-      >
-        Click me
-      </div>
-      <motion.div animate={control} style={styles}></motion.div>
-    </div>
+    <motion.div
+      variants={stagger}
+      animate='animate'
+      initial='initial'
+      className='test-container'
+    >
+      <motion.div variants={item} className='test-item'>
+        Mir
+      </motion.div>
+      <motion.div variants={item} className='test-item'>
+        Mir
+      </motion.div>
+      <motion.div variants={item} className='test-item'>
+        Mir
+      </motion.div>
+      <motion.div variants={item} className='test-item'>
+        Mir
+      </motion.div>
+    </motion.div>
   );
 };
 

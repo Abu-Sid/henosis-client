@@ -1,11 +1,12 @@
 import React from "react";
 import HomePage from "../components/ui/HomePage/HomePage";
+import { motion } from "framer-motion";
 
 const Home = () => {
   return (
-    <section className='home-section'>
+    <motion.section exit={{ opacity: 0 }} className='home-section'>
       <HomePage />
-    </section>
+    </motion.section>
   );
 };
 
