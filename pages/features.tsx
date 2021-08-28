@@ -3,10 +3,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import FeatureSubSection from "../components/ui/Feature/FeatureSubSection";
 import FeaturesData from "../data/FeaturesData.json";
+import { exit } from "../components/ui/Animation/Animation";
 
 const Features = () => {
   return (
-    <motion.section exit={{ opacity: 0 }} className='features-section'>
+    <motion.section exit={exit} className='features-section'>
       <div className='features-section__intro'>
         <h1>Features for large scale development.</h1>
         <h2>

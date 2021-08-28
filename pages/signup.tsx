@@ -7,6 +7,8 @@ import GoogleGithubLogin from "../components/Login/GoogleGithubLogin";
 import LoginForm from "../components/Login/LoginForm";
 import RedirectUser from "../components/Login/RedirectUser";
 import { authUserFailure, authUserSuccess } from "../redux/actions/userActions";
+import { motion } from "framer-motion";
+import { exit } from "../components/ui/Animation/Animation";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -53,16 +55,16 @@ const SignUp = () => {
 
   return (
     <RedirectUser>
-      <section className="login-section">
-        <div className="inner-login">
+      <motion.section exit={exit} className='login-section'>
+        <div className='inner-login'>
           <h1>Create New Account</h1>
           <LoginForm submit={submit} newUser />
           <GoogleGithubLogin />
-          <p className="login-bottom">
-            Already Have An Account? <Link href="/signin">Sign In</Link>
+          <p className='login-bottom'>
+            Already Have An Account? <Link href='/signin'>Sign In</Link>
           </p>
         </div>
-      </section>
+      </motion.section>
     </RedirectUser>
   );
 };

@@ -8,6 +8,8 @@ import withAuthCheck from "../HOC/withAuthCheck";
 import useSocket from "../hooks/useSocket";
 import { RootState } from "../redux/reducers";
 import { IWorkspaceData } from "./information";
+import { motion } from "framer-motion";
+import { exit } from "../components/ui/Animation/Animation";
 
 let loadingId: string;
 
@@ -58,10 +60,10 @@ const Workspace = () => {
   const handleCategory = (category: string) => setSelect(category);
 
   return (
-    <section className="new-workspace">
+    <motion.section exit={exit} className='new-workspace'>
       {select === "personal" && <WorkspaceForm submit={submit} />}
       {select === "" && <SelectCategory handleCategory={handleCategory} />}
-    </section>
+    </motion.section>
   );
 };
 

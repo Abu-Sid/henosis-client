@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PricingMain from "../components/Pricing/PricingMain";
 import PricingTop from "../components/Pricing/PricingTop";
 import { motion } from "framer-motion";
+import { exit } from "../components/ui/Animation/Animation";
 
 const Pricing = () => {
   const [isAnnual, setIsAnnual] = useState(false);
@@ -12,7 +13,7 @@ const Pricing = () => {
 
   return (
     <motion.section
-      exit={{ opacity: 0 }}
+      exit={exit}
       animate='animate'
       initial='initial'
       className='pricing-section'

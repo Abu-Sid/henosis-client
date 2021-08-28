@@ -8,7 +8,7 @@ import Backlog from "./WorkspacePages/Backlog/Backlog";
 import Board from "./WorkspacePages/Board/Board";
 import Chat from "./WorkspacePages/Chat/Chat";
 import Notification from "./WorkspacePages/Notification";
-import PersonalDashboard from "./WorkspacePages/PersonalDashboard";
+import PersonalDashboard from "./WorkspacePages/PersonalDashboard/PersonalDashboard";
 import Settings from "./WorkspacePages/Settings";
 
 interface IProps {
@@ -16,7 +16,8 @@ interface IProps {
 }
 
 const WorkspaceRoute = ({ socket }: IProps) => {
-  const [id, path] = useRouter().query.paths;
+  const id = useRouter()?.query?.[0];
+  const path = useRouter()?.query?.[1];
 
   useEffect(() => {
     if (socket !== null) {

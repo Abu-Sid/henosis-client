@@ -1,5 +1,6 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useRouter } from "next/router";
 import { AnimatePresence } from "framer-motion";
 import type { AppProps } from "next/app";
 import { useEffect, useState } from "react";
@@ -10,10 +11,13 @@ import Layout from "../components/ui/Layout";
 import store from "../redux/store";
 import "../styles/main.scss";
 
-function MyApp({ Component, pageProps, router }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     AOS.init();
   }, []);
+
+  const router = useRouter();
+  console.log(router.asPath);
 
   const [loading, setLoading] = useState(true);
 
@@ -26,11 +30,11 @@ function MyApp({ Component, pageProps, router }: AppProps) {
   return (
     <>
       <AnimatePresence>{loading && <Preloader />}</AnimatePresence>
-      {!loading && (
+      {!loading && router?.asPath && (
         <Provider store={store}>
           <Layout>
             <AnimatePresence exitBeforeEnter>
-              <Component {...pageProps} key={router.route} />
+              <Component {...pageProps} key={router?.asPath} />
             </AnimatePresence>
             <div className='scroll-to-top'>
               <ScrollToTop
