@@ -5,22 +5,21 @@ interface IStatus {
 }
 
 const DashboardStatusPill: React.FC<IStatus> = ({ status }) => {
-  const iconCheck = status.toLowerCase().replace(/\s+/g, "");
-  console.log(iconCheck);
+  const currentStatus = status.toLowerCase().replace(/\s+/g, "");
 
   let color;
 
-  if (iconCheck === "remaining") {
+  if (currentStatus === "remaining") {
     color = "#eb5757";
-  } else if (iconCheck === "inprogress") {
+  } else if (currentStatus === "inprogress") {
     color = "#f2994a";
-  } else if (iconCheck === "done") {
+  } else if (currentStatus === "done") {
     color = "#27ae60";
   }
   return (
     <div className='status'>
       <div className='status__icon'>
-        {iconCheck === "remaining" && (
+        {currentStatus === "remaining" && (
           <svg
             width='60'
             height='60'
@@ -38,7 +37,7 @@ const DashboardStatusPill: React.FC<IStatus> = ({ status }) => {
           </svg>
         )}
 
-        {iconCheck === "inprogress" && (
+        {currentStatus === "inprogress" && (
           <svg
             width='60'
             height='60'
@@ -55,7 +54,7 @@ const DashboardStatusPill: React.FC<IStatus> = ({ status }) => {
             />
           </svg>
         )}
-        {iconCheck === "done" && (
+        {currentStatus === "done" && (
           <svg
             width='60'
             height='60'
@@ -75,7 +74,9 @@ const DashboardStatusPill: React.FC<IStatus> = ({ status }) => {
       </div>
       <div className='status__info'>
         <h1 style={{ color: color }}>{status}</h1>
-        <p>2 Tasks</p>
+        {currentStatus === "remaining" && <p>5 Tasks</p>}
+        {currentStatus === "inprogress" && <p>2 Tasks</p>}
+        {currentStatus === "done" && <p>3 Tasks</p>}
       </div>
     </div>
   );
