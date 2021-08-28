@@ -42,6 +42,10 @@ const Chat = () => {
       !actives.map((activeMember) => activeMember.userId).includes(member._id)
   );
 
+  const [showChannel, setShowChannel] = useState(false);
+
+  const [showActive, setShowActive] = useState(false);
+
   useEffect(() => {
     if (socket !== null) {
       socket.on("change-activeList", (activeList: IActive[]) => {
@@ -92,11 +96,20 @@ const Chat = () => {
 
   return (
     <section className="chat-portal">
-      <ChatHeader channels={channels} />
+      <ChatHeader
+        channels={channels}
+        setShowChannel={setShowChannel}
+        setShowActive={setShowActive}
+      />
       <div className="chat-portal__body">
-        <ChatChannel channels={channels} handleAddChannel={handleAddChannel} />
+        <ChatChannel
+          channels={channels}
+          handleAddChannel={handleAddChannel}
+          showChannel={showChannel}
+          setShowChannel={setShowChannel}
+        />
         <ChatBody channels={channels} socket={socket} />
-        <div className="members">
+        <div className={showActive ? "members active" : "members"}>
           <div className="members__online">
             <h3>Online ({actives.length})</h3>
             {actives.map((active) => {

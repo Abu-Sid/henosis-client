@@ -16,8 +16,7 @@ interface IProps {
 }
 
 const WorkspaceRoute = ({ socket }: IProps) => {
-  const id = useRouter()?.query?.[0];
-  const path = useRouter()?.query?.[1];
+  const [id, path] = useRouter().query.paths || [];
 
   useEffect(() => {
     if (socket !== null) {
@@ -26,7 +25,7 @@ const WorkspaceRoute = ({ socket }: IProps) => {
   }, [socket, id]);
 
   switch (path) {
-    case undefined:
+    case "dashboard":
       return <PersonalDashboard />;
     case "board":
       return <Board workspaceSocket={socket} />;
