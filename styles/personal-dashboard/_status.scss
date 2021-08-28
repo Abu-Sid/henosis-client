@@ -1,0 +1,13 @@
+.status {
+  height: 100%;
+  @include flex(row, flex-start);
+  &__icon {
+    margin: 0 0.5em;
+  }
+  &__info {
+    h1 {
+      @include writing-style($dark-blue, large, thin);
+      margin-bottom: 5px;
+    }
+  }
+}
