@@ -29,7 +29,7 @@ let toastId: string;
 const Workspace = () => {
   const { query, replace } = useRouter();
 
-  const id = query?.paths?.[0];
+  const [id] = query.paths || [];
 
   const { error } = useSelector((state: RootState) => state.workspaceReducer);
 
@@ -141,7 +141,7 @@ const Workspace = () => {
           handleSendEmail={handleSendEmail}
         />
       ) : (
-        <section className='workspace'>
+        <section className="workspace">
           <Sidebar />
           <WorkspaceRoute socket={socket} />
         </section>
