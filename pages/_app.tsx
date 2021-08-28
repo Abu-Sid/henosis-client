@@ -17,7 +17,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   const router = useRouter();
-  console.log(router.asPath);
 
   const [loading, setLoading] = useState(true);
 

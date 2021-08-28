@@ -1,9 +1,9 @@
 .personal-dashboard__header {
-  @include flex;
-  .div1 {
-    background: blue;
-  }
-  .div2 {
-    background: green;
+  background-color: $gray;
+  &__time {
+    color: $gray-purple;
+    span {
+      color: $purple;
+    }
   }
 }
