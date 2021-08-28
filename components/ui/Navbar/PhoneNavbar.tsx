@@ -31,7 +31,11 @@ const PhoneNavbar = () => {
         <DropdownMenu width={250}>
           <DropdownItem href='/features'>Features</DropdownItem>
           <DropdownItem href='/pricing'>Pricing</DropdownItem>
-          {admin && <NavItem name='Admin' href='/dashboard/admins' />}
+          {admin && (
+            <DropdownItem name='Admin' href='/dashboard/admins'>
+              Admin
+            </DropdownItem>
+          )}
           {!username && <DropdownItem href='/signup'>Sign Up</DropdownItem>}
           {!username && <DropdownItem href='/signin'>Sign In</DropdownItem>}
           {username && (

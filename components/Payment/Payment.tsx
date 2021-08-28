@@ -33,7 +33,7 @@ const Payment = (
           workspaceId: id,
           users: [],
         });
-        router.replace(`/workspaces/${id}`);
+        router.replace(`/workspaces/${id}/dashboard`);
       });
     }
   }, [socket, router, socket2]);

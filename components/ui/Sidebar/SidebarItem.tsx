@@ -54,7 +54,7 @@ const SidebarItem: React.FC<IProps> = ({
       className={className}
     >
       {href && (
-        <Link href={href === "/" ? "/" : `${pathName}/${href}`}>
+        <Link href={href === "/" ? "/" : `${pathName}/${href}`} passHref>
           <a>
             <Image src={icon} alt='icon' />
           </a>

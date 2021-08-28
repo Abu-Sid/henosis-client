@@ -5,7 +5,6 @@
   border-radius: radius(large);
   @include flex;
   .indicator-container {
-    width: 20%;
     height: 100%;
     padding: 0 10px;
     border-radius: radius(large);
@@ -19,8 +18,18 @@
     }
   }
   .options-container {
+    .options-right {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+    .options-icons {
+      display: flex;
+      height: 100%;
+      align-items: center;
+    }
     @extend .indicator-container;
-    width: 60%;
+    width: 100%;
     @include flex(row, flex-end, center);
     .channel-name {
       margin-right: auto;
@@ -41,7 +50,9 @@
       @include flex;
       background-color: $light-gray-purple;
       height: 100%;
+      min-height: 40px;
       width: 100%;
+      min-width: 200px;
       border-radius: radius(medium);
       label {
         padding-left: 5px;
@@ -53,9 +64,20 @@
         width: 100%;
         height: 100%;
         color: $dark-blue;
-        padding-left: 5px;
+        padding: 5px;
         font-size: 1rem;
       }
     }
+  }
+}
+
+.chat-dropdown {
+  position: relative;
+  right: 55px;
+  z-index: 1000;
+  display: none;
+  top: 3px;
+  .dropdown {
+    background-color: #d7dae0;
   }
 }

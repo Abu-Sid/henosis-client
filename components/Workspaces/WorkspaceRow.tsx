@@ -14,7 +14,7 @@ const WorkspaceRow = ({ workspace, index }: IProps) => {
   const { photo, name } = members.find((member) => member.isCreator);
 
   return (
-    <Link passHref href={`/workspaces/${workspace._id}`}>
+    <Link passHref href={`/workspaces/${workspace._id}/dashboard`}>
       <div className="row-container">
         <div className="number">{index + 1}</div>
         <div className="name">{workspaceName}</div>

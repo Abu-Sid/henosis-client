@@ -18,6 +18,8 @@ import { IChannel } from "./Chat";
 interface IProps {
   channels: IChannel[];
   handleAddChannel: (data: IChannel) => void;
+  showChannel: boolean;
+  setShowChannel: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface IOption {
@@ -27,7 +29,12 @@ interface IOption {
 
 const animatedComponents = makeAnimated();
 
-const ChatChannel = ({ channels, handleAddChannel }: IProps) => {
+const ChatChannel = ({
+  channels,
+  handleAddChannel,
+  showChannel,
+  setShowChannel,
+}: IProps) => {
   const { _id: id, members } = useSelector(
     (state: RootState) => state.workspaceReducer.workspace
   );
@@ -71,7 +78,11 @@ const ChatChannel = ({ channels, handleAddChannel }: IProps) => {
 
   return (
     <>
-      <section className="chat-channel">
+      <section
+        className={`chat-channel chat-channel-top ${
+          showChannel ? "active" : ""
+        }`}
+      >
         <div className="chat-channel__text">
           <div className="chat-channel__text-header">
             <h1>Text Channels</h1>
@@ -89,6 +100,7 @@ const ChatChannel = ({ channels, handleAddChannel }: IProps) => {
                   className={
                     path === _id ? "chat-member active-channel" : "chat-member"
                   }
+                  onClick={() => setShowChannel(false)}
                 >
                   {"# " + chatName}
                 </p>

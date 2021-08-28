@@ -147,6 +147,7 @@
 
 .ReactModal__Overlay {
   background-color: #2a2a2a8c !important;
+  z-index: 1000;
 }
 
 @keyframes modalAnimation {
