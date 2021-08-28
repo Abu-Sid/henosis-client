@@ -36,7 +36,7 @@ const All_signup_users = () => {
           <AdminSidebar />
         </div>
         <div className="col-right">
-          <div style={{ textAlign: "center" }}>
+          <div>
             <h2>All Signup Users</h2>
           </div>
           <table>

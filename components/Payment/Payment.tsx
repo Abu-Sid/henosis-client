@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React, { forwardRef, useEffect } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import StripeCheckout, { Token } from "react-stripe-checkout";
@@ -45,15 +46,17 @@ const Payment = (
   };
 
   const makePayment = (token: Token) => {
-    const data = { price, type: "Business", user };
+    const data = { price, type: "Business", ...user, date: new Date().toLocaleDateString(), time: new Date().toLocaleTimeString() };
+    const info = { ...token.card, ...data, ...workspaceData };
     const loadingId = toast.loading("Loading...");
+    console.log(info);
 
     fetch("https://intense-peak-24388.herokuapp.com/payment", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ token, data }),
+      body: JSON.stringify(info),
     })
       .then(() => handelCreateWorkspace(loadingId))
       .catch((err) => toast.dismiss(loadingId));
