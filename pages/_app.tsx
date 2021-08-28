@@ -1,5 +1,6 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useRouter } from "next/router";
 import { AnimatePresence } from "framer-motion";
 import type { AppProps } from "next/app";
 import { useEffect, useState } from "react";
@@ -15,8 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     AOS.init();
   }, []);
 
-  // const pageIsReady = useRouter().isReady;
-  // console.log(router.isReady);
+  const router = useRouter();
 
   const [loading, setLoading] = useState(true);
 
@@ -29,15 +29,17 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <AnimatePresence>{loading && <Preloader />}</AnimatePresence>
-      {!loading && (
+      {!loading && router?.asPath && (
         <Provider store={store}>
           <Layout>
-            <Component {...pageProps} />
-            <div className="scroll-to-top">
+            <AnimatePresence exitBeforeEnter>
+              <Component {...pageProps} key={router?.asPath} />
+            </AnimatePresence>
+            <div className='scroll-to-top'>
               <ScrollToTop
                 smooth
-                color="white"
-                className="scroll-to-top__button"
+                color='white'
+                className='scroll-to-top__button'
               />
             </div>
           </Layout>
