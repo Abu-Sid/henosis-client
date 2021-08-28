@@ -1,3 +1,5 @@
+@import "./header.scss";
+
 .personal-dashboard {
   width: 100%;
   height: 130vh;
@@ -7,43 +9,44 @@
   grid-template-rows: 1.5fr repeat(7, 1fr);
   grid-column-gap: 10px;
   grid-row-gap: 10px;
-  div {
+  .border-bg {
     border-radius: radius(large);
+    background-color: $gray;
   }
   &__header {
     grid-area: 1 / 1 / 3 / 5;
-    background-color: red;
+    @extend .border-bg;
   }
   &__chart {
     grid-area: 3 / 1 / 6 / 3;
-    background-color: green;
+    @extend .border-bg;
   }
   &__progress {
     grid-area: 3 / 3 / 6 / 4;
-    background-color: pink;
+    @extend .border-bg;
   }
   &__to-do {
     grid-area: 3 / 4 / 4 / 5;
-    background-color: blue;
+    @extend .border-bg;
   }
   &__in-progress {
     grid-area: 4 / 4 / 5 / 5;
-    background-color: orange;
+    @extend .border-bg;
   }
   &__done {
     grid-area: 5 / 4 / 6 / 5;
-    background-color: lime;
+    @extend .border-bg;
   }
   &__task {
     grid-area: 6 / 1 / 9 / 3;
-    background-color: gold;
+    @extend .border-bg;
   }
   &__sub-task {
     grid-area: 6 / 3 / 9 / 5;
-    background-color: darkblue;
+    @extend .border-bg;
   }
   &__account {
     grid-area: 1 / 5 / 9 / 6;
-    background-color: cyan;
+    @extend .border-bg;
   }
 }

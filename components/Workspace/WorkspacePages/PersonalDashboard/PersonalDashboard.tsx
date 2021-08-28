@@ -1,8 +1,9 @@
 import React from "react";
+import PersonalDashboardHeader from "./PersonalDashboardHeader";
 const PersonalDashboard = () => {
   return (
     <section className='personal-dashboard'>
-      <div className='personal-dashboard__header'></div>
+      <PersonalDashboardHeader />
       <div className='personal-dashboard__chart'></div>
       <div className='personal-dashboard__progress'></div>
       <div className='personal-dashboard__to-do'></div>
