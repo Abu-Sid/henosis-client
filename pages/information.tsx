@@ -7,6 +7,8 @@ import { priceData } from "../components/Pricing/PriceData";
 import withAuthCheck from "../HOC/withAuthCheck";
 import { IWorkspace } from "../redux/actions/workspaceActions/actionInterface";
 import { RootState } from "../redux/reducers";
+import { motion } from "framer-motion";
+import { exit } from "../components/ui/Animation/Animation";
 
 export interface IWorkspaceData {
   companyName: string;
@@ -49,10 +51,10 @@ const Information = () => {
   const price = pricing[isAnnual ? "annualPrice" : "monthlyPrice"];
 
   return (
-    <section className="information">
+    <motion.section exit={exit} className='information'>
       <Payment ref={btnRef} workspaceData={workspaceData} price={price} />
       <WorkspaceForm submit={submit} isCompany />
-    </section>
+    </motion.section>
   );
 };
 

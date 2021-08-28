@@ -10,6 +10,7 @@ import Boards from "../../../public/images/icons/view-boards.svg";
 import Logo from "../../../public/images/logo.svg";
 import SidebarContainer from "./SidebarContainer";
 import SidebarItem from "./SidebarItem";
+import Link from "next/link";
 
 const Sidebar = () => {
   const router = useRouter();
@@ -18,6 +19,12 @@ const Sidebar = () => {
   return (
     <SidebarContainer>
       <SidebarItem icon={Logo} className='sidebar__logo' href='/' />
+      <SidebarItem
+        icon={User}
+        pathName={path}
+        href='dashboard'
+        tooltip='Dashboard'
+      />
       <SidebarItem
         icon={ClipBoard}
         pathName={path}
