@@ -1,4 +1,5 @@
 import React from "react";
+import DashboardBarChart from "./DashboardBarChart";
 import DashboardStatusPill from "./DashboardStatusPill";
 import PersonalDashboardHeader from "./PersonalDashboardHeader";
 const PersonalDashboard = () => {
@@ -8,7 +9,7 @@ const PersonalDashboard = () => {
       <div className='personal-dashboard__activity'>
         <p>Activity</p>
       </div>
-      <div className='personal-dashboard__chart'></div>
+      <DashboardBarChart />
       <div className='personal-dashboard__progress'></div>
       <div className='personal-dashboard__to-do'>
         <DashboardStatusPill status='Remaining' />
