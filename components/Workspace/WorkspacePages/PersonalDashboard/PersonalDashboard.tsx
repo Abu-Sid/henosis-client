@@ -4,13 +4,13 @@ const PersonalDashboard = () => {
     <section className='personal-dashboard'>
       <div className='personal-dashboard__header'></div>
       <div className='personal-dashboard__chart'></div>
-      <div className='div3'></div>
-      <div className='div4'></div>
-      <div className='div5'></div>
-      <div className='div6'></div>
-      <div className='div7'></div>
-      <div className='div8'></div>
-      <div className='div9'></div>
+      <div className='personal-dashboard__progress'></div>
+      <div className='personal-dashboard__to-do'></div>
+      <div className='personal-dashboard__in-progress'></div>
+      <div className='personal-dashboard__done'></div>
+      <div className='personal-dashboard__task'></div>
+      <div className='personal-dashboard__sub-task'></div>
+      <div className='personal-dashboard__account'></div>
     </section>
   );
 };
