@@ -13,7 +13,17 @@ const PersonalDashboardHeader = () => {
         {month} {date}, {year}
       </div>
       <div className='personal-dashboard__header__info'>
-        This is personal dashboard__header
+        <div className='info__image'></div>
+        <div className='info__text'>
+          <h1>
+            Hi, <span>Mir Hussain</span>
+          </h1>
+          <p>Welcome to Henosis</p>
+          <p>
+            You have 4 tasks to finish today. You have already completed 60% of
+            your tasks. Your progress is unbeatable.
+          </p>
+        </div>
       </div>
     </div>
   );
