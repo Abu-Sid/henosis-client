@@ -7,20 +7,19 @@
     }
   }
   &__info {
-    background-color: $gray;
     height: 100%;
     width: 100%;
-    margin-top: 10px;
     border-radius: radius(large);
     @include flex;
     .info__image {
       width: 50%;
       height: 100%;
+      @include flex;
     }
     .info__text {
       width: 50%;
       height: 100%;
-      padding: 2em;
+      padding: 0 2em;
       @include flex(column, center, flex-start);
       h1 {
         @include writing-style($dark-blue, extra-large, extra-thin);
@@ -29,7 +28,8 @@
         }
       }
       p {
-        margin: 5px 0;
+        margin: 10px 0;
+        color: $gray-purple;
       }
     }
   }
