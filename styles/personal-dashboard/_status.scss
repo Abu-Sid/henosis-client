@@ -9,5 +9,8 @@
       @include writing-style($dark-blue, large, thin);
       margin-bottom: 5px;
     }
+    p {
+      color: $dark-blue;
+    }
   }
 }

@@ -7,6 +7,16 @@ interface IStatus {
 const DashboardStatusPill: React.FC<IStatus> = ({ status }) => {
   const iconCheck = status.toLowerCase().replace(/\s+/g, "");
   console.log(iconCheck);
+
+  let color;
+
+  if (iconCheck === "remaining") {
+    color = "#eb5757";
+  } else if (iconCheck === "inprogress") {
+    color = "#f2994a";
+  } else if (iconCheck === "done") {
+    color = "#27ae60";
+  }
   return (
     <div className='status'>
       <div className='status__icon'>
@@ -64,7 +74,7 @@ const DashboardStatusPill: React.FC<IStatus> = ({ status }) => {
         )}
       </div>
       <div className='status__info'>
-        <h1 style={{ color: "red" }}>{status}</h1>
+        <h1 style={{ color: color }}>{status}</h1>
         <p>2 Tasks</p>
       </div>
     </div>
