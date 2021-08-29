@@ -1,0 +1,41 @@
+.personal-dashboard__task {
+  padding: 0.5em 1em 1em 1em;
+  color: $dark-blue;
+  overflow-y: auto;
+  .assigned-to-me__header {
+    height: 2.5em;
+    padding-left: 0.5em;
+    @include flex(row, flex-start);
+    &__task-name {
+      width: 50%;
+      @include flex(row, flex-start);
+    }
+    &__due-date {
+      width: 25%;
+      @include flex;
+    }
+    &__status {
+      width: 25%;
+      @include flex;
+    }
+  }
+
+  .assigned-to-me__task {
+    @extend .assigned-to-me__header;
+    background-color: lighten($light-gray-purple, 60);
+    margin: 10px 0;
+    border-radius: radius(medium);
+    &__task-name {
+      width: 50%;
+      @include flex(row, flex-start);
+    }
+    &__due-date {
+      width: 25%;
+      @include flex;
+    }
+    &__status {
+      width: 25%;
+      @include flex;
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import AssignedToMe from "./AssignedToMe";
 import DashboardBarChart from "./DashboardBarChart";
 import DashboardProgressChart from "./DashboardProgressChart";
 import DashboardStatusPill from "./DashboardStatusPill";
@@ -30,7 +31,9 @@ const PersonalDashboard = () => {
       <div className='personal-dashboard__assigned-to-me'>
         <p>Assigned to me</p>
       </div>
-      <div className='personal-dashboard__task'></div>
+      <div className='personal-dashboard__task'>
+        <AssignedToMe />
+      </div>
       <div className='personal-dashboard__add-sub-task'>
         <p>My Sub-tasks</p>
       </div>
