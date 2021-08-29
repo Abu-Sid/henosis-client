@@ -4,7 +4,7 @@ import { Doughnut } from "react-chartjs-2";
 const DashboardProgressChart = () => {
   return (
     <div className='personal-dashboard__progress'>
-      <p>Progress</p>
+      <p>Today&apos;s Progress</p>
       <div className='doughnut-chart'>
         <Doughnut
           data={{
@@ -12,7 +12,7 @@ const DashboardProgressChart = () => {
             datasets: [
               {
                 data: [20, 30],
-                backgroundColor: ["#27ae60", "#eb5757"],
+                backgroundColor: ["#4a4fff", "#d0d1d8"],
                 border: "none",
               },
             ],
@@ -33,7 +33,10 @@ const DashboardProgressChart = () => {
             },
           }}
         />
+        <h1 className='percentage'>60%</h1>
       </div>
+      <p>Done</p>
+      <p className='remaining-tasks-percentage'>40% of tasks remaining</p>
     </div>
   );
 };
