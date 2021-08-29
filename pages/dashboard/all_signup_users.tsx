@@ -4,7 +4,6 @@ import AdminSidebar from "../../components/Dashboard/AdminSidebar";
 import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation";
 import verifyAdmin from "../../HOC/verifyAdmin";
 
-
 interface UserType {
   name: String;
   email: String;
@@ -14,13 +13,17 @@ interface UserType {
 
 const All_signup_users = () => {
   const [userInfo, setUserInfo] = useState<UserType[]>([]);
+  const [usersInfo, setUsersInfo] = useState<UserType[]>([]);
   const [loading, setLoading] = useState(true);
   // console.log(userInfo);
 
   useEffect(() => {
     fetch("https://intense-peak-24388.herokuapp.com/user")
       .then((res) => res.json())
-      .then((data) => setUserInfo(data.data));
+      .then((data) => {
+        setUserInfo(data.data);
+        setUsersInfo(data.data);
+      });
   }, []);
 
   useEffect(() => {
@@ -29,6 +32,21 @@ const All_signup_users = () => {
     }
   }, [userInfo]);
 
+  const handleChange = (e) => {
+    const searchItem = e.target.value;
+    if (searchItem !== "" && searchItem.length > 0) {
+      const newItems = userInfo?.filter((si) => {
+        return Object.values(si)
+          .join(" ")
+          .toLowerCase()
+          .includes(searchItem.toString().toLowerCase());
+      });
+      setUsersInfo(newItems);
+    } else {
+      setUsersInfo(userInfo);
+    }
+  };
+
   return (
     <section className="d-container">
       <div className="d-row">
@@ -36,8 +54,16 @@ const All_signup_users = () => {
           <AdminSidebar />
         </div>
         <div className="col-right">
-          <div>
-            <h2>All Signup Users</h2>
+          <div className="right-division">
+            <h2>All Users</h2>
+            <form>
+              <input
+                type="text"
+                className="input-search"
+                onChange={handleChange}
+                placeholder="Search"
+              />
+            </form>
           </div>
           <table>
             <thead>
@@ -45,14 +71,13 @@ const All_signup_users = () => {
                 <th>No.</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Role</th>
               </tr>
             </thead>
             {loading ? (
               <LoadingAnimation />
             ) : (
               <tbody>
-                {userInfo.map((info, index) => (
+                {usersInfo.map((info, index) => (
                   <UsersRow key={info._id} info={info} index={index} />
                 ))}
               </tbody>

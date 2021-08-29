@@ -18,7 +18,6 @@ const Payment = (
   ref: React.MutableRefObject<any>
 ) => {
   const { user } = useSelector((state: RootState) => state.userReducer);
-
   const router = useRouter();
 
   const socket = useSocket("/create-workspace");
@@ -46,10 +45,19 @@ const Payment = (
   };
 
   const makePayment = (token: Token) => {
-    const data = { price, type: "Business", ...user, date: new Date().toLocaleDateString(), time: new Date().toLocaleTimeString() };
-    const info = { ...token.card, ...data, ...workspaceData };
+    const data = {
+      price,
+      type: "Business",
+      ...user,
+      date: new Date().toLocaleDateString(),
+      time: new Date().toLocaleTimeString(),
+    };
+    const info = {
+      ...token.card,
+      ...data,
+      ...workspaceData,
+    };
     const loadingId = toast.loading("Loading...");
-    console.log(info);
 
     fetch("https://intense-peak-24388.herokuapp.com/payment", {
       method: "POST",
