@@ -20,6 +20,9 @@
     padding: 1em;
     @include flex(row, space-between);
     .card-info {
+      .cut-line {
+        text-decoration: line-through;
+      }
       &__sub-task-name {
         color: $dark-blue;
         margin-bottom: 5px;

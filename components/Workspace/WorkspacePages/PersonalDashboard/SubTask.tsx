@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface ISubTaskHeader {
   handleAddSubTask: () => void;
@@ -48,14 +48,31 @@ const SubTaskHeader: React.FC<ISubTaskHeader> = ({ handleAddSubTask }) => {
 };
 
 const SubTaskCard: React.FC<ISubTaskCard> = ({ subTaskName, taskName }) => {
+  const [cutLine, setCutLine] = useState(false);
   return (
     <div className='personal-dashboard__sub-task__card'>
       <div className='card-info'>
-        <h1 className='card-info__sub-task-name'>{subTaskName}</h1>
-        <p className='card-info__task-name'>sub task of {taskName}</p>
+        <h1
+          className={
+            cutLine
+              ? "card-info__sub-task-name cut-line"
+              : "card-info__sub-task-name"
+          }
+        >
+          {subTaskName}
+        </h1>
+        <p
+          className={
+            cutLine
+              ? "card-info__sub-task-name cut-line"
+              : "card-info__sub-task-name"
+          }
+        >
+          sub task of {taskName}
+        </p>
       </div>
       <div className='card-checkbox'>
-        <input type='checkbox' />
+        <input type='checkbox' onChange={() => setCutLine(!cutLine)} />
       </div>
     </div>
   );
