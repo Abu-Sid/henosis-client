@@ -1,10 +1,26 @@
 import React from "react";
 
-const SubTask = () => {
+interface ISubTaskHeader {
+  handleAddSubTask: () => void;
+}
+
+const SubTask: React.FC = () => {
+  const handleAddSubTask = () => {
+    console.log("Add sub task clicked");
+  };
+
   return (
     <>
-      <div className='personal-dashboard__sub-task__header'>
-        <h1>Add sub-task</h1>
+      <SubTaskHeader handleAddSubTask={handleAddSubTask} />
+    </>
+  );
+};
+
+const SubTaskHeader: React.FC<ISubTaskHeader> = ({ handleAddSubTask }) => {
+  return (
+    <div className='personal-dashboard__sub-task__header'>
+      <h1>Add sub-task</h1>
+      <div className='sub-task-add-button' onClick={handleAddSubTask}>
         <svg
           width='50'
           height='50'
@@ -21,7 +37,7 @@ const SubTask = () => {
           />
         </svg>
       </div>
-    </>
+    </div>
   );
 };
 

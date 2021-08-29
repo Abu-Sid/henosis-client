@@ -8,5 +8,8 @@
     h1 {
       @include writing-style($dark-blue, semi-large, thin);
     }
+    .sub-task-add-button {
+      cursor: pointer;
+    }
   }
 }
