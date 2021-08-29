@@ -2,17 +2,17 @@
 @import "./chat-channel";
 
 .chat-portal {
-  height: 100vh;
   width: 100%;
   padding: 10px 10px 10px 0;
   @include flex(column, flex-start, stretch);
-
   &__body {
+    height: 90.5vh;
     padding-top: 10px;
     @include flex;
     .chat-body {
       @extend .chat-channel;
-      height: 90vh;
+      height: 100%;
+      padding: 10px;
       ::-webkit-scrollbar {
         max-width: 8px;
       }
@@ -53,6 +53,7 @@
         .skeleton {
           animation: skeleton-animation 1s linear infinite alternate;
           opacity: 0.7;
+          border-radius: 8px;
         }
         img,
         .skeleton-img {
@@ -173,12 +174,14 @@
     display: block;
   }
   .chat-portal {
-    height: 100%;
     overflow: hidden;
+    padding: 5px 10px 0 0;
+    display: block;
     &__body {
       position: relative;
       flex-direction: column;
       width: 100%;
+      padding-top: 0;
       .chat-body {
         width: 100%;
         height: 88vh;
@@ -188,8 +191,9 @@
     .members {
       position: absolute;
       top: 5px;
-      height: 90vh;
+      height: 98%;
       width: 100%;
+      bottom: 5px !important;
     }
     .members {
       left: 110%;
