@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useRef } from "react";
 import { HiOutlinePlus } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import Select from "react-select";
@@ -13,14 +14,7 @@ import User from "../../../../public/images/icons/user-pp.svg";
 import Speaker from "../../../../public/images/icons/volume-up.svg";
 import { RootState } from "../../../../redux/reducers";
 import Modal from "../../../Modal/Modal";
-import { IChannel } from "./Chat";
-
-interface IProps {
-  channels: IChannel[];
-  handleAddChannel: (data: IChannel) => void;
-  showChannel: boolean;
-  setShowChannel: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { chatContext } from "./ChatContainer";
 
 interface IOption {
   value: string;
@@ -29,12 +23,10 @@ interface IOption {
 
 const animatedComponents = makeAnimated();
 
-const ChatChannel = ({
-  channels,
-  handleAddChannel,
-  showChannel,
-  setShowChannel,
-}: IProps) => {
+const ChatChannel = () => {
+  const { channels, handleAddChannel, showChannel, setShowChannel } =
+    useContext(chatContext);
+
   const { _id: id, members } = useSelector(
     (state: RootState) => state.workspaceReducer.workspace
   );
@@ -44,6 +36,8 @@ const ChatChannel = ({
   const path = router.query.paths[2] || channels[0]?._id;
 
   const [isOpen, setIsOpen] = useState(false);
+
+  const [stream, setStream] = useState<MediaStream>(null);
 
   const [memberOptions, setMemberOptions] = useState<IOption[]>([]);
 
@@ -76,6 +70,17 @@ const ChatChannel = ({
     }
   };
 
+  const streamRef = useRef(null as HTMLVideoElement);
+
+  const handleVoice = () => {
+    navigator.mediaDevices
+      .getUserMedia({ video: true, audio: true })
+      .then((mediaStream) => {
+        setStream(mediaStream);
+        streamRef.current.srcObject = mediaStream;
+      });
+  };
+
   return (
     <>
       <section
@@ -106,6 +111,17 @@ const ChatChannel = ({
                 </p>
               </Link>
             ))}
+          </div>
+        </div>
+        <div className="chat-channel__text">
+          <div className="chat-channel__text-header">
+            <h1>Voice Channels</h1>
+          </div>
+          <div className="chat-channels">
+            <div onClick={handleVoice} className="chat-member active-channel">
+              <Image src={Speaker} alt="Speaker Icon" height={24} width={24} />{" "}
+              <p>Meet</p>
+            </div>
           </div>
         </div>
         <div className="chat-channel__options">

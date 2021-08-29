@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { IoMdClose, IoMdMenu } from "react-icons/io";
 import { useSelector } from "react-redux";
 import Bell from "../../../../public/images/icons/bell.svg";
@@ -8,15 +8,11 @@ import Search from "../../../../public/images/icons/search.svg";
 import Tag from "../../../../public/images/icons/tag.svg";
 import { RootState } from "../../../../redux/reducers";
 import { DropdownItem, DropdownMenu } from "../../../ui/Navbar/DropDown";
-import { IChannel } from "./Chat";
+import { chatContext } from "./ChatContainer";
 
-interface IProps {
-  channels: IChannel[];
-  setShowChannel: React.Dispatch<React.SetStateAction<boolean>>;
-  setShowActive: React.Dispatch<React.SetStateAction<boolean>>;
-}
+const ChatHeader = () => {
+  const { channels, setShowChannel, setShowActive } = useContext(chatContext);
 
-const ChatHeader = ({ channels, setShowChannel, setShowActive }: IProps) => {
   const router = useRouter();
 
   const id = router.query.paths[2] || channels[0]?._id;
