@@ -4,6 +4,7 @@ import DashboardBarChart from "./DashboardBarChart";
 import DashboardProgressChart from "./DashboardProgressChart";
 import DashboardStatusPill from "./DashboardStatusPill";
 import PersonalDashboardHeader from "./PersonalDashboardHeader";
+import SubTask from "./SubTask";
 const PersonalDashboard = () => {
   return (
     <section className='personal-dashboard'>
@@ -37,7 +38,9 @@ const PersonalDashboard = () => {
       <div className='personal-dashboard__add-sub-task'>
         <p>My Sub-tasks</p>
       </div>
-      <div className='personal-dashboard__sub-task'></div>
+      <div className='personal-dashboard__sub-task'>
+        <SubTask />
+      </div>
       <div className='personal-dashboard__account'></div>
     </section>
   );
