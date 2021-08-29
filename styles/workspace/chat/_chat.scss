@@ -127,6 +127,25 @@
       h3 {
         margin-bottom: 5px;
       }
+      button {
+        @include button($dark-blue, $light-gray-purple);
+        transition: all 300ms ease-in-out;
+        padding: 3px 12px;
+        &:focus {
+          box-shadow: 0 0 1px 3px $red;
+        }
+        &:hover {
+          background-color: $red;
+          color: $white;
+        }
+        svg {
+          margin-top: 3px;
+          font-size: 1.3rem;
+        }
+        margin-bottom: 5px;
+        margin-left: auto;
+        display: none;
+      }
     }
     .chat-member {
       padding: 5px;
@@ -196,16 +215,26 @@
       bottom: 5px !important;
     }
     .members {
-      left: 110%;
+      left: 105%;
       transition: 0.3s;
+      button {
+        display: block;
+      }
     }
     .members.active {
       left: 0;
       z-index: 10;
     }
     .chat-channel-top {
-      left: -125%;
+      left: -100%;
       transition: 0.3s;
+    }
+    .chat-channel {
+      &__text-header {
+        button {
+          display: block;
+        }
+      }
     }
     .chat-channel-top.active {
       left: 0;
