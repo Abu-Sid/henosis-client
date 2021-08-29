@@ -6,12 +6,18 @@ import PersonalDashboardHeader from "./PersonalDashboardHeader";
 const PersonalDashboard = () => {
   return (
     <section className='personal-dashboard'>
-      <PersonalDashboardHeader />
+      <div className='personal-dashboard__header'>
+        <PersonalDashboardHeader />
+      </div>
       <div className='personal-dashboard__activity'>
         <p>Activity</p>
       </div>
-      <DashboardBarChart />
-      <DashboardProgressChart />
+      <div style={{ padding: "1em" }} className='personal-dashboard__chart'>
+        <DashboardBarChart />
+      </div>
+      <div className='personal-dashboard__progress'>
+        <DashboardProgressChart />
+      </div>
       <div className='personal-dashboard__to-do'>
         <DashboardStatusPill status='Remaining' />
       </div>

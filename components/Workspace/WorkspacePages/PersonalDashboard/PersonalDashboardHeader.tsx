@@ -8,7 +8,7 @@ const PersonalDashboardHeader = () => {
   const date = today.getDate();
   const year = today.getFullYear();
   return (
-    <div className='personal-dashboard__header'>
+    <>
       <div className='personal-dashboard__header__info'>
         <div className='info__image'>
           <CodingBanner />
@@ -27,7 +27,7 @@ const PersonalDashboardHeader = () => {
           </p>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

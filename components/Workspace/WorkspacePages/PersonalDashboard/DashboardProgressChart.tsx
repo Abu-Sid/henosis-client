@@ -3,7 +3,7 @@ import { Doughnut } from "react-chartjs-2";
 
 const DashboardProgressChart = () => {
   return (
-    <div className='personal-dashboard__progress'>
+    <>
       <p>Today&apos;s Progress</p>
       <div className='doughnut-chart'>
         <Doughnut
@@ -37,7 +37,7 @@ const DashboardProgressChart = () => {
       </div>
       <p>Done</p>
       <p className='remaining-tasks-percentage'>40% of tasks remaining</p>
-    </div>
+    </>
   );
 };
 

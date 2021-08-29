@@ -3,7 +3,7 @@ import { Bar } from "react-chartjs-2";
 
 const DashboardBarChart = () => {
   return (
-    <div style={{ padding: "1em" }} className='personal-dashboard__chart'>
+    <>
       <Bar
         height={600}
         width={350}
@@ -38,7 +38,7 @@ const DashboardBarChart = () => {
           },
         }}
       />
-    </div>
+    </>
   );
 };
 
