@@ -44,7 +44,7 @@
     background-color: $light-gray-purple;
     width: 100%;
     height: 80px;
-    padding: 0 10px;
+    padding: 10px;
     border-radius: radius(medium);
     @include flex(row, flex-end, center);
     .options-icon {

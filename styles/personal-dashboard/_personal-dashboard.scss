@@ -1,13 +1,17 @@
 @import "./header.scss";
 @import "./status.scss";
+@import "./progress.scss";
+@import "./assigned-to-me.scss";
+@import "./sub-task.scss";
+@import "./dashboard-account-section.scss";
 
 .personal-dashboard {
   width: 100%;
-  height: 130vh;
+  height: 145vh;
   padding: 10px 10px 10px 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr) 1.3fr;
-  grid-template-rows: 1.5fr 1fr 0.3fr repeat(3, 1fr) 0.3fr repeat(3, 1fr);
+  grid-template-rows: 1.5fr 1fr 0.3fr repeat(3, 1fr) 0.3fr repeat(4, 1fr);
   grid-column-gap: 10px;
   grid-row-gap: 10px;
   .border-bg {
@@ -57,20 +61,15 @@
     @extend .section-header-text;
   }
   &__task {
-    grid-area: 8 / 1 / 11 / 3;
+    grid-area: 8 / 1 / 12 / 3;
     @extend .border-bg;
   }
   &__sub-task {
-    grid-area: 8 / 3 / 11 / 5;
+    grid-area: 8 / 3 / 12 / 5;
     @extend .border-bg;
   }
   &__account {
-    grid-area: 1 / 5 / 11 / 6;
+    grid-area: 1 / 5 / 12 / 6;
     @extend .border-bg;
   }
-}
-
-.doughnut-chart {
-  height: 150px;
-  width: 150px;
 }

@@ -28,13 +28,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <AnimatePresence>{loading && <Preloader />}</AnimatePresence>
-      {!loading && router?.asPath && (
+      {loading && <Preloader />}
+      {!loading && (
         <Provider store={store}>
           <Layout>
-            <AnimatePresence exitBeforeEnter>
-              <Component {...pageProps} key={router?.asPath} />
-            </AnimatePresence>
+            <Component {...pageProps} />
             <div className='scroll-to-top'>
               <ScrollToTop
                 smooth

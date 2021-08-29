@@ -1,19 +1,18 @@
 import { format, subDays } from "date-fns";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useSelector } from "react-redux";
-import { Socket } from "socket.io-client";
-import { DefaultEventsMap } from "socket.io-client/build/typed-events";
 import Send from "../../../../public/images/icons/paper-airplane.svg";
 import personImage from "../../../../public/images/icons/purple.svg";
 import { RootState } from "../../../../redux/reducers";
-import { IChannel } from "./Chat";
-
-interface IProps {
-  channels: IChannel[];
-  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
-}
+import { chatContext } from "./ChatContainer";
 
 interface IMessage {
   _id?: string;
@@ -24,7 +23,9 @@ interface IMessage {
   seen: string[];
 }
 
-const ChatBody = ({ channels, socket }: IProps) => {
+const ChatBody = () => {
+  const { channels, socket } = useContext(chatContext);
+
   const router = useRouter();
 
   const id = router.query.paths[2] || channels[0]?._id;
