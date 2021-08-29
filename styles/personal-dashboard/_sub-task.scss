@@ -1,0 +1,12 @@
+.personal-dashboard__sub-task {
+  padding: 1em;
+  &__header {
+    background-color: $light-gray-purple;
+    border-radius: radius(medium);
+    padding: 0.5em;
+    @include flex(row, space-between);
+    h1 {
+      @include writing-style($dark-blue, semi-large, thin);
+    }
+  }
+}
