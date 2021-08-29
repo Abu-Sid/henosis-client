@@ -1,9 +1,21 @@
 import React from "react";
 
-const SidebarContainer: React.FC = ({ children }) => {
+interface ISidebarContainer {
+  device: string;
+  children: React.ReactNode;
+}
+
+const SidebarContainer: React.FC<ISidebarContainer> = ({
+  children,
+  device,
+}) => {
   return (
-    <div className="sidebar-container">
-      <div className="sidebar">
+    <div
+      className={
+        device === "desktop" ? "sidebar-container" : "phone-sidebar-container"
+      }
+    >
+      <div className={device === "desktop" ? "sidebar" : "phone-sidebar"}>
         <ul>{children}</ul>
       </div>
     </div>

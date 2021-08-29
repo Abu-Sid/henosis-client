@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
 import React from "react";
+import { useRouter } from "next/router";
 import Chat from "../../../public/images/icons/chat.svg";
 import ClipBoard from "../../../public/images/icons/clipboard-check.svg";
 import Logout from "../../../public/images/icons/logout.svg";
@@ -11,68 +11,74 @@ import Logo from "../../../public/images/logo.svg";
 import SidebarContainer from "./SidebarContainer";
 import SidebarItem from "./SidebarItem";
 
-const Sidebar = () => {
+const PhoneSidebar = () => {
   const router = useRouter();
   const path = router.query.paths?.[0];
-
   return (
-    <SidebarContainer device='desktop'>
+    <SidebarContainer device='phone'>
       <SidebarItem
         icon={Logo}
         className='sidebar__logo'
         href='/'
-        device='desktop'
+        device='phone'
       />
       <SidebarItem
         icon={User}
         pathName={path}
         href='dashboard'
         tooltip='Dashboard'
-        device='desktop'
+        device='phone'
+        routeName='Dashboard'
       />
       <SidebarItem
         icon={ClipBoard}
         pathName={path}
         href='backlog'
         tooltip='Backlog'
-        device='desktop'
+        device='phone'
+        routeName='Backlog'
       />
       <SidebarItem
         icon={Boards}
         pathName={path}
         href='board'
         tooltip='Boards'
-        device='desktop'
+        device='phone'
+        routeName='Boards'
       />
       <SidebarItem
         icon={Chat}
         pathName={path}
         href='chat'
         tooltip='Chats'
-        device='desktop'
+        device='phone'
+        routeName='Chat'
       />
       <SidebarItem
         icon={Mail}
         pathName={path}
         href='notifications'
         tooltip='Notifications'
-        device='desktop'
+        device='phone'
+        routeName='Notification'
       />
       <SidebarItem
         icon={Settings}
         pathName={path}
         href='settings'
         tooltip='Settings'
-        device='desktop'
+        device='phone'
+        routeName='Settings'
       />
       <SidebarItem
         icon={Logout}
         className='sidebar__logout'
         tooltip='Logout'
-        device='desktop'
+        device='phone'
+        routeName='Logout'
       />
     </SidebarContainer>
   );
 };
 
-export default Sidebar;
+export default PhoneSidebar;
