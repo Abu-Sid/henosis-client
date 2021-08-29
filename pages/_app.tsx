@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <AnimatePresence>{loading && <Preloader />}</AnimatePresence>
-      {!loading && router?.asPath && (
+      {!loading && (
         <Provider store={store}>
           <Layout>
             <AnimatePresence exitBeforeEnter>

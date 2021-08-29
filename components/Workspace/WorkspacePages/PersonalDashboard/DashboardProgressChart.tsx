@@ -11,7 +11,7 @@ const DashboardProgressChart = () => {
             labels: ["Done", "Remaining"],
             datasets: [
               {
-                data: [20, 30],
+                data: [60, 40],
                 backgroundColor: ["#4a4fff", "#d0d1d8"],
                 border: "none",
               },

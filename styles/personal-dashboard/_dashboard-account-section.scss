@@ -1,0 +1,45 @@
+.personal-dashboard__account {
+  padding: 1em;
+  &__user {
+    @include flex(column);
+    .user-information {
+      @include flex(column);
+      h1 {
+        margin-top: 10px;
+        @include writing-style($dark-blue, large, regular);
+      }
+      p {
+        @include writing-style($gray-purple, small, thin);
+      }
+    }
+  }
+
+  &__tasks {
+    .ongoing-tasks-header {
+      @include flex(row, space-between);
+      margin-top: 2em;
+      h1 {
+        @include writing-style($dark-blue, semi-large, thin);
+      }
+      a {
+        @include writing-style($purple, small, thin);
+      }
+    }
+    .ongoing-task {
+      padding: 1em;
+      margin-top: 10px;
+      border-radius: radius(medium);
+      background-color: $light-gray-purple;
+      h1 {
+        @include writing-style($dark-blue, regular, regular);
+      }
+      &__information {
+        margin-top: 5px;
+        @include flex(row, space-between);
+        p {
+          @include writing-style($gray-purple, small, thin);
+        }
+      }
+    }
+  }
+}
