@@ -1,5 +1,6 @@
 import React from "react";
 import AssignedToMe from "./AssignedToMe";
+import DashboardAccount from "./DashboardAccount";
 import DashboardBarChart from "./DashboardBarChart";
 import DashboardProgressChart from "./DashboardProgressChart";
 import DashboardStatusPill from "./DashboardStatusPill";
@@ -41,7 +42,9 @@ const PersonalDashboard = () => {
       <div className='personal-dashboard__sub-task'>
         <SubTask />
       </div>
-      <div className='personal-dashboard__account'></div>
+      <div className='personal-dashboard__account'>
+        <DashboardAccount />
+      </div>
     </section>
   );
 };
