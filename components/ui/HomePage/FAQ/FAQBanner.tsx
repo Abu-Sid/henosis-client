@@ -5,19 +5,10 @@ const FAQBanner = () => {
   const upperVariants = {
     animationOne: {
       opacity: [0, 1],
-      transition: {
-        yoyo: Infinity,
-        delay: 3,
-        duration: 3,
-      },
     },
     animationTwo: {
       rotate: -30,
       y: 10,
-      transition: {
-        yoyo: Infinity,
-        duration: 3,
-      },
     },
   };
   return (
@@ -166,6 +157,11 @@ const FAQBanner = () => {
           <motion.g
             animate='animationOne'
             variants={upperVariants}
+            transition={{
+              repeat: Infinity,
+              repeatType: "reverse",
+              duration: 3,
+            }}
             id='question-mark-upper'
           >
             <path
@@ -257,6 +253,12 @@ const FAQBanner = () => {
           <motion.g
             animate='animationOne'
             variants={upperVariants}
+            transition={{
+              repeat: Infinity,
+              repeatType: "reverse",
+              delay: 3,
+              duration: 3,
+            }}
             id='question-mark-lower'
           >
             <path

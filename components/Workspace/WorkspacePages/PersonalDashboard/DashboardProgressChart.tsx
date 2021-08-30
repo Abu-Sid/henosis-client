@@ -42,8 +42,6 @@ const DashboardProgressChart = () => {
   } else {
     currentRemaining = remaining;
   }
-  console.log({ remaining });
-  console.log({ currentRemaining });
   return (
     <>
       <p>Today&apos;s Progress</p>
