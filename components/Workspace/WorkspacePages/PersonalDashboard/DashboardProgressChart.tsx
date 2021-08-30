@@ -34,6 +34,8 @@ const DashboardProgressChart = () => {
 
   const cutoutSize = screenSize < 600 ? 50 : 65;
 
+  const color = !progress ? "#75798c" : "#4a4fff";
+
   return (
     <>
       <p>Today&apos;s Progress</p>
@@ -65,7 +67,9 @@ const DashboardProgressChart = () => {
             },
           }}
         />
-        <h1 className='percentage'>{progress || 0}%</h1>
+        <h1 style={{ color: color }} className='percentage'>
+          {progress || 0}%
+        </h1>
       </div>
       <p>Done</p>
       <p className='remaining-tasks-percentage'>

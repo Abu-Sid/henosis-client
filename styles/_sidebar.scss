@@ -35,6 +35,8 @@
         text-align: center;
         border-radius: radius(small);
         transform: translateY(3px);
+        border: 1px solid $gray-purple;
+        z-index: 999;
       }
     }
     .sidebar__logo {

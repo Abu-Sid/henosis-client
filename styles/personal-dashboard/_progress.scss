@@ -1,6 +1,9 @@
 .personal-dashboard__progress {
   padding: 10px 0;
   @include flex(column, space-evenly);
+  p {
+    color: $dark-blue;
+  }
   .doughnut-chart {
     position: relative;
     height: 150px;
