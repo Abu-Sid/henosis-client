@@ -46,6 +46,7 @@ const PhoneNavbar = () => {
           {username && (
             <DropdownItem href='/workspaces'>Existing workspaces</DropdownItem>
           )}
+          {username && <DropdownItem href='/settings'>Settings</DropdownItem>}
           {username && (
             <DropdownItem functionality={handleLogout}>Log out</DropdownItem>
           )}

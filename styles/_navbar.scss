@@ -69,6 +69,7 @@
   right: 50%;
   padding: 0.5em;
   transform: translateX(30%);
+  border: 1px solid $gray-purple;
   border-radius: radius(small);
   background-color: $gray;
   &__item {
