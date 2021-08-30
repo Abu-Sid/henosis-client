@@ -1,0 +1,24 @@
+.bilingContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1.2%;
+  width: 98%;
+  .billing-card {
+    border: 1px solid black;
+    margin-top: 1.5rem;
+    padding: 1.3rem;
+    border-radius: 0.4rem;
+    h4 {
+      margin: 0.5rem 0;
+    }
+    p {
+      margin: 0.5rem 0;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .bilingContainer {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

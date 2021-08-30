@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
+import { IoMdClose } from "react-icons/io";
 import { useSelector } from "react-redux";
 import Purple from "../../../../public/images/icons/purple.svg";
 import { RootState } from "../../../../redux/reducers";
 import { chatContext } from "./ChatContainer";
 
 const ChatMembers = () => {
-  const { showActive, actives } = useContext(chatContext);
+  const { showActive, actives, setShowActive } = useContext(chatContext);
 
   const { members } = useSelector(
     (state: RootState) => state.workspaceReducer.workspace
@@ -18,6 +19,9 @@ const ChatMembers = () => {
 
   return (
     <div className={showActive ? "members active" : "members"}>
+      <button onClick={() => setShowActive(false)}>
+        <IoMdClose />
+      </button>
       <div className="members__online">
         <h3>Online ({actives.length})</h3>
         {actives.map((active) => {
