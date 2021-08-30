@@ -1,5 +1,5 @@
+import React from "react";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
 import Chat from "../../../public/images/icons/chat.svg";
 import ClipBoard from "../../../public/images/icons/clipboard-check.svg";
 import Logout from "../../../public/images/icons/logout.svg";
@@ -11,30 +11,23 @@ import Logo from "../../../public/images/logo.svg";
 import SidebarContainer from "./SidebarContainer";
 import SidebarItem from "./SidebarItem";
 
-const Sidebar = () => {
-  const [screenSize, setScreenSize] = useState(null);
+const PhoneSidebar = () => {
   const router = useRouter();
   const path = router.query.paths?.[0];
-
-  useEffect(() => {
-    const currentScreenSize = window.innerWidth;
-    setScreenSize(currentScreenSize);
-  }, []);
-
   return (
-    <SidebarContainer device={screenSize < 600 ? "phone" : "desktop"}>
+    <SidebarContainer device='phone'>
       <SidebarItem
         icon={Logo}
         className='sidebar__logo'
         href='/'
-        device={screenSize < 600 ? "phone" : "desktop"}
+        device='phone'
       />
       <SidebarItem
         icon={User}
         pathName={path}
         href='dashboard'
         tooltip='Dashboard'
-        device={screenSize < 600 ? "phone" : "desktop"}
+        device='phone'
         routeName='Dashboard'
       />
       <SidebarItem
@@ -42,7 +35,7 @@ const Sidebar = () => {
         pathName={path}
         href='backlog'
         tooltip='Backlog'
-        device={screenSize < 600 ? "phone" : "desktop"}
+        device='phone'
         routeName='Backlog'
       />
       <SidebarItem
@@ -50,7 +43,7 @@ const Sidebar = () => {
         pathName={path}
         href='board'
         tooltip='Boards'
-        device={screenSize < 600 ? "phone" : "desktop"}
+        device='phone'
         routeName='Boards'
       />
       <SidebarItem
@@ -58,7 +51,7 @@ const Sidebar = () => {
         pathName={path}
         href='chat'
         tooltip='Chats'
-        device={screenSize < 600 ? "phone" : "desktop"}
+        device='phone'
         routeName='Chat'
       />
       <SidebarItem
@@ -66,7 +59,7 @@ const Sidebar = () => {
         pathName={path}
         href='notifications'
         tooltip='Notifications'
-        device={screenSize < 600 ? "phone" : "desktop"}
+        device='phone'
         routeName='Notification'
       />
       <SidebarItem
@@ -74,18 +67,18 @@ const Sidebar = () => {
         pathName={path}
         href='settings'
         tooltip='Settings'
-        device={screenSize < 600 ? "phone" : "desktop"}
+        device='phone'
         routeName='Settings'
       />
       <SidebarItem
         icon={Logout}
         className='sidebar__logout'
         tooltip='Logout'
-        device={screenSize < 600 ? "phone" : "desktop"}
+        device='phone'
         routeName='Logout'
       />
     </SidebarContainer>
   );
 };
 
-export default Sidebar;
+export default PhoneSidebar;

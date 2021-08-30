@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../../redux/reducers";
 import CodingBanner from "./CodingBanner";
 
-const PersonalDashboardHeader = () => {
+const PersonalDashboardHeader: React.FC = () => {
   const today = new Date();
   const day = today.toLocaleString("default", { weekday: "long" });
   const month = today.toLocaleString("default", { month: "long" });

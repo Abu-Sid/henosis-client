@@ -12,6 +12,8 @@ interface IProps {
   href?: string;
   tooltip?: string;
   pathName?: string;
+  device: string;
+  routeName?: string;
 }
 
 const SidebarItem: React.FC<IProps> = ({
@@ -20,8 +22,14 @@ const SidebarItem: React.FC<IProps> = ({
   href,
   tooltip,
   pathName,
+  device,
+  routeName,
 }) => {
   const [showTooltip, setShowTooltip] = useState(false);
+<<<<<<< HEAD
+=======
+
+>>>>>>> c3259dcb89d70836fefd28ba7206f0a14edf8615
   const dispatch = useDispatch();
   const tooltipVariant = {
     hidden: { opacity: 0, x: -50 },
@@ -49,16 +57,26 @@ const SidebarItem: React.FC<IProps> = ({
       {href && (
         <Link href={href === "/" ? "/" : `${pathName}/${href}`} passHref>
           <a>
+<<<<<<< HEAD
             <Image src={icon} alt="icon" />
+=======
+            <Image src={icon} alt='icon' />
+            {device === "phone" && <p className='route-name'>{routeName}</p>}
+>>>>>>> c3259dcb89d70836fefd28ba7206f0a14edf8615
           </a>
         </Link>
       )}
       {className === "sidebar__logout" && (
         <button onClick={handleLogoutClick}>
+<<<<<<< HEAD
           <Image src={icon} alt="icon" />
+=======
+          <Image src={icon} alt='icon' />
+          {device === "phone" && <p className='route-name'>{routeName}</p>}
+>>>>>>> c3259dcb89d70836fefd28ba7206f0a14edf8615
         </button>
       )}
-      {tooltip && (
+      {tooltip && device === "desktop" && (
         <Link href={`${pathName}/${href}`} passHref>
           <AnimatePresence>
             {showTooltip && (
