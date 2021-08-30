@@ -1,21 +1,10 @@
 .phone-sidebar-container {
   height: 100vh;
   width: 250px;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-.clickme {
-  width: 80px;
-  position: absolute;
-  top: 0;
-  left: -80px;
-}
-
-.clickme2 {
   position: fixed;
   top: 0;
   right: 0;
+  z-index: 999;
 }
 
 .phone-sidebar {
@@ -55,5 +44,37 @@
     .sidebar__logout {
       margin: auto 0 10px 0;
     }
+  }
+}
+
+.sidebar-toggle-button__hide {
+  background-color: $dark-blue;
+  outline: none;
+  border: none;
+  border-top-left-radius: radius(small);
+  border-bottom-left-radius: radius(small);
+  width: 25px;
+  position: absolute;
+  top: 50px;
+  left: -25px;
+  z-index: 999;
+  svg {
+    transform: rotate(-90deg);
+  }
+}
+
+.sidebar-toggle-button__show {
+  background-color: $dark-blue;
+  outline: none;
+  border: none;
+  border-top-left-radius: radius(small);
+  border-bottom-left-radius: radius(small);
+  width: 25px;
+  position: fixed;
+  top: 50px;
+  right: 0;
+  z-index: 999;
+  svg {
+    transform: rotate(90deg);
   }
 }

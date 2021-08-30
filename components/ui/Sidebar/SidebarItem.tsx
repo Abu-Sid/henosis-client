@@ -26,7 +26,7 @@ const SidebarItem: React.FC<IProps> = ({
   routeName,
 }) => {
   const [showTooltip, setShowTooltip] = useState(false);
-  console.log(showTooltip);
+
   const dispatch = useDispatch();
   const tooltipVariant = {
     hidden: { opacity: 0, x: -50 },
