@@ -150,7 +150,7 @@ const Workspace = () => {
         />
       ) : (
         <section className='workspace'>
-          {screenSize > 600 ? <Sidebar /> : <PhoneSidebar />}
+          <Sidebar />
           <WorkspaceRoute socket={socket} />
         </section>
       )}
