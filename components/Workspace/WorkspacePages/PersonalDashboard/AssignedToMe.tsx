@@ -6,7 +6,7 @@ interface ITask {
   status: string;
 }
 
-const AssignedToMe = () => {
+const AssignedToMe: React.FC = () => {
   return (
     <>
       <div className='assigned-to-me__header'>
