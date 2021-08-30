@@ -1,10 +1,10 @@
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useDispatch } from "react-redux";
 import { logout } from "../../../auth/authManager";
 import { authUserLogout } from "../../../redux/actions/userActions";
-import { useDispatch } from "react-redux";
 
 interface IProps {
   icon: StaticImageData;
@@ -12,6 +12,8 @@ interface IProps {
   href?: string;
   tooltip?: string;
   pathName?: string;
+  device: string;
+  routeName?: string;
 }
 
 const SidebarItem: React.FC<IProps> = ({
@@ -20,9 +22,10 @@ const SidebarItem: React.FC<IProps> = ({
   href,
   tooltip,
   pathName,
+  device,
+  routeName,
 }) => {
   const [showTooltip, setShowTooltip] = useState(false);
-  console.log(showTooltip);
   const dispatch = useDispatch();
   const tooltipVariant = {
     hidden: { opacity: 0, x: -50 },
@@ -50,25 +53,27 @@ const SidebarItem: React.FC<IProps> = ({
       {href && (
         <Link href={href === "/" ? "/" : `${pathName}/${href}`} passHref>
           <a>
-            <Image src={icon} alt='icon' />
+            <Image src={icon} alt="icon" />
+            {device === "phone" && <p className="route-name">{routeName}</p>}
           </a>
         </Link>
       )}
       {className === "sidebar__logout" && (
         <button onClick={handleLogoutClick}>
-          <Image src={icon} alt='icon' />
+          <Image src={icon} alt="icon" />
+          {device === "phone" && <p className="route-name">{routeName}</p>}
         </button>
       )}
-      {tooltip && (
+      {tooltip && device === "desktop" && (
         <Link href={`${pathName}/${href}`} passHref>
           <AnimatePresence>
             {showTooltip && (
               <motion.span
-                initial='hidden'
-                animate='visible'
+                initial="hidden"
+                animate="visible"
                 exit={{ opacity: 0, x: -50 }}
                 variants={tooltipVariant}
-                className='tooltip'
+                className="tooltip"
               >
                 {tooltip}
               </motion.span>

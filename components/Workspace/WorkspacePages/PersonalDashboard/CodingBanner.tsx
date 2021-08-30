@@ -1,6 +1,6 @@
 import React from "react";
 
-const CodingBanner = () => {
+const CodingBanner: React.FC = () => {
   return (
     <div className='coding-banner'>
       <svg
