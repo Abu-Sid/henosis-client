@@ -12,6 +12,8 @@ interface IProps {
   href?: string;
   tooltip?: string;
   pathName?: string;
+  device: string;
+  routeName?: string;
 }
 
 const SidebarItem: React.FC<IProps> = ({
@@ -20,9 +22,11 @@ const SidebarItem: React.FC<IProps> = ({
   href,
   tooltip,
   pathName,
+  device,
+  routeName,
 }) => {
   const [showTooltip, setShowTooltip] = useState(false);
-  console.log(showTooltip);
+
   const dispatch = useDispatch();
   const tooltipVariant = {
     hidden: { opacity: 0, x: -50 },
@@ -51,15 +55,17 @@ const SidebarItem: React.FC<IProps> = ({
         <Link href={href === "/" ? "/" : `${pathName}/${href}`} passHref>
           <a>
             <Image src={icon} alt='icon' />
+            {device === "phone" && <p className='route-name'>{routeName}</p>}
           </a>
         </Link>
       )}
       {className === "sidebar__logout" && (
         <button onClick={handleLogoutClick}>
           <Image src={icon} alt='icon' />
+          {device === "phone" && <p className='route-name'>{routeName}</p>}
         </button>
       )}
-      {tooltip && (
+      {tooltip && device === "desktop" && (
         <Link href={`${pathName}/${href}`} passHref>
           <AnimatePresence>
             {showTooltip && (

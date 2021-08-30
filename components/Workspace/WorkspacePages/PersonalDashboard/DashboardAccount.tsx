@@ -12,7 +12,7 @@ interface ITaskCard {
 const DashboardAccount: React.FC = () => {
   const router = useRouter();
   const path = router.query.paths?.[0];
-  console.log(path);
+
   return (
     <>
       <div className='personal-dashboard__account__user'>
