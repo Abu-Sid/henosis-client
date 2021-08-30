@@ -36,6 +36,14 @@ const DashboardProgressChart = () => {
 
   const color = !progress ? "#75798c" : "#4a4fff";
 
+  let currentRemaining;
+  if (isNaN(remaining)) {
+    currentRemaining = 100;
+  } else {
+    currentRemaining = remaining;
+  }
+  console.log({ remaining });
+  console.log({ currentRemaining });
   return (
     <>
       <p>Today&apos;s Progress</p>
@@ -45,7 +53,7 @@ const DashboardProgressChart = () => {
             labels: ["Done", "Remaining"],
             datasets: [
               {
-                data: [progress || 0, remaining || 0],
+                data: [progress || 0, currentRemaining],
                 backgroundColor: ["#4a4fff", "#d0d1d8"],
                 border: "none",
               },
