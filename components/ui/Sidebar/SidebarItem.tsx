@@ -22,7 +22,6 @@ const SidebarItem: React.FC<IProps> = ({
   pathName,
 }) => {
   const [showTooltip, setShowTooltip] = useState(false);
-  console.log(showTooltip);
   const dispatch = useDispatch();
   const tooltipVariant = {
     hidden: { opacity: 0, x: -50 },
@@ -50,13 +49,13 @@ const SidebarItem: React.FC<IProps> = ({
       {href && (
         <Link href={href === "/" ? "/" : `${pathName}/${href}`} passHref>
           <a>
-            <Image src={icon} alt='icon' />
+            <Image src={icon} alt="icon" />
           </a>
         </Link>
       )}
       {className === "sidebar__logout" && (
         <button onClick={handleLogoutClick}>
-          <Image src={icon} alt='icon' />
+          <Image src={icon} alt="icon" />
         </button>
       )}
       {tooltip && (
@@ -64,11 +63,11 @@ const SidebarItem: React.FC<IProps> = ({
           <AnimatePresence>
             {showTooltip && (
               <motion.span
-                initial='hidden'
-                animate='visible'
+                initial="hidden"
+                animate="visible"
                 exit={{ opacity: 0, x: -50 }}
                 variants={tooltipVariant}
-                className='tooltip'
+                className="tooltip"
               >
                 {tooltip}
               </motion.span>
