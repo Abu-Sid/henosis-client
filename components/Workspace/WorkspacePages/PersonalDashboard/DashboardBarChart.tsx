@@ -9,11 +9,19 @@ const DashboardBarChart: React.FC = () => {
   }, []);
 
   const height = screenSize < 600 ? 200 : 600;
+  const width =
+    screenSize > 600
+      ? 300
+      : screenSize < 600
+      ? 250
+      : screenSize < 414
+      ? 200
+      : 250;
   return (
     <>
       <Bar
         height={height}
-        width={350}
+        width={width}
         data={{
           labels: ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"],
           datasets: [
