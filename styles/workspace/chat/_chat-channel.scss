@@ -39,6 +39,15 @@
         font-size: 1.3rem;
       }
     }
+    button.close {
+      &:hover {
+        background-color: $red;
+      }
+      &:focus {
+        box-shadow: 0 0 1px 3px $red;
+      }
+      display: none;
+    }
   }
   &__options {
     background-color: $light-gray-purple;

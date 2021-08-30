@@ -6,7 +6,7 @@ import DashboardProgressChart from "./DashboardProgressChart";
 import DashboardStatusPill from "./DashboardStatusPill";
 import PersonalDashboardHeader from "./PersonalDashboardHeader";
 import SubTask from "./SubTask";
-const PersonalDashboard = () => {
+const PersonalDashboard: React.FC = () => {
   return (
     <section className='personal-dashboard'>
       <div className='personal-dashboard__header'>

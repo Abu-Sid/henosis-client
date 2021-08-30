@@ -5,14 +5,13 @@ interface IProps {
   index: number;
 }
 const UsersRow = (props: IProps) => {
-  const { name, email, role = "User" } = props.info;
+  const { name, email } = props.info;
   const index = props.index;
   return (
     <tr>
       <td>{index + 1}</td>
       <td>{name}</td>
       <td>{email}</td>
-      <td>{role}</td>
     </tr>
   );
 };

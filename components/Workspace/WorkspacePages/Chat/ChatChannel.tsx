@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect, useState } from "react";
-import { useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { HiOutlinePlus } from "react-icons/hi";
+import { IoMdClose } from "react-icons/io";
 import { useSelector } from "react-redux";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
@@ -96,6 +96,9 @@ const ChatChannel = () => {
               className="plus-btn status-plus"
             >
               <HiOutlinePlus />
+            </button>
+            <button className="close" onClick={() => setShowChannel(false)}>
+              <IoMdClose />
             </button>
           </div>
           <div className="chat-channels">

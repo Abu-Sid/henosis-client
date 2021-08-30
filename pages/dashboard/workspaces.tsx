@@ -5,14 +5,7 @@ import AdminSidebar from "../../components/Dashboard/AdminSidebar";
 import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation";
 import verifyAdmin from "../../HOC/verifyAdmin";
 
-enum FilterEnum {
-  all = "all",
-  personal = "personal",
-  business = "business",
-}
-
 interface IFormInput {
-  filter: FilterEnum;
   _id: number;
   workspaceName: String;
   type: String;
@@ -21,30 +14,30 @@ interface IFormInput {
 
 const Workspaces = () => {
   const [workspaceInfo, setWorkspaceInfo] = useState<IFormInput[]>([]);
+  const [allWorkspace, setAllWorkspace] = useState([]);
   const [loading, setLoading] = useState(true);
-  // console.log(loading);
-  const { register, handleSubmit } = useForm();
-  // console.log(workspaceInfo);
 
   useEffect(() => {
     fetch("https://intense-peak-24388.herokuapp.com/workspace/all")
       .then((res) => res.json())
-      .then((data) => setWorkspaceInfo(data.data));
+      .then((data) => {
+        setWorkspaceInfo(data.data);
+        setAllWorkspace(data.data);
+      });
   }, []);
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    if (data.filter === "personal") {
-      fetch("https://intense-peak-24388.herokuapp.com/workspace/personal")
-        .then((res) => res.json())
-        .then((data) => setWorkspaceInfo(data.data));
-    } else if (data.filter === "business") {
-      fetch("https://intense-peak-24388.herokuapp.com/workspace/business")
-        .then((res) => res.json())
-        .then((data) => setWorkspaceInfo(data.data));
+  const handleSearch = (e) => {
+    const searchItem = e.target.value;
+    if (searchItem !== "" && searchItem.length > 0) {
+      const result = workspaceInfo?.filter((si) => {
+        return Object.values(si)
+          .join(" ")
+          .toLowerCase()
+          .includes(searchItem.toString().toLowerCase());
+      });
+      setAllWorkspace(result);
     } else {
-      fetch("https://intense-peak-24388.herokuapp.com/workspace/all")
-        .then((res) => res.json())
-        .then((data) => setWorkspaceInfo(data.data));
+      setAllWorkspace(workspaceInfo);
     }
   };
 
@@ -66,13 +59,13 @@ const Workspaces = () => {
           <div className="col-right">
             <div className="right-division">
               <h2>Workspaces</h2>
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <select {...register("filter")}>
-                  <option value="all">All</option>
-                  <option value="personal">Personal</option>
-                  <option value="business">Business</option>
-                </select>
-                <input type="submit" value="Filter" className="button" />
+              <form>
+                <input
+                  type="text"
+                  placeholder="Search"
+                  onChange={handleSearch}
+                  className="input-search"
+                />
               </form>
             </div>
             <table>
@@ -85,7 +78,7 @@ const Workspaces = () => {
                 </tr>
               </thead>
               <tbody>
-                {workspaceInfo.map((info, index) => (
+                {allWorkspace.map((info, index) => (
                   <WorkspaceRow key={info._id} info={info} index={index} />
                 ))}
               </tbody>
