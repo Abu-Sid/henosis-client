@@ -1,0 +1,38 @@
+.personal-dashboard__sub-task {
+  padding: 1em;
+  overflow-y: auto;
+  &__header {
+    background-color: $light-gray-purple;
+    border-radius: radius(medium);
+    padding: 0.5em 1em;
+    @include flex(row, space-between);
+    h1 {
+      @include writing-style($dark-blue, semi-large, thin);
+    }
+    .sub-task-add-button {
+      cursor: pointer;
+    }
+  }
+  &__card {
+    background-color: lighten($gray-purple, 60);
+    margin-top: 10px;
+    border-radius: radius(medium);
+    padding: 1em;
+    @include flex(row, space-between);
+    .card-info {
+      .cut-line {
+        text-decoration: line-through;
+      }
+      &__sub-task-name {
+        color: $dark-blue;
+        margin-bottom: 5px;
+      }
+      &__task-name {
+        color: $gray-purple;
+      }
+    }
+    .card-checkbox {
+      transform: translateX(-17px);
+    }
+  }
+}
