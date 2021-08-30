@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../redux/reducers";
@@ -26,10 +26,18 @@ const DashboardProgressChart = () => {
 
   const progress = parseFloat((100 - remaining).toFixed(2));
 
+  const [screenSize, setScreenSize] = useState(null);
+  useEffect(() => {
+    const currentScreenSize = window.innerWidth;
+    setScreenSize(currentScreenSize);
+  }, []);
+
+  const cutoutSize = screenSize < 600 ? 50 : 65;
+
   return (
     <>
       <p>Today&apos;s Progress</p>
-      <div className="doughnut-chart">
+      <div className='doughnut-chart'>
         <Doughnut
           data={{
             labels: ["Done", "Remaining"],
@@ -49,7 +57,7 @@ const DashboardProgressChart = () => {
                 display: false,
               },
             },
-            cutout: 65,
+            cutout: cutoutSize,
             elements: {
               arc: {
                 borderWidth: 0,
@@ -57,10 +65,10 @@ const DashboardProgressChart = () => {
             },
           }}
         />
-        <h1 className="percentage">{progress || 0}%</h1>
+        <h1 className='percentage'>{progress || 0}%</h1>
       </div>
       <p>Done</p>
-      <p className="remaining-tasks-percentage">
+      <p className='remaining-tasks-percentage'>
         {remaining || 0}% of tasks remaining
       </p>
     </>

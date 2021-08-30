@@ -1,9 +1,6 @@
 .personal-dashboard__progress {
   padding: 10px 0;
-  @include flex(column, flex-start);
-  p {
-    margin: 10px 0;
-  }
+  @include flex(column, space-evenly);
   .doughnut-chart {
     position: relative;
     height: 150px;
@@ -18,5 +15,14 @@
   }
   .remaining-tasks-percentage {
     color: $gray-purple;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .personal-dashboard__progress {
+    .doughnut-chart {
+      height: 120px;
+      width: 120px;
+    }
   }
 }
