@@ -1,0 +1,75 @@
+@import "./header.scss";
+@import "./status.scss";
+@import "./progress.scss";
+@import "./assigned-to-me.scss";
+@import "./sub-task.scss";
+@import "./dashboard-account-section.scss";
+
+.personal-dashboard {
+  width: 100%;
+  height: 145vh;
+  padding: 10px 10px 10px 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 1.3fr;
+  grid-template-rows: 1.5fr 1fr 0.3fr repeat(3, 1fr) 0.3fr repeat(4, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  .border-bg {
+    border-radius: radius(large);
+    background-color: $gray;
+  }
+  .section-header-text {
+    @include flex(row, flex-start);
+    p {
+      color: $purple;
+    }
+  }
+  &__header {
+    grid-area: 1 / 1 / 3 / 5;
+    @extend .border-bg;
+  }
+  &__activity {
+    grid-area: 3 / 1 / 4 / 5;
+    @extend .section-header-text;
+  }
+  &__chart {
+    grid-area: 4 / 1 / 7 / 3;
+    @extend .border-bg;
+  }
+  &__progress {
+    grid-area: 4 / 3 / 7 / 4;
+    @extend .border-bg;
+  }
+  &__to-do {
+    grid-area: 4 / 4 / 5 / 5;
+    @extend .border-bg;
+  }
+  &__in-progress {
+    grid-area: 5 / 4 / 6 / 5;
+    @extend .border-bg;
+  }
+  &__done {
+    grid-area: 6 / 4 / 7 / 5;
+    @extend .border-bg;
+  }
+  &__assigned-to-me {
+    grid-area: 7 / 1 / 8 / 3;
+    @extend .section-header-text;
+  }
+  &__add-sub-task {
+    grid-area: 7 / 3 / 8 / 5;
+    @extend .section-header-text;
+  }
+  &__task {
+    grid-area: 8 / 1 / 12 / 3;
+    @extend .border-bg;
+  }
+  &__sub-task {
+    grid-area: 8 / 3 / 12 / 5;
+    @extend .border-bg;
+  }
+  &__account {
+    grid-area: 1 / 5 / 12 / 6;
+    @extend .border-bg;
+  }
+}

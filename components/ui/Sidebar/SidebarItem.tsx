@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import { motion, useAnimation } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { logout } from "../../../auth/authManager";
 import { authUserLogout } from "../../../redux/actions/userActions";
 import { useDispatch } from "react-redux";
@@ -21,10 +21,12 @@ const SidebarItem: React.FC<IProps> = ({
   tooltip,
   pathName,
 }) => {
+  const [showTooltip, setShowTooltip] = useState(false);
+  console.log(showTooltip);
   const dispatch = useDispatch();
-  const control = useAnimation();
-  const variants = {
+  const tooltipVariant = {
     hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0 },
   };
 
   const handleLogoutClick = async () => {
@@ -38,23 +40,15 @@ const SidebarItem: React.FC<IProps> = ({
   return (
     <motion.li
       onMouseEnter={() => {
-        control.start({
-          opacity: 1,
-          x: 0,
-          display: "inline-block",
-        });
+        setShowTooltip(true);
       }}
       onMouseLeave={() => {
-        control.start({
-          opacity: 0,
-          x: -50,
-          display: "none",
-        });
+        setShowTooltip(false);
       }}
       className={className}
     >
       {href && (
-        <Link href={href === "/" ? "/" : `${pathName}/${href}`}>
+        <Link href={href === "/" ? "/" : `${pathName}/${href}`} passHref>
           <a>
             <Image src={icon} alt='icon' />
           </a>
@@ -67,14 +61,19 @@ const SidebarItem: React.FC<IProps> = ({
       )}
       {tooltip && (
         <Link href={`${pathName}/${href}`} passHref>
-          <motion.span
-            initial='hidden'
-            animate={control}
-            variants={variants}
-            className='tooltip'
-          >
-            {tooltip}
-          </motion.span>
+          <AnimatePresence>
+            {showTooltip && (
+              <motion.span
+                initial='hidden'
+                animate='visible'
+                exit={{ opacity: 0, x: -50 }}
+                variants={tooltipVariant}
+                className='tooltip'
+              >
+                {tooltip}
+              </motion.span>
+            )}
+          </AnimatePresence>
         </Link>
       )}
     </motion.li>

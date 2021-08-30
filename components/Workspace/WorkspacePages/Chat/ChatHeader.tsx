@@ -1,18 +1,18 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useContext, useState } from "react";
+import { IoMdClose, IoMdMenu } from "react-icons/io";
 import { useSelector } from "react-redux";
 import Bell from "../../../../public/images/icons/bell.svg";
 import Search from "../../../../public/images/icons/search.svg";
 import Tag from "../../../../public/images/icons/tag.svg";
 import { RootState } from "../../../../redux/reducers";
-import { IChannel } from "./Chat";
+import { DropdownItem, DropdownMenu } from "../../../ui/Navbar/DropDown";
+import { chatContext } from "./ChatContainer";
 
-interface IProps {
-  channels: IChannel[];
-}
+const ChatHeader = () => {
+  const { channels, setShowChannel, setShowActive } = useContext(chatContext);
 
-const ChatHeader = ({ channels }: IProps) => {
   const router = useRouter();
 
   const id = router.query.paths[2] || channels[0]?._id;
@@ -22,6 +22,20 @@ const ChatHeader = ({ channels }: IProps) => {
   const { workspaceName } = useSelector(
     (state: RootState) => state.workspaceReducer.workspace
   );
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleChannel = () => {
+    setShowChannel((preValue) => !preValue);
+    setIsOpen(false);
+    setShowActive(false);
+  };
+
+  const handleActive = () => {
+    setShowActive((preValue) => !preValue);
+    setIsOpen(false);
+    setShowChannel(false);
+  };
 
   return (
     <div className="chat-portal__header">
@@ -34,25 +48,68 @@ const ChatHeader = ({ channels }: IProps) => {
         <div className="channel-name">
           <h2>{"# " + (currentChannel?.chatName || "general")}</h2>
         </div>
-        <div className="options-icon">
-          <Image src={Bell} alt="bell-icon" />
+        <button
+          className="button-primary chat-toggle"
+          onClick={() => setIsOpen(true)}
+        >
+          {isOpen ? <IoMdClose /> : <IoMdMenu />}
+        </button>
+        <div className="options-right">
+          <div className="options-icons">
+            <div className="options-icon">
+              <Image src={Bell} alt="bell-icon" />
+            </div>
+            <div className="options-icon">
+              <Image src={Tag} alt="tag-icon" />
+            </div>
+          </div>
+          <div className="search-container">
+            <div className="search-box">
+              <label htmlFor="search">
+                <Image src={Search} alt="search-icon" />
+              </label>
+              <input
+                type="text"
+                name="search"
+                id="search"
+                placeholder="search..."
+              />
+            </div>
+          </div>
         </div>
-        <div className="options-icon">
-          <Image src={Tag} alt="tag-icon" />
-        </div>
-      </div>
-      <div className="search-container">
-        <div className="search-box">
-          <label htmlFor="search">
-            <Image src={Search} alt="search-icon" />
-          </label>
-          <input
-            type="text"
-            name="search"
-            id="search"
-            placeholder="search..."
-          />
-        </div>
+        {isOpen && (
+          <div className="chat-dropdown">
+            <DropdownMenu width={230} setIsOpen={setIsOpen}>
+              <div className="options-right display">
+                <div className="options-icons">
+                  <div className="options-icon">
+                    <Image src={Bell} alt="bell-icon" />
+                  </div>
+                  <div className="options-icon">
+                    <Image src={Tag} alt="tag-icon" />
+                  </div>
+                </div>
+                <div className="search-container">
+                  <div className="search-box">
+                    <label htmlFor="search">
+                      <Image src={Search} alt="search-icon" />
+                    </label>
+                    <input
+                      type="text"
+                      name="search"
+                      id="search"
+                      placeholder="search..."
+                    />
+                  </div>
+                </div>
+              </div>
+              <DropdownItem functionality={handleChannel}>
+                Channels
+              </DropdownItem>
+              <DropdownItem functionality={handleActive}>Active</DropdownItem>
+            </DropdownMenu>
+          </div>
+        )}
       </div>
     </div>
   );

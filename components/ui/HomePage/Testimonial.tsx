@@ -33,30 +33,30 @@ const Testimonial: React.FC<ITestimonial> = () => {
   };
 
   return (
-    <div className="testimonial">
-      <h1 data-aos="fade-up">
-        Our Client{" "}
+    <div className='testimonial'>
+      <h1 data-aos='fade-up'>
+        Our Client
         <span
-          data-aos="fade-left"
-          data-aos-duration="1000"
-          data-aos-delay="300"
+          data-aos='fade-left'
+          data-aos-duration='1000'
+          data-aos-delay='300'
         >
           Testimonials
-        </span>{" "}
+        </span>
       </h1>
       <div>
-        <div className="testimonial__container" style={CONTAINER_STYLE}>
+        <div className='testimonial__container' style={CONTAINER_STYLE}>
           <ReactCardCarousel autoplay={true} autoplay_speed={3500}>
             {TestimonialData?.testimonials?.map((test) => (
               <div
-                key="test.name"
+                key='test.name'
                 style={CARD_STYLE}
-                className="testimonial__container__card"
+                className='testimonial__container__card'
               >
-                <img src={test.image} alt="" />
-                <h4 className="mt-4">{test.name}</h4>
+                <img src={test.image} alt='' />
+                <h4 className='mt-4'>{test.name}</h4>
                 <small>{test.title}</small>
-                <p className="mt-4 ">{test.review} </p>
+                <p className='mt-4 '>{test.review} </p>
               </div>
             ))}
           </ReactCardCarousel>

@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { HiOutlinePlus } from "react-icons/hi";
+import { IoMdClose } from "react-icons/io";
 import { useSelector } from "react-redux";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
@@ -13,12 +14,7 @@ import User from "../../../../public/images/icons/user-pp.svg";
 import Speaker from "../../../../public/images/icons/volume-up.svg";
 import { RootState } from "../../../../redux/reducers";
 import Modal from "../../../Modal/Modal";
-import { IChannel } from "./Chat";
-
-interface IProps {
-  channels: IChannel[];
-  handleAddChannel: (data: IChannel) => void;
-}
+import { chatContext } from "./ChatContainer";
 
 interface IOption {
   value: string;
@@ -27,7 +23,10 @@ interface IOption {
 
 const animatedComponents = makeAnimated();
 
-const ChatChannel = ({ channels, handleAddChannel }: IProps) => {
+const ChatChannel = () => {
+  const { channels, handleAddChannel, showChannel, setShowChannel } =
+    useContext(chatContext);
+
   const { _id: id, members } = useSelector(
     (state: RootState) => state.workspaceReducer.workspace
   );
@@ -37,6 +36,8 @@ const ChatChannel = ({ channels, handleAddChannel }: IProps) => {
   const path = router.query.paths[2] || channels[0]?._id;
 
   const [isOpen, setIsOpen] = useState(false);
+
+  const [stream, setStream] = useState<MediaStream>(null);
 
   const [memberOptions, setMemberOptions] = useState<IOption[]>([]);
 
@@ -69,9 +70,24 @@ const ChatChannel = ({ channels, handleAddChannel }: IProps) => {
     }
   };
 
+  const streamRef = useRef(null as HTMLVideoElement);
+
+  const handleVoice = () => {
+    navigator.mediaDevices
+      .getUserMedia({ video: true, audio: true })
+      .then((mediaStream) => {
+        setStream(mediaStream);
+        streamRef.current.srcObject = mediaStream;
+      });
+  };
+
   return (
     <>
-      <section className="chat-channel">
+      <section
+        className={`chat-channel chat-channel-top ${
+          showChannel ? "active" : ""
+        }`}
+      >
         <div className="chat-channel__text">
           <div className="chat-channel__text-header">
             <h1>Text Channels</h1>
@@ -81,6 +97,9 @@ const ChatChannel = ({ channels, handleAddChannel }: IProps) => {
             >
               <HiOutlinePlus />
             </button>
+            <button className="close" onClick={() => setShowChannel(false)}>
+              <IoMdClose />
+            </button>
           </div>
           <div className="chat-channels">
             {channels.map(({ _id, chatName }) => (
@@ -89,11 +108,23 @@ const ChatChannel = ({ channels, handleAddChannel }: IProps) => {
                   className={
                     path === _id ? "chat-member active-channel" : "chat-member"
                   }
+                  onClick={() => setShowChannel(false)}
                 >
                   {"# " + chatName}
                 </p>
               </Link>
             ))}
+          </div>
+        </div>
+        <div className="chat-channel__text">
+          <div className="chat-channel__text-header">
+            <h1>Voice Channels</h1>
+          </div>
+          <div className="chat-channels">
+            <div onClick={handleVoice} className="chat-member active-channel">
+              <Image src={Speaker} alt="Speaker Icon" height={24} width={24} />{" "}
+              <p>Meet</p>
+            </div>
           </div>
         </div>
         <div className="chat-channel__options">

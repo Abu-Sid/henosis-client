@@ -29,7 +29,7 @@ let toastId: string;
 const Workspace = () => {
   const { query, replace } = useRouter();
 
-  const [id] = query.paths;
+  const [id] = query.paths || [];
 
   const { error } = useSelector((state: RootState) => state.workspaceReducer);
 
