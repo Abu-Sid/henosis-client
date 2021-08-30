@@ -1,6 +1,6 @@
 import React from "react";
 
-const Partner = () => {
+const Partner: React.FC = () => {
   return (
     <div className="partner">
       <h1>Trusted by companies from all corners of the world</h1>
