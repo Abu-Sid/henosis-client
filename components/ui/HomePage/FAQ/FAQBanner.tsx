@@ -7,7 +7,6 @@ const FAQBanner = () => {
       opacity: [0, 1],
       transition: {
         yoyo: Infinity,
-        delay: 3,
         duration: 3,
       },
     },
@@ -16,6 +15,7 @@ const FAQBanner = () => {
       y: 10,
       transition: {
         yoyo: Infinity,
+        delay: 3,
         duration: 3,
       },
     },
