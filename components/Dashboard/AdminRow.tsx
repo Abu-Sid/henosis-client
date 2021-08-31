@@ -24,13 +24,17 @@ const AdminRow = (props: IProps & IDelete) => {
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   return (
-    <tr>
-      <td>{index + 1}</td>
-      <td>{name}</td>
-      <td>{email}</td>
-      <td>{role}</td>
-      <td>
-        <MdDeleteForever className="delete-icon" onClick={onOpenModal} title="Remove Admin" />
+    <tr className="table-row">
+      <td className="serial_no">{index + 1}</td>
+      <td className="content">{name}</td>
+      <td className="content">{email}</td>
+      <td className="content">{role}</td>
+      <td className="content">
+        <MdDeleteForever
+          className="delete-icon"
+          onClick={onOpenModal}
+          title="Remove Admin"
+        />
         <Modal open={open} onClose={onCloseModal} center>
           <div className="admin-info delete-confirm">
             <Image src={deleteImg} alt="" />

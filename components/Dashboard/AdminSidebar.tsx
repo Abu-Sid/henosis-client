@@ -19,40 +19,40 @@ const AdminSidebar = () => {
     <SidebarContainer device={screenSize < 600 ? "phone" : "desktop"}>
       <SidebarItem
         icon={Logo}
-        className='sidebar__logo'
-        href='/'
+        className="sidebar__logo"
+        href="/"
         device={screenSize < 600 ? "phone" : "desktop"}
       />
       <SidebarItem
         icon={Admin}
-        pathName='/dashboard'
-        href='admins'
-        tooltip='Admins'
+        pathName="/dashboard"
+        href="admins"
+        tooltip="Admins"
         device={screenSize < 600 ? "phone" : "desktop"}
-        routeName='Admins'
+        routeName="Admins"
       />
       <SidebarItem
         icon={Users}
-        pathName='/dashboard'
-        href='all_signup_users'
-        tooltip='Users'
+        pathName="/dashboard"
+        href="all_signup_users"
+        tooltip="Users"
         device={screenSize < 600 ? "phone" : "desktop"}
-        routeName='All users'
+        routeName="All users"
       />
       <SidebarItem
         icon={Workspaces}
-        pathName='/dashboard'
-        href='workspaces'
-        tooltip='Workspaces'
+        pathName="/dashboard"
+        href="workspaces"
+        tooltip="Workspaces"
         device={screenSize < 600 ? "phone" : "desktop"}
-        routeName='Workspaces'
+        routeName="Workspaces"
       />
       <SidebarItem
         icon={Logout}
-        className='sidebar__logout'
-        tooltip='Logout'
+        className="sidebar__logout"
+        tooltip="Logout"
         device={screenSize < 600 ? "phone" : "desktop"}
-        routeName='Logout'
+        routeName="Logout"
       />
     </SidebarContainer>
   );

@@ -1,13 +1,13 @@
 #profile-body {
-  width: 70vw;
+  // width: 70vw;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  margin: 5% auto 0 auto;
+  margin: 5% 6% 0 0;
   padding: 4rem 1rem;
   border-radius: 0.4rem;
-  overflow: hidden;
+  overflow: auto;
   box-sizing: border-box;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
   .profile-left #image {
@@ -78,4 +78,11 @@
   color: white;
   margin-left: 2px;
   display: inline-block;
+}
+
+@media (max-width:599px){
+  #profile-body {
+margin: 1rem;
+padding: 1rem;
+  }
 }
