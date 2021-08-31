@@ -57,6 +57,14 @@ const ChatChannel = () => {
 
   const myVideo = useRef(null as HTMLAudioElement);
 
+  const peerRef = useRef(null as Peer.Instance);
+
+  const handleCallEnded = () => {
+    setCallEnded(true);
+    peerRef.current.destroy();
+    setStream(null);
+  };
+
   useEffect(() => {
     const options: IOption[] = members.map((member) => ({
       value: member.email,
@@ -85,37 +93,40 @@ const ChatChannel = () => {
   };
 
   const handleVoice = () => {
-    navigator.mediaDevices
-      .getUserMedia({ video: true, audio: true })
-      .then((mediaStream) => {
-        setStream(mediaStream);
-        myVideo.current.srcObject = mediaStream;
-        const peer = new Peer({
-          initiator: true,
-          trickle: false,
-          stream: mediaStream,
-        });
-
-        peer.on("signal", (data) => {
-          socket.emit("call-send", {
-            signal: data,
-            user,
-            id,
+    if (stream === null) {
+      navigator.mediaDevices
+        .getUserMedia({ video: true, audio: true })
+        .then((mediaStream) => {
+          setStream(mediaStream);
+          myVideo.current.srcObject = mediaStream;
+          const peer = new Peer({
+            initiator: true,
+            trickle: false,
+            stream: mediaStream,
           });
-        });
 
-        socket.on(
-          "call-sended",
-          ({ signal, user }: { signal: Peer.SignalData; user: IUser }) => {
-            peer.signal(signal);
-            setUsers((preUsers) => [...preUsers, user]);
-            peer.on("stream", (currentStream) => {
-              setUserStreams((preStreams) => [...preStreams, currentStream]);
-              console.log(currentStream);
+          peer.on("signal", (data) => {
+            socket.emit("call-send", {
+              signal: data,
+              user,
+              id,
             });
-          }
-        );
-      });
+          });
+
+          socket.on(
+            "call-sended",
+            ({ signal, user }: { signal: Peer.SignalData; user: IUser }) => {
+              peer.signal(signal);
+              setUsers((preUsers) => [...preUsers, user]);
+              peer.on("stream", (currentStream) => {
+                setUserStreams((preStreams) => [...preStreams, currentStream]);
+                console.log(currentStream);
+              });
+            }
+          );
+          peerRef.current = peer;
+        });
+    }
   };
 
   return (
@@ -125,20 +136,20 @@ const ChatChannel = () => {
           showChannel ? "active" : ""
         }`}
       >
-        <div className='chat-channel__text'>
-          <div className='chat-channel__text-header'>
+        <div className="chat-channel__text">
+          <div className="chat-channel__text-header">
             <h1>Text Channels</h1>
             <button
               onClick={() => setIsOpen(true)}
-              className='plus-btn status-plus'
+              className="plus-btn status-plus"
             >
               <HiOutlinePlus />
             </button>
-            <button className='close' onClick={() => setShowChannel(false)}>
+            <button className="close" onClick={() => setShowChannel(false)}>
               <IoMdClose />
             </button>
           </div>
-          <div className='chat-channels'>
+          <div className="chat-channels">
             {channels.map(({ _id, chatName }) => (
               <Link passHref key={_id} href={`/workspaces/${id}/chat/${_id}`}>
                 <p
@@ -153,13 +164,13 @@ const ChatChannel = () => {
             ))}
           </div>
         </div>
-        <div className='chat-channel__text'>
-          <div className='chat-channel__text-header'>
+        <div className="chat-channel__text">
+          <div className="chat-channel__text-header">
             <h1>Voice Channels</h1>
           </div>
-          <div className='chat-channels'>
-            <div onClick={handleVoice} className='chat-member active-channel'>
-              <Image src={Speaker} alt='Speaker Icon' height={24} width={24} />{" "}
+          <div className="chat-channels">
+            <div onClick={handleVoice} className="chat-member active-channel">
+              <Image src={Speaker} alt="Speaker Icon" height={24} width={24} />{" "}
               <p>Meet</p>
             </div>
             {stream && (
@@ -175,7 +186,10 @@ const ChatChannel = () => {
                 ) : (
                   <>
                     <audio playsInline muted autoPlay ref={myVideo} />
-                    <h1>1. {user.name}</h1>
+                    <h1>
+                      {user.name}{" "}
+                      <button onClick={handleCallEnded}>CallEnded</button>
+                    </h1>
                   </>
                 )}
               </>
@@ -190,36 +204,36 @@ const ChatChannel = () => {
             ))}
           </div>
         </div>
-        <div className='chat-channel__options'>
-          <div className='options-user-pp'>
-            <img src={User.src} alt='user profile picture' />
+        <div className="chat-channel__options">
+          <div className="options-user-pp">
+            <img src={User.src} alt="user profile picture" />
           </div>
-          <div className='options-icon'>
-            <Image src={Speaker} alt='Speaker Icon' height={24} width={24} />
+          <div className="options-icon">
+            <Image src={Speaker} alt="Speaker Icon" height={24} width={24} />
           </div>
-          <div className='options-icon'>
-            <Image src={Mic} alt='Microphone Icon' height={24} width={24} />
+          <div className="options-icon">
+            <Image src={Mic} alt="Microphone Icon" height={24} width={24} />
           </div>
-          <div className='options-icon'>
-            <Image src={Gear} alt='Gear Icon' height={24} width={24} />
+          <div className="options-icon">
+            <Image src={Gear} alt="Gear Icon" height={24} width={24} />
           </div>
         </div>
       </section>
       <Modal modalIsOpen={isOpen} setIsOpen={setIsOpen}>
-        <form onSubmit={handleSubmit(submit)} className='create-sprint-form'>
+        <form onSubmit={handleSubmit(submit)} className="create-sprint-form">
           <h2>Create A New Channel</h2>
-          <label htmlFor='chatName'>Channel Name:</label>
+          <label htmlFor="chatName">Channel Name:</label>
           <input
             onChange={handleInput}
             required
             onInvalid={handleInvalid}
-            type='text'
-            placeholder='Channel Name'
-            id='chatName'
-            name='chatName'
+            type="text"
+            placeholder="Channel Name"
+            id="chatName"
+            name="chatName"
           />
           {error.chatName && (
-            <p className='alert-error'>Channel Name Is Required</p>
+            <p className="alert-error">Channel Name Is Required</p>
           )}
           <label>Add Member:</label>
           <Select
@@ -227,14 +241,14 @@ const ChatChannel = () => {
             components={animatedComponents}
             isMulti
             options={memberOptions}
-            className='basic-multi-select'
+            className="basic-multi-select"
             onChange={handleChange}
             defaultValue={memberOptions}
           />
           {assignedMember.length < 2 && (
-            <p className='alert-error'>Add Minimum Two Members</p>
+            <p className="alert-error">Add Minimum Two Members</p>
           )}
-          <button type='submit'>Create New Channel</button>
+          <button type="submit">Create New Channel</button>
         </form>
       </Modal>
     </>
