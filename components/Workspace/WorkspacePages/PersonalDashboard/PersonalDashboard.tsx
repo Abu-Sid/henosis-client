@@ -101,7 +101,7 @@ const PersonalDashboard = () => {
             <p>My Sub-tasks</p>
           </div>
           <div className="personal-dashboard__sub-task">
-            <SubTask />
+            <SubTask socket={socket} />
           </div>
           <div className="personal-dashboard__account">
             <DashboardAccount />
