@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,6 +31,8 @@ const PersonalDashboard = () => {
   const { _id } = useSelector(
     (state: RootState) => state.workspaceReducer.workspace
   );
+
+  const { sprint } = useSelector((state: RootState) => state.sprintReducer);
 
   const { email } = useSelector((state: RootState) => state.userReducer.user);
 
@@ -80,7 +83,7 @@ const PersonalDashboard = () => {
     <>
       {loading ? (
         <LoadingAnimation />
-      ) : (
+      ) : sprint._id ? (
         <section className="personal-dashboard">
           <div className="personal-dashboard__header">
             <PersonalDashboardHeader />
@@ -119,6 +122,13 @@ const PersonalDashboard = () => {
             <DashboardAccount />
           </div>
         </section>
+      ) : (
+        <div className="board-error">
+          <h1 className="alert-error">No Sprint Here</h1>
+          <Link href={`${_id}/backlog`} passHref>
+            <button className="button-primary">Create A Sprint</button>
+          </Link>
+        </div>
       )}
     </>
   );

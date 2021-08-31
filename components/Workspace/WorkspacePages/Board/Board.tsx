@@ -228,7 +228,7 @@ const Board = ({ workspaceSocket }: IProps) => {
       ) : (
         <div className="board-error">
           <h1 className="alert-error">No Sprint Here</h1>
-          <Link href={`/workspaces/${_id}/backlog`} passHref>
+          <Link href={`${_id}/backlog`} passHref>
             <button className="button-primary">Create A Sprint</button>
           </Link>
         </div>
