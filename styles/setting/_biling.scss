@@ -22,3 +22,16 @@
     grid-template-columns: repeat(1, 1fr);
   }
 }
+
+@media (max-width: 599px) {
+  .bilingContainer {
+    margin: 1rem;
+    padding: 1rem;
+  }
+  .bill-main {
+    h2 {
+      margin: 0 1rem;
+      padding: 0 1rem;
+    }
+  }
+}

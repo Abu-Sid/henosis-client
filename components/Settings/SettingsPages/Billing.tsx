@@ -24,7 +24,7 @@ const Billing = () => {
     infos();
   }, []);
   return (
-    <div>
+    <div className="bill-main">
       <h2>Billing</h2>
       {!loading ? (
         <div>
