@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
-import { addTask } from "../../../../redux/actions/sprintActions";
 import { RootState } from "../../../../redux/reducers";
 import SubTaskModal from "./SubTaskModal";
 
@@ -11,7 +11,7 @@ interface ISubTaskHeader {
 }
 
 interface ISubTaskCard {
-  subTaskName: string;
+  subtasks: string[];
   taskName: string;
 }
 
@@ -26,38 +26,36 @@ interface IData {
 
 interface IProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
+  toastId: string;
 }
 
-const SubTask: React.FC<IProps> = ({ socket }) => {
+const SubTask: React.FC<IProps> = ({ socket, toastId }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const [selectedTask, setSelectedTask] = useState("");
 
   const [selectError, setSelectError] = useState(false);
 
-  const { tasks } = useSelector(
+  const { email } = useSelector((state: RootState) => state.userReducer.user);
+
+  const { _id, tasks } = useSelector(
     (state: RootState) => state.sprintReducer.sprint
   );
 
-  const dispatch = useDispatch();
-
-  const handleAddSubTask = () => {
-    setIsOpen(true);
-  };
-
-  console.log(tasks);
+  const userTasks = tasks.filter((task) => task.assignedMember.includes(email));
 
   const submit = (data: IData) => {
     if (selectedTask) {
       setSelectError(false);
-      //socket
+      setIsOpen(false);
       const newTasks = [...tasks];
       const index = tasks.findIndex((task) => task._id === selectedTask);
       const task = tasks.find((task) => task._id === selectedTask);
-      const subtasks = [...task.subTasks, data.subtaskName];
-      task.subTasks = subtasks;
+      const subtasks = [...task.subtasks, data.subtaskName];
+      task.subtasks = subtasks;
       newTasks[index] = task;
-      dispatch(addTask(tasks));
+      socket.emit("add-task", _id, newTasks, { email, isSub: true });
+      toastId = toast.loading("Loading...");
     } else {
       setSelectError(true);
     }
@@ -70,8 +68,14 @@ const SubTask: React.FC<IProps> = ({ socket }) => {
 
   return (
     <>
-      <SubTaskHeader handleAddSubTask={handleAddSubTask} />
-      <SubTaskCard subTaskName="testing 1.1" taskName="testing 1" />
+      <SubTaskHeader handleAddSubTask={() => setIsOpen(true)} />
+      {userTasks.map((task) => (
+        <SubTaskCard
+          key={task._id}
+          subtasks={task.subtasks}
+          taskName={task.taskName}
+        />
+      ))}
       <SubTaskModal
         submit={submit}
         modalIsOpen={modalIsOpen}
@@ -108,34 +112,43 @@ const SubTaskHeader: React.FC<ISubTaskHeader> = ({ handleAddSubTask }) => {
   );
 };
 
-const SubTaskCard: React.FC<ISubTaskCard> = ({ subTaskName, taskName }) => {
+const SubTaskCard: React.FC<ISubTaskCard> = ({ subtasks, taskName }) => {
   const [cutLine, setCutLine] = useState(false);
+
   return (
-    <div className="personal-dashboard__sub-task__card">
-      <div className="card-info">
-        <h1
-          className={
-            cutLine
-              ? "card-info__sub-task-name cut-line"
-              : "card-info__sub-task-name"
-          }
-        >
-          {subTaskName}
-        </h1>
-        <p
-          className={
-            cutLine
-              ? "card-info__sub-task-name cut-line"
-              : "card-info__sub-task-name"
-          }
-        >
-          sub task of {taskName}
-        </p>
-      </div>
-      <div className="card-checkbox">
-        <input type="checkbox" onChange={() => setCutLine(!cutLine)} />
-      </div>
-    </div>
+    <>
+      {subtasks.length > 0 && (
+        <div className="personal-dashboard__sub-task__card">
+          <div className="card-info">
+            <h1
+              className={
+                cutLine
+                  ? "card-info__sub-task-name cut-line"
+                  : "card-info__sub-task-name"
+              }
+            >
+              {subtasks.map((subtask, index) => (
+                <span key={index}>
+                  {index + 1}. {subtask} <br />
+                </span>
+              ))}
+            </h1>
+            <p
+              className={
+                cutLine
+                  ? "card-info__sub-task-name cut-line"
+                  : "card-info__sub-task-name"
+              }
+            >
+              Subtask{subtasks.length > 1 ? "'s" : ""} of {taskName}
+            </p>
+          </div>
+          <div className="card-checkbox">
+            <input type="checkbox" onChange={() => setCutLine(!cutLine)} />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

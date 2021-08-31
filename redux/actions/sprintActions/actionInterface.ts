@@ -17,7 +17,7 @@ export interface ITask {
   currentStatus: string;
   dueDate: Date;
   assignedMember: string[];
-  subTasks: string[];
+  subtasks: string[];
 }
 
 interface ISprintAction {
