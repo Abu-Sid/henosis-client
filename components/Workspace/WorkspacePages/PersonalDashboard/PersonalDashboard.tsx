@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import { motion } from "framer-motion";
 import useSocket from "../../../../hooks/useSocket";
 import {
   addTask,
@@ -64,6 +65,17 @@ const PersonalDashboard = () => {
     }
   }, [socket, _id, dispatch, email]);
 
+  const ballVariant = {
+    initial: { scale: 0 },
+    animate: {
+      scale: 1,
+      transition: {
+        delay: 2,
+        duration: 0.2,
+      },
+    },
+  };
+
   return (
     <>
       {loading ? (
@@ -71,6 +83,20 @@ const PersonalDashboard = () => {
       ) : (
         <section className='personal-dashboard'>
           <div className='personal-dashboard__header'>
+            <div className='header-purple-ball'>
+              <motion.svg
+                width='150'
+                height='150'
+                viewBox='0 0 238 238'
+                fill='none'
+                xmlns='http://www.w3.org/2000/svg'
+                variants={ballVariant}
+                initial='initial'
+                animate='animate'
+              >
+                <circle cx='119' cy='119' r='119' fill='#4A4FFF' />
+              </motion.svg>
+            </div>
             <PersonalDashboardHeader />
           </div>
           <div className='personal-dashboard__activity'>

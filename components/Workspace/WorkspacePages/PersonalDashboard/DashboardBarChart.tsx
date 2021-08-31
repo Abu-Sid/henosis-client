@@ -20,7 +20,6 @@ const DashboardBarChart: React.FC = () => {
 
   const today = new Date();
   const day = today.toLocaleString("default", { weekday: "long" });
-  console.log(day);
 
   const sat = day === "Saturday" ? "#4a4fff" : "#75798c";
   const sun = day === "Sunday" ? "#4a4fff" : "#75798c";
