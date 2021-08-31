@@ -2,6 +2,7 @@ import Link from "next/link";
 import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import { motion } from "framer-motion";
 import useSocket from "../../../../hooks/useSocket";
 import {
   addTask,
@@ -79,54 +80,79 @@ const PersonalDashboard = () => {
     }
   }, [socket, _id, dispatch, email]);
 
+  const ballVariant = {
+    initial: { scale: 0 },
+    animate: {
+      scale: 1,
+      transition: {
+        delay: 2,
+        duration: 0.2,
+      },
+    },
+  };
+
   return (
     <>
       {loading ? (
         <LoadingAnimation />
       ) : sprint._id ? (
-        <section className="personal-dashboard">
-          <div className="personal-dashboard__header">
+        <section className='personal-dashboard'>
+          <div className='personal-dashboard__header'>
+            <div className='header-purple-ball'>
+              <motion.svg
+                width='150'
+                height='150'
+                viewBox='0 0 238 238'
+                fill='none'
+                xmlns='http://www.w3.org/2000/svg'
+                variants={ballVariant}
+                initial='initial'
+                animate='animate'
+              >
+                <circle cx='119' cy='119' r='119' fill='#4A4FFF' />
+              </motion.svg>
+            </div>
             <PersonalDashboardHeader />
           </div>
-          <div className="personal-dashboard__activity">
+          <div className='personal-dashboard__activity'>
             <p>Activity</p>
           </div>
-          <div style={{ padding: "1em" }} className="personal-dashboard__chart">
+          <div className='personal-dashboard__chart'>
             <DashboardBarChart />
           </div>
-          <div className="personal-dashboard__progress">
+          <div className='personal-dashboard__progress'>
             <DashboardProgressChart />
           </div>
-          <div className="personal-dashboard__to-do">
-            <DashboardStatusPill status="Remaining" />
+          <div className='personal-dashboard__to-do'>
+            <DashboardStatusPill status='Remaining' />
           </div>
-          <div className="personal-dashboard__in-progress">
-            <DashboardStatusPill status="In Progress" />
+          <div className='personal-dashboard__in-progress'>
+            <DashboardStatusPill status='In Progress' />
           </div>
-          <div className="personal-dashboard__done">
-            <DashboardStatusPill status="Done" />
+          <div className='personal-dashboard__done'>
+            <DashboardStatusPill status='Done' />
           </div>
-          <div className="personal-dashboard__assigned-to-me">
+          <div className='personal-dashboard__assigned-to-me'>
             <p>Assigned to me</p>
           </div>
-          <div className="personal-dashboard__task">
+          <div className='personal-dashboard__task'>
             <AssignedToMe />
           </div>
-          <div className="personal-dashboard__add-sub-task">
+          <div className='personal-dashboard__add-sub-task'>
             <p>My Sub-tasks</p>
           </div>
-          <div className="personal-dashboard__sub-task">
+          <div className='personal-dashboard__sub-task'>
             <SubTask socket={socket} toastId={toastId} />
           </div>
-          <div className="personal-dashboard__account">
+          <div className='personal-dashboard__account'>
             <DashboardAccount />
           </div>
         </section>
       ) : (
-        <div className="board-error">
-          <h1 className="alert-error">No Sprint Here</h1>
+        <div className='board-error'>
+          <h1 className='alert-error'>No Sprint Here</h1>
           <Link href={`${_id}/backlog`} passHref>
-            <button className="button-primary">Create A Sprint</button>
+            <button className='button-primary'>Create A Sprint</button>
           </Link>
         </div>
       )}
