@@ -166,6 +166,7 @@ const Backlog = () => {
         assignedMember,
         currentStatus: "TO DO",
         dueDate: new Date(data.dueDate),
+        subTasks: [],
       };
       if (socket !== null) {
         socket.emit("add-task", sprint._id, [...sprint.tasks, taskData], {

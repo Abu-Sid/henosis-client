@@ -183,6 +183,7 @@ const Board = ({ workspaceSocket }: IProps) => {
         assignedMember,
         currentStatus: currentStatus || "TO DO",
         dueDate: new Date(data.dueDate),
+        subTasks: [],
       };
       if (socket !== null) {
         socket.emit("add-task", sprint._id, [...sprint.tasks, taskData], {
@@ -227,7 +228,7 @@ const Board = ({ workspaceSocket }: IProps) => {
       ) : (
         <div className="board-error">
           <h1 className="alert-error">No Sprint Here</h1>
-          <Link href={`/workspaces/${_id}/backlog`} passHref>
+          <Link href={`${_id}/backlog`} passHref>
             <button className="button-primary">Create A Sprint</button>
           </Link>
         </div>

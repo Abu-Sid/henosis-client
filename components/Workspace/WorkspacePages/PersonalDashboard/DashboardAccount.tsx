@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
@@ -15,8 +16,18 @@ const DashboardAccount: React.FC = () => {
   const router = useRouter();
   const path = router.query.paths?.[0];
 
-  const { name, photo } = useSelector(
+  const { name, photo, email } = useSelector(
     (state: RootState) => state.userReducer.user
+  );
+
+  const { tasks } = useSelector(
+    (state: RootState) => state.sprintReducer.sprint
+  );
+
+  const userOngoingTasks = tasks.filter(
+    (task) =>
+      task.assignedMember.includes(email) &&
+      task.currentStatus === "IN PROGRESS"
   );
 
   const { workspaceName } = useSelector(
@@ -45,21 +56,17 @@ const DashboardAccount: React.FC = () => {
             <a>View All</a>
           </Link>
         </div>
-        <OngoingTask
-          taskName="Testing1"
-          memberName="John Doe"
-          date="20/08/2021"
-        />
-        <OngoingTask
-          taskName="Testing2"
-          memberName="John Doe"
-          date="20/08/2021"
-        />
-        <OngoingTask
-          taskName="Testing3"
-          memberName="John Doe"
-          date="20/08/2021"
-        />
+        {userOngoingTasks.length === 0 && (
+          <p className="alert-error">You Have No Ongoing Task</p>
+        )}
+        {userOngoingTasks.map((task) => (
+          <OngoingTask
+            key={task._id}
+            taskName={task.taskName}
+            memberName={name}
+            date={format(new Date(task.dueDate), "dd/MM/yyyy")}
+          />
+        ))}
       </div>
     </>
   );
