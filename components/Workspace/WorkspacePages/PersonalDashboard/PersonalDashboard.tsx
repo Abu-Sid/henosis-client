@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,6 +22,8 @@ import DashboardStatusPill from "./DashboardStatusPill";
 import PersonalDashboardHeader from "./PersonalDashboardHeader";
 import SubTask from "./SubTask";
 
+let toastId: string;
+
 const PersonalDashboard = () => {
   const socket = useSocket("/sprint");
 
@@ -29,6 +32,8 @@ const PersonalDashboard = () => {
   const { _id } = useSelector(
     (state: RootState) => state.workspaceReducer.workspace
   );
+
+  const { sprint } = useSelector((state: RootState) => state.sprintReducer);
 
   const { email } = useSelector((state: RootState) => state.userReducer.user);
 
@@ -48,14 +53,24 @@ const PersonalDashboard = () => {
         "added-task",
         (
           tasks: ITask[],
-          user?: { name: string; email: string; status?: string }
+          user?: {
+            name: string;
+            email: string;
+            status?: string;
+            isSub?: boolean;
+          }
         ) => {
           dispatch(addTask(tasks));
           if (user) {
             if (user.email === email) {
-              toast.success(
-                `Your Task ${user.status || "Added"} Successfully!`
-              );
+              if (user.isSub) {
+                toast.dismiss(toastId);
+                toast.success(`Your SubTask Added Successfully!`);
+              } else {
+                toast.success(
+                  `Your Task ${user.status || "Added"} Successfully!`
+                );
+              }
             } else {
               toast.success(`${user.name} ${user.status || "Added"} A Task!`);
             }
@@ -80,7 +95,7 @@ const PersonalDashboard = () => {
     <>
       {loading ? (
         <LoadingAnimation />
-      ) : (
+      ) : sprint._id ? (
         <section className='personal-dashboard'>
           <div className='personal-dashboard__header'>
             <div className='header-purple-ball'>
@@ -127,12 +142,19 @@ const PersonalDashboard = () => {
             <p>My Sub-tasks</p>
           </div>
           <div className='personal-dashboard__sub-task'>
-            <SubTask />
+            <SubTask socket={socket} toastId={toastId} />
           </div>
           <div className='personal-dashboard__account'>
             <DashboardAccount />
           </div>
         </section>
+      ) : (
+        <div className='board-error'>
+          <h1 className='alert-error'>No Sprint Here</h1>
+          <Link href={`${_id}/backlog`} passHref>
+            <button className='button-primary'>Create A Sprint</button>
+          </Link>
+        </div>
       )}
     </>
   );
