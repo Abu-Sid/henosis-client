@@ -35,13 +35,6 @@ interface IContext {
   actives: IActive[];
 }
 
-interface ICall {
-  name: string;
-  callerName: string;
-  from: string;
-  isReceivedCall?: boolean;
-}
-
 export const chatContext = createContext<IContext>({} as IContext);
 
 const ChatContainer = ({ children }: IProps) => {
@@ -62,14 +55,6 @@ const ChatContainer = ({ children }: IProps) => {
   const [showChannel, setShowChannel] = useState(false);
 
   const [showActive, setShowActive] = useState(false);
-
-  const [me, setMe] = useState("");
-
-  const [call, setCall] = useState({} as ICall);
-
-  const [callAccepted, setCallAccepted] = useState(false);
-
-  const [callEnded, setCallEnded] = useState(false);
 
   useEffect(() => {
     if (socket !== null) {
@@ -110,24 +95,13 @@ const ChatContainer = ({ children }: IProps) => {
     }
   }, [socket]);
 
-  useEffect(() => {
-    if (socket !== null) {
-      socket.on("me", (id: string) => {
-        setMe(id);
-      });
-
-      socket.on("call-user", (callData: ICall) => {
-        setCall({ ...callData, isReceivedCall: true });
-      });
-    }
-  }, [socket]);
-
   const handleAddChannel = (data: IChannel) => {
     const loadingId = toast.loading("loading...");
     socket.emit("create-channel", data, (id: string) => {
       toast.dismiss(loadingId);
       toast.success("Channel Created Successfully!");
       router.replace(`/workspaces/${_id}/chat/${id}`);
+      setShowChannel(false);
     });
   };
   return (
