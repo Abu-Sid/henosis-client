@@ -45,23 +45,13 @@ const FAQ = () => {
         >
           <FAQBanner />
         </div>
-<<<<<<< HEAD
-        <div
-          className="faq__cards-container"
-          data-aos="fade-down"
-          data-aos-easing="linear"
-          data-aos-duration="1500"
-        >
-          <motion.div className="faq-card">
-=======
-        <div className='faq__cards-container'>
+        <div className="faq__cards-container">
           <motion.div
             variants={cardContainerVariant}
-            initial='hidden'
-            animate='visible'
-            className='faq-card'
+            initial="hidden"
+            animate="visible"
+            className="faq-card"
           >
->>>>>>> 6d564df6b8e749dee81425a443dca5b874abab50
             <AnimatePresence>
               {selectedId === null && (
                 <>
