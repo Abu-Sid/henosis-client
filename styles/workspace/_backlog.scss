@@ -1,5 +1,6 @@
 .backlog-section {
-  margin: 15px 0 1rem 0;
+  margin: 15px auto 1rem auto;
+  width: 95%;
   h2 {
     color: $purple;
     font-weight: 500;
@@ -16,13 +17,12 @@
     color: $dark-blue;
   }
   .sprint-section {
-    margin-right: 8px;
     background-color: $gray;
     border-radius: 0.5em;
     padding: 0.8em 0;
     &__inner {
       padding: 1em;
-      min-width: 470px;
+      min-width: 465px;
     }
     &__top {
       @include flex(row, space-between);
@@ -176,6 +176,7 @@
   .backlog-section {
     width: 100%;
     .sprint-section {
+      margin-right: 8px;
       overflow-x: auto;
       overflow-y: hidden;
       &__inner {
