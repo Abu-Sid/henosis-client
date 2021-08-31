@@ -68,7 +68,7 @@ const AcceptRequest = ({ socket }: IProps) => {
       if (currentUser) {
         socket.emit("add-member", _id, [...members, currentUser]);
         toastId = toast.loading("Loading...");
-        replace(`/workspaces/${_id}/`);
+        replace(`/workspaces/${_id}/dashboard`);
       } else {
         toast.error("The User Not Found");
       }

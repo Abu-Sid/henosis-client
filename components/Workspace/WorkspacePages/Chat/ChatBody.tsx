@@ -150,7 +150,7 @@ const ChatBody = () => {
     }
   }, [messages, scrolling, smooth]);
 
-  const newArray = Array.from(Array(12));
+  const newArray = Array.from(Array(11));
 
   return (
     <div className="chat-body">
@@ -159,9 +159,7 @@ const ChatBody = () => {
           newArray.map((_, index) => (
             <div
               key={index}
-              className={
-                (index + 1) % 2 === 0 ? "message-right" : "message-left"
-              }
+              className={index % 2 === 0 ? "message-right" : "message-left"}
             >
               <div className="main-message">
                 <p className="skeleton skeleton-message"></p>
@@ -191,6 +189,19 @@ const ChatBody = () => {
           const anotherDate = format(new Date(message.date), "dd/MM/yyyy");
           const newDate = new Date().toDateString();
           const yesterday = subDays(new Date(), 1).toDateString();
+          const finalDate =
+            (newDate === date
+              ? "Today"
+              : date === yesterday
+              ? "Yesterday"
+              : anotherDate) +
+            " " +
+            "at " +
+            hour +
+            ":" +
+            minute +
+            " " +
+            amPm;
           return (
             <div
               key={message._id}
@@ -202,13 +213,15 @@ const ChatBody = () => {
               <div className="main-message">
                 <p>{message.message}</p>
                 <small>
-                  <span>{sender.name}</span> -{" "}
-                  {newDate === date
-                    ? "Today"
-                    : date === yesterday
-                    ? "Yesterday"
-                    : anotherDate}{" "}
-                  at {hour + ":" + minute + " " + amPm}
+                  {sender.email === email ? (
+                    <>
+                      {finalDate} - <span>{sender.name}</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>{sender.name}</span> - {finalDate}
+                    </>
+                  )}
                 </small>
               </div>
               <img src={sender.photo || personImage.src} alt="" />

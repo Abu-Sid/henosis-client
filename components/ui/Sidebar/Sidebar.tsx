@@ -22,67 +22,67 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <SidebarContainer device={screenSize < 600 ? "phone" : "desktop"}>
+    <SidebarContainer device={screenSize < 650 ? "phone" : "desktop"}>
       <SidebarItem
         icon={Logo}
-        className='sidebar__logo'
-        href='/'
-        device={screenSize < 600 ? "phone" : "desktop"}
+        className="sidebar__logo"
+        href="/"
+        device={screenSize < 650 ? "phone" : "desktop"}
       />
       <SidebarItem
         icon={User}
         pathName={path}
-        href='dashboard'
-        tooltip='Dashboard'
-        device={screenSize < 600 ? "phone" : "desktop"}
-        routeName='Dashboard'
+        href="dashboard"
+        tooltip="Dashboard"
+        device={screenSize < 650 ? "phone" : "desktop"}
+        routeName="Dashboard"
       />
       <SidebarItem
         icon={ClipBoard}
         pathName={path}
-        href='backlog'
-        tooltip='Backlog'
-        device={screenSize < 600 ? "phone" : "desktop"}
-        routeName='Backlog'
+        href="backlog"
+        tooltip="Backlog"
+        device={screenSize < 650 ? "phone" : "desktop"}
+        routeName="Backlog"
       />
       <SidebarItem
         icon={Boards}
         pathName={path}
-        href='board'
-        tooltip='Boards'
-        device={screenSize < 600 ? "phone" : "desktop"}
-        routeName='Boards'
+        href="board"
+        tooltip="Boards"
+        device={screenSize < 650 ? "phone" : "desktop"}
+        routeName="Boards"
       />
       <SidebarItem
         icon={Chat}
         pathName={path}
-        href='chat'
-        tooltip='Chats'
-        device={screenSize < 600 ? "phone" : "desktop"}
-        routeName='Chat'
+        href="chat"
+        tooltip="Chats"
+        device={screenSize < 650 ? "phone" : "desktop"}
+        routeName="Chat"
       />
       <SidebarItem
         icon={Mail}
         pathName={path}
-        href='notifications'
-        tooltip='Notifications'
-        device={screenSize < 600 ? "phone" : "desktop"}
-        routeName='Notification'
+        href="notifications"
+        tooltip="Notifications"
+        device={screenSize < 650 ? "phone" : "desktop"}
+        routeName="Notification"
       />
       <SidebarItem
         icon={Settings}
         pathName={path}
-        href='settings'
-        tooltip='Settings'
-        device={screenSize < 600 ? "phone" : "desktop"}
-        routeName='Settings'
+        href="settings"
+        tooltip="Settings"
+        device={screenSize < 650 ? "phone" : "desktop"}
+        routeName="Settings"
       />
       <SidebarItem
         icon={Logout}
-        className='sidebar__logout'
-        tooltip='Logout'
-        device={screenSize < 600 ? "phone" : "desktop"}
-        routeName='Logout'
+        className="sidebar__logout"
+        tooltip="Logout"
+        device={screenSize < 650 ? "phone" : "desktop"}
+        routeName="Logout"
       />
     </SidebarContainer>
   );

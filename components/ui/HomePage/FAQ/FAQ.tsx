@@ -9,6 +9,16 @@ const FAQ = () => {
   const [selectedId, setSelectedId] = useState(null);
   const data = FAQData.FAQ;
   const answer = data?.find((data) => data.id === selectedId)?.answer;
+
+  const cardContainerVariant = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
   return (
     <section className="faq-section">
       <h1 data-aos="fade-zoom-in">
@@ -35,6 +45,7 @@ const FAQ = () => {
         >
           <FAQBanner />
         </div>
+<<<<<<< HEAD
         <div
           className="faq__cards-container"
           data-aos="fade-down"
@@ -42,6 +53,15 @@ const FAQ = () => {
           data-aos-duration="1500"
         >
           <motion.div className="faq-card">
+=======
+        <div className='faq__cards-container'>
+          <motion.div
+            variants={cardContainerVariant}
+            initial='hidden'
+            animate='visible'
+            className='faq-card'
+          >
+>>>>>>> 6d564df6b8e749dee81425a443dca5b874abab50
             <AnimatePresence>
               {selectedId === null && (
                 <>

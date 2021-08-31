@@ -1,15 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
+import { useEffect } from "react";
 import PartnerData from "../../../data/PartnerData.json";
 
 const Partner: React.FC = () => {
   const data = PartnerData.partners;
-  console.log(data);
-
   return (
-    <div className="partner">
+    <div className='partner'>
       <h1>Trusted by companies from all corners of the world</h1>
-      <div className="partner__image">
-        <div className="partner__image__logo">
+      <div className='partner__image'>
+        <div className='partner__image__logo'>
           {data &&
             data?.map((p) => <img key={p.name} src={p.image} alt={p.name} />)}
         </div>
