@@ -17,6 +17,10 @@ const DashboardBarChart: React.FC = () => {
       : screenSize < 414
       ? 200
       : 250;
+
+  const today = new Date();
+  const day = today.toLocaleString("default", { weekday: "long" });
+  console.log(day);
   return (
     <>
       <Bar

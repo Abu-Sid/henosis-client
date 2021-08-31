@@ -11,6 +11,16 @@ const FAQ = () => {
   const [selectedId, setSelectedId] = useState(null);
   const data = FAQData.FAQ;
   const answer = data?.find((data) => data.id === selectedId)?.answer;
+
+  const cardContainerVariant = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
   return (
     <section className='faq-section'>
       <h1>
@@ -21,7 +31,12 @@ const FAQ = () => {
           <FAQBanner />
         </div>
         <div className='faq__cards-container'>
-          <motion.div className='faq-card'>
+          <motion.div
+            variants={cardContainerVariant}
+            initial='hidden'
+            animate='visible'
+            className='faq-card'
+          >
             <AnimatePresence>
               {selectedId === null && (
                 <>
