@@ -8,8 +8,9 @@
     padding: 1.8rem;
     padding-bottom: 0;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    h4,h3 {
+    grid-template-areas: "contact menu signup";
+    h4,
+    h3 {
       color: #4a4fff;
       margin-bottom: 0.5rem;
     }
@@ -18,9 +19,9 @@
       margin-right: 0.5rem;
       margin-top: 0.5rem;
       color: $purple;
-      span{
+      span {
         margin-right: 0.6rem;
-        &:hover{
+        &:hover {
           color: $gray-purple;
         }
       }
@@ -32,13 +33,20 @@
       a {
         text-decoration: none;
         color: black;
-        &:hover{
+        &:hover {
           text-decoration: underline;
         }
       }
     }
   }
+  .footer-contact {
+    grid-area: contact;
+  }
+  .footer-menu {
+    grid-area: menu;
+  }
   .footer-sign-up {
+    grid-area: signup;
     text-align: center;
     position: relative;
     z-index: 2;
@@ -101,5 +109,30 @@
   left: 30px;
   &::after {
     content: url("../public/images/gray-dots.svg");
+  }
+}
+
+//Responsiveness for mobile
+
+@media (max-width: 600px) {
+  .container {
+    margin-top: 5rem;
+    .row {
+      padding: 0.75rem;
+      padding-bottom: 0;
+      display: grid;
+      grid-template-columns: auto;
+      grid-template-areas:
+        "signup signup"
+        "contact menu";
+      h4,
+      h3 {
+        color: #4a4fff;
+        margin-bottom: 0.5rem;
+      }
+    }
+    .footer-sign-up {
+      @include flex(column);
+    }
   }
 }

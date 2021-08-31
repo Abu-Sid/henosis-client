@@ -1,5 +1,5 @@
-import React from "react";
 import { motion } from "framer-motion";
+import React from "react";
 
 interface IQuestion {
   id: string;
@@ -18,9 +18,9 @@ const FAQQuestionCard: React.FC<IQuestion> = ({
   };
   return (
     <motion.div
-      className='faq-card__question'
-      initial='hidden'
-      animate='visible'
+      className="faq-card__question"
+      initial="hidden"
+      animate="visible"
       whileHover={{ scale: 1.05 }}
       variants={cardVariant}
       exit={{ opacity: 0, y: -100 }}
@@ -28,19 +28,19 @@ const FAQQuestionCard: React.FC<IQuestion> = ({
     >
       <motion.div>
         <p>{question}</p>
-        <div className='down-indicator'>
+        <div className="down-indicator">
           <svg
-            width='20'
-            height='10'
-            viewBox='0 0 116 46'
-            fill='none'
-            xmlns='http://www.w3.org/2000/svg'
+            width="20"
+            height="10"
+            viewBox="0 0 116 46"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d='M8 8L58 36.4672L108 8'
-              stroke='#171E3C'
-              strokeWidth='10'
-              strokeLinecap='round'
+              d="M8 8L58 36.4672L108 8"
+              stroke="#171E3C"
+              strokeWidth="10"
+              strokeLinecap="round"
             />
           </svg>
         </div>

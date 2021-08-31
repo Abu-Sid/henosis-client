@@ -33,11 +33,25 @@ const Contact = () => {
 
   return (
     <section className="contact-section">
-      <h1>
-        Contact<span> Us</span>
+      <h1 data-aos="zoom-out-down">
+        Contact
+        <span
+          data-aos="fade-down"
+          data-aos-easing="linear"
+          data-aos-duration="500"
+          data-aos-delay="700"
+        >
+          {" "}
+          Us
+        </span>
       </h1>
       <div className="contact">
-        <div className="contact__image">
+        <div
+          className="contact__image"
+          data-aos="fade-down"
+          data-aos-easing="linear"
+          data-aos-duration="1500"
+        >
           <img src={contact.src} alt="contact us" />
         </div>
         <div
@@ -45,7 +59,12 @@ const Contact = () => {
           data-aos="zoom-in-up"
           className="contact__container"
         >
-          <div className="contact__container__form">
+          <div
+            className="contact__container__form"
+            data-aos="flip-left"
+            data-aos-easing="ease-out-cubic"
+            data-aos-duration="2000"
+          >
             <Form onSubmit={sendEmail}>
               <FormInputField name="name" type="text">
                 Name
