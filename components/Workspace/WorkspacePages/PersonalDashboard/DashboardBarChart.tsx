@@ -21,6 +21,14 @@ const DashboardBarChart: React.FC = () => {
   const today = new Date();
   const day = today.toLocaleString("default", { weekday: "long" });
   console.log(day);
+
+  const sat = day === "Saturday" ? "#4a4fff" : "#75798c";
+  const sun = day === "Sunday" ? "#4a4fff" : "#75798c";
+  const mon = day === "Monday" ? "#4a4fff" : "#75798c";
+  const tue = day === "Tuesday" ? "#4a4fff" : "#75798c";
+  const wed = day === "Wednesday" ? "#4a4fff" : "#75798c";
+  const thu = day === "Thursday" ? "#4a4fff" : "#75798c";
+  const fri = day === "Friday" ? "#4a4fff" : "#75798c";
   return (
     <>
       <Bar
@@ -32,15 +40,7 @@ const DashboardBarChart: React.FC = () => {
             {
               label: "Tasks",
               data: [1, 4, 3, 5, 2, 3, 5],
-              backgroundColor: [
-                "#171e3c",
-                "#171e3c",
-                "#171e3c",
-                "#171e3c",
-                "#171e3c",
-                "#171e3c",
-                "#171e3c",
-              ],
+              backgroundColor: [sat, sun, mon, tue, wed, thu, fri],
               barThickness: 15,
             },
           ],
