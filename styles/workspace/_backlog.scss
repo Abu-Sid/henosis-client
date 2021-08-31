@@ -19,9 +19,10 @@
   .sprint-section {
     background-color: $gray;
     border-radius: 0.5em;
+    padding: 0.8em 0;
     &__inner {
       padding: 1em;
-      min-width: 450px;
+      min-width: 465px;
     }
     &__top {
       @include flex(row, space-between);
@@ -175,7 +176,9 @@
   .backlog-section {
     width: 100%;
     .sprint-section {
+      margin-right: 8px;
       overflow-x: auto;
+      overflow-y: hidden;
       &__inner {
         padding: 0.8em;
       }
@@ -186,7 +189,18 @@
         }
       }
       .task-name {
-        font-size: 1.2rem;
+        font-size: 1.15rem;
+      }
+      .backlog-dropdown {
+        top: -8px;
+      }
+      .single-task {
+        .assigned-section {
+          .assigned-img {
+            height: 30px;
+            width: 30px;
+          }
+        }
       }
     }
   }

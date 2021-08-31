@@ -1,3 +1,14 @@
+// basic part
+.select {
+  background-color: #d0d1d8;
+  padding: 0.6rem 1rem;
+  border: 0.02rem solid #d0d1d8;
+  border-radius: 0.4rem;
+  box-sizing: border-box;
+  margin: 0.5rem 0;
+  resize: vertical;
+}
+
 .btn {
   background-color: #4a4fff;
   color: white;
@@ -13,36 +24,33 @@
     color: red;
   }
 }
-
-.input-search{
+.input-search {
   color: 808080;
   padding: 0.5rem;
   width: 70% !important;
   border: 1px solid #808080 !important;
   border-radius: 0.5rem;
-  
 }
 
+// main part
 .d-container {
-  width: 100%;
+  // width: 100%;
   padding-bottom: 6rem;
   .d-row {
-    display: flex;
-    flex-wrap: wrap;
+    // display: flex;
+    // flex-wrap: wrap;
     .col-left {
-      width: 10%;
+      // width: 10%;
     }
     .col-right {
-      width: 90%;
+      // width: 90%;
       margin: 3rem 0 0 7rem;
       .right-division {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
         align-items: center;
-        position: relative;
-        // padding: 0 4rem;
-        .button{
+        .button {
           @extend .btn;
           width: 60%;
           margin-left: 5px;
@@ -73,13 +81,20 @@
       }
       table {
         border-collapse: collapse;
-        width: 95%;
+        width: 92%;
         margin-top: 5%;
+        overflow: auto;
         tr {
-          height: 45px;
+          height: 3rem;
           text-align: center;
           background-color: $gray;
           cursor: pointer;
+          margin-bottom: 5rem;
+          th,
+          td {
+            padding: 0 1rem;
+          }
+
           &:hover {
             background-color: $light-gray-purple;
           }
@@ -92,6 +107,8 @@
     }
   }
 }
+
+// delete part
 .delete-confirm {
   .text {
     text-align: center;
@@ -121,6 +138,7 @@
   }
 }
 
+// modal part
 .react-responsive-modal-modal {
   background: #fefcfc !important;
   border-radius: 5px;
@@ -132,7 +150,9 @@
     text-align: center;
     margin-bottom: 2rem;
   }
-  input{
+  input,
+  select {
+    @extend .select;
     width: 100%;
   }
 
@@ -141,13 +161,7 @@
   }
 }
 
-@media (max-width: 575px) {
-  .col-right {
-    margin: 3rem 0 0 6rem !important;
-  }
-}
-
-// error message
+// error message part
 
 .error-container {
   .error-body {
@@ -170,5 +184,21 @@
     a:hover {
       text-decoration: underline;
     }
+  }
+}
+
+// responsive part
+@media (max-width: 599px) {
+  .col-right {
+    .right-division {
+      padding: 1rem 2rem;
+      form {
+        margin-top: 0.5rem;
+      }
+    }
+    .admin-button {
+      margin: 0 !important;
+    }
+    margin: 2rem auto !important;
   }
 }

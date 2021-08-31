@@ -10,6 +10,7 @@
     border-radius: radius(large);
     @include flex(row, flex-start, center);
     .indicator {
+      min-width: 210px;
       font-size: 1rem;
       color: $gray-purple;
       span {
@@ -79,5 +80,15 @@
   top: 3px;
   .dropdown {
     background-color: #d7dae0;
+  }
+}
+
+@media (max-width: 500px) {
+  .chat-portal__header {
+    .indicator-container {
+      .indicator {
+        min-width: 80px;
+      }
+    }
   }
 }
