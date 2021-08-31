@@ -62,16 +62,16 @@ const Admins = () => {
         },
         body: JSON.stringify({ email, name, role }),
       })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data) {
-          const newAdminInfo = [...adminInfo, data.data];
-          setAdminInfo(newAdminInfo);
-          toast.dismiss(loadingId);
-          toast.success("New Admin Record Reserved!");
-      }
-      });
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data) {
+            const newAdminInfo = [...adminInfo, data.data];
+            setAdminInfo(newAdminInfo);
+            toast.dismiss(loadingId);
+            toast.success("New Admin Record Reserved!");
+          }
+        });
       setOpen(false);
     }
   };
@@ -110,6 +110,7 @@ const Admins = () => {
             <button className="admin-button" onClick={onOpenModal}>
               Add New Admin
             </button>
+            {/* modal */}
             <Modal open={open} onClose={onCloseModal} center>
               <div className="admin-info">
                 <h2>Admin Information</h2>
@@ -128,15 +129,17 @@ const Admins = () => {
                 </form>
               </div>
             </Modal>
+            {/* modal */}
           </div>
-          <table>
+          {/* table */}
+          <table id="admin_table">
             <thead>
-              <tr>
-                <th>No.</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Action</th>
+              <tr className="table-row">
+                <th className="serial_no">No.</th>
+                <th className="content">Name</th>
+                <th className="content">Email</th>
+                <th className="content">Role</th>
+                <th className="content">Action</th>
               </tr>
             </thead>
             {loading ? (
