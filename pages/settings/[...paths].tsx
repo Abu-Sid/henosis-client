@@ -5,12 +5,12 @@ import withAuthCheck from "../../HOC/withAuthCheck";
 
 const SettingsPage = () => {
   return (
-    <div className="d-container">
-      <div className="d-row">
-        <div className="col-left">
+    <div className='d-container'>
+      <div className='d-row'>
+        <div className='col-left'>
           <SettingsSidebar />
         </div>
-        <div className="col-right">
+        <div className='col-right'>
           <SettingsRoute />
         </div>
       </div>

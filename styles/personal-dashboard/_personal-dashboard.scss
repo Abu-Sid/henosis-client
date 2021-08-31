@@ -73,3 +73,69 @@
     @extend .border-bg;
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .personal-dashboard {
+    height: 250vh;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr 0.5fr 3fr repeat(3, 1fr) 0.5fr 5fr 0.5fr 5fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    padding-right: 10px;
+
+    &__header {
+      grid-area: 1 / 1 / 2 / 3;
+      @extend .border-bg;
+    }
+    &__activity {
+      grid-area: 2 / 1 / 2 / 3;
+      @extend .section-header-text;
+    }
+    &__chart {
+      grid-area: 3 / 1 / 3 / 3;
+      @extend .border-bg;
+    }
+    &__progress {
+      grid-area: 4 / 2 / 7 / 3;
+      @extend .border-bg;
+    }
+    &__to-do {
+      grid-area: 4 / 1 / 4 / 2;
+      @extend .border-bg;
+    }
+    &__in-progress {
+      grid-area: 5 / 1 / 5 / 2;
+      @extend .border-bg;
+    }
+    &__done {
+      grid-area: 6 / 1 / 6 / 2;
+      @extend .border-bg;
+    }
+    &__assigned-to-me {
+      grid-area: 7 / 1 / 7 / 3;
+      @extend .section-header-text;
+    }
+    &__task {
+      grid-area: 8 / 1 / 8 / 3;
+      @extend .border-bg;
+    }
+    &__add-sub-task {
+      grid-area: 9 / 1 / 9 / 3;
+      @extend .section-header-text;
+    }
+    &__sub-task {
+      grid-area: 10 / 1 / 10 / 3;
+      @extend .border-bg;
+    }
+    &__account {
+      display: none;
+    }
+  }
+
+  // Status info (Pill)
+  .status__info {
+    h1 {
+      font-size: 1.2em;
+    }
+  }
+}

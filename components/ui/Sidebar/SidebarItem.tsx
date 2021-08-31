@@ -1,10 +1,10 @@
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useDispatch } from "react-redux";
 import { logout } from "../../../auth/authManager";
 import { authUserLogout } from "../../../redux/actions/userActions";
-import { useDispatch } from "react-redux";
 
 interface IProps {
   icon: StaticImageData;
@@ -26,7 +26,6 @@ const SidebarItem: React.FC<IProps> = ({
   routeName,
 }) => {
   const [showTooltip, setShowTooltip] = useState(false);
-
   const dispatch = useDispatch();
   const tooltipVariant = {
     hidden: { opacity: 0, x: -50 },
@@ -54,15 +53,15 @@ const SidebarItem: React.FC<IProps> = ({
       {href && (
         <Link href={href === "/" ? "/" : `${pathName}/${href}`} passHref>
           <a>
-            <Image src={icon} alt='icon' />
-            {device === "phone" && <p className='route-name'>{routeName}</p>}
+            <Image src={icon} alt="icon" />
+            {device === "phone" && <p className="route-name">{routeName}</p>}
           </a>
         </Link>
       )}
       {className === "sidebar__logout" && (
         <button onClick={handleLogoutClick}>
-          <Image src={icon} alt='icon' />
-          {device === "phone" && <p className='route-name'>{routeName}</p>}
+          <Image src={icon} alt="icon" />
+          {device === "phone" && <p className="route-name">{routeName}</p>}
         </button>
       )}
       {tooltip && device === "desktop" && (
@@ -70,11 +69,11 @@ const SidebarItem: React.FC<IProps> = ({
           <AnimatePresence>
             {showTooltip && (
               <motion.span
-                initial='hidden'
-                animate='visible'
+                initial="hidden"
+                animate="visible"
                 exit={{ opacity: 0, x: -50 }}
                 variants={tooltipVariant}
-                className='tooltip'
+                className="tooltip"
               >
                 {tooltip}
               </motion.span>
