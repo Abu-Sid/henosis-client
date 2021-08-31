@@ -185,55 +185,43 @@
 }
 
 // Contact form
-.contact-container {
-  border-radius: 0.5rem;
-  background-color: #e6e8ea;
-  padding: 2.5rem;
-  width: 28rem;
-  margin: 10rem auto;
-  box-sizing: border-box;
 
-  h2 {
-    color: $dark-blue;
+.contact-section {
+  margin-top: 3rem;
+  h1 {
     text-align: center;
-    margin-bottom: 2rem;
-    box-sizing: border-box;
+    @include writing-style($dark-blue, extra-large, bold);
+    span {
+      color: $purple;
+    }
   }
-  label {
-    color: $dark-blue;
-  }
-  input,
-  textarea {
-    background-color: #d0d1d8;
+  .contact {
+    padding-top: 4rem;
+    height: auto;
     width: 100%;
-    padding: 0.6rem 1.5rem !important;
-    border: none;
-    border-radius: 0.4rem;
-    box-sizing: border-box;
-    margin: 0.5rem 0;
-    resize: vertical;
-  }
-
-  .button {
-    background-color: #4a4fff !important;
-    color: white;
-    padding: 0.8rem 1.8rem;
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-
-    &:hover {
-      background-color: $gray-purple !important;
+    @include flex(row, center, flex-end);
+    // flex-wrap: wrap;
+    &__image {
+      width: 50%;
+      height: 50vh;
+      @include flex(column);
+      img {
+        width: 100%;
+      }
     }
-  }
-  &:hover {
-    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
-    h2 {
-      color: #4a4fff;
-    }
-    input,
-    textarea {
-      background-color: rgb(152, 161, 224, 0.4);
+    &__container {
+      // padding: 5rem;
+      width: 50%;
+      height: 60%;
+      border-radius: radius(small);
+      // background-color: #e6e8ea;
+      // padding: 2.5rem;
+      // width: 28rem;
+      // margin: 10rem auto;
+      box-sizing: border-box;
+      form {
+        height: 100%;
+      }
     }
   }
 }
@@ -297,6 +285,31 @@
     &__text {
       width: 100%;
       @include flex(column, flex-start, flex-start);
+    }
+  }
+  .contact-section {
+    margin-top: 5rem;
+    .contact {
+      @include flex(column, center, center);
+      &__image {
+        width: 100%;
+        height: auto;
+        @include flex(row);
+        img {
+          width: 100%;
+        }
+      }
+      &__container {
+        // padding: 5rem;
+        width: 100%;
+        height: auto;
+        @include flex();
+        border-radius: 0.5rem;
+        // background-color: #e6e8ea;
+        // padding: 2.5rem;
+        // width: 28rem;
+        // margin: 10rem auto;
+      }
     }
   }
 }
@@ -376,5 +389,25 @@
   //Testimonials
   .testimonial {
     margin: 1rem;
+  }
+  //Contact us
+  .contact-section {
+    h1 {
+      @include writing-style($dark-blue, large, bold);
+    }
+    img {
+      height: 50vh;
+    }
+    form {
+      width: 23rem;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .contact-section {
+    form {
+      width: 18rem;
+    }
   }
 }
