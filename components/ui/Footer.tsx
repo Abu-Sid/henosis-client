@@ -17,7 +17,7 @@ const Footer = () => {
   return (
     <footer className="container">
       <div className="row">
-        <div>
+        <div className="footer-contact">
           <h4>Contact</h4>
           <p>Phone: +88 017 123 654 45</p>
           <p>Address: 385 Lane - 6, Dhaka, 1206</p>
@@ -36,7 +36,7 @@ const Footer = () => {
             </span>
           </div>
         </div>
-        <div>
+        <div className="footer-menu">
           <h4>Menu</h4>
           <p>
             <Link href="/features">
