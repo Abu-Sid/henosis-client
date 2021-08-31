@@ -20,6 +20,8 @@ import DashboardStatusPill from "./DashboardStatusPill";
 import PersonalDashboardHeader from "./PersonalDashboardHeader";
 import SubTask from "./SubTask";
 
+let toastId: string;
+
 const PersonalDashboard = () => {
   const socket = useSocket("/sprint");
 
@@ -47,14 +49,24 @@ const PersonalDashboard = () => {
         "added-task",
         (
           tasks: ITask[],
-          user?: { name: string; email: string; status?: string }
+          user?: {
+            name: string;
+            email: string;
+            status?: string;
+            isSub?: boolean;
+          }
         ) => {
           dispatch(addTask(tasks));
           if (user) {
             if (user.email === email) {
-              toast.success(
-                `Your Task ${user.status || "Added"} Successfully!`
-              );
+              if (user.isSub) {
+                toast.dismiss(toastId);
+                toast.success(`Your SubTask Added Successfully!`);
+              } else {
+                toast.success(
+                  `Your Task ${user.status || "Added"} Successfully!`
+                );
+              }
             } else {
               toast.success(`${user.name} ${user.status || "Added"} A Task!`);
             }
@@ -101,7 +113,7 @@ const PersonalDashboard = () => {
             <p>My Sub-tasks</p>
           </div>
           <div className="personal-dashboard__sub-task">
-            <SubTask />
+            <SubTask socket={socket} toastId={toastId} />
           </div>
           <div className="personal-dashboard__account">
             <DashboardAccount />

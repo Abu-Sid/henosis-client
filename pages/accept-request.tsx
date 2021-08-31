@@ -63,7 +63,7 @@ const AcceptRequest = () => {
       socket.on("added-member", () => {
         toast.dismiss(toastId);
         toast.success("You Added Successfully!");
-        replace(`/workspaces/${query.id}/`);
+        replace(`/workspaces/${query.id}/dashboard`);
       });
     }
   }, [socket, replace, query]);
