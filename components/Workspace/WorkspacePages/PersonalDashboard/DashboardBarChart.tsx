@@ -47,11 +47,26 @@ const DashboardBarChart: React.FC = () => {
         }}
         options={{
           maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false,
+            },
+          },
           scales: {
             y: {
               beginAtZero: true,
               ticks: {
                 stepSize: 1,
+              },
+              title: {
+                color: "#75798c",
+                display: true,
+                text: "Tasks",
+              },
+            },
+            x: {
+              ticks: {
+                color: [sat, sun, mon, tue, wed, thu, fri],
               },
             },
           },

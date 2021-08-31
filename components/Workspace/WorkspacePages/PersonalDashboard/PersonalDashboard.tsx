@@ -69,41 +69,41 @@ const PersonalDashboard = () => {
       {loading ? (
         <LoadingAnimation />
       ) : (
-        <section className="personal-dashboard">
-          <div className="personal-dashboard__header">
+        <section className='personal-dashboard'>
+          <div className='personal-dashboard__header'>
             <PersonalDashboardHeader />
           </div>
-          <div className="personal-dashboard__activity">
+          <div className='personal-dashboard__activity'>
             <p>Activity</p>
           </div>
-          <div style={{ padding: "1em" }} className="personal-dashboard__chart">
+          <div className='personal-dashboard__chart'>
             <DashboardBarChart />
           </div>
-          <div className="personal-dashboard__progress">
+          <div className='personal-dashboard__progress'>
             <DashboardProgressChart />
           </div>
-          <div className="personal-dashboard__to-do">
-            <DashboardStatusPill status="Remaining" />
+          <div className='personal-dashboard__to-do'>
+            <DashboardStatusPill status='Remaining' />
           </div>
-          <div className="personal-dashboard__in-progress">
-            <DashboardStatusPill status="In Progress" />
+          <div className='personal-dashboard__in-progress'>
+            <DashboardStatusPill status='In Progress' />
           </div>
-          <div className="personal-dashboard__done">
-            <DashboardStatusPill status="Done" />
+          <div className='personal-dashboard__done'>
+            <DashboardStatusPill status='Done' />
           </div>
-          <div className="personal-dashboard__assigned-to-me">
+          <div className='personal-dashboard__assigned-to-me'>
             <p>Assigned to me</p>
           </div>
-          <div className="personal-dashboard__task">
+          <div className='personal-dashboard__task'>
             <AssignedToMe />
           </div>
-          <div className="personal-dashboard__add-sub-task">
+          <div className='personal-dashboard__add-sub-task'>
             <p>My Sub-tasks</p>
           </div>
-          <div className="personal-dashboard__sub-task">
+          <div className='personal-dashboard__sub-task'>
             <SubTask />
           </div>
-          <div className="personal-dashboard__account">
+          <div className='personal-dashboard__account'>
             <DashboardAccount />
           </div>
         </section>
