@@ -6,7 +6,13 @@
 }
 
 @import "./FAQ";
-
+a {
+  color: $purple;
+  .read-more-icon {
+    padding-top: 2px;
+    margin-left: 0.5em;
+  }
+}
 //Banner-Section
 
 .banner {
@@ -403,6 +409,7 @@
 
 @media screen and (max-width: 400px) {
   .contact-section {
+    margin-top: 0;
     form {
       width: 18rem;
     }
