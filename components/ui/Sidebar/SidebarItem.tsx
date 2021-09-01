@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../auth/authManager";
@@ -14,6 +15,7 @@ interface IProps {
   pathName?: string;
   device: string;
   routeName?: string;
+  replace?: boolean;
 }
 
 const SidebarItem: React.FC<IProps> = ({
@@ -24,6 +26,7 @@ const SidebarItem: React.FC<IProps> = ({
   pathName,
   device,
   routeName,
+  replace,
 }) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const dispatch = useDispatch();
@@ -40,6 +43,8 @@ const SidebarItem: React.FC<IProps> = ({
       console.log(error);
     }
   };
+
+  const router = useRouter();
   return (
     <motion.li
       onMouseEnter={() => {
@@ -50,18 +55,35 @@ const SidebarItem: React.FC<IProps> = ({
       }}
       className={className}
     >
-      {href && (
-        <Link href={href === "/" ? "/" : `${pathName}/${href}`} passHref>
+      {className === "sidebar__logo" && href === "/" && (
+        <Link href='/' passHref>
           <a>
-            <Image src={icon} alt="icon" />
-            {device === "phone" && <p className="route-name">{routeName}</p>}
+            {device === "phone" && (
+              <Image src={icon} width={60} height={20} alt='icon' />
+            )}
+            {device === "desktop" && <Image src={icon} alt='icon' />}
+            {device === "phone" && <p className='route-name'>{routeName}</p>}
+          </a>
+        </Link>
+      )}
+      {replace && (
+        <a onClick={() => router.replace(`${href}`)}>
+          <Image src={icon} alt='icon' />
+          {device === "phone" && <p className='route-name'>{routeName}</p>}
+        </a>
+      )}
+      {href && !replace && href !== "/" && (
+        <Link href={`${pathName}/${href}`} passHref>
+          <a>
+            <Image src={icon} alt='icon' />
+            {device === "phone" && <p className='route-name'>{routeName}</p>}
           </a>
         </Link>
       )}
       {className === "sidebar__logout" && (
         <button onClick={handleLogoutClick}>
-          <Image src={icon} alt="icon" />
-          {device === "phone" && <p className="route-name">{routeName}</p>}
+          <Image src={icon} alt='icon' />
+          {device === "phone" && <p className='route-name'>{routeName}</p>}
         </button>
       )}
       {tooltip && device === "desktop" && (
@@ -69,11 +91,11 @@ const SidebarItem: React.FC<IProps> = ({
           <AnimatePresence>
             {showTooltip && (
               <motion.span
-                initial="hidden"
-                animate="visible"
+                initial='hidden'
+                animate='visible'
                 exit={{ opacity: 0, x: -50 }}
                 variants={tooltipVariant}
-                className="tooltip"
+                className='tooltip'
               >
                 {tooltip}
               </motion.span>

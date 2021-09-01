@@ -18,6 +18,7 @@
     li {
       position: relative;
       margin: 10px;
+      @include flex(row, flex-start);
       a {
         @include writing-style($light-gray, large, thin);
         @include flex;
