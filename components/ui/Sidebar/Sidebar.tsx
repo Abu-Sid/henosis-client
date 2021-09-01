@@ -66,9 +66,11 @@ const Sidebar = () => {
       <SidebarItem
         icon={Workspaces}
         pathName={null}
-        href='workspaces'
+        href='/workspaces'
         tooltip='Workspaces'
         device={screenSize < 650 ? "phone" : "desktop"}
+        replace={true}
+        routeName='Workspaces'
       />
       <SidebarItem
         icon={Mail}
