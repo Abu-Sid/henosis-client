@@ -18,12 +18,13 @@
 
 ## Documentation
 
-- [Next Js Documentation](https://nextjs.org/docs)
+- [How to work with multiple branch or team collaboration](docs/team-collaboration-guide-for-github.md)
 
-- [TypeScript Documentation ](https://www.typescriptlang.org/docs/)
-- [ Express Documentation ](https://expressjs.com/en/starter/installing.html)
-- [ Mongoose Documentation ](https://mongoosejs.com/docs/index.html)
-- [ Vercel Documentation ](https://nextjs.org/docs/deployment)
+* [Next Js Documentation](https://nextjs.org/docs)
+* [TypeScript Documentation ](https://www.typescriptlang.org/docs/)
+* [ Express Documentation ](https://expressjs.com/en/starter/installing.html)
+* [ Mongoose Documentation ](https://mongoosejs.com/docs/index.html)
+* [ Vercel Documentation ](https://nextjs.org/docs/deployment)
 
 ## How to run this project
 
