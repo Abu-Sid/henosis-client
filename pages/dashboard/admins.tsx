@@ -132,14 +132,14 @@ const Admins = () => {
             {/* modal */}
           </div>
           {/* table */}
-          <table id="admin_table">
+          <table>
             <thead>
-              <tr className="table-row">
-                <th className="serial_no">No.</th>
-                <th className="content">Name</th>
-                <th className="content">Email</th>
-                <th className="content">Role</th>
-                <th className="content">Action</th>
+              <tr>
+                <th>No.</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Action</th>
               </tr>
             </thead>
             {loading ? (
