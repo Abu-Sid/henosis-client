@@ -82,7 +82,9 @@ const AcceptRequest = () => {
         <LoadingAnimation />
       ) : (
         <div className="accept-request">
-          <h1>Click Here For Accept Request</h1>
+          <h1>
+            You have invited to join the WorkSpace. Please accept the request
+          </h1>
           <button onClick={handleClick} className="button-primary">
             Accept Request
           </button>
