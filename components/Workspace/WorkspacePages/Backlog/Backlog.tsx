@@ -225,7 +225,11 @@ const Backlog = () => {
         icon={errorIcon}
         iconHeight="180px"
       />
-      <img width={900} src={empty.src} alt="" />
+      {!sprint._id && (
+        <div>
+          <img src={empty.src} alt="" />
+        </div>
+      )}
     </>
   );
 };
