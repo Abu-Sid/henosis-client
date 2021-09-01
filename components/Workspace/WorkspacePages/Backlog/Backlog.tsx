@@ -225,7 +225,7 @@ const Backlog = () => {
         icon={errorIcon}
         iconHeight="180px"
       />
-      <img src={empty.src} alt="" />
+      <img width={900} src={empty.src} alt="" />
     </>
   );
 };
