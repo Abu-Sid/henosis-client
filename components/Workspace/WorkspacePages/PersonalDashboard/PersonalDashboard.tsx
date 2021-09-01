@@ -1,8 +1,10 @@
+import { motion } from "framer-motion";
 import Link from "next/link";
 import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import useSocket from "../../../../hooks/useSocket";
+import empty from "../../../../public/images/empty.png";
 import {
   addTask,
   sendCurrentSprint,
@@ -28,10 +30,9 @@ const PersonalDashboard = () => {
 
   const { loading } = useSelector((state: RootState) => state.sprintReducer);
 
-  const { _id } = useSelector(
+  const { _id, workspaceName } = useSelector(
     (state: RootState) => state.workspaceReducer.workspace
   );
-
   const { sprint } = useSelector((state: RootState) => state.sprintReducer);
 
   const { email } = useSelector((state: RootState) => state.userReducer.user);
@@ -79,6 +80,17 @@ const PersonalDashboard = () => {
     }
   }, [socket, _id, dispatch, email]);
 
+  const ballVariant = {
+    initial: { scale: 0 },
+    animate: {
+      scale: 1,
+      transition: {
+        delay: 2,
+        duration: 0.2,
+      },
+    },
+  };
+
   return (
     <>
       {loading ? (
@@ -86,12 +98,26 @@ const PersonalDashboard = () => {
       ) : sprint._id ? (
         <section className="personal-dashboard">
           <div className="personal-dashboard__header">
+            <div className="header-purple-ball">
+              <motion.svg
+                width="150"
+                height="150"
+                viewBox="0 0 238 238"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                variants={ballVariant}
+                initial="initial"
+                animate="animate"
+              >
+                <circle cx="119" cy="119" r="119" fill="#4A4FFF" />
+              </motion.svg>
+            </div>
             <PersonalDashboardHeader />
           </div>
           <div className="personal-dashboard__activity">
             <p>Activity</p>
           </div>
-          <div style={{ padding: "1em" }} className="personal-dashboard__chart">
+          <div className="personal-dashboard__chart">
             <DashboardBarChart />
           </div>
           <div className="personal-dashboard__progress">
@@ -124,10 +150,18 @@ const PersonalDashboard = () => {
         </section>
       ) : (
         <div className="board-error">
-          <h1 className="alert-error">No Sprint Here</h1>
+          <h1 className="alert-error" style={{ color: "#171e3c" }}>
+            {" "}
+            Welcome to <span style={{ color: "#4a4fff" }}>
+              {workspaceName}
+            </span>{" "}
+            WorkSpace. <br /> Please Create A Sprint to Manage Your Project with{" "}
+            <span style={{ color: "#4a4fff" }}>Henosis</span>.
+          </h1>
           <Link href={`${_id}/backlog`} passHref>
-            <button className="button-primary">Create A Sprint</button>
+            <button className="button-primary">Create Sprint</button>
           </Link>
+          <img width={900} src={empty.src} alt="" />
         </div>
       )}
     </>
