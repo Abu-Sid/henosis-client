@@ -20,7 +20,7 @@ const WorkspaceError = ({ requestData, handleSendEmail }: IProps) => {
         <>
           <h2>If you are a member of this team, Please request for access</h2>
           <button onClick={() => handleSendEmail(requestData)}>
-            Request For Access
+            Request Access
           </button>
         </>
       )}

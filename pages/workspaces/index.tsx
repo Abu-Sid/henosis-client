@@ -8,8 +8,6 @@ import withAuthCheck from "../../HOC/withAuthCheck";
 import useSocket from "../../hooks/useSocket";
 import { IWorkspace } from "../../redux/actions/workspaceActions/actionInterface";
 import { RootState } from "../../redux/reducers";
-import { motion } from "framer-motion";
-import { exit } from "../../components/ui/Animation/Animation";
 const Workspaces = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
 
@@ -48,15 +46,15 @@ const Workspaces = () => {
   }, [socket, router, user]);
 
   return (
-    <section className='workspaces'>
+    <section className="workspaces">
       {loading ? (
         <LoadingAnimation />
       ) : (
         <>
-          <div className='workspaces-header'>
+          <div className="workspaces-header">
             <h1>Workspaces</h1>
-            <Link href='/new-workspace' passHref>
-              <button className='button-primary'>Create new project</button>
+            <Link href="/new-workspace" passHref>
+              <button className="button-primary">Create New Project</button>
             </Link>
           </div>
           <WorkspacesTable workspaces={workspaces} />
