@@ -159,9 +159,9 @@ const PersonalDashboard = () => {
             <span style={{ color: "#4a4fff" }}>Henosis</span>.
           </h1>
           <Link href={`${_id}/backlog`} passHref>
-            <button className="button-primary">Create Sprint</button>
+            <button className="button-primary">Navigate To Backlog</button>
           </Link>
-          <img width={900} src={empty.src} alt="" />
+          <img style={{ maxWidth: "100%" }} src={empty.src} alt="" />
         </div>
       )}
     </>
