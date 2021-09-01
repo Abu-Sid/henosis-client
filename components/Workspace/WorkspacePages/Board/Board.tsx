@@ -7,6 +7,7 @@ import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
 import { IUser } from "../../../../auth/authManager";
 import useSocket from "../../../../hooks/useSocket";
+import empty from "../../../../public/images/empty.png";
 import errorIcon from "../../../../public/images/warning.gif";
 import {
   addTask,
@@ -227,10 +228,13 @@ const Board = ({ workspaceSocket }: IProps) => {
         </section>
       ) : (
         <div className="board-error">
-          <h1 className="alert-error">No Sprint Here</h1>
+          <h1 className="alert-error" style={{ color: "#171e3c" }}>
+            There is No Sprint. Please Create One and Manage Your Project.
+          </h1>
           <Link href={`${_id}/backlog`} passHref>
-            <button className="button-primary">Create A Sprint</button>
+            <button className="button-primary">Navigate To Backlog</button>
           </Link>
+          <img style={{ maxWidth: "100%" }} src={empty.src} alt="" />
         </div>
       )}
       <PromptModal

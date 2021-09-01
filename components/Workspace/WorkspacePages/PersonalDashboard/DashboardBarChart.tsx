@@ -1,8 +1,18 @@
-import React, { useState, useEffect } from "react";
+import { getISOWeek } from "date-fns";
+import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../redux/reducers";
 
 const DashboardBarChart: React.FC = () => {
   const [screenSize, setScreenSize] = useState(null);
+
+  const { email } = useSelector((state: RootState) => state.userReducer.user);
+
+  const { tasks } = useSelector(
+    (state: RootState) => state.sprintReducer.sprint
+  );
+
   useEffect(() => {
     const currentScreenSize = window.innerWidth;
     setScreenSize(currentScreenSize);
@@ -18,28 +28,50 @@ const DashboardBarChart: React.FC = () => {
       ? 200
       : 250;
 
-  const today = new Date();
-  const day = today.toLocaleString("default", { weekday: "long" });
+  const today = new Date().toLocaleString("default", { weekday: "long" });
 
-  const sat = day === "Saturday" ? "#4a4fff" : "#75798c";
-  const sun = day === "Sunday" ? "#4a4fff" : "#75798c";
-  const mon = day === "Monday" ? "#4a4fff" : "#75798c";
-  const tue = day === "Tuesday" ? "#4a4fff" : "#75798c";
-  const wed = day === "Wednesday" ? "#4a4fff" : "#75798c";
-  const thu = day === "Thursday" ? "#4a4fff" : "#75798c";
-  const fri = day === "Friday" ? "#4a4fff" : "#75798c";
+  const currentWeek = getISOWeek(new Date());
+
+  const days = [
+    "Saturday",
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+  ];
+
+  const color = days.map((day) => (today === day ? "#4a4fff" : "#75798c"));
+
+  const labels = days.map((day) => day.slice(0, 3));
+
+  const userTasks = tasks.filter((task) => task.assignedMember.includes(email));
+
+  const data = days.map(
+    (day) =>
+      userTasks.filter(
+        (task) =>
+          new Date(task.dueDate).toLocaleString("default", {
+            weekday: "long",
+          }) === day &&
+          getISOWeek(new Date(task.dueDate)) === currentWeek &&
+          new Date(task.dueDate).getFullYear() === new Date().getFullYear()
+      ).length
+  );
+
   return (
     <>
       <Bar
         height={height}
         width={width}
         data={{
-          labels: ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"],
+          labels,
           datasets: [
             {
               label: "Tasks",
-              data: [1, 4, 3, 5, 2, 3, 5],
-              backgroundColor: [sat, sun, mon, tue, wed, thu, fri],
+              data,
+              backgroundColor: color,
               barThickness: 15,
             },
           ],
@@ -65,7 +97,7 @@ const DashboardBarChart: React.FC = () => {
             },
             x: {
               ticks: {
-                color: [sat, sun, mon, tue, wed, thu, fri],
+                color,
               },
             },
           },

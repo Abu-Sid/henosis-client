@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import useSocket from "../../../../hooks/useSocket";
+import empty from "../../../../public/images/empty.png";
 import errorIcon from "../../../../public/images/warning.gif";
 import {
   addTask,
@@ -202,10 +203,10 @@ const Backlog = () => {
           />
         ) : (
           <h1
-            style={{ textAlign: "center", color: "red" }}
+            style={{ textAlign: "center", marginTop: "50px" }}
             className="alert-error"
           >
-            No Sprint Here
+            There is No Sprint. Please Create One and Manage Your Project.
           </h1>
         )}
         <CreateSprint
@@ -224,6 +225,11 @@ const Backlog = () => {
         icon={errorIcon}
         iconHeight="180px"
       />
+      {!sprint._id && (
+        <div>
+          <img src={empty.src} alt="" />
+        </div>
+      )}
     </>
   );
 };

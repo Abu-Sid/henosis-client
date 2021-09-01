@@ -1,4 +1,8 @@
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import chat from "../../../public/images/chat.png";
 
@@ -26,6 +30,17 @@ const BoardSection = () => {
           items,<span>chat in real-time</span> , share attachments, and never
           miss a beat with fluid team communication
         </p>
+        <div>
+          <Link href="/features">
+            <a>
+              Read More
+              <FontAwesomeIcon
+                className="read-more-icon"
+                icon={faArrowRight as IconProp}
+              />
+            </a>
+          </Link>
+        </div>
       </div>
     </div>
   );
