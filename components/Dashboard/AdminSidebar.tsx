@@ -16,19 +16,19 @@ const AdminSidebar = () => {
   }, []);
 
   return (
-    <SidebarContainer device={screenSize < 600 ? "phone" : "desktop"}>
+    <SidebarContainer device={screenSize < 651 ? "phone" : "desktop"}>
       <SidebarItem
         icon={Logo}
         className="sidebar__logo"
         href="/"
-        device={screenSize < 600 ? "phone" : "desktop"}
+        device={screenSize < 651 ? "phone" : "desktop"}
       />
       <SidebarItem
         icon={Admin}
         pathName="/dashboard"
         href="admins"
         tooltip="Admins"
-        device={screenSize < 600 ? "phone" : "desktop"}
+        device={screenSize < 651 ? "phone" : "desktop"}
         routeName="Admins"
       />
       <SidebarItem
@@ -36,7 +36,7 @@ const AdminSidebar = () => {
         pathName="/dashboard"
         href="all_signup_users"
         tooltip="Users"
-        device={screenSize < 600 ? "phone" : "desktop"}
+        device={screenSize < 651 ? "phone" : "desktop"}
         routeName="All users"
       />
       <SidebarItem
@@ -44,14 +44,14 @@ const AdminSidebar = () => {
         pathName="/dashboard"
         href="workspaces"
         tooltip="Workspaces"
-        device={screenSize < 600 ? "phone" : "desktop"}
+        device={screenSize < 651 ? "phone" : "desktop"}
         routeName="Workspaces"
       />
       <SidebarItem
         icon={Logout}
         className="sidebar__logout"
         tooltip="Logout"
-        device={screenSize < 600 ? "phone" : "desktop"}
+        device={screenSize < 651 ? "phone" : "desktop"}
         routeName="Logout"
       />
     </SidebarContainer>

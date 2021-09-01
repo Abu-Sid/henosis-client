@@ -1,5 +1,4 @@
 #profile-body {
-  // width: 70vw;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -62,7 +61,6 @@
   background-color: #4a4fff !important;
   color: white;
   margin-left: 2px;
-
   cursor: pointer;
   display: inline-block;
 }
@@ -80,7 +78,7 @@
   display: inline-block;
 }
 
-@media (max-width:599px){
+@media (max-width:650px){
   #profile-body {
 margin: 1rem;
 padding: 1rem;

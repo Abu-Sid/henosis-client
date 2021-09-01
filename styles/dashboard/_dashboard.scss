@@ -81,8 +81,8 @@
       }
       table {
         border-collapse: collapse;
-        width: 92%;
-        margin-top: 5%;
+        width: 100%;
+        margin: 5% auto 0 auto;
         overflow: auto;
         tr {
           height: 3rem;
@@ -142,9 +142,10 @@
 .react-responsive-modal-modal {
   background: #fefcfc !important;
   border-radius: 5px;
-  width: 24rem;
+  max-width: 22rem !important;
 }
 .admin-info {
+  
   padding: 2rem;
   h2 {
     text-align: center;
@@ -188,7 +189,7 @@
 }
 
 // responsive part
-@media (max-width: 599px) {
+@media (max-width: 650px) {
   .col-right {
     .right-division {
       padding: 1rem 2rem;
