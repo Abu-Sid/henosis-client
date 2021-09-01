@@ -40,6 +40,8 @@ const SidebarItem: React.FC<IProps> = ({
       console.log(error);
     }
   };
+
+  console.log(pathName);
   return (
     <motion.li
       onMouseEnter={() => {

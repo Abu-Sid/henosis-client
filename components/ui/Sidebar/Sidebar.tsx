@@ -7,6 +7,7 @@ import Mail from "../../../public/images/icons/mail.svg";
 import Settings from "../../../public/images/icons/settings.svg";
 import User from "../../../public/images/icons/user.svg";
 import Boards from "../../../public/images/icons/view-boards.svg";
+import Workspaces from "../../../public/images/icons/workspaces.svg";
 import Logo from "../../../public/images/logo.svg";
 import SidebarContainer from "./SidebarContainer";
 import SidebarItem from "./SidebarItem";
@@ -61,6 +62,13 @@ const Sidebar = () => {
         tooltip='Chats'
         device={screenSize < 650 ? "phone" : "desktop"}
         routeName='Chat'
+      />
+      <SidebarItem
+        icon={Workspaces}
+        pathName={null}
+        href='workspaces'
+        tooltip='Workspaces'
+        device={screenSize < 650 ? "phone" : "desktop"}
       />
       <SidebarItem
         icon={Mail}
