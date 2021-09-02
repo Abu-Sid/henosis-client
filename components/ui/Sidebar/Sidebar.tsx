@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import useScreenSize from "../../../hooks/useScreenSize";
 import Chat from "../../../public/images/icons/chat.svg";
 import ClipBoard from "../../../public/images/icons/clipboard-check.svg";
 import Logout from "../../../public/images/icons/logout.svg";
@@ -13,14 +14,10 @@ import SidebarContainer from "./SidebarContainer";
 import SidebarItem from "./SidebarItem";
 
 const Sidebar = () => {
-  const [screenSize, setScreenSize] = useState(null);
   const router = useRouter();
   const path = router.query.paths?.[0];
 
-  useEffect(() => {
-    const currentScreenSize = window.innerWidth;
-    setScreenSize(currentScreenSize);
-  }, []);
+  const screenSize = useScreenSize();
 
   return (
     <SidebarContainer device={screenSize < 650 ? "phone" : "desktop"}>
