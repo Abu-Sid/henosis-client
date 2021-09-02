@@ -17,8 +17,8 @@ const Account: React.FC = () => {
     }
   };
   return (
-    <div style={{ marginLeft: "13%", marginTop: "3%" }}>
-      <Form width={800} onSubmit={handleSubmit(submit)}>
+    <div style={{ marginLeft: "", marginTop: "3%", padding: "3%" }}>
+      <Form onSubmit={handleSubmit(submit)}>
         <FormHeader>Change Password</FormHeader>
         <FormInputField name="password" type="password" onChange={handleInput}>
           Current Password
@@ -41,13 +41,17 @@ const Account: React.FC = () => {
         >
           Confirm New Password
         </FormInputField>
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div
+          style={{ display: "flex", alignItems: "center", flexWrap: "wrap" }}
+        >
           <FormInputField
             width={180}
             type="submit"
             value={"Set New Password"}
           />
-          <small style={{ color: "#4a4fff", marginLeft: "10px",marginTop:'20px' }}>
+          <small
+            style={{ color: "#4a4fff", marginLeft: "10px", marginTop: "20px" }}
+          >
             Forgot Password?
           </small>
         </div>

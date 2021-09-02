@@ -12,7 +12,9 @@ const Billing = () => {
   useEffect(() => {
     const infos = async () => {
       try {
-        const res = await fetch(`https://intense-peak-24388.herokuapp.com/payment/${user.email}`);
+        const res = await fetch(
+          `https://intense-peak-24388.herokuapp.com/payment/${user.email}`
+        );
         const data = await res.json();
         setBillingInfos(data.data);
         setLoading(false);
@@ -23,6 +25,7 @@ const Billing = () => {
     };
     infos();
   }, []);
+  
   return (
     <div className="bill-main">
       <h2>Billing</h2>

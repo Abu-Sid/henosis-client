@@ -96,6 +96,10 @@
     &__header {
       grid-area: 1 / 1 / 2 / 3;
       @extend .border-bg;
+      height: 200px;
+      .header-purple-ball {
+        display: none;
+      }
     }
     &__activity {
       grid-area: 2 / 1 / 2 / 3;
