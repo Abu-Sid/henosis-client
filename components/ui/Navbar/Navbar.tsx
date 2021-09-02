@@ -1,10 +1,10 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { useRouter } from "next/router";
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/reducers";
 import DesktopNavbar from "./DesktopNavbar";
 import PhoneNavbar from "./PhoneNavbar";
-import { RootState } from "../../../redux/reducers";
 
 interface IDropdownContext {
   open?: boolean;
