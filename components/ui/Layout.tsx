@@ -31,14 +31,13 @@ const Layout = ({ children }) => {
   }, [pathname]);
 
   const path = useRoute();
+
   return (
     <>
       <Toaster toastOptions={{ className: "toast" }} />
       {!path.includes("workspaces/[...paths]") &&
         !path.includes("dashboard") &&
-        !path.includes("settings") &&
-        !path.includes("form") &&
-        !path.includes("test") && <Navbar />}
+        !path.includes("settings") && <Navbar />}
       <main>{children}</main>
     </>
   );

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
 import LoadingAnimation from "../ui/Animation/LoadingAnimation";
-import toast from "react-hot-toast";
 
 interface IFormInput {
   email: string;
