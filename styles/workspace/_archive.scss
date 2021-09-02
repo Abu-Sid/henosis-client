@@ -1,13 +1,14 @@
 .archive {
-  @include writing-style();
   h1 {
     text-align: center;
+    @include writing-style(0, large, bold);
   }
   margin-top: 3rem;
   span {
     color: $purple;
   }
   &__text {
+    margin-top: 2rem;
     background-color: $gray;
     padding: 1.75rem;
     @include flex(0, flex-start, flex-start);

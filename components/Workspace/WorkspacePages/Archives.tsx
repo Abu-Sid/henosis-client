@@ -30,7 +30,7 @@ const Archives = () => {
   return (
     <div className="archive">
       <h1>
-        Get a complete view of all sprint with <span>archive</span> <br /> so
+        Get a complete view of all sprint with <span>Archive</span> <br /> so
         teams tackle the right tasks at the right time.
       </h1>
       {loading ? (
