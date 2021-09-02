@@ -1,0 +1,27 @@
+.archive {
+  @include writing-style();
+  h1 {
+    text-align: center;
+  }
+  margin-top: 3rem;
+  span {
+    color: $purple;
+  }
+  &__text {
+    background-color: $gray;
+    padding: 1.75rem;
+    @include flex(0, flex-start, flex-start);
+    &__sprint {
+      h2 {
+        color: $purple;
+      }
+      background-color: $light-gray-purple;
+      margin: 1rem;
+      padding: 1rem;
+      border-radius: 1rem;
+      //   &:hover {
+      //     background-color: $light-gray;
+      //   }
+    }
+  }
+}

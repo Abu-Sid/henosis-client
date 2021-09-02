@@ -64,10 +64,10 @@ const Sidebar = () => {
       <SidebarItem
         icon={Mail}
         pathName={path}
-        href="notifications"
-        tooltip="Notifications"
+        href="archive"
+        tooltip="Archive"
         device={screenSize < 650 ? "phone" : "desktop"}
-        routeName="Notification"
+        routeName="Archive"
       />
       <SidebarItem
         icon={Settings}

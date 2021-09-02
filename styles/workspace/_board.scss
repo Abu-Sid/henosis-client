@@ -150,7 +150,7 @@
 }
 
 .accept-request {
-  @include flex();
+  @include flex(column, space-between);
   margin-top: 6rem;
   margin-bottom: 0.5rem;
   text-align: center;
