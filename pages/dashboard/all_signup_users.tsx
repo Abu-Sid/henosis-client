@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import UsersRow from "../../components/Dashboard/UsersRow";
 import AdminSidebar from "../../components/Dashboard/AdminSidebar";
+import UsersRow from "../../components/Dashboard/UsersRow";
 import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation";
 import verifyAdmin from "../../HOC/verifyAdmin";
 

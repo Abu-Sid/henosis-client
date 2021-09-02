@@ -14,7 +14,7 @@ import SidebarItem from "./SidebarItem";
 const PhoneSidebar = () => {
   const router = useRouter();
   const path = router.query.paths?.[0];
-  
+
   return (
     <SidebarContainer device="phone">
       <SidebarItem
