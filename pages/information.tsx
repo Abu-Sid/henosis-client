@@ -1,14 +1,14 @@
+import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import WorkspaceForm from "../components/NewWorkspace/WorkspaceForm";
 import Payment from "../components/Payment/Payment";
 import { priceData } from "../components/Pricing/PriceData";
+import { exit } from "../components/ui/Animation/Animation";
 import withAuthCheck from "../HOC/withAuthCheck";
 import { IWorkspace } from "../redux/actions/workspaceActions/actionInterface";
 import { RootState } from "../redux/reducers";
-import { motion } from "framer-motion";
-import { exit } from "../components/ui/Animation/Animation";
 
 export interface IWorkspaceData {
   companyName: string;
@@ -51,7 +51,7 @@ const Information = () => {
   const price = pricing[isAnnual ? "annualPrice" : "monthlyPrice"];
 
   return (
-    <motion.section exit={exit} className='information'>
+    <motion.section exit={exit} className="information">
       <Payment ref={btnRef} workspaceData={workspaceData} price={price} />
       <WorkspaceForm submit={submit} isCompany />
     </motion.section>

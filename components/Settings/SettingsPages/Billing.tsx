@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/reducers";
 import LoadingAnimation from "../../ui/Animation/LoadingAnimation";
@@ -6,9 +6,11 @@ import BillingDetails from "./BillingDetails";
 
 const Billing = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
+
   const [loading, setLoading] = useState(true);
 
   const [billingInfos, setBillingInfos] = useState([]);
+
   useEffect(() => {
     const infos = async () => {
       try {
@@ -24,8 +26,8 @@ const Billing = () => {
       }
     };
     infos();
-  }, []);
-  
+  }, [user.email]);
+
   return (
     <div className="bill-main">
       <h2>Billing</h2>
