@@ -1,22 +1,18 @@
 import { getISOWeek } from "date-fns";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Bar } from "react-chartjs-2";
 import { useSelector } from "react-redux";
+import useScreenSize from "../../../../hooks/useScreenSize";
 import { RootState } from "../../../../redux/reducers";
 
 const DashboardBarChart: React.FC = () => {
-  const [screenSize, setScreenSize] = useState(null);
-
   const { email } = useSelector((state: RootState) => state.userReducer.user);
 
   const { tasks } = useSelector(
     (state: RootState) => state.sprintReducer.sprint
   );
 
-  useEffect(() => {
-    const currentScreenSize = window.innerWidth;
-    setScreenSize(currentScreenSize);
-  }, []);
+  const screenSize = useScreenSize();
 
   const height = screenSize < 600 ? 200 : 600;
   const width =
