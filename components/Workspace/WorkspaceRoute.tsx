@@ -4,10 +4,10 @@ import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
 import NotFound from "../../pages/404";
 import AcceptRequest from "./WorkspacePages/AcceptRequest";
+import Archives from "./WorkspacePages/Archives";
 import Backlog from "./WorkspacePages/Backlog/Backlog";
 import Board from "./WorkspacePages/Board/Board";
 import Chat from "./WorkspacePages/Chat/Chat";
-import Notification from "./WorkspacePages/Notification";
 import PersonalDashboard from "./WorkspacePages/PersonalDashboard/PersonalDashboard";
 import Settings from "./WorkspacePages/Settings";
 
@@ -33,8 +33,10 @@ const WorkspaceRoute = ({ socket }: IProps) => {
       return <Backlog />;
     case "chat":
       return <Chat />;
-    case "notifications":
-      return <Notification />;
+    // case "notifications":
+    //   return <Archives />;
+    case "archive":
+      return <Archives />;
     case "settings":
       return <Settings />;
     case "acceptRequest":

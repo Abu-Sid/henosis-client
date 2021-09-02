@@ -7,6 +7,7 @@ import Mail from "../../../public/images/icons/mail.svg";
 import Settings from "../../../public/images/icons/settings.svg";
 import User from "../../../public/images/icons/user.svg";
 import Boards from "../../../public/images/icons/view-boards.svg";
+import Workspaces from "../../../public/images/icons/workspaces.svg";
 import Logo from "../../../public/images/logo.svg";
 import SidebarContainer from "./SidebarContainer";
 import SidebarItem from "./SidebarItem";
@@ -28,6 +29,7 @@ const Sidebar = () => {
         className="sidebar__logo"
         href="/"
         device={screenSize < 650 ? "phone" : "desktop"}
+        routeName="Henosis"
       />
       <SidebarItem
         icon={User}
@@ -62,12 +64,21 @@ const Sidebar = () => {
         routeName="Chat"
       />
       <SidebarItem
+        icon={Workspaces}
+        pathName={null}
+        href="/workspaces"
+        tooltip="Workspaces"
+        device={screenSize < 650 ? "phone" : "desktop"}
+        replace={true}
+        routeName="Workspaces"
+      />
+      <SidebarItem
         icon={Mail}
         pathName={path}
-        href="notifications"
-        tooltip="Notifications"
+        href="archive"
+        tooltip="Archive"
         device={screenSize < 650 ? "phone" : "desktop"}
-        routeName="Notification"
+        routeName="Archive"
       />
       <SidebarItem
         icon={Settings}
