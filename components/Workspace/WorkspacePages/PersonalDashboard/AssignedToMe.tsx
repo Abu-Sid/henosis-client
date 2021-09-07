@@ -15,14 +15,14 @@ const AssignedToMe = () => {
 
   return (
     <>
-      <div className="assigned-to-me__header">
-        <div className="assigned-to-me__header__task-name">
+      <div className='assigned-to-me__header'>
+        <div className='assigned-to-me__header__task-name'>
           <p>Task</p>
         </div>
-        <div className="assigned-to-me__header__due-date">
+        <div className='assigned-to-me__header__due-date'>
           <p>Due Date</p>
         </div>
-        <div className="assigned-to-me__header__status">
+        <div className='assigned-to-me__header__status'>
           <p>Status</p>
         </div>
       </div>
@@ -51,14 +51,14 @@ const TaskCard: React.FC<IProps> = ({ task }) => {
     color = "#27ae60";
   }
   return (
-    <div className="assigned-to-me__task">
-      <div className="assigned-to-me__task__task-name">
+    <div className='assigned-to-me__task'>
+      <div className='assigned-to-me__task__task-name'>
         <p>{taskName}</p>
       </div>
-      <div className="assigned-to-me__task__due-date">
+      <div className='assigned-to-me__task__due-date'>
         <p>{format(new Date(dueDate), "dd/MM/yyyy")}</p>
       </div>
-      <div className="assigned-to-me__task__status">
+      <div className='assigned-to-me__task__status'>
         <p style={{ color: color }}>{currentStatus}</p>
       </div>
     </div>

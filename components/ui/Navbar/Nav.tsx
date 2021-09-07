@@ -8,6 +8,7 @@ const Nav: React.FC<INav> = ({ children, className }) => {
   const path = useRoute();
 
   let color: string;
+  console.log("color:", color);
   if (path === "/") {
     color = "white-bg";
   } else {

@@ -14,15 +14,20 @@ const WorkspaceRow = ({ workspace, index }: IProps) => {
 
   const { photo, name } = members.find((member) => member.isCreator);
 
+  const tableRowVariant = {
+    initial: { opacity: 0, x: "-100vw" },
+    animate: { opacity: 1, x: 0 },
+  };
+
   return (
-    <div>
+    <motion.div variants={tableRowVariant} initial='initial' animate='animate'>
       <Link passHref href={`/workspaces/${workspace._id}/dashboard`}>
         <div className='row-container'>
           <div className='number'>{index + 1}</div>
           <div className='name'>{workspaceName}</div>
           <div className='type'>{type}</div>
           <div className='owner owner-name'>
-            <img
+            <motion.img
               className='owner-image'
               src={photo || profileIcon.src}
               alt=''
@@ -31,7 +36,7 @@ const WorkspaceRow = ({ workspace, index }: IProps) => {
           </div>
         </div>
       </Link>
-    </div>
+    </motion.div>
   );
 };
 
