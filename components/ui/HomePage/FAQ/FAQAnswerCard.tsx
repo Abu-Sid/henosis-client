@@ -1,5 +1,5 @@
-import React from "react";
 import { motion, useAnimation } from "framer-motion";
+import React from "react";
 
 interface IAnswer {
   answer: string;
@@ -15,9 +15,9 @@ const FAQAnswerCard: React.FC<IAnswer> = ({ answer, setSelectedId }) => {
   };
   return (
     <motion.div
-      className='faq-card__answer'
-      initial='hidden'
-      animate='visible'
+      className="faq-card__answer"
+      initial="hidden"
+      animate="visible"
       exit={{
         opacity: 0,
         y: -100,
@@ -48,22 +48,22 @@ const FAQAnswerCard: React.FC<IAnswer> = ({ answer, setSelectedId }) => {
         <motion.svg
           initial={{ width: 20, height: 20 }}
           animate={control}
-          viewBox='0 0 130 130'
-          fill='none'
-          xmlns='http://www.w3.org/2000/svg'
+          viewBox="0 0 130 130"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <circle cx='65' cy='65' r='65' fill='#E6E8EA' />
+          <circle cx="65" cy="65" r="65" fill="#E6E8EA" />
           <path
-            d='M29.1445 30.1521L100.856 99.8481'
-            stroke='#171E3C'
-            strokeWidth='15'
-            strokeLinecap='round'
+            d="M29.1445 30.1521L100.856 99.8481"
+            stroke="#171E3C"
+            strokeWidth="15"
+            strokeLinecap="round"
           />
           <path
-            d='M99.8481 29.1445L30.1522 100.856'
-            stroke='#171E3C'
-            strokeWidth='15'
-            strokeLinecap='round'
+            d="M99.8481 29.1445L30.1522 100.856"
+            stroke="#171E3C"
+            strokeWidth="15"
+            strokeLinecap="round"
           />
         </motion.svg>
       </motion.button>

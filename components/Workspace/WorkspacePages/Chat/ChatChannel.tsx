@@ -103,6 +103,13 @@ const ChatChannel = () => {
             initiator: true,
             trickle: false,
             stream: mediaStream,
+            config: {
+              iceServers: [
+                {
+                  urls: ["stun:stun.l.google.com:19302"],
+                },
+              ],
+            },
           });
 
           peer.on("signal", (data) => {
@@ -120,7 +127,6 @@ const ChatChannel = () => {
               setUsers((preUsers) => [...preUsers, user]);
               peer.on("stream", (currentStream) => {
                 setUserStreams((preStreams) => [...preStreams, currentStream]);
-                console.log(currentStream);
               });
             }
           );

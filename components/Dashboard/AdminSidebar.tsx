@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import useScreenSize from "../../hooks/useScreenSize";
 import Admin from "../../public/images/icons/admins.svg";
 import Logout from "../../public/images/icons/logout.svg";
 import Users from "../../public/images/icons/user.svg";
@@ -8,12 +9,7 @@ import SidebarContainer from "../ui/Sidebar/SidebarContainer";
 import SidebarItem from "../ui/Sidebar/SidebarItem";
 
 const AdminSidebar = () => {
-  const [screenSize, setScreenSize] = useState(null);
-
-  useEffect(() => {
-    const currentScreenSize = window.innerWidth;
-    setScreenSize(currentScreenSize);
-  }, []);
+  const screenSize = useScreenSize();
 
   return (
     <SidebarContainer device={screenSize < 651 ? "phone" : "desktop"}>

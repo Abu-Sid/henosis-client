@@ -1,10 +1,8 @@
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../redux/reducers";
 import CodingBanner from "./CodingBanner";
-import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
 
 const PersonalDashboardHeader: React.FC = () => {
   const today = new Date();
@@ -49,11 +47,11 @@ const PersonalDashboardHeader: React.FC = () => {
   return (
     <>
       <AnimateSharedLayout>
-        <motion.div layout className='personal-dashboard__header__info'>
-          <div className='info__image'>
+        <motion.div layout className="personal-dashboard__header__info">
+          <div className="info__image">
             <CodingBanner />
           </div>
-          <motion.div layout className='info__text'>
+          <motion.div layout className="info__text">
             <AnimatePresence>
               {!greeting && (
                 <motion.h1 exit={{ opacity: 0 }}>
@@ -69,23 +67,20 @@ const PersonalDashboardHeader: React.FC = () => {
                 Welcome to <span>{workspaceName}</span>
               </motion.h1>
             )}
-            <motion.div layout className='personal-dashboard__header__time'>
+            <motion.div layout className="personal-dashboard__header__time">
               It is <span>{day}, </span>
               {month} {date}, {year}
             </motion.div>
             <motion.p layout>
-              {todayUndoTasks.length === 0 && (
-                <span>There is nothing left to do. </span>
+              {todayTasks.length === 0 && (
+                <span>There is nothing to do today.</span>
               )}
-              {todayUndoTasks.length !== 0 && (
+              {progress !== 0 && !isNaN(progress) && (
                 <span>
-                  You have {todayUndoTasks.length} tasks to finish today.
-                </span>
-              )}
-              {progress !== 0 && (
-                <span>
-                  You have already completed {parseFloat(progress.toFixed(2))}%
-                  of your tasks. Your progress is unbeatable.
+                  You have {todayUndoTasks.length || "no remaining"} tasks to
+                  finish today. You have already completed{" "}
+                  {parseFloat(progress.toFixed(2))}% of your tasks. Your
+                  progress is unbeatable.
                 </span>
               )}
               {progress === 0 && (

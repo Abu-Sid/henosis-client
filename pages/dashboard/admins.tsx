@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import AdminRow from "../../components/Dashboard/AdminRow";
 import AdminSidebar from "../../components/Dashboard/AdminSidebar";
 import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation";
-import toast from "react-hot-toast";
 import verifyAdmin from "../../HOC/verifyAdmin";
 
 enum RoleEnum {

@@ -58,34 +58,34 @@ const SidebarItem: React.FC<IProps> = ({
       className={className}
     >
       {className === "sidebar__logo" && href === "/" && (
-        <Link href='/' passHref>
+        <Link href="/" passHref>
           <a>
             {device === "phone" && (
-              <Image src={icon} width={60} height={20} alt='icon' />
+              <Image src={icon} width={60} height={20} alt="icon" />
             )}
-            {device === "desktop" && <Image src={icon} alt='icon' />}
-            {device === "phone" && <p className='route-name'>{routeName}</p>}
+            {device === "desktop" && <Image src={icon} alt="icon" />}
+            {device === "phone" && <p className="route-name">{routeName}</p>}
           </a>
         </Link>
       )}
       {replace && (
         <a onClick={() => router.replace(`${href}`)}>
-          <Image src={icon} alt='icon' />
-          {device === "phone" && <p className='route-name'>{routeName}</p>}
+          <Image src={icon} alt="icon" />
+          {device === "phone" && <p className="route-name">{routeName}</p>}
         </a>
       )}
       {href && !replace && href !== "/" && (
         <Link href={`${pathName}/${href}`} passHref>
           <a>
-            <Image src={icon} alt='icon' />
-            {device === "phone" && <p className='route-name'>{routeName}</p>}
+            <Image src={icon} alt="icon" />
+            {device === "phone" && <p className="route-name">{routeName}</p>}
           </a>
         </Link>
       )}
       {className === "sidebar__logout" && (
         <button onClick={handleLogoutClick}>
-          <Image src={icon} alt='icon' />
-          {device === "phone" && <p className='route-name'>{routeName}</p>}
+          <Image src={icon} alt="icon" />
+          {device === "phone" && <p className="route-name">{routeName}</p>}
         </button>
       )}
       {tooltip && device === "desktop" && (
@@ -93,11 +93,11 @@ const SidebarItem: React.FC<IProps> = ({
           <AnimatePresence>
             {showTooltip && (
               <motion.span
-                initial='hidden'
-                animate='visible'
+                initial="hidden"
+                animate="visible"
                 exit={{ opacity: 0, x: -50 }}
                 variants={tooltipVariant}
-                className='tooltip'
+                className="tooltip"
               >
                 {tooltip}
               </motion.span>

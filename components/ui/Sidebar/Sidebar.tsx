@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import useScreenSize from "../../../hooks/useScreenSize";
 import Chat from "../../../public/images/icons/chat.svg";
 import ClipBoard from "../../../public/images/icons/clipboard-check.svg";
 import Logout from "../../../public/images/icons/logout.svg";
@@ -13,87 +14,83 @@ import SidebarContainer from "./SidebarContainer";
 import SidebarItem from "./SidebarItem";
 
 const Sidebar = () => {
-  const [screenSize, setScreenSize] = useState(null);
   const router = useRouter();
   const path = router.query.paths?.[0];
 
-  useEffect(() => {
-    const currentScreenSize = window.innerWidth;
-    setScreenSize(currentScreenSize);
-  }, []);
+  const screenSize = useScreenSize();
 
   return (
     <SidebarContainer device={screenSize < 650 ? "phone" : "desktop"}>
       <SidebarItem
         icon={Logo}
-        className='sidebar__logo'
-        href='/'
+        className="sidebar__logo"
+        href="/"
         device={screenSize < 650 ? "phone" : "desktop"}
-        routeName='Henosis'
+        routeName="Henosis"
       />
       <SidebarItem
         icon={User}
         pathName={path}
-        href='dashboard'
-        tooltip='Dashboard'
+        href="dashboard"
+        tooltip="Dashboard"
         device={screenSize < 650 ? "phone" : "desktop"}
-        routeName='Dashboard'
+        routeName="Dashboard"
       />
       <SidebarItem
         icon={ClipBoard}
         pathName={path}
-        href='backlog'
-        tooltip='Backlog'
+        href="backlog"
+        tooltip="Backlog"
         device={screenSize < 650 ? "phone" : "desktop"}
-        routeName='Backlog'
+        routeName="Backlog"
       />
       <SidebarItem
         icon={Boards}
         pathName={path}
-        href='board'
-        tooltip='Boards'
+        href="board"
+        tooltip="Boards"
         device={screenSize < 650 ? "phone" : "desktop"}
-        routeName='Boards'
+        routeName="Boards"
       />
       <SidebarItem
         icon={Chat}
         pathName={path}
-        href='chat'
-        tooltip='Chats'
+        href="chat"
+        tooltip="Chats"
         device={screenSize < 650 ? "phone" : "desktop"}
-        routeName='Chat'
+        routeName="Chat"
       />
       <SidebarItem
         icon={Workspaces}
         pathName={null}
-        href='/workspaces'
-        tooltip='Workspaces'
+        href="/workspaces"
+        tooltip="Workspaces"
         device={screenSize < 650 ? "phone" : "desktop"}
         replace={true}
-        routeName='Workspaces'
+        routeName="Workspaces"
       />
       <SidebarItem
         icon={Mail}
         pathName={path}
-        href='notifications'
-        tooltip='Notifications'
+        href="archive"
+        tooltip="Archive"
         device={screenSize < 650 ? "phone" : "desktop"}
-        routeName='Notification'
+        routeName="Archive"
       />
       <SidebarItem
         icon={Settings}
         pathName={path}
-        href='settings'
-        tooltip='Settings'
+        href="settings"
+        tooltip="Settings"
         device={screenSize < 650 ? "phone" : "desktop"}
-        routeName='Settings'
+        routeName="Settings"
       />
       <SidebarItem
         icon={Logout}
-        className='sidebar__logout'
-        tooltip='Logout'
+        className="sidebar__logout"
+        tooltip="Logout"
         device={screenSize < 650 ? "phone" : "desktop"}
-        routeName='Logout'
+        routeName="Logout"
       />
     </SidebarContainer>
   );

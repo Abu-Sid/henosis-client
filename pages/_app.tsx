@@ -1,7 +1,5 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useRouter } from "next/router";
-import { AnimatePresence } from "framer-motion";
 import type { AppProps } from "next/app";
 import { useEffect, useState } from "react";
 import { Provider } from "react-redux";
@@ -12,13 +10,11 @@ import store from "../redux/store";
 import "../styles/main.scss";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     AOS.init();
   }, []);
-
-  const router = useRouter();
-
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
@@ -33,11 +29,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Provider store={store}>
           <Layout>
             <Component {...pageProps} />
-            <div className='scroll-to-top'>
+            <div className="scroll-to-top">
               <ScrollToTop
                 smooth
-                color='white'
-                className='scroll-to-top__button'
+                color="white"
+                className="scroll-to-top__button"
               />
             </div>
           </Layout>

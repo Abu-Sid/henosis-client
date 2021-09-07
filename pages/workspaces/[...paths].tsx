@@ -4,7 +4,6 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { IUser } from "../../auth/authManager";
 import LoadingAnimation from "../../components/ui/Animation/LoadingAnimation";
-import PhoneSidebar from "../../components/ui/Sidebar/PhoneSidebar";
 import Sidebar from "../../components/ui/Sidebar/Sidebar";
 import WorkspaceError from "../../components/Workspace/WorkspaceError";
 import WorkspaceRoute from "../../components/Workspace/WorkspaceRoute";
@@ -41,8 +40,6 @@ const Workspace = () => {
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(true);
-
-  const [screenSize, setScreenSize] = useState(null);
 
   const [requestData, setRequestData] = useState({} as RequestData);
 
@@ -117,11 +114,6 @@ const Workspace = () => {
     }
   }, [socket, replace]);
 
-  useEffect(() => {
-    const currentScreenSize = window.innerWidth;
-    setScreenSize(currentScreenSize);
-  }, []);
-  console.log(screenSize);
   const handleSendEmail = ({
     creatorEmail,
     workspaceName,
@@ -149,7 +141,7 @@ const Workspace = () => {
           handleSendEmail={handleSendEmail}
         />
       ) : (
-        <section className='workspace'>
+        <section className="workspace">
           <Sidebar />
           <WorkspaceRoute socket={socket} />
         </section>

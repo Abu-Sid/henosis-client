@@ -1,10 +1,10 @@
-import React from "react";
 import { useRouter } from "next/router";
-import Profile from "./SettingsPages/Profile";
+import React from "react";
+import NotFound from "../../pages/404";
 import Account from "./SettingsPages/Account";
 import Billing from "./SettingsPages/Billing";
 import Customization from "./SettingsPages/Customization";
-import NotFound from "../../pages/404";
+import Profile from "./SettingsPages/Profile";
 
 const SettingsRoute = () => {
   const router = useRouter();

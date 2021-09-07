@@ -1,8 +1,8 @@
+import { motion } from "framer-motion";
 import Link from "next/link";
 import React, { useContext } from "react";
 import { useDetectClickOutside } from "react-detect-click-outside";
 import { DropdownContext, INav } from "./Navbar";
-import { motion, AnimatePresence } from "framer-motion";
 
 interface IDropdown {
   width: number;
@@ -39,11 +39,11 @@ export const DropdownMenu: React.FC<IDropdown> = ({
     <div ref={ref}>
       <motion.div
         exit={{ opacity: 0 }}
-        initial='hidden'
-        animate='visible'
+        initial="hidden"
+        animate="visible"
         variants={dropdownVariant}
         style={{ width: `${width}px` }}
-        className='dropdown'
+        className="dropdown"
       >
         {children}
       </motion.div>
@@ -65,7 +65,7 @@ export const DropdownItem: React.FC<INav> = ({
     functionality();
   };
   return (
-    <div className='dropdown__item'>
+    <div className="dropdown__item">
       {!href && (
         <motion.a variants={dropdownItemVariant} onClick={handleClick}>
           {children}
